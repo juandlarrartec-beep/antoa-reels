@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Investigacion de contenido para Antoa">
+<title>Antoá — De placas a reels reales</title>
+<style>
+  :root{
+    --ground:#FCF5F1;
+    --surface:#FFFFFF;
+    --surface-2:#FBEEE8;
+    --ink:#3B2B2F;
+    --ink-soft:#6E585E;
+    --ink-faint:#9A848B;
+    --line:#EADBD3;
+    --gold:#C9A96A;
+    --rose:#C97C74;
+    --sage:#7C9885;
+    --mauve:#A87E8B;
+    --amber:#C99A63;
+    --shadow:0 1px 2px rgba(59,43,47,.04),0 12px 34px rgba(59,43,47,.07);
+    --shadow-lift:0 4px 10px rgba(59,43,47,.06),0 22px 50px rgba(59,43,47,.12);
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --maxw:960px;
+  }
+  /* Marca luminosa: se compromete a un solo mundo claro también en modo oscuro */
+  :root[data-theme="dark"], @media (prefers-color-scheme: dark){}
+  :root[data-theme="dark"]{
+    --ground:#FCF5F1;--surface:#FFFFFF;--surface-2:#FBEEE8;--ink:#3B2B2F;
+    --ink-soft:#6E585E;--ink-faint:#9A848B;--line:#EADBD3;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:76px 0}
+  @media(max-width:640px){section{padding:52px 0}}
+
+  .eyebrow{
+    font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;margin:0 0 18px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--gold)}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;letter-spacing:-.01em}
+  h2{font-size:clamp(28px,4.4vw,42px);line-height:1.1;margin:0 0 20px}
+  h2 em{font-style:italic;color:var(--rose)}
+  h3{font-size:23px;line-height:1.2;margin:0}
+  p{margin:0 0 16px;max-width:62ch}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:56ch}
+  a{color:inherit}
+
+  /* ---------- brand bar ---------- */
+  .brandbar{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb,var(--ground) 88%,transparent);
+    backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brandbar .row{max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .wordmark{font-family:var(--serif);font-size:25px;letter-spacing:.02em}
+  .wordmark b{font-weight:400}
+  .brandbar .tag{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 0 70px;
+    background:
+      radial-gradient(120% 90% at 82% -10%,#FBE6DE 0%,rgba(251,230,222,0) 55%),
+      radial-gradient(90% 70% at 0% 8%,#F4EEE9 0%,rgba(244,238,233,0) 60%);
+  }
+  .hero .kicker{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--rose);font-weight:600;margin:0 0 22px}
+  .hero h1{font-size:clamp(38px,7vw,68px);line-height:1.02;margin:0 0 24px;letter-spacing:-.02em}
+  .hero h1 em{font-style:italic;color:var(--rose)}
+  .hero .lead{font-size:21px}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;
+    padding:8px 15px;font-size:13.5px;color:var(--ink-soft);box-shadow:var(--shadow)}
+  .chip b{color:var(--ink);font-weight:600}
+
+  /* ---------- stats ---------- */
+  .stats-band{background:var(--ink);color:#F7ECE7;
+    background-image:linear-gradient(180deg,#43323700,#0000000f)}
+  .stats-band .eyebrow{color:#D9B7A9}
+  .stats-band .eyebrow::before{background:var(--gold)}
+  .stats-band h2{color:#FBF3EF}
+  .stats-band .lead{color:#D8C3BC}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:38px}
+  @media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+  .stat{padding:22px 20px;border:1px solid #55424799;border-radius:16px;
+    background:#4633380f}
+  .stat .num{font-family:var(--serif);font-size:38px;line-height:1;color:#F3D9B0;
+    font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .stat .lbl{margin-top:12px;font-size:13.5px;color:#E4CEC6;line-height:1.4}
+
+  /* ---------- pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  @media(max-width:760px){.pillars{grid-template-columns:1fr}}
+  .pillar{background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    padding:26px 24px;box-shadow:var(--shadow)}
+  .pillar .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+    font-size:20px;margin-bottom:18px}
+  .pillar h3{font-size:20px;margin-bottom:10px}
+  .pillar p{font-size:15px;color:var(--ink-soft);margin:0}
+
+  /* ---------- modelos ---------- */
+  .sec-head{max-width:60ch}
+  .models{display:flex;flex-direction:column;gap:26px;margin-top:44px}
+  .model{
+    background:var(--surface);border:1px solid var(--line);border-radius:22px;
+    box-shadow:var(--shadow);overflow:hidden;
+    display:grid;grid-template-columns:1.35fr .9fr;
+  }
+  @media(max-width:780px){.model{grid-template-columns:1fr}}
+  .model .body{padding:30px 30px 32px}
+  .model-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .angle{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:5px 12px;border-radius:999px;color:#fff}
+  .idx{font-family:var(--serif);font-size:15px;color:var(--ink-faint)}
+  .model h3{margin-bottom:14px}
+  .offer{display:flex;gap:12px;padding:14px 16px;border-radius:14px;
+    background:var(--surface-2);margin:0 0 22px;font-size:15px;color:var(--ink)}
+  .offer .k{font-weight:700;color:var(--rose);white-space:nowrap}
+  .steps{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none}
+  .step{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:11px 0;
+    border-top:1px solid var(--line)}
+  .step:first-child{border-top:0}
+  .step .t{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+    color:var(--ink-faint);padding-top:2px}
+  .step .d{font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+  .step .d b{color:var(--ink);font-weight:600}
+
+  /* reel preview card */
+  .reel{background:var(--surface-2);border-left:1px solid var(--line);
+    padding:26px 24px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+  @media(max-width:780px){.reel{border-left:0;border-top:1px solid var(--line)}}
+  .reel .rl-lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:700}
+  .phone{
+    position:relative;display:block;border-radius:18px;overflow:hidden;
+    aspect-ratio:9/16;max-height:340px;margin:0 auto;width:100%;max-width:200px;
+    box-shadow:var(--shadow-lift);text-decoration:none;
+    transition:transform .3s ease,box-shadow .3s ease;
+    border:1px solid rgba(255,255,255,.5);
+  }
+  .phone:hover{transform:translateY(-4px)}
+  .phone .grad{position:absolute;inset:0}
+  .phone .veil{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(59,43,47,0) 40%,rgba(59,43,47,.62) 100%)}
+  .phone .pf{position:absolute;top:12px;left:12px;font-size:10.5px;font-weight:700;
+    letter-spacing:.05em;color:#fff;background:rgba(0,0,0,.28);backdrop-filter:blur(4px);
+    padding:4px 10px;border-radius:999px}
+  .phone .play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;
+    background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.25);
+    transition:transform .3s ease}
+  .phone:hover .play{transform:scale(1.08)}
+  .phone .play::after{content:"";width:0;height:0;margin-left:4px;
+    border-left:16px solid var(--ink);border-top:10px solid transparent;border-bottom:10px solid transparent}
+  .phone .cap{position:absolute;left:14px;right:14px;bottom:14px;color:#fff;
+    font-size:13px;line-height:1.35;font-weight:500}
+  .reel .also{font-size:13px;color:var(--ink-soft)}
+  .reel .also a{color:var(--rose);font-weight:600;text-decoration:none;border-bottom:1px solid transparent}
+  .reel .also a:hover{border-bottom-color:var(--rose)}
+  .reel .cta{font-size:13px;color:var(--ink-faint);display:flex;align-items:center;gap:6px;justify-content:center}
+
+  /* ---------- referencias de la clienta ---------- */
+  .refs{background:var(--ground)}
+  .ref-sum{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .ref-sum .s{display:inline-flex;align-items:center;gap:8px;background:var(--surface);
+    border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--ink-soft)}
+  .ref-sum .dot{width:9px;height:9px;border-radius:50%}
+  .ref-sum b{color:var(--ink);font-weight:700}
+  .ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+    gap:26px;align-items:start;justify-items:center;margin-top:36px}
+  .ref{width:100%;max-width:360px;min-width:0;display:flex;flex-direction:column;gap:12px}
+  .ref-note{display:flex;flex-direction:column;gap:7px;padding:0 2px}
+  .ref-note .top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .ref-note .rchip{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    color:#fff;padding:4px 10px;border-radius:999px}
+  .ref-note .hn{font-size:13px;color:var(--ink-faint);font-weight:600}
+  .ref-note .rwhat{font-size:14.5px;color:var(--ink);line-height:1.4}
+  .ref-note .rhow{font-size:13px;color:var(--ink-soft);line-height:1.42}
+  .ref-note .rhow b{color:var(--rose);font-weight:600}
+  .instagram-media{margin:0 auto !important;min-width:0 !important;max-width:100% !important}
+  .ref .fallback{display:block;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:16px;font-size:13.5px;color:var(--rose);text-decoration:none;font-weight:600}
+
+  /* ---------- herramientas ---------- */
+  .tools{background:var(--surface)}
+  .tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px}
+  @media(max-width:640px){.tool-grid{grid-template-columns:1fr}}
+  .tool{display:flex;gap:16px;padding:20px 22px;border:1px solid var(--line);
+    border-radius:16px;background:var(--ground)}
+  .tool .n{font-family:var(--serif);font-size:22px;color:var(--gold);line-height:1}
+  .tool h3{font-size:17px;margin-bottom:5px;font-family:var(--sans);font-weight:700;letter-spacing:0}
+  .tool p{font-size:14px;color:var(--ink-soft);margin:0}
+  .tool .free{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700}
+
+  /* ---------- plan ---------- */
+  .plan-note{display:flex;gap:14px;padding:20px 22px;border-radius:16px;
+    background:var(--surface-2);border:1px solid var(--line);margin:34px 0 8px;
+    font-size:15.5px;color:var(--ink)}
+  .plan-note .b{font-size:22px;line-height:1}
+  .timeline{display:flex;flex-direction:column;gap:0;margin-top:28px}
+  .phase{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;
+    border-top:1px solid var(--line);position:relative}
+  @media(max-width:640px){.phase{grid-template-columns:1fr;gap:10px;padding:20px 0}}
+  .phase .when{font-family:var(--serif);font-size:19px;color:var(--rose)}
+  .phase .when span{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-faint);margin-top:4px;font-weight:600}
+  .phase h3{font-size:19px;margin-bottom:8px}
+  .phase p{font-size:15px;color:var(--ink-soft);margin:0}
+  .phase ul{margin:10px 0 0;padding-left:18px;color:var(--ink-soft);font-size:14.5px}
+  .phase li{margin:4px 0}
+
+  /* ---------- reglas ---------- */
+  .reglas{background:var(--ink);color:#F6EBE6}
+  .reglas .eyebrow{color:#D9B7A9}.reglas .eyebrow::before{background:var(--gold)}
+  .reglas h2{color:#FBF3EF}
+  .rg-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:38px}
+  @media(max-width:720px){.rg-grid{grid-template-columns:1fr}}
+  .rg-card{border:1px solid #55424799;border-radius:18px;padding:26px 24px;background:#46333810}
+  .rg-card h3{color:#F3D9B0;font-size:19px;margin-bottom:16px}
+  .rg-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .rg-list li{display:flex;gap:12px;font-size:14.5px;color:#E9D5CD;line-height:1.4}
+  .rg-list .mk{flex:none;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
+    font-size:12px;font-weight:700}
+  .rg-list.no .mk{background:#7d3b3f;color:#ffd9d4}
+  .rg-list.yes .mk{background:#3e5a48;color:#c8f0d6}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ground);border-top:1px solid var(--line);padding:44px 0 60px}
+  footer .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  footer .wordmark{font-size:22px}
+  footer .meta{font-size:13px;color:var(--ink-faint);line-height:1.6}
+  .priv{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft);
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;margin-top:14px}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+  a.phone:focus-visible,.also a:focus-visible{outline:3px solid var(--rose);outline-offset:3px;border-radius:8px}
+  @media(prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .phone,.phone .play{transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+
+</head>
+<body>
+<header class="brandbar">
+  <div class="row">
+    <div class="wordmark"><b>Antoá</b></div>
+    <div class="tag">Investigación de contenido · Reels</div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker rv">Estrategia de contenido · Julio 2026</p>
+      <h1 class="rv">De placas a <em>reels reales</em>.</h1>
+      <p class="lead rv">Tu marca ya está viva. El próximo paso es mostrar personas: tus clientas, tu equipo, tu mundo. Esta es la investigación de qué grabar — y por qué funciona.</p>
+      <div class="hero-meta rv">
+        <span class="chip">🎥 <b>5 modelos</b> de contenido para replicar</span>
+        <span class="chip">📊 Basado en <b>casos reales</b> verificados</span>
+        <span class="chip">❄️ Pensado para la <b>temporada de invierno</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGNÓSTICO -->
+  <section class="stats-band">
+    <div class="wrap">
+      <p class="eyebrow rv">El momento</p>
+      <h2 class="rv">El contenido de IA y las placas con texto ya no rinden.</h2>
+      <p class="lead rv">Lo dicen los números del 2026: las redes dejaron de premiar la imagen fija y ahora reparten alcance al video real con personas.</p>
+      <div class="stats-grid">
+        <div class="stat rv"><div class="num">+117%</div><div class="lbl">más tiempo de visualización en reels que hace un año</div></div>
+        <div class="stat rv"><div class="num">+125%</div><div class="lbl">más alcance de un reel frente a una imagen sola</div></div>
+        <div class="stat rv"><div class="num">3 seg</div><div class="lbl">en ese tiempo la mitad de la gente decide si sigue mirando</div></div>
+        <div class="stat rv"><div class="num">↑ shares</div><div class="lbl">el algoritmo premia compartir y guardar, no el "me gusta"</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ SIRVE -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow rv">Por qué este contenido sirve</p>
+      <h2 class="rv sec-head">Qué te ofrece mostrar <em>personas reales</em>.</h2>
+      <div class="pillars">
+        <div class="pillar rv">
+          <div class="ico" style="background:#F3E7DF;color:var(--rose)">🤝</div>
+          <h3>Confianza</h3>
+          <p>En estética, la clienta reserva a una persona antes que a una clínica. Ver al equipo real baja el miedo y acerca la primera visita.</p>
+        </div>
+        <div class="pillar rv">
+          <div class="ico" style="background:#E7EFE9;color:var(--sage)">📈</div>
+          <h3>Alcance</h3>
+          <p>El video real de proceso y rutina es justo lo que las redes están empujando hoy. Menos producción, más distribución.</p>
+        </div>
+        <div class="pillar rv">
+          <div class="ico" style="background:#F0E7EC;color:var(--mauve)">💫</div>
+          <h3>Tu ventaja</h3>
+          <p>Tus clientas de 35 a 65 son el diferencial. Cuando les hablás sin edadismo, esa audiencia se moviliza — la competencia usa modelos jóvenes, vos usás mujeres reales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOS 5 MODELOS -->
+  <section style="background:var(--surface)">
+    <div class="wrap">
+      <p class="eyebrow rv">Los 5 modelos</p>
+      <h2 class="rv sec-head">Uno por cada ángulo. <em>Del más fácil al más producido.</em></h2>
+      <p class="lead rv">Cada modelo tiene un ejemplo real que podés mirar. Tocá la pantalla para ver el reel.</p>
+
+      <div class="models">
+
+        <!-- 01 MARCA -->
+        <article class="model rv">
+          <div class="body">
+            <div class="model-top">
+              <span class="angle" style="background:var(--gold)">Marca</span>
+              <span class="idx">Modelo 01</span>
+            </div>
+            <h3>Abrí el spa conmigo</h3>
+            <div class="offer"><span class="k">Te ofrece</span><span>Mostrar la calidez y el mundo de Antoá sin exponer a nadie. Es el más simple para arrancar: cero clientas, cero riesgo.</span></div>
+            <ul class="steps">
+              <li class="step"><div class="t">Hook 0-3s</div><div class="d">La llave girando o las luces encendiéndose + texto <b>"Abrí el centro conmigo ✨"</b></div></li>
+              <li class="step"><div class="t">Desarrollo</div><div class="d">6-8 clips cortitos: velas, toallas tibias, la camilla, el mate, la luz de la mañana</div></li>
+              <li class="step"><div class="t">Cierre</div><div class="d">El espacio listo + <b>"Lista para recibirte hoy"</b></div></li>
+            </ul>
+          </div>
+          <div class="reel">
+            <div class="rl-lbl">Ejemplo real</div>
+            <a class="phone" href="https://www.instagram.com/reel/DTgBzjMiTI6/" target="_blank" rel="noopener">
+              <div class="grad" style="background:linear-gradient(155deg,#E9C9A7,#C9A96A 60%,#9C7C58)"></div>
+              <div class="veil"></div><span class="pf">Instagram</span><span class="play"></span>
+              <span class="cap">"Minivlog abriendo mi salón ✨"</span>
+            </a>
+            <div class="also">Variante sensorial (ASMR de cabina): <a href="https://www.tiktok.com/@bohomedspa" target="_blank" rel="noopener">@bohomedspa ↗</a> · 3,6M</div>
+          </div>
+        </article>
+
+        <!-- 02 EDUCACIÓN -->
+        <article class="model rv">
+          <div class="body">
+            <div class="model-top">
+              <span class="angle" style="background:var(--sage)">Educación</span>
+              <span class="idx">Modelo 02</span>
+            </div>
+            <h3>Mitos vs. Verdades</h3>
+            <div class="offer"><span class="k">Te ofrece</span><span>Te posiciona como la experta y responde el miedo antes de que frene la reserva. El guion sale de las preguntas que ya te hacen por WhatsApp.</span></div>
+            <ul class="steps">
+              <li class="step"><div class="t">Hook 0-3s</div><div class="d">Una negación de frente a cámara: <b>"No, el láser NO te quema la piel"</b></div></li>
+              <li class="step"><div class="t">Desarrollo</div><div class="d">2-3 mitos máximo, cada uno con su verdad en una frase</div></li>
+              <li class="step"><div class="t">Cierre</div><div class="d"><b>"¿Otra duda? Escribinos por DM"</b></div></li>
+            </ul>
+          </div>
+          <div class="reel">
+            <div class="rl-lbl">Ejemplo real</div>
+            <a class="phone" href="https://www.instagram.com/dermobog/" target="_blank" rel="noopener">
+              <div class="grad" style="background:linear-gradient(155deg,#A9C6B2,#7C9885 60%,#5E7A68)"></div>
+              <div class="veil"></div><span class="pf">Instagram</span><span class="play"></span>
+              <span class="cap">@dermobog — mitos de piel, sin vueltas</span>
+            </a>
+            <div class="also">Referente de tono: <a href="https://www.instagram.com/dr.anamolina/" target="_blank" rel="noopener">@dr.anamolina ↗</a> · 410K</div>
+          </div>
+        </article>
+
+        <!-- 03 VENTAS -->
+        <article class="model rv">
+          <div class="body">
+            <div class="model-top">
+              <span class="angle" style="background:var(--rose)">Ventas</span>
+              <span class="idx">Modelo 03</span>
+            </div>
+            <h3>POV: tu primera sesión</h3>
+            <div class="offer"><span class="k">Te ofrece</span><span>Vende el proceso, no el resultado — por eso no necesita "antes y después". Desactiva el miedo a la primera vez mostrando exactamente qué pasa.</span></div>
+            <ul class="steps">
+              <li class="step"><div class="t">Hook 0-3s</div><div class="d"><b>"POV: venís a tu primera sesión de láser"</b> + entrando al local</div></li>
+              <li class="step"><div class="t">Desarrollo</div><div class="d">Recepción, cabina, la preparación (gafas, gel, las manos de la técnica en primer plano)</div></li>
+              <li class="step"><div class="t">Cierre</div><div class="d">La clienta sonriendo al salir + <b>"Escribinos LÁSER por DM"</b></div></li>
+            </ul>
+          </div>
+          <div class="reel">
+            <div class="rl-lbl">Ejemplo real</div>
+            <a class="phone" href="https://www.instagram.com/reel/DYzuW3Cos3p/" target="_blank" rel="noopener">
+              <div class="grad" style="background:linear-gradient(155deg,#E7BAB4,#C97C74 58%,#A05C57)"></div>
+              <div class="veil"></div><span class="pf">Instagram</span><span class="play"></span>
+              <span class="cap">"POV: tu sesión de depilación láser"</span>
+            </a>
+            <div class="also">Referente del formato: <a href="https://www.instagram.com/sevlaseraesthetics/" target="_blank" rel="noopener">@sevlaseraesthetics ↗</a> · 297K</div>
+          </div>
+        </article>
+
+        <!-- 04 CONEXIÓN -->
+        <article class="model rv">
+          <div class="body">
+            <div class="model-top">
+              <span class="angle" style="background:var(--mauve)">Conexión</span>
+              <span class="idx">Modelo 04</span>
+            </div>
+            <h3>Mi primera vez</h3>
+            <div class="offer"><span class="k">Te ofrece</span><span>La voz real de una clienta de 35-65: la confianza más difícil de fingir. No se guiona — se edita con sus respuestas espontáneas.</span></div>
+            <ul class="steps">
+              <li class="step"><div class="t">Hook 0-3s</div><div class="d">Ella a cámara: <b>"Me hice láser por primera vez a los 52 y esto pasó"</b></div></li>
+              <li class="step"><div class="t">Desarrollo</div><div class="d">Su llegada y su voz contando qué le daba miedo y qué sintió de verdad</div></li>
+              <li class="step"><div class="t">Cierre</div><div class="d"><b>"Ya agendé la segunda. Si dudás como yo, escribiles"</b></div></li>
+            </ul>
+          </div>
+          <div class="reel">
+            <div class="rl-lbl">Ejemplo real</div>
+            <a class="phone" href="https://www.tiktok.com/@kassandralanis/video/7481501874537958711" target="_blank" rel="noopener">
+              <div class="grad" style="background:linear-gradient(155deg,#D6B3C0,#A87E8B 58%,#835F6C)"></div>
+              <div class="veil"></div><span class="pf">TikTok</span><span class="play"></span>
+              <span class="cap">"Mi primera vez con láser 🫠" · 645K me gusta</span>
+            </a>
+            <div class="also">Cómo se graba: 3 preguntas fuera de cámara + consentimiento firmado.</div>
+          </div>
+        </article>
+
+        <!-- 05 URGENCIA -->
+        <article class="model rv">
+          <div class="body">
+            <div class="model-top">
+              <span class="angle" style="background:var(--amber)">Oportunidad · Urgencia</span>
+              <span class="idx">Modelo 05</span>
+            </div>
+            <h3>Empezá ahora para el verano</h3>
+            <div class="offer"><span class="k">Te ofrece</span><span>Convierte la estacionalidad honesta (invierno = la mejor época) en un motivo real para agendar hoy. Sin inventar escasez.</span></div>
+            <ul class="steps">
+              <li class="step"><div class="t">Hook 0-3s</div><div class="d">En cabina: <b>"Si querés llegar al verano sin depilarte, empezá AHORA"</b></div></li>
+              <li class="step"><div class="t">Desarrollo</div><div class="d">Un calendario simple: <b>Julio → Octubre → Diciembre</b> + la razón clínica</div></li>
+              <li class="step"><div class="t">Cierre</div><div class="d"><b>"Agendá tu evaluación esta semana"</b> por WhatsApp</div></li>
+            </ul>
+          </div>
+          <div class="reel">
+            <div class="rl-lbl">Benchmark local</div>
+            <a class="phone" href="https://www.instagram.com/depilifeuruguay/" target="_blank" rel="noopener">
+              <div class="grad" style="background:linear-gradient(155deg,#E7CDA6,#C99A63 58%,#9E7748)"></div>
+              <div class="veil"></div><span class="pf">Instagram</span><span class="play"></span>
+              <span class="cap">DepiLife Uruguay · "Sale de Invierno"</span>
+            </a>
+            <div class="also">Variante honesta: "Nos quedan 3 lugares esta semana" (número real de la agenda).</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCIAS DE LA CLIENTA -->
+  <section class="refs">
+    <div class="wrap">
+      <p class="eyebrow rv">Los videos que elegiste</p>
+      <h2 class="rv sec-head">Tu instinto ya apunta a <em>los 5 ángulos</em>.</h2>
+      <p class="lead rv">Analizamos los 11 reels que enviaste. Se reparten casi perfecto entre los cinco modelos — buena señal: vamos por el camino correcto. Tocá cada uno para verlo.</p>
+      <div class="ref-sum rv">
+        <span class="s"><span class="dot" style="background:var(--mauve)"></span> Conexión <b>2</b></span>
+        <span class="s"><span class="dot" style="background:var(--gold)"></span> Marca <b>3</b></span>
+        <span class="s"><span class="dot" style="background:var(--sage)"></span> Educación <b>2</b></span>
+        <span class="s"><span class="dot" style="background:var(--rose)"></span> Ventas <b>2</b></span>
+        <span class="s"><span class="dot" style="background:var(--amber)"></span> Oportunidad <b>2</b></span>
+      </div>
+
+      <div class="ref-grid">
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--mauve)">Conexión</span><span class="hn">@regeneraskin</span></div>
+            <div class="rwhat">Mensaje de autocuidado: "también merecés una pausa".</div>
+            <div class="rhow"><b>→</b> Así conectás con la mujer ocupada, sin mostrar tratamientos.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaYG6xLxqVT/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DaYG6xLxqVT/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--mauve)">Conexión</span><span class="hn">@odsilviaprada</span></div>
+            <div class="rwhat">La profesional a cámara, cercana y humana.</div>
+            <div class="rhow"><b>→</b> El formato exacto de "la dueña te habla". Igual con tu equipo.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaQQcOLu5Hg/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DaQQcOLu5Hg/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--gold)">Marca</span><span class="hn">@cosmetologist_ny_ · 14K ❤</span></div>
+            <div class="rwhat">Facial ASMR: puro sonido y textura, sin hablar.</div>
+            <div class="rhow"><b>→</b> Tus limpiezas faciales filmadas así. El más viral de tu selección.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXZk778BDyI/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DXZk778BDyI/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--gold)">Marca</span><span class="hn">@espacio_hifu</span></div>
+            <div class="rwhat">El mundo de un centro de HIFU, en cabina.</div>
+            <div class="rhow"><b>→</b> Mostrás el ritual y el espacio, nunca la marca del aparato.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DaoOkiYg1_r/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/p/DaoOkiYg1_r/" target="_blank" rel="noopener">Ver la publicación en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--gold)">Marca</span><span class="hn">@yelyzaveta.cosmetolog · 1.4K ❤</span></div>
+            <div class="rwhat">El proceso del tratamiento, paso a paso.</div>
+            <div class="rhow"><b>→</b> Reemplaza directo a las placas con texto.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZuS3ipNc5z/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DZuS3ipNc5z/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--sage)">Educación</span><span class="hn">@by_rebecamartinez</span></div>
+            <div class="rwhat">Mito vs. verdad: "la limpieza facial no es solo belleza".</div>
+            <div class="rhow"><b>→</b> Es el Modelo 02 tal cual, con tus tratamientos.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DURfVoUjZLl/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DURfVoUjZLl/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--sage)">Educación</span><span class="hn">@draciriani</span></div>
+            <div class="rwhat">La profesional como autoridad que explica con criterio.</div>
+            <div class="rhow"><b>→</b> Una del equipo enseña; posiciona a Antoá como experta.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DVypq19DETF/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/p/DVypq19DETF/" target="_blank" rel="noopener">Ver la publicación en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--rose)">Ventas</span><span class="hn">@opalospa · 584 ❤</span></div>
+            <div class="rwhat">Esculpido corporal + llamado directo a agendar.</div>
+            <div class="rhow"><b>→</b> Igual para SculptFit, pero con CTA suave y sin prometer resultado.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZQuJkyu8e1/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DZQuJkyu8e1/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--rose)">Ventas</span><span class="hn">@siemprebellasiempreeva</span></div>
+            <div class="rwhat">Invitación simple: "agendá tu cita por DM".</div>
+            <div class="rhow"><b>→</b> El CTA a WhatsApp que después levanta Iris.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Da3b10tSNOA/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/Da3b10tSNOA/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--amber)">Oportunidad</span><span class="hn">@cherry.laser · 1.2K ❤</span></div>
+            <div class="rwhat">Promo de primera sesión de láser con precio de entrada.</div>
+            <div class="rhow"><b>→</b> Tu promo de invierno — el precio va al DM, no en el reel.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaGCyqfi2al/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DaGCyqfi2al/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+        <figure class="ref rv">
+          <figcaption class="ref-note">
+            <div class="top"><span class="rchip" style="background:var(--amber)">Oportunidad</span><span class="hn">@regeneraskin</span></div>
+            <div class="rwhat">Teaser de un nuevo servicio: "muy pronto…".</div>
+            <div class="rhow"><b>→</b> Anticipás temporada y novedades para crear expectativa.</div>
+          </figcaption>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaGYXP0xTwy/" data-instgrm-version="14"><a class="fallback" href="https://www.instagram.com/reel/DaGYXP0xTwy/" target="_blank" rel="noopener">Ver el reel en Instagram ↗</a></blockquote>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS -->
+  <section class="tools">
+    <div class="wrap">
+      <p class="eyebrow rv">Cómo encontramos el contenido</p>
+      <h2 class="rv sec-head">No inventamos: <em>miramos lo que ya funciona.</em></h2>
+      <div class="tool-grid">
+        <div class="tool rv"><div class="n">01</div><div><h3>TikTok Creative Center</h3><p>Los anuncios de belleza con mejor rendimiento del mundo. <span class="free">Gratis</span></p></div></div>
+        <div class="tool rv"><div class="n">02</div><div><h3>Biblioteca de anuncios de Meta</h3><p>Todo lo que publican las clínicas de UY y la región. <span class="free">Gratis</span></p></div></div>
+        <div class="tool rv"><div class="n">03</div><div><h3>Cuentas espejo + Metricool</h3><p>Seguimos 5 clínicas referentes y medimos qué reels rinden. <span class="free">Gratis</span></p></div></div>
+        <div class="tool rv"><div class="n">04</div><div><h3>Audios en tendencia</h3><p>El audio correcto de la semana = empuje de alcance regalado. <span class="free">Gratis</span></p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow rv">Plan de acción</p>
+      <h2 class="rv sec-head">Probamos <em>en vivo</em>, hasta encontrar tu estilo.</h2>
+      <div class="plan-note rv">
+        <span class="b">🌱</span>
+        <span>Antoá ya está activa, así que no arrancamos de cero: probamos estos formatos directamente en tus redes. El objetivo no es acertar al primer intento — es ir viendo con cuáles te sentís cómoda vos y el equipo, y quedarnos con esos.</span>
+      </div>
+      <div class="timeline">
+        <div class="phase rv">
+          <div class="when">Semana 1<span>Preparar</span></div>
+          <div>
+            <h3>Dejar todo listo (sin grabar todavía)</h3>
+            <ul>
+              <li>Cuenta espejo + 5 clínicas referentes en Metricool</li>
+              <li>Consentimiento de imagen simple para clientas + su beneficio</li>
+              <li>Banco de preguntas frecuentes de Iris → temas de Educación</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase rv">
+          <div class="when">Semanas 2-6<span>Probar</span></div>
+          <div>
+            <h3>Rodar los 5 modelos, 2-3 reels por semana</h3>
+            <p>Rotamos los ángulos del más fácil al más producido. En cinco semanas cada modelo tuvo al menos dos salidas — vemos qué rinde y con qué se sienten cómodas.</p>
+          </div>
+        </div>
+        <div class="phase rv">
+          <div class="when">Semana 7<span>Decidir</span></div>
+          <div>
+            <h3>Mirar los números y elegir tu estilo</h3>
+            <p>Comparamos reels reales vs. las placas de antes. Duplicamos los 2 formatos ganadores y los volvemos serie fija.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGLAS -->
+  <section class="reglas">
+    <div class="wrap">
+      <p class="eyebrow rv">Reglas de oro</p>
+      <h2 class="rv">Para que rinda y no nos bloqueen.</h2>
+      <div class="rg-grid">
+        <div class="rg-card rv">
+          <h3>Lo que nunca hacemos</h3>
+          <ul class="rg-list no">
+            <li><span class="mk">✕</span> Fotos de "antes y después"</li>
+            <li><span class="mk">✕</span> Piel de más o encuadres sugerentes</li>
+            <li><span class="mk">✕</span> Nombrar marcas de los aparatos (usamos SculptFit, RadioLift 360…)</li>
+            <li><span class="mk">✕</span> Estética oscura — Antoá es siempre luminosa</li>
+          </ul>
+        </div>
+        <div class="rg-card rv">
+          <h3>Lo que lleva cada reel</h3>
+          <ul class="rg-list yes">
+            <li><span class="mk">✓</span> 15 a 30 segundos, texto grande en el primer frame</li>
+            <li><span class="mk">✓</span> Subtítulos siempre (la mayoría mira sin audio)</li>
+            <li><span class="mk">✓</span> Cierre que invita a guardar o comentar</li>
+            <li><span class="mk">✓</span> Geo "Colonia del Sacramento" y publicar 19-21h</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <div class="wordmark"><b>Antoá</b></div>
+      <div class="priv">🔒 Documento de trabajo · Antoá · página no listada</div>
+    </div>
+    <div class="meta">
+      Investigación de contenido preparada para Antoá<br>
+      Colonia del Sacramento · Julio 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els=[].slice.call(document.querySelectorAll('.rv'));
+    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')});return;
+    }
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+<script async src="https://www.instagram.com/embed.js"></script>
+
+</body>
+</html>
