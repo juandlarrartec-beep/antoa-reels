@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Anexo de ejecución — Peter U Cook</title>
+<link rel="stylesheet" href="print.css">
+<style>
+  .kw{font-family:var(--mono);font-size:7.9pt;line-height:1.75;color:var(--ink-2)}
+  .kw b{color:var(--ink);font-weight:700}
+  .flow{break-inside:avoid;border:.7pt solid var(--rule-2);padding:3.6mm 4mm;margin-bottom:3.2mm}
+  .flow h3{margin:0 0 1.5mm;font-size:9.8pt}
+  .flow .trig{font-family:var(--mono);font-size:7.4pt;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-bottom:2.6mm}
+  .flow ol{margin:0;padding-left:5.5mm;font-size:8.4pt;color:var(--ink-2)}
+  .flow li{margin:1.3mm 0;line-height:1.42}
+  .flow li b{color:var(--ink)}
+  .ck{display:grid;grid-template-columns:5mm 1fr;gap:2.5mm;padding:1.8mm 0;
+    border-bottom:.6pt solid var(--rule);font-size:8.5pt;break-inside:avoid}
+  .ck .bx{width:3.2mm;height:3.2mm;border:.8pt solid var(--rule-2);border-radius:.6mm;margin-top:1.1mm}
+  .ck b{font-family:var(--sans);font-size:8.6pt}
+  .ck span{display:block;color:var(--ink-2);margin-top:.6mm;line-height:1.38}
+  .lang{display:inline-block;font-family:var(--mono);font-size:6.8pt;letter-spacing:.1em;
+    background:var(--accent-soft);color:#0A5E6B;padding:.7mm 1.6mm;border-radius:1mm;
+    margin-right:1.5mm;vertical-align:.3mm;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ===================== PORTADA ===================== -->
+<section class="cover">
+  <div class="rule-top"></div>
+  <p class="kicker">Anexo de ejecución · Uso interno</p>
+  <h1>Peter U Cook<br><em>cómo se hace.</em></h1>
+  <p class="sub">Las piezas concretas detrás de la propuesta: arquitectura de la web, flujos de automatización, estructura de campañas, investigación de palabras clave en tres idiomas y listas de verificación de arranque.</p>
+
+  <div class="facts">
+    <div class="fact"><div class="n">9</div><div class="l">secciones de ejecución</div></div>
+    <div class="fact"><div class="n">3</div><div class="l">idiomas trabajados en paralelo</div></div>
+    <div class="fact"><div class="n">4</div><div class="l">flujos de automatización</div></div>
+    <div class="fact"><div class="n">7</div><div class="l">formatos de contenido repetibles</div></div>
+  </div>
+
+  <div class="meta">
+    <span>Complemento del informe de salud digital · 22.09.2026</span>
+    <span>No enviar al prospecto</span>
+  </div>
+</section>
+
+<!-- ===================== 01 WEB ===================== -->
+<section class="sec break">
+  <p class="sec-n">01</p>
+  <h2>Arquitectura de la web</h2>
+  <p class="std">Sitio chico y orientado a una sola acción: reservar. Nada de menús de navegación largos — cada página empuja al calendario.</p>
+
+  <table>
+    <thead><tr><th style="width:34mm">Página</th><th style="width:30mm">Trabajo que hace</th><th>Contenido</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Inicio</td><td>Convencer y reservar</td><td>Video de la vista al atardecer, qué es la experiencia en una frase, tres fotos de platos, el formato (2 a 8 personas, menú por pasos, maridaje, tango en vivo), reseñas destacadas, botón de reserva fijo.</td></tr>
+      <tr><td class="dim">La experiencia</td><td>Resolver dudas</td><td>Cómo es la noche paso a paso, duración, qué incluye, política de alérgenos y vegetarianos, cómo se llega, política de cancelación.</td></tr>
+      <tr><td class="dim">Menú</td><td>Justificar el precio</td><td>Menú por pasos actual, maridaje, precio por persona. Se actualiza por temporada.</td></tr>
+      <tr><td class="dim">Reservar</td><td>Cerrar</td><td>Calendario con disponibilidad real, selección de cantidad de personas, cobro de seña, confirmación automática.</td></tr>
+      <tr><td class="dim">Eventos y catering</td><td>Captar consultas de alto ticket</td><td>Tipos de evento, capacidad, modalidades, formulario calificador con fecha, cantidad de personas y tipo de evento.</td></tr>
+      <tr><td class="dim">Reseñas</td><td>Dar confianza</td><td>Selección de reseñas reales con enlace a TripAdvisor y a Google.</td></tr>
+      <tr><td class="dim">Contacto</td><td>Recoger lo que no cierra online</td><td>WhatsApp, formulario y horarios de atención.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Idiomas</h3>
+  <table>
+    <thead><tr><th style="width:26mm">Versión</th><th style="width:26mm">Prioridad</th><th>Criterio</th></tr></thead>
+    <tbody>
+      <tr><td class="dim"><span class="lang">ES</span>Español</td><td>Lanzamiento</td><td>Base del sitio. Mercado local y uruguayo.</td></tr>
+      <tr><td class="dim"><span class="lang">EN</span>Inglés</td><td>Lanzamiento</td><td>Segundo mercado emisor y el de mayor gasto. Traducción profesional, no automática.</td></tr>
+      <tr><td class="dim"><span class="lang">PT</span>Portugués</td><td>Lanzamiento</td><td>Primer mercado emisor: 22% de las llegadas. Portugués de Brasil, no de Portugal.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">Detalles que definen la conversión</div>
+    <p>Precio visible desde el inicio — filtra consultas que no van a cerrar. Botón de reserva fijo en móvil. Tiempo de carga por debajo de dos segundos: el turista entra desde el celular con red móvil. Cada idioma con su propia dirección web, no un traductor automático.</p>
+  </div>
+</section>
+
+<!-- ===================== 02 AUTOMATIZACIONES ===================== -->
+<section class="sec break">
+  <p class="sec-n">02</p>
+  <h2>Flujos de automatización</h2>
+  <p class="std">Cuatro circuitos. Cubren el 90% de los mensajes que hoy contesta él a mano.</p>
+
+  <div class="flow">
+    <h3>Flujo 1 · Consulta nueva</h3>
+    <div class="trig">Se dispara con: mensaje entrante en WhatsApp, Instagram o formulario web</div>
+    <ol>
+      <li><b>Respuesta inmediata</b> con saludo y detección de idioma por el texto recibido.</li>
+      <li><b>Menú de opciones:</b> reservar una mesa · consultar por un evento · información general.</li>
+      <li>Si elige reservar: <b>envío del menú, el precio por persona y el enlace al calendario.</b></li>
+      <li>Si elige evento: deriva al flujo 4.</li>
+      <li>Si a las <b>24 horas</b> no completó la reserva: un único recordatorio con disponibilidad de las próximas noches.</li>
+      <li>Si escribe algo fuera del guion: <b>alerta a Peter</b> y el circuito se detiene.</li>
+    </ol>
+  </div>
+
+  <div class="flow">
+    <h3>Flujo 2 · Reserva confirmada</h3>
+    <div class="trig">Se dispara con: reserva completada en el calendario</div>
+    <ol>
+      <li><b>Confirmación inmediata</b> por correo y WhatsApp, con fecha, horario, cantidad de personas y monto de la seña.</li>
+      <li><b>Cobro de la seña</b> y comprobante automático.</li>
+      <li><b>Recordatorio a 48 horas</b> con opción de reprogramar en un clic — baja las cancelaciones de último momento.</li>
+      <li><b>El mismo día, 4 horas antes:</b> dirección exacta, cómo llegar, cómo entrar y teléfono de contacto.</li>
+      <li><b>Alerta a Peter</b> con la lista del día: mesas, personas y notas de alérgenos.</li>
+    </ol>
+  </div>
+
+  <div class="flow">
+    <h3>Flujo 3 · Después de la cena</h3>
+    <div class="trig">Se dispara con: fecha de la reserva cumplida</div>
+    <ol>
+      <li><b>A las 2 horas:</b> agradecimiento breve en su idioma.</li>
+      <li><b>A las 24 horas:</b> pedido de reseña con enlace directo a Google y a TripAdvisor. Es lo que alimenta su mejor activo.</li>
+      <li><b>Alta en la base</b> con origen, idioma, motivo de la visita y cantidad de personas.</li>
+      <li><b>A los 30 días:</b> mensaje sobre la línea de eventos privados a quien vino por una ocasión especial.</li>
+      <li><b>Al año:</b> mensaje de aniversario a quien festejó algo.</li>
+    </ol>
+  </div>
+
+  <div class="flow">
+    <h3>Flujo 4 · Consulta de evento o catering</h3>
+    <div class="trig">Se dispara con: formulario de eventos o derivación del flujo 1</div>
+    <ol>
+      <li><b>Formulario calificador:</b> fecha tentativa, cantidad de personas, tipo de evento, lugar y rango de presupuesto.</li>
+      <li><b>Alerta inmediata a Peter</b> con los datos — estas consultas no se automatizan hasta el cierre.</li>
+      <li><b>Acuse automático</b> al consultante con plazo de respuesta comprometido.</li>
+      <li><b>Plantilla de presupuesto</b> precargada según tipo de evento.</li>
+      <li><b>Seguimiento a los 3 y a los 7 días</b> si no hubo respuesta.</li>
+    </ol>
+  </div>
+
+  <div class="call warn">
+    <div class="t">Regla de oro</div>
+    <p>La automatización <b>califica y ordena</b>, no cierra la venta de eventos. En cuanto la consulta vale plata de verdad, entra Peter. Si el circuito se siente robótico, pierde el tono de una puerta cerrada y ahí se pierde la reserva.</p>
+  </div>
+</section>
+
+<!-- ===================== 03 GOOGLE ADS ===================== -->
+<section class="sec break">
+  <p class="sec-n">03</p>
+  <h2>Google Ads · estructura y palabras clave</h2>
+  <p class="std">Cuenta chica y ordenada por intención, no por idioma: cada campaña es un idioma, cada grupo es una intención.</p>
+
+  <table>
+    <thead><tr><th style="width:38mm">Campaña</th><th style="width:22mm">Tipo</th><th style="width:24mm">Prioridad</th><th>Función</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Marca <span class="lang">ES</span><span class="lang">EN</span><span class="lang">PT</span></td><td>Búsqueda</td><td><span class="pill ok">Primera</span></td><td>Defender su propio nombre. Es la campaña más barata y la que más rápido convierte: gente que ya lo vio en Instagram o en TripAdvisor y lo busca por nombre.</td></tr>
+      <tr><td class="dim">Genéricas <span class="lang">ES</span></td><td>Búsqueda</td><td><span class="pill ok">Primera</span></td><td>Demanda local y regional de alta intención.</td></tr>
+      <tr><td class="dim">Genéricas <span class="lang">EN</span></td><td>Búsqueda</td><td><span class="pill ok">Primera</span></td><td>Turista de Estados Unidos y Europa. El de mayor ticket.</td></tr>
+      <tr><td class="dim">Genéricas <span class="lang">PT</span></td><td>Búsqueda</td><td><span class="pill mid">Segunda</span></td><td>Primer mercado emisor en volumen.</td></tr>
+      <tr><td class="dim">Eventos y catering <span class="lang">ES</span></td><td>Búsqueda</td><td><span class="pill mid">Segunda</span></td><td>Línea de mayor ticket, público local, compensa estacionalidad.</td></tr>
+      <tr><td class="dim">Planificación de viaje</td><td>Demand Gen</td><td><span class="pill mid">Tercera</span></td><td>YouTube y Discover, para alcanzar al viajero antes de que busque.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Palabras clave por intención <span class="lang">ES</span></h3>
+  <table>
+    <thead><tr><th style="width:30mm">Grupo</th><th>Términos</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Marca</td><td class="kw">peter u cook · peterucook · peter u cook buenos aires · peter u cook reservas</td></tr>
+      <tr><td class="dim">Puerta cerrada</td><td class="kw"><b>restaurante puerta cerrada buenos aires</b> · restaurantes a puertas cerradas caba · cena puerta cerrada buenos aires · puerta cerrada palermo · restaurante secreto buenos aires</td></tr>
+      <tr><td class="dim">Cena privada</td><td class="kw"><b>cena privada buenos aires</b> · chef privado buenos aires · chef a domicilio buenos aires · cena íntima buenos aires · cena exclusiva buenos aires</td></tr>
+      <tr><td class="dim">Vista y rooftop</td><td class="kw"><b>restaurante con vista buenos aires</b> · cena con vista al río buenos aires · rooftop para cenar buenos aires · terraza con vista buenos aires</td></tr>
+      <tr><td class="dim">Ocasión especial</td><td class="kw">cena romántica buenos aires · restaurante para aniversario · dónde festejar un cumpleaños buenos aires · lugar para pedida de mano buenos aires · cena de aniversario caba</td></tr>
+      <tr><td class="dim">Menú por pasos</td><td class="kw">menú por pasos buenos aires · menú degustación buenos aires · cocina de autor buenos aires · maridaje buenos aires</td></tr>
+      <tr><td class="dim">Eventos</td><td class="kw"><b>catering para eventos buenos aires</b> · catering cocina de autor · cena de empresa buenos aires · agasajo empresarial buenos aires · catering a domicilio caba</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Palabras clave por intención <span class="lang">EN</span></h3>
+  <table>
+    <thead><tr><th style="width:30mm">Grupo</th><th>Términos</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Puerta cerrada</td><td class="kw"><b>closed door restaurant buenos aires</b> · puerta cerrada buenos aires · secret restaurant buenos aires · supper club buenos aires · hidden restaurant buenos aires</td></tr>
+      <tr><td class="dim">Cena privada</td><td class="kw"><b>private dinner buenos aires</b> · private chef buenos aires · intimate dinner buenos aires · chef table buenos aires</td></tr>
+      <tr><td class="dim">Experiencia</td><td class="kw"><b>unique dining experience buenos aires</b> · tasting menu buenos aires · dinner with tango buenos aires · food experience buenos aires · fine dining buenos aires</td></tr>
+      <tr><td class="dim">Vista</td><td class="kw">rooftop dinner buenos aires · best view restaurant buenos aires · dinner with a view buenos aires</td></tr>
+      <tr><td class="dim">Ocasión</td><td class="kw">romantic dinner buenos aires · anniversary dinner buenos aires · special occasion restaurant buenos aires</td></tr>
+      <tr><td class="dim">Exploración</td><td class="kw">where to eat in buenos aires · things to do at night in buenos aires · best restaurants buenos aires</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Palabras clave por intención <span class="lang">PT</span></h3>
+  <table>
+    <thead><tr><th style="width:30mm">Grupo</th><th>Términos</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Puerta cerrada</td><td class="kw"><b>restaurante porta fechada buenos aires</b> · restaurante secreto buenos aires · puerta cerrada buenos aires</td></tr>
+      <tr><td class="dim">Cena privada</td><td class="kw"><b>jantar privativo buenos aires</b> · chef privado buenos aires · jantar exclusivo buenos aires</td></tr>
+      <tr><td class="dim">Experiencia</td><td class="kw"><b>experiência gastronômica buenos aires</b> · menu degustação buenos aires · jantar com tango buenos aires</td></tr>
+      <tr><td class="dim">Vista</td><td class="kw">jantar com vista buenos aires · rooftop buenos aires jantar · restaurante com vista buenos aires</td></tr>
+      <tr><td class="dim">Exploración</td><td class="kw">onde jantar em buenos aires · o que fazer à noite em buenos aires · melhores restaurantes buenos aires</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call warn">
+    <div class="t">Antes de cargar nada</div>
+    <p>Estos términos son la <b>hipótesis de trabajo</b>, armada por lógica de intención y no por volumen medido: no tuve acceso al Planificador de Palabras Clave. Hay que validarlos ahí antes de activar, revisar el costo por clic real en cada idioma y podar lo que no tenga volumen. Las genéricas amplias de exploración van <b>al final</b>, nunca en el primer mes.</p>
+  </div>
+
+  <h3>Palabras negativas desde el día uno</h3>
+  <p class="kw" style="margin-bottom:4mm">gratis · free · barato · cheap · delivery · pedidos ya · empleo · trabajo · vacante · curso · receta · recipe · como hacer · tenedor libre · buffet · all you can eat · franquicia · alquiler de salón · salón de fiestas · casamiento · mayorista · proveedor</p>
+
+  <h3>Configuración</h3>
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:44mm">Geografía</td><td>Presencia o interés en Buenos Aires. Para inglés y portugués, agregar los países emisores con «interés en» — capta a quien planifica desde su casa.</td></tr>
+      <tr><td class="dim">Concordancias</td><td>Frase y exacta al arrancar. Amplia solo cuando haya historial de conversiones que la guíe.</td></tr>
+      <tr><td class="dim">Puja</td><td>Maximizar clics con límite de costo las primeras dos semanas, hasta juntar conversiones. Después, maximizar conversiones.</td></tr>
+      <tr><td class="dim">Conversión principal</td><td>Reserva confirmada. Secundarias: reserva iniciada, clic a WhatsApp, consulta de evento.</td></tr>
+      <tr><td class="dim">Extensiones</td><td>Enlaces a menú, reservar, eventos y reseñas. Textos destacados: menú por pasos, tango en vivo, vista al río, de 2 a 8 personas.</td></tr>
+      <tr><td class="dim">Horario</td><td>Sin restricción: el turista extranjero busca en su huso horario, no en el nuestro.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 04 META ADS ===================== -->
+<section class="sec break">
+  <p class="sec-n">04</p>
+  <h2>Meta Ads · estructura, públicos y ángulos</h2>
+  <p class="std">Video primero. Este negocio tiene material creativo gratis cada noche de servicio — hay que aprovecharlo.</p>
+
+  <table>
+    <thead><tr><th style="width:36mm">Campaña</th><th style="width:26mm">Objetivo</th><th>Público</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Turista en destino</td><td>Reservas</td><td>Personas ubicadas en la Ciudad, excluyendo residentes. Es quien decide dónde cenar con 24 a 48 horas de anticipación.</td></tr>
+      <tr><td class="dim">Planificadores <span class="lang">PT</span></td><td>Reservas</td><td>São Paulo, Río de Janeiro, Porto Alegre y Curitiba, con interés en viajes a Argentina y en gastronomía.</td></tr>
+      <tr><td class="dim">Planificadores <span class="lang">EN</span></td><td>Reservas</td><td>Estados Unidos, con interés en viajes a Sudamérica, alta gastronomía y vino.</td></tr>
+      <tr><td class="dim">Local · ocasiones</td><td>Reservas</td><td>CABA y zona norte, 28 a 55 años, intereses de alta gastronomía, vino y salidas. Para aniversarios y festejos.</td></tr>
+      <tr><td class="dim">Recuperación</td><td>Reservas</td><td>Visitantes de la web de 30 y 90 días, reservas abandonadas, quienes vieron más del 75% de un video, interacciones con el perfil en 365 días.</td></tr>
+      <tr><td class="dim">Eventos y catering</td><td>Consultas</td><td>CABA, 30 a 60 años, cargos de dirección y recursos humanos, intereses de eventos corporativos.</td></tr>
+      <tr><td class="dim">Similares</td><td>Reservas</td><td>Público similar al de quienes ya reservaron. Recién cuando la base supere las 100 personas.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Ocho ángulos creativos para probar</h3>
+  <table>
+    <thead><tr><th style="width:8mm">#</th><th style="width:36mm">Ángulo</th><th>Gancho de los primeros tres segundos</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">1</td><td class="dim">La vista</td><td>Cámara fija sobre el skyline al atardecer, acelerado hasta la noche. Funciona en todos los mercados y no necesita idioma.</td></tr>
+      <tr><td class="dim">2</td><td class="dim">El fuego</td><td>Primer plano de la llama y el sellado. Es el gancho más confiable en gastronomía.</td></tr>
+      <tr><td class="dim">3</td><td class="dim">El primer bocado</td><td>La cara del comensal en el primer bocado. Prueba social sin decir una palabra.</td></tr>
+      <tr><td class="dim">4</td><td class="dim">El tango</td><td>El músico arrancando, con la ciudad de fondo. Es el diferencial que ningún competidor tiene.</td></tr>
+      <tr><td class="dim">5</td><td class="dim">Detrás de la puerta</td><td>Subir, tocar el timbre, se abre la puerta y aparece la terraza. Vende el misterio del formato.</td></tr>
+      <tr><td class="dim">6</td><td class="dim">El chef explica</td><td>Peter contando un plato en 45 segundos. Grabar las tres versiones de idioma en la misma sesión.</td></tr>
+      <tr><td class="dim">7</td><td class="dim">El testimonio</td><td>Un comensal extranjero contando la experiencia en su idioma. El de mayor conversión en su mercado.</td></tr>
+      <tr><td class="dim">8</td><td class="dim">La comparación</td><td>«Tu última noche en Buenos Aires puede ser una parrilla más, o esto.» Confronta con la alternativa obvia.</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:44mm">Formato</td><td>Vertical 9:16, entre 15 y 30 segundos, con subtítulos incrustados. El 85% se mira sin sonido.</td></tr>
+      <tr><td class="dim">Rotación</td><td>Tanda nueva cada tres semanas. En públicos chicos la frecuencia se satura rápido.</td></tr>
+      <tr><td class="dim">Prueba</td><td>Un ángulo por conjunto de anuncios, presupuesto parejo, 4 días mínimo antes de decidir.</td></tr>
+      <tr><td class="dim">Destino</td><td>La web, nunca el perfil de Instagram. El perfil no se puede medir ni optimizar.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 05 CONTENIDO ===================== -->
+<section class="sec break">
+  <p class="sec-n">05</p>
+  <h2>Formatos de contenido</h2>
+  <p class="std">Siete formatos fijos que se repiten. El objetivo es que grabar deje de ser una decisión creativa y pase a ser una rutina de servicio.</p>
+
+  <table>
+    <thead><tr><th style="width:8mm">#</th><th style="width:34mm">Formato</th><th style="width:22mm">Frecuencia</th><th>Cómo se graba</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">1</td><td class="dim">Atardecer y plato</td><td>Semanal</td><td>Trípode fijo en la terraza 40 minutos antes del servicio. Se corta con el emplatado del primer paso.</td></tr>
+      <tr><td class="dim">2</td><td class="dim">Fuego y cocina</td><td>2 por semana</td><td>Celular apoyado durante el sellado. 15 segundos alcanzan.</td></tr>
+      <tr><td class="dim">3</td><td class="dim">Primer bocado</td><td>Semanal</td><td>Pedir permiso al sentar la mesa. Un solo plano de la reacción.</td></tr>
+      <tr><td class="dim">4</td><td class="dim">El músico</td><td>Quincenal</td><td>Durante el set, con la ciudad de fondo. Cuidar derechos de la obra.</td></tr>
+      <tr><td class="dim">5</td><td class="dim">La llegada</td><td>Mensual</td><td>Recorrido en primera persona desde la calle hasta la terraza.</td></tr>
+      <tr><td class="dim">6</td><td class="dim">El chef explica</td><td>Semanal</td><td>Un plato, 45 segundos, tres idiomas en la misma toma. Es el formato que más autoridad construye.</td></tr>
+      <tr><td class="dim">7</td><td class="dim">Testimonio</td><td>Quincenal</td><td>Al final de la cena, en el idioma del comensal. Pedir autorización de uso por escrito.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">La regla que hace que esto funcione</div>
+    <p>Todo se graba durante el servicio normal, con celular, sin producción. <b>Una sesión de grabación programada nunca se sostiene</b> en un negocio de una sola persona. Lo que se sostiene es una rutina de tres minutos por noche.</p>
+  </div>
+</section>
+
+<!-- ===================== 06 GBP ===================== -->
+<section class="sec break">
+  <p class="sec-n">06</p>
+  <h2>Ficha de Google · lista de carga</h2>
+  <p class="std">Primero hay que definir con él si va con dirección pública. Si no, la ficha se crea como negocio sin local visible o directamente se omite.</p>
+
+  <div class="ck"><div class="bx"></div><div><b>Verificar si la ficha ya existe</b><span>Buscar el nombre en Maps. Si aparece sin reclamar, reclamarla antes de crear una nueva: dos fichas duplicadas se canibalizan.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Categoría principal</b><span>Restaurante. Secundarias: restaurante de alta cocina, servicio de catering, salón para eventos.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Nombre exacto</b><span>Peter U Cook, sin agregados de palabras clave — Google penaliza el relleno.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Horarios reales</b><span>Solo las noches que abre. Un horario incorrecto genera reseñas negativas de gente que fue y estaba cerrado.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Al menos 20 fotos</b><span>Interior, terraza, vista, platos, el equipo. Con fecha reciente: Google prioriza fichas actualizadas.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Atributos</b><span>Solo con reserva, apto vegetarianos, música en vivo, vista panorámica, terraza.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Enlace de reserva</b><span>Al calendario de la web, no al perfil de Instagram.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Preguntas frecuentes precargadas</b><span>Cómo se reserva, si hay que pagar seña, cuánto dura, si hay opción vegetariana, cómo se llega.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Publicaciones quincenales</b><span>Menú de temporada, disponibilidad, fechas especiales. Mantienen la ficha activa.</span></div></div>
+  <div class="ck" style="border-bottom:0"><div class="bx"></div><div><b>Protocolo de reseñas</b><span>Responder todas dentro de las 48 horas, también las negativas. Es señal de posicionamiento local y de confianza.</span></div></div>
+</section>
+
+<!-- ===================== 07 OTAS ===================== -->
+<section class="sec break">
+  <p class="sec-n">07</p>
+  <h2>Plataformas de experiencias · alta</h2>
+  <p class="std">Orden de prioridad por esfuerzo contra retorno esperado. Ninguna cobra hasta que hay venta.</p>
+
+  <table>
+    <thead><tr><th style="width:32mm">Plataforma</th><th style="width:22mm">Prioridad</th><th>Por qué y qué mirar</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Viator</td><td><span class="pill ok">Primera</span></td><td>Pertenece al mismo grupo que TripAdvisor, donde ya tiene reputación con distinción. Es la ventaja más directa que tiene disponible.</td></tr>
+      <tr><td class="dim">Airbnb Experiencias</td><td><span class="pill ok">Primera</span></td><td>Alcanza al huésped que ya está en la ciudad. Alta relativamente simple y muy afín al formato de puerta cerrada.</td></tr>
+      <tr><td class="dim">GetYourGuide</td><td><span class="pill mid">Segunda</span></td><td>Turista europeo y norteamericano. Exige buena ficha en inglés y tiempos de respuesta cortos.</td></tr>
+      <tr><td class="dim">Civitatis</td><td><span class="pill mid">Segunda</span></td><td>Turista hispanohablante y agencias de habla española. Buen volumen en la región.</td></tr>
+      <tr><td class="dim">Cookly · Eatwith</td><td><span class="pill mid">Tercera</span></td><td>Especializadas en cenas privadas: su categoría exacta, con menos volumen pero público muy afín.</td></tr>
+      <tr><td class="dim">TheFork · Meitre</td><td><span class="pill q">Evaluar</span></td><td>Orientadas a restaurante tradicional. Tienen sentido solo si decide abrir el formato a reservas más abiertas.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call crit">
+    <div class="t">Antes de dar de alta nada</div>
+    <p>La disponibilidad tiene que estar <b>sincronizada con un único calendario</b>. Con 2 a 8 cubiertos, una doble reserva entre dos plataformas arruina la noche y genera la peor reseña posible. Si no hay sincronización automática, se da de alta una sola plataforma por vez.</p>
+  </div>
+</section>
+
+<!-- ===================== 08 TABLERO ===================== -->
+<section class="sec break">
+  <p class="sec-n">08</p>
+  <h2>Tablero de control</h2>
+  <p class="std">De dónde sale cada número del informe mensual, para que el tablero se pueda armar sin depender de nadie.</p>
+
+  <table>
+    <thead><tr><th style="width:44mm">Número</th><th style="width:34mm">Fuente</th><th>Cómo se calcula</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Reservas confirmadas</td><td>Motor de reservas</td><td>Conteo directo. Es la fuente de verdad, por encima de lo que reporte cualquier plataforma publicitaria.</td></tr>
+      <tr><td class="dim">Reservas por canal</td><td>Analítica + parámetros de campaña</td><td>Etiquetar todo enlace de campaña. Sin esto no hay atribución posible.</td></tr>
+      <tr><td class="dim">Costo por reserva</td><td>Google Ads + Meta + motor</td><td>Inversión total del canal dividida por reservas confirmadas que le corresponden.</td></tr>
+      <tr><td class="dim">Retorno de la inversión</td><td>Motor de reservas</td><td>Ingreso de las reservas atribuidas dividido por la inversión publicitaria del período.</td></tr>
+      <tr><td class="dim">Ocupación por noche</td><td>Calendario</td><td>Cubiertos vendidos sobre cubiertos disponibles, abierto por día de la semana.</td></tr>
+      <tr><td class="dim">Tasa de ausencias</td><td>Calendario</td><td>Reservas no presentadas sobre confirmadas. Es el indicador que valida la política de señas.</td></tr>
+      <tr><td class="dim">Tiempo de respuesta</td><td>WhatsApp Business</td><td>Mediana del tiempo hasta la primera respuesta, separando automática de humana.</td></tr>
+      <tr><td class="dim">Reservas por idioma</td><td>Analítica</td><td>Segmentar por versión de idioma de la web.</td></tr>
+      <tr><td class="dim">Posiciones orgánicas</td><td>Search Console</td><td>Posición media de los términos objetivo, por idioma.</td></tr>
+      <tr><td class="dim">Reseñas nuevas</td><td>Google + TripAdvisor</td><td>Conteo mensual y nota media acumulada.</td></tr>
+      <tr><td class="dim">Consultas de eventos</td><td>Formulario</td><td>Consultas calificadas, tasa de cierre y ticket medio.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 09 ARRANQUE ===================== -->
+<section class="sec break">
+  <p class="sec-n">09</p>
+  <h2>Lista de arranque · primeras dos semanas</h2>
+
+  <h3>Antes de tocar nada</h3>
+  <div class="ck"><div class="bx"></div><div><b>Confirmar los cuatro puntos pendientes</b><span>Ficha de Maps, anuncios activos en Meta, enlace en la biografía de Instagram y tipo de cuenta.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Definir si la dirección es pública</b><span>Condiciona la ficha de Google, el alta en plataformas y cómo se redactan los flujos de confirmación.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Confirmar situación de habilitación y facturación</b><span>Afecta el alta en plataformas y el cobro de señas.</span></div></div>
+  <div class="ck" style="border-bottom:0"><div class="bx"></div><div><b>Registrar el dominio a nombre del cliente</b><span>Nunca a nombre de la agencia. Es un punto de conflicto clásico y se evita desde el día uno.</span></div></div>
+
+  <h3>Semana 1</h3>
+  <div class="ck"><div class="bx"></div><div><b>Relevar materiales</b><span>Fotos, video, menú vigente, precios, reglas de reserva.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Redactar los textos en español</b><span>Base para las traducciones. Aprobación del cliente antes de traducir.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Armar la web y el calendario</b><span>Con reglas de aforo de 2 a 8 personas y política de señas.</span></div></div>
+  <div class="ck" style="border-bottom:0"><div class="bx"></div><div><b>Crear cuentas publicitarias y administrador comercial</b><span>Todo a nombre del cliente, con la agencia como colaboradora.</span></div></div>
+
+  <h3>Semana 2</h3>
+  <div class="ck"><div class="bx"></div><div><b>Traducciones al inglés y al portugués</b><span>Traducción profesional, revisada por hablante nativo. La automática se nota y resta credibilidad.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Instalar y probar la medición</b><span>Analítica, píxel, etiqueta y eventos. Hacer una reserva de prueba de punta a punta y verificar que el evento llegue.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Montar los flujos 1 y 2</b><span>Consulta nueva y reserva confirmada. Los flujos 3 y 4 pueden esperar a la semana 3.</span></div></div>
+  <div class="ck"><div class="bx"></div><div><b>Completar la ficha de Google</b><span>Según la decisión sobre dirección pública.</span></div></div>
+  <div class="ck" style="border-bottom:0"><div class="bx"></div><div><b>Arrancar la rutina de grabación</b><span>Formatos 1, 2 y 6. Tres minutos por noche de servicio.</span></div></div>
+
+  <div class="call">
+    <div class="t">Criterio de cierre del arranque</div>
+    <p>El arranque está terminado cuando <b>una reserva hecha desde el celular, en portugués, llega al calendario, cobra la seña, dispara la confirmación y aparece como conversión en el tablero.</b> Hasta que eso no ocurre de punta a punta, no se enciende ni un peso de publicidad.</p>
+  </div>
+
+  <p class="fine" style="margin-top:8mm;padding-top:4mm;border-top:.6pt solid var(--rule)">
+    Documento interno. Las palabras clave son hipótesis de intención sin validación de volumen: hay que contrastarlas en el Planificador de Palabras Clave antes de activar campañas. Los públicos y ángulos creativos son puntos de partida a ajustar con datos reales del primer mes.
+  </p>
+</section>
+
+</body>
+</html>
