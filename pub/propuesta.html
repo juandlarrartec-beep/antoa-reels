@@ -1,0 +1,624 @@
+<title>Propuesta de trabajo — Peter U Cook</title>
+<style>
+  @page{
+    size:A4;
+    margin:17mm 15mm 18mm 15mm;
+  }
+  :root{
+    --paper:#FFFFFF;
+    --panel:#F2F4F5;
+    --panel-2:#E8ECEE;
+    --accent:#0E7C8C;
+    --accent-soft:#E2F0F2;
+    --ink:#14191C;
+    --ink-2:#48545A;
+    --ink-3:#77858C;
+    --rule:#D6DCDF;
+    --rule-2:#B9C3C7;
+    --good:#0CA30C;
+    --warn:#FAB219;
+    --crit:#D03B3B;
+    --none:#8D9A9F;
+    --serif:"Bitstream Charter","Charter","DejaVu Serif",Georgia,serif;
+    --sans:"Liberation Sans","DejaVu Sans",Arial,sans-serif;
+    --mono:"Liberation Mono","DejaVu Sans Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:9.25pt;
+    line-height:1.45;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  p{margin:0 0 6pt}
+  h1,h2,h3,h4{font-family:var(--sans);margin:0;line-height:1.16;font-weight:700;color:var(--ink)}
+  strong,b{font-weight:700}
+  a{color:var(--accent);text-decoration:none;word-break:break-word}
+
+  /* El contenido fluye: solo la portada y el índice fuerzan salto.
+     Los títulos nunca quedan huérfanos al pie de página. */
+  .break{}
+  .pgend{break-after:page}
+  .avoid{break-inside:avoid}
+
+  /* ---------- cover ---------- */
+  .cover{height:243mm;display:flex;flex-direction:column;position:relative;break-after:page}
+  .cover .rule-top{height:3.2mm;background:var(--accent);width:44mm;margin-bottom:14mm}
+  .cover .kicker{font-family:var(--mono);font-size:8pt;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:9mm}
+  .cover h1{font-family:var(--serif);font-size:32pt;line-height:1.05;letter-spacing:-.01em;font-weight:700;max-width:150mm}
+  .cover h1 em{font-style:italic;color:var(--accent)}
+  .cover .sub{font-size:12pt;color:var(--ink-2);margin-top:8mm;max-width:130mm;line-height:1.45}
+  .cover .facts{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule-2)}
+  .cover .fact{padding:6mm 5mm 0 0;border-right:1px solid var(--rule)}
+  .cover .fact:last-child{border-right:0}
+  .cover .fact .n{font-family:var(--sans);font-size:19pt;font-weight:700;color:var(--accent);line-height:1}
+  .cover .fact .l{font-size:8pt;color:var(--ink-2);margin-top:2.5mm;line-height:1.35}
+  .cover .meta{margin-top:10mm;padding-top:5mm;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;font-family:var(--mono);font-size:7.6pt;
+    letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- índice ---------- */
+  .toc{margin-top:2mm}
+  .toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+  .toc li{counter-increment:t;display:flex;align-items:baseline;gap:3mm;
+    padding:2.4mm 0;border-bottom:.6pt solid var(--rule);font-size:9.4pt}
+  .toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);
+    font-size:8pt;color:var(--accent);font-weight:700;flex:none;width:8mm}
+  .toc .tt{font-family:var(--sans);font-weight:700;font-size:9.2pt;flex:none}
+  .toc .td{color:var(--ink-3);font-size:8.4pt;flex:1;
+    border-bottom:.5pt dotted var(--rule-2);transform:translateY(-.8mm);margin:0 2mm}
+  .toc .tp{font-family:var(--mono);font-size:8.4pt;color:var(--ink-2);flex:none}
+
+  /* ---------- section chrome ---------- */
+  .sec{margin-bottom:8mm}
+  .sec-n{font-family:var(--mono);font-size:7.6pt;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:2.5mm;break-after:avoid}
+  h2{font-size:15pt;letter-spacing:-.005em;padding-bottom:2.2mm;border-bottom:1.6pt solid var(--ink);
+    margin-bottom:4mm;break-after:avoid;break-inside:avoid}
+  h3{font-size:10.4pt;margin:5mm 0 2.5mm;break-after:avoid;break-inside:avoid}
+  h4{font-size:9.2pt;margin:4mm 0 2mm;color:var(--ink-2);break-after:avoid}
+  .std{font-size:9.9pt;color:var(--ink-2);margin-bottom:4mm;max-width:158mm;line-height:1.48;break-inside:avoid}
+
+  /* ---------- tables ---------- */
+  table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:2.5mm 0 4mm}
+  th{font-family:var(--sans);font-size:7.2pt;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-3);text-align:left;font-weight:700;
+    padding:2.2mm 2.2mm;border-bottom:1pt solid var(--rule-2);vertical-align:bottom}
+  td{padding:2.2mm 2.2mm;border-bottom:.6pt solid var(--rule);vertical-align:top;line-height:1.42}
+  tr{break-inside:avoid}
+  thead{break-after:avoid}
+  table{break-inside:auto}
+  td.c{text-align:center}
+  td.r{text-align:right;font-family:var(--mono);font-size:8.2pt;white-space:nowrap}
+  td.dim{font-family:var(--sans);font-weight:700;font-size:8.4pt}
+  tbody tr:nth-child(even) td{background:#FAFBFB}
+  .tot td{border-top:1.2pt solid var(--ink);border-bottom:0;font-family:var(--sans);font-weight:700;background:var(--accent-soft) !important}
+
+  /* status pill */
+  .pill{display:inline-block;white-space:nowrap;font-family:var(--sans);font-size:7.2pt;
+    letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink);
+    padding:1mm 2mm;border-radius:1.4mm;border:.6pt solid var(--rule-2);background:#fff}
+  .pill::before{content:"";display:inline-block;width:2.1mm;height:2.1mm;border-radius:.5mm;
+    margin-right:1.6mm;vertical-align:-.15mm}
+  .pill.ok::before{background:var(--good)}
+  .pill.mid::before{background:var(--warn)}
+  .pill.no::before{background:var(--crit)}
+  .pill.q::before{background:var(--none)}
+  .pill.q{border-style:dashed;color:var(--ink-2)}
+
+  /* ---------- callout ---------- */
+  .call{break-inside:avoid;background:var(--panel);border-left:2.2pt solid var(--accent);
+    padding:3.4mm 4.5mm;margin:3.5mm 0 4mm}
+  .call.warn{border-left-color:var(--warn)}
+  .call.crit{border-left-color:var(--crit)}
+  .call .t{font-family:var(--sans);font-size:7.6pt;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700;margin-bottom:2mm}
+  .call p:last-child{margin-bottom:0}
+
+  /* ---------- key figures ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin:3.5mm 0 4mm;break-inside:avoid}
+  .kpi{border:.7pt solid var(--rule-2);border-top:2.2pt solid var(--accent);padding:3.5mm 3.5mm 4mm}
+  .kpi .n{font-family:var(--sans);font-size:16pt;font-weight:700;color:var(--ink);line-height:1}
+  .kpi .n small{font-size:9pt;color:var(--ink-2)}
+  .kpi .l{font-size:7.8pt;color:var(--ink-2);margin-top:2.2mm;line-height:1.35}
+  .kpi .s{font-family:var(--mono);font-size:6.6pt;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:2mm}
+
+  /* ---------- bar chart ---------- */
+  .chart{break-inside:avoid;border:.7pt solid var(--rule-2);padding:4.5mm 5mm 5mm;margin:4mm 0 5mm}
+  .chart .ct{font-family:var(--sans);font-size:9pt;font-weight:700}
+  .chart .cs{font-family:var(--mono);font-size:7pt;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-top:1mm}
+  .bars{margin-top:4mm}
+  .bar{display:grid;grid-template-columns:30mm 1fr 10mm;gap:3mm;align-items:center;padding:1.1mm 0}
+  .bar .cat{font-size:8.4pt;color:var(--ink-2)}
+  .bar .tk{height:4.2mm;background:var(--panel-2)}
+  .bar .fl{height:100%;background:#9DAAB0}
+  .bar .vl{font-family:var(--mono);font-size:8pt;text-align:right;color:var(--ink-2)}
+  .bar.hi .cat{color:var(--ink);font-weight:700;font-family:var(--sans);font-size:8.2pt}
+  .bar.hi .fl{background:var(--accent)}
+  .bar.hi .vl{color:var(--ink);font-weight:700}
+
+  /* ---------- score ---------- */
+  .score{display:grid;grid-template-columns:62mm 1fr;gap:7mm;align-items:center;
+    border:.7pt solid var(--rule-2);padding:5mm;margin:4mm 0 5mm;break-inside:avoid}
+  .score .legend p{font-size:8.6pt;margin-bottom:3mm}
+  .score .legend p:last-child{margin-bottom:0}
+  .sw{display:inline-block;width:3mm;height:3mm;margin-right:2mm;vertical-align:-.3mm;border:.5pt solid var(--rule-2)}
+
+  /* ---------- service card ---------- */
+  .svc{break-inside:avoid;border:.7pt solid var(--rule-2);padding:3.4mm 4mm;margin-bottom:2.8mm}
+  .svc-h{display:flex;align-items:baseline;gap:3mm;border-bottom:.6pt solid var(--rule);padding-bottom:2.2mm;margin-bottom:3mm}
+  .svc-h .no{font-family:var(--mono);font-size:8pt;color:var(--accent);font-weight:700}
+  .svc-h h3{margin:0;font-size:10pt;flex:1}
+  .svc-h .bk{font-family:var(--sans);font-size:6.8pt;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:#fff;background:var(--accent);padding:.9mm 2mm;border-radius:1mm;white-space:nowrap}
+  .svc-h .bk.b1{background:#3A6B78}
+  .svc-h .bk.b2{background:#5A7F88}
+  .svc-h .bk.b3{background:#78959B}
+  .svc > p{font-size:8.7pt;margin-bottom:2.5mm}
+  .svc dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2.4mm 5mm}
+  .svc dt{font-family:var(--sans);font-size:6.9pt;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700;margin-bottom:.8mm}
+  .svc dd{margin:0;font-size:8.1pt;color:var(--ink-2);line-height:1.38}
+  .svc dd b{color:var(--ink)}
+
+  /* ---------- timeline ---------- */
+  .ph{break-inside:avoid;display:grid;grid-template-columns:26mm 1fr;gap:5mm;
+    padding:3.2mm 0;border-top:.6pt solid var(--rule)}
+  .ph:first-of-type{border-top:1pt solid var(--rule-2)}
+  .ph .w{font-family:var(--mono);font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .ph h3{margin:0 0 2mm;font-size:9.6pt}
+  .ph ul{margin:0;padding-left:4.5mm;font-size:8.6pt;color:var(--ink-2)}
+  .ph li{margin:1.2mm 0;line-height:1.42}
+  .ph li b{color:var(--ink)}
+
+  ul.tight{margin:0 0 4mm;padding-left:5mm}
+  ul.tight li{margin:1.3mm 0;line-height:1.42}
+
+  /* ---------- radar svg ---------- */
+  .radar-wrap{display:grid;grid-template-columns:76mm 1fr;gap:7mm;align-items:center;break-inside:avoid;margin:4mm 0 5mm}
+  .radar-wrap svg{width:100%;height:auto}
+  .rlist{font-size:8.4pt}
+  .rlist div{display:flex;justify-content:space-between;gap:4mm;padding:1.5mm 0;border-bottom:.6pt solid var(--rule)}
+  .rlist div:last-child{border-bottom:0}
+  .rlist .nm{color:var(--ink)}
+
+  /* ---------- quote ---------- */
+  .quote{break-inside:avoid;background:var(--panel);padding:5mm 6mm;margin:4mm 0}
+  .quote .t{font-family:var(--mono);font-size:7.2pt;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3mm}
+  .quote p{font-size:9.4pt;line-height:1.58}
+  .quote p:last-child{margin-bottom:0}
+
+  .srcs{font-size:8pt;color:var(--ink-2);line-height:1.6}
+  .srcs li{margin:1.5mm 0}
+  .fine{font-size:8pt;color:var(--ink-3);line-height:1.55}
+
+  /* ---------- vista en pantalla (no afecta la impresión ni el PDF) ---------- */
+  @media screen{
+    body{
+      background:#E7EAEC;
+      padding:24px 16px 56px;
+      font-size:10.4pt;
+    }
+    body > section{
+      background:var(--paper);
+      max-width:210mm;
+      margin:0 auto 18px;
+      padding:20mm 18mm;
+      box-shadow:0 1px 2px rgba(20,25,28,.06),0 10px 30px rgba(20,25,28,.10);
+      border-radius:2px;
+    }
+    body > section.cover{height:auto;min-height:220mm;padding-top:26mm}
+    @media (max-width:700px){
+      body{padding:12px 10px 32px}
+      body > section{padding:16px 16px 22px;border-radius:0}
+      .cover .facts{grid-template-columns:repeat(2,1fr);gap:10px 0}
+      .cover .fact{padding:10px 10px 0 0}
+      .cover .fact:nth-child(2){border-right:0}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+      .score,.radar-wrap,.svc dl{grid-template-columns:1fr;gap:14px}
+      .ph{grid-template-columns:1fr;gap:6px}
+      .bar{grid-template-columns:24mm 1fr 10mm}
+      table{font-size:9pt}
+      td,th{padding:7px 6px}
+    }
+    /* tablas anchas nunca desbordan la página */
+    section{overflow-x:auto}
+  }
+
+</style>
+<style>
+  .pk{break-inside:avoid;border:.7pt solid var(--rule-2);padding:4mm 4.5mm;margin-bottom:3.5mm}
+  .pk.hi{border:1.4pt solid var(--accent);background:#FAFCFC}
+  .pk-h{display:flex;align-items:baseline;gap:3mm;border-bottom:.6pt solid var(--rule);
+    padding-bottom:2.4mm;margin-bottom:3mm}
+  .pk-h h3{margin:0;font-size:11pt;flex:1}
+  .pk-h .tag{font-family:var(--sans);font-size:6.8pt;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:#fff;background:var(--accent);padding:.9mm 2mm;border-radius:1mm}
+  .pk ul{margin:0 0 3mm;padding-left:5mm;font-size:8.6pt;color:var(--ink-2)}
+  .pk li{margin:1.2mm 0;line-height:1.4}
+  .pk .price{display:flex;justify-content:space-between;align-items:baseline;gap:4mm;
+    border-top:.6pt solid var(--rule);padding-top:2.6mm;font-size:8.6pt}
+  .pk .price .lb{font-family:var(--sans);font-size:7pt;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:700}
+  .pk .price .pv{font-family:var(--mono);font-size:10pt;color:var(--ink-3);
+    border-bottom:.8pt solid var(--rule-2);min-width:38mm;text-align:right}
+  .faq{break-inside:avoid;margin-bottom:4mm;padding-bottom:3.5mm;border-bottom:.6pt solid var(--rule)}
+  .faq .q{font-family:var(--sans);font-weight:700;font-size:9.2pt;margin-bottom:1.8mm}
+  .faq p{font-size:8.9pt;color:var(--ink-2);margin:0}
+  .need{display:grid;grid-template-columns:7mm 1fr;gap:3mm;padding:2.6mm 0;
+    border-bottom:.6pt solid var(--rule);break-inside:avoid}
+  .need .ck{font-family:var(--mono);color:var(--accent);font-size:9pt;font-weight:700}
+  .need b{font-family:var(--sans);font-size:9pt}
+  .need span{display:block;font-size:8.5pt;color:var(--ink-2);margin-top:.8mm;line-height:1.42}
+  .fill{font-family:var(--mono);color:var(--ink-3);
+    border-bottom:.8pt solid var(--rule-2);padding:0 6mm}
+</style>
+
+<!-- ===================== PORTADA ===================== -->
+<section class="cover">
+  <div class="rule-top"></div>
+  <p class="kicker">Propuesta de trabajo</p>
+  <h1>Que te encuentren<br><em>los que te están buscando.</em></h1>
+  <p class="sub">Plan de presencia digital y captación de reservas para Peter U Cook. Diagnóstico, propuesta y plan de los primeros 90 días.</p>
+
+  <div class="facts">
+    <div class="fact"><div class="n">1,6 <small>M</small></div><div class="l">turistas internacionales llegaron a la Ciudad este año</div></div>
+    <div class="fact"><div class="n">+19%</div><div class="l">más que el año pasado, y sigue creciendo</div></div>
+    <div class="fact"><div class="n">29%</div><div class="l">de lo que gastan se va en gastronomía: el rubro número uno</div></div>
+    <div class="fact"><div class="n">0</div><div class="l">de esa búsqueda te encuentra hoy</div></div>
+  </div>
+
+  <div class="meta">
+    <span>Preparado para Peter U Cook · 22.09.2026</span>
+    <span>Preparado por <span class="fill">&nbsp;</span></span>
+  </div>
+</section>
+
+<!-- ===================== 01 ===================== -->
+<section class="sec break">
+  <p class="sec-n">01</p>
+  <h2>Por qué te escribimos</h2>
+
+  <p class="std">Antes de contactarte hicimos un ejercicio simple: buscar en Google lo que busca un turista antes de elegir dónde cenar en Buenos Aires.</p>
+
+  <p>Probamos con <b>«closed door restaurant Buenos Aires»</b>, <b>«private dinner Buenos Aires»</b>, <b>«restaurante puerta cerrada Buenos Aires»</b> y <b>«cena con vista Buenos Aires»</b>. Son las frases exactas que teclea alguien que ya decidió que quiere una experiencia como la tuya y solo le falta elegir cuál.</p>
+
+  <p>En ninguna de esas búsquedas aparece Peter U Cook. Lo único tuyo que figura es la ficha de TripAdvisor — que está muy bien valorada, pero no es tuya: la controla la plataforma, decide ella en qué posición aparece y puede cambiar eso mañana sin avisarte.</p>
+
+  <div class="call">
+    <div class="t">El punto</div>
+    <p>No es un problema de tu propuesta. Tenés distinción Travelers' Choice, 13.000 seguidores conseguidos sin pagar un peso de publicidad y reseñas que hablan de la comida, la vista y tu atención. <b>El producto está probado.</b> Lo que falta es que la gente que ya lo está buscando pueda encontrarte y reservar sin fricción.</p>
+  </div>
+
+  <p>Esta propuesta es eso: qué vimos, qué proponemos hacer y en qué orden.</p>
+</section>
+
+<!-- ===================== 02 ===================== -->
+<section class="sec break">
+  <p class="sec-n">02</p>
+  <h2>La oportunidad</h2>
+  <p class="std">El momento del mercado juega a favor con una fuerza poco habitual.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">1,61 <small>M</small></div><div class="l">turistas internacionales en la Ciudad, enero a julio de 2026</div><div class="s">Ente de Turismo CABA</div></div>
+    <div class="kpi"><div class="n">+19%</div><div class="l">de crecimiento respecto del año anterior</div><div class="s">Ente de Turismo CABA</div></div>
+    <div class="kpi"><div class="n">29%</div><div class="l">del gasto del turista va a gastronomía: más que a hotel</div><div class="s">INDEC</div></div>
+    <div class="kpi"><div class="n">1.434.001</div><div class="l">visitantes de países no limítrofes: mejor marca en 25 años</div><div class="s">INDEC</div></div>
+  </div>
+
+  <div class="chart">
+    <div class="ct">En qué gasta el turista internacional</div>
+    <div class="cs">Participación sobre el gasto total · 2026</div>
+    <div class="bars">
+      <div class="bar hi"><div class="cat">Gastronomía</div><div class="tk"><div class="fl" style="width:100%"></div></div><div class="vl">29%</div></div>
+      <div class="bar"><div class="cat">Alojamiento</div><div class="tk"><div class="fl" style="width:89.7%"></div></div><div class="vl">26%</div></div>
+      <div class="bar"><div class="cat">Compras</div><div class="tk"><div class="fl" style="width:48.3%"></div></div><div class="vl">14%</div></div>
+      <div class="bar"><div class="cat">Paquetes turísticos</div><div class="tk"><div class="fl" style="width:37.9%"></div></div><div class="vl">11%</div></div>
+      <div class="bar"><div class="cat">Transporte</div><div class="tk"><div class="fl" style="width:34.5%"></div></div><div class="vl">10%</div></div>
+    </div>
+  </div>
+
+  <h3>De dónde viene ese turista</h3>
+  <table>
+    <thead><tr><th style="width:32mm">Mercado</th><th style="width:30mm">Participación</th><th style="width:24mm">Idioma</th><th>Qué significa para vos</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Brasil</td><td>22% — 357 mil</td><td>Portugués</td><td>Es tu mercado número uno y hoy no hay nada tuyo en portugués.</td></tr>
+      <tr><td class="dim">Estados Unidos</td><td>14% — 219 mil</td><td>Inglés</td><td>El que más gasta y el que más reserva con anticipación.</td></tr>
+      <tr><td class="dim">Uruguay</td><td>11% — 171 mil</td><td>Español</td><td>El único de los tres que tu comunicación actual alcanza.</td></tr>
+      <tr><td class="dim">China</td><td>+62% interanual</td><td>Chino / inglés</td><td>El de mayor crecimiento. Llega casi siempre por plataformas, no por redes.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Dicho corto: <b>dos de cada tres turistas de tus principales mercados no hablan español</b>, y hoy no hay ninguna vía por la que puedan descubrirte, entenderte y reservar.</p>
+</section>
+
+<!-- ===================== 03 ===================== -->
+<section class="sec break">
+  <p class="sec-n">03</p>
+  <h2>Qué encontramos</h2>
+  <p class="std">Revisamos diez frentes de tu presencia digital. Esto es lo que ya funciona y lo que todavía no existe.</p>
+
+  <table>
+    <thead><tr><th style="width:44mm">Frente</th><th style="width:26mm">Cómo está</th><th>Detalle</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Instagram y redes</td><td><span class="pill ok">Bien</span></td><td>13.000 seguidores orgánicos. Tu canal más fuerte y el que sostiene todo.</td></tr>
+      <tr><td class="dim">Reseñas y reputación</td><td><span class="pill ok">Bien</span></td><td>Travelers' Choice en TripAdvisor. Es tu mejor carta de presentación.</td></tr>
+      <tr><td class="dim">Contenido en video</td><td><span class="pill mid">A medias</span></td><td>Publicás en Instagram, pero TikTok y YouTube están vacíos. Es distribución gratis que hoy no usás.</td></tr>
+      <tr><td class="dim">Sitio web propio</td><td><span class="pill no">Falta</span></td><td>No tenés. Es la pieza que destraba casi todo lo demás.</td></tr>
+      <tr><td class="dim">Reserva online</td><td><span class="pill no">Falta</span></td><td>Todo pasa por teléfono o mensaje. Sin agenda, sin seña, sin confirmación automática.</td></tr>
+      <tr><td class="dim">Aparecer en Google</td><td><span class="pill no">Falta</span></td><td>En las búsquedas donde se decide la reserva, hoy no estás.</td></tr>
+      <tr><td class="dim">Ficha de Google Maps</td><td><span class="pill q">A revisar</span></td><td>Lo confirmamos con vos en la primera reunión.</td></tr>
+      <tr><td class="dim">Campañas en Google</td><td><span class="pill no">Falta</span></td><td>Sin web no hay a dónde llevar a la gente ni forma de medir si funcionó.</td></tr>
+      <tr><td class="dim">Campañas en Meta</td><td><span class="pill q">A revisar</span></td><td>No encontramos anuncios activos.</td></tr>
+      <tr><td class="dim">Saber qué funciona</td><td><span class="pill no">Falta</span></td><td>Hoy no hay manera de saber de dónde vino cada reserva.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">Lo importante</div>
+    <p>Las dos primeras filas son las difíciles de conseguir y ya las tenés. <b>Las otras ocho son trabajo, no talento.</b></p>
+  </div>
+
+  <h3>Los tres huecos que más te cuestan</h3>
+  <table>
+    <thead><tr><th style="width:44mm">Hueco</th><th>Qué se pierde hoy</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">No aparecés cuando te buscan</td><td>La demanda ya existe y está lista para reservar. Hoy se la lleva otro simplemente porque aparece primero.</td></tr>
+      <tr><td class="dim">Todo depende de Instagram</td><td>Es una cuenta que no te pertenece. Si se bloquea o cae el alcance, no queda ninguna otra vía para que un cliente te encuentre.</td></tr>
+      <tr><td class="dim">La reserva te depende a vos</td><td>El turista de Estados Unidos escribe con cinco horas de diferencia y el de Brasil compara tres opciones en la misma tarde. El que contesta primero se queda con la mesa.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 04 ===================== -->
+<section class="sec break">
+  <p class="sec-n">04</p>
+  <h2>Qué proponemos</h2>
+  <p class="std">Diecisiete servicios agrupados en cuatro bloques, con un orden que no es negociable: primero construir y medir, después invertir en publicidad.</p>
+
+  <div class="call">
+    <div class="t">Por qué ese orden</div>
+    <p>Pautar antes de tener web y medición es tirar plata sin poder demostrar el resultado. <b>Primero queremos que sepas de dónde viene cada reserva</b>, y recién después te pedimos presupuesto de publicidad.</p>
+  </div>
+
+  <h3>Bloque 0 · Los cimientos</h3>
+  <p>Lo que hace que tu negocio exista fuera de Instagram y que todo lo demás se pueda medir.</p>
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:52mm">Página web con reserva</td><td>Un sitio tuyo que cuente la experiencia y cierre la reserva solo, en español, inglés y portugués.</td></tr>
+      <tr><td class="dim">Agenda y calendario</td><td>Turnos por noche, cupos por mesa, cobro de seña y confirmación automática. Menos ausencias, menos mensajes.</td></tr>
+      <tr><td class="dim">Automatizaciones</td><td>Respuesta inmediata a cada consulta, envío de menú y precio, recordatorio antes de la cena, indicaciones de llegada y pedido de reseña después.</td></tr>
+      <tr><td class="dim">Ficha de Google</td><td>Alta o reclamo de tu ficha de empresa, con fotos, horarios y gestión de reseñas. Es gratis y es la puerta de Maps.</td></tr>
+      <tr><td class="dim">Medición y tablero</td><td>El informe mensual de una página donde ves cuántas reservas trajo cada canal y cuánto costó cada una.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Bloque 1 · Aparecer donde ya te buscan</h3>
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:52mm">Campañas en Google Búsqueda</td><td>Anuncios sobre las frases exactas que usa quien ya quiere reservar, en los tres idiomas, más defensa de tu propio nombre.</td></tr>
+      <tr><td class="dim">Google en YouTube y Discover</td><td>Alcanzar al viajero mientras planifica el viaje, semanas antes de llegar.</td></tr>
+      <tr><td class="dim">Posicionamiento orgánico</td><td>Que tu web escale sola en Google. Es el único canal cuyo costo baja con el tiempo en lugar de subir.</td></tr>
+      <tr><td class="dim">Plataformas de experiencias</td><td>Alta en Viator, GetYourGuide, Civitatis y Airbnb Experiencias. Tienen demanda propia y no cobran hasta que hay venta.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Bloque 2 · Crear demanda nueva</h3>
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:52mm">Publicidad en Meta</td><td>Campañas de video en Instagram y Facebook para turistas que están planificando o ya están en la Ciudad. Tu producto es puro video: fuego, vista, tango.</td></tr>
+      <tr><td class="dim">Recuperación de interesados</td><td>Volver a mostrarte a quien entró a la web o empezó una reserva y no la terminó. Es siempre lo más barato.</td></tr>
+      <tr><td class="dim">Eventos y catering</td><td>Campañas para tu línea de mayor ticket, que hoy no tiene ni una pieza propia: cumpleaños, aniversarios, agasajos de empresa.</td></tr>
+      <tr><td class="dim">Producción de anuncios</td><td>Piezas nuevas todos los meses y medición de cuál funciona mejor.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Bloque 3 · Contenido y clientes que vuelven</h3>
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:52mm">Sistema de reels</td><td>Formatos fijos y calendario, en lugar de publicar cuando se puede. El mismo material alimenta el orgánico y la publicidad.</td></tr>
+      <tr><td class="dim">TikTok y YouTube</td><td>Dos canales gratis, hoy vacíos, con el contenido que ya producís.</td></tr>
+      <tr><td class="dim">Base de comensales</td><td>Saber quién vino, cuándo y por qué motivo, para invitarlo de vuelta o venderle un evento privado.</td></tr>
+      <tr><td class="dim">Alianzas</td><td>Hoteles boutique, anfitriones de alojamiento, conserjes y agencias. Llenan mesas sin costo por clic.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 05 ===================== -->
+<section class="sec break">
+  <p class="sec-n">05</p>
+  <h2>Formas de empezar</h2>
+  <p class="std">Tres alternativas según con qué te sientas cómodo. Las tres respetan el mismo orden: nada de publicidad antes de que haya medición.</p>
+
+  <div class="pk hi">
+    <div class="pk-h"><h3>Arranque</h3><span class="tag">Recomendado para empezar</span></div>
+    <ul>
+      <li>Página web con reserva integrada, en español, inglés y portugués</li>
+      <li>Agenda y calendario con cobro de seña y confirmación automática</li>
+      <li>Ficha de Google reclamada y completa</li>
+      <li>Medición instalada y tablero mensual</li>
+    </ul>
+    <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm"><b>Sin inversión publicitaria.</b> Mejora la conversión de lo que ya tenés y te deja el tablero funcionando para decidir el paso siguiente con datos.</p>
+    <div class="price"><span class="lb">Plazo · 3 a 4 semanas</span><span class="pv">&nbsp;</span></div>
+  </div>
+
+  <div class="pk">
+    <div class="pk-h"><h3>Arranque completo</h3></div>
+    <ul>
+      <li>Todo lo del paquete anterior</li>
+      <li>Automatizaciones de atención y seguimiento por WhatsApp</li>
+      <li>Sistema de reels en marcha desde la primera semana</li>
+      <li>Alta en plataformas de experiencias para turistas</li>
+    </ul>
+    <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm">Los cimientos completos, con atención automatizada y contenido produciéndose en paralelo.</p>
+    <div class="price"><span class="lb">Plazo · 4 a 6 semanas</span><span class="pv">&nbsp;</span></div>
+  </div>
+
+  <div class="pk">
+    <div class="pk-h"><h3>Gestión mensual</h3></div>
+    <ul>
+      <li>Campañas en Google y en Meta, según la etapa</li>
+      <li>Posicionamiento orgánico y contenido</li>
+      <li>Gestión de plataformas, reseñas y base de comensales</li>
+      <li>Informe mensual y reunión de lectura de resultados</li>
+    </ul>
+    <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm">Se contrata después del arranque y se escala según lo que muestre el tablero. Mínimo tres meses, porque antes no hay datos suficientes para decidir.</p>
+    <div class="price"><span class="lb">Honorarios mensuales · inversión publicitaria aparte</span><span class="pv">&nbsp;</span></div>
+  </div>
+
+  <div class="call warn">
+    <div class="t">Sobre la inversión publicitaria</div>
+    <p>El presupuesto de medios lo definís vos y se paga directo a Google y a Meta: nosotros no lo tocamos. En la reunión hacemos juntos la cuenta con tus números — cuánto vale una reserva para vos y cuántas hacen falta por mes para que la inversión se pague sola. Con tu ticket y tu margen, suelen ser muy pocas.</p>
+  </div>
+</section>
+
+<!-- ===================== 06 ===================== -->
+<section class="sec break">
+  <p class="sec-n">06</p>
+  <h2>Los primeros 90 días</h2>
+
+  <div class="ph"><div class="w">Semanas 1 – 2</div><div>
+    <h3>Construir</h3>
+    <ul>
+      <li>Web con reserva en tres idiomas, con seña para reducir ausencias</li>
+      <li>Calendario configurado con tus turnos y cupos reales</li>
+      <li>Ficha de Google completa y verificada</li>
+      <li>Medición instalada y probada</li>
+      <li>WhatsApp con respuestas automáticas</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Semanas 3 – 6</div><div>
+    <h3>Aparecer</h3>
+    <ul>
+      <li>Campañas en Google Búsqueda en los tres idiomas</li>
+      <li>Primeros contenidos para posicionamiento orgánico</li>
+      <li>Alta en plataformas de experiencias, sincronizadas con tu agenda</li>
+      <li><b>Primera lectura del tablero:</b> de dónde vino cada reserva</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Semanas 7 – 11</div><div>
+    <h3>Crecer</h3>
+    <ul>
+      <li>Campañas de video en Instagram y Facebook</li>
+      <li>Recuperación de quienes entraron y no reservaron</li>
+      <li>Sistema de reels en régimen</li>
+      <li>TikTok y YouTube abiertos con el material que ya existe</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Semanas 12 – 13</div><div>
+    <h3>Escalar</h3>
+    <ul>
+      <li>Campañas de eventos y catering</li>
+      <li>Alianzas con hoteles, anfitriones y agencias</li>
+      <li>Base de comensales activada para temporada alta</li>
+      <li>Informe trimestral y plan del período siguiente</li>
+    </ul></div></div>
+</section>
+
+<!-- ===================== 07 ===================== -->
+<section class="sec break">
+  <p class="sec-n">07</p>
+  <h2>Qué vas a poder ver</h2>
+  <p class="std">Una página por mes, siempre con los mismos números, siempre comparados contra el mes anterior. Sin jerga.</p>
+
+  <table>
+    <thead><tr><th style="width:48mm">Número</th><th style="width:26mm">Desde cuándo</th><th>Qué te dice</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Reservas confirmadas</td><td>Semana 2</td><td>El número que importa. Todo lo demás está para explicarlo.</td></tr>
+      <tr><td class="dim">Cuánto costó cada reserva</td><td>Mes 1</td><td>Si conviene invertir más o corregir. Se compara contra lo que vale una mesa para vos.</td></tr>
+      <tr><td class="dim">Ocupación por noche</td><td>Semana 2</td><td>Qué noches se llenan y cuáles hay que trabajar.</td></tr>
+      <tr><td class="dim">Ausencias sin aviso</td><td>Semana 2</td><td>Si el sistema de señas y recordatorios está funcionando.</td></tr>
+      <tr><td class="dim">Cuánto tardamos en contestar</td><td>Semana 2</td><td>El efecto directo de las automatizaciones sobre tus reservas.</td></tr>
+      <tr><td class="dim">Reservas por idioma</td><td>Mes 1</td><td>Cuánto te devolvió haber traducido todo.</td></tr>
+      <tr><td class="dim">Reservas por canal</td><td>Mes 1</td><td>Dónde poner más plata el mes que viene.</td></tr>
+      <tr><td class="dim">Posiciones en Google</td><td>Mes 2</td><td>El indicador que anticipa que el costo por reserva va a bajar.</td></tr>
+      <tr><td class="dim">Reseñas nuevas</td><td>Mes 1</td><td>Cómo evoluciona tu mejor activo.</td></tr>
+      <tr><td class="dim">Consultas de eventos</td><td>Mes 2</td><td>Tu línea de mayor ticket, hoy en cero.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== 08 ===================== -->
+<section class="sec break">
+  <p class="sec-n">08</p>
+  <h2>Qué necesitamos de vos</h2>
+  <p class="std">Poco, pero sin esto no arrancamos. La idea es que te saquemos trabajo de encima, no que te agreguemos.</p>
+
+  <div class="need"><span class="ck">01</span><div><b>Fotos y video del lugar y de los platos</b>
+    <span>Lo que ya tengas sirve. Si hace falta, coordinamos una producción.</span></div></div>
+  <div class="need"><span class="ck">02</span><div><b>El menú actual y los precios</b>
+    <span>Para la web y para calcular juntos cuántas reservas justifican la inversión.</span></div></div>
+  <div class="need"><span class="ck">03</span><div><b>Tus reglas de reserva</b>
+    <span>Noches que abrís, turnos, cupos, anticipación mínima, política de cancelación y si querés cobrar seña.</span></div></div>
+  <div class="need"><span class="ck">04</span><div><b>Accesos a tus cuentas</b>
+    <span>Instagram, Facebook y el número de WhatsApp del negocio. No necesitamos tus contraseñas: se hace por permisos.</span></div></div>
+  <div class="need"><span class="ck">05</span><div><b>Una definición sobre la dirección</b>
+    <span>Si querés que la dirección sea pública o preferís el modelo de reservar primero y dar la dirección al confirmar. Las dos opciones funcionan, pero cambian cómo armamos la ficha de Google.</span></div></div>
+  <div class="need"><span class="ck">06</span><div><b>Una reunión de 45 minutos por mes</b>
+    <span>Para leer juntos el tablero y decidir el mes siguiente.</span></div></div>
+</section>
+
+<!-- ===================== 09 ===================== -->
+<section class="sec break">
+  <p class="sec-n">09</p>
+  <h2>Preguntas que nos suelen hacer</h2>
+
+  <div class="faq"><div class="q">Somos a puerta cerrada. ¿No pierdo la exclusividad?</div>
+    <p>La exclusividad está en el acceso, no en ser invisible. Ya estás listado en TripAdvisor con distinción y tenés 13.000 seguidores: la decisión de ser público ya la tomaste. Lo que proponemos es que controles esa exposición en lugar de dejarla en manos de una plataforma, y que puedas elegir a quién le llega.</p></div>
+
+  <div class="faq"><div class="q">No quiero publicar la dirección.</div>
+    <p>No hace falta. Se trabaja con reserva primero y dirección al confirmar, que además es el estándar del formato. En ese caso la ficha de Google se configura sin dirección visible, o directamente no se crea, y se compensa con posicionamiento de tu web y con las plataformas de experiencias.</p></div>
+
+  <div class="faq"><div class="q">Ya me lleno. ¿Para qué necesito esto?</div>
+    <p>Si te llenás, el objetivo deja de ser llenar y pasa a ser elegir con quién y a qué precio. Con demanda predecible podés subir el ticket, sumar turnos y desarrollar la línea de eventos, que tiene el mejor margen y hoy está en cero. Y llenarte hoy no te protege de una caída de alcance mañana.</p></div>
+
+  <div class="faq"><div class="q">¿Cuánto tarda en verse el resultado?</div>
+    <p>Los cimientos se notan en semanas: menos ausencias, respuestas más rápidas, más reservas cerradas sobre las mismas consultas. Las campañas rinden entre el primer y el segundo mes. El posicionamiento orgánico empieza a pesar desde el tercero. No prometemos resultados inmediatos: prometemos que desde el primer mes vas a poder ver exactamente qué está pasando.</p></div>
+
+  <div class="faq"><div class="q">Ya trabajé con una agencia y no funcionó.</div>
+    <p>Suele ser el mismo problema: pautaron sin medición. Sin web ni eventos de conversión, nadie puede demostrar qué trajo qué. Acá el primer entregable es el tablero, no el anuncio.</p></div>
+
+  <div class="faq" style="border-bottom:0"><div class="q">¿Me quedo con lo que se construye?</div>
+    <p>Sí. El dominio, la web, la ficha de Google, las cuentas publicitarias y la base de comensales se crean a tu nombre y son tuyos, trabajes con nosotros o no. Ese es justamente el punto de todo esto: que dejes de depender de activos ajenos.</p></div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section class="sec break">
+  <p class="sec-n">10</p>
+  <h2>Próximos pasos</h2>
+
+  <div class="ph"><div class="w">Paso 1</div><div>
+    <h3>Una reunión de 45 minutos</h3>
+    <ul>
+      <li>Revisamos juntos lo que encontramos y lo que todavía falta confirmar</li>
+      <li>Hacemos la cuenta con tus números: cuánto vale una reserva y cuántas justifican la inversión</li>
+      <li>Definimos si vas por el arranque o por el arranque completo</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Paso 2</div><div>
+    <h3>Propuesta cerrada</h3>
+    <ul>
+      <li>Alcance, plazos y precio finales por escrito</li>
+      <li>Calendario de entregas semana por semana</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Paso 3</div><div>
+    <h3>Arranque</h3>
+    <ul>
+      <li>Reunión de inicio y pedido de materiales</li>
+      <li>Primera entrega a las tres semanas</li>
+    </ul></div></div>
+
+  <div class="call" style="margin-top:8mm">
+    <div class="t">Para coordinar</div>
+    <p><span class="fill">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+  </div>
+
+  <p class="fine" style="margin-top:10mm;padding-top:4mm;border-top:.6pt solid var(--rule)">
+    Los datos de mercado provienen del INDEC y del Ente de Turismo de la Ciudad de Buenos Aires, período enero a julio de 2026. El diagnóstico de presencia digital se hizo el 22 de septiembre de 2026 a partir de fuentes públicas; dos puntos quedaron marcados como «a revisar» para confirmar con vos. Esta propuesta es una base de trabajo: el alcance y el precio finales se definen después de la primera reunión.
+  </p>
+</section>

@@ -21,6 +21,19 @@ cocina de autor a puerta cerrada, CABA.
 | `Propuesta-Peter-U-Cook.pdf` | Propuesta de trabajo, 10 págs. | **Se le envía a él** |
 | `Anexo-Ejecucion-Peter-U-Cook.pdf` | Keywords, campañas, flujos y checklists, 11 págs. | Interno |
 
+### Links para abrir en el navegador
+
+| Documento | Link |
+|---|---|
+| Radiografía con motion graphics | https://claude.ai/artifact/9WwuDdrDETx7AqpSgmDTKH |
+| Propuesta (para el cliente) | https://claude.ai/artifact/MiKuGVaM1aoDNd4xFDUHU1 |
+| Informe de salud digital | https://claude.ai/artifact/JXcxARqAVkZavtv4zLfd4M |
+| Anexo de ejecución | https://claude.ai/artifact/KR1Vxh738DEQYdGLov74aR |
+
+Son privados: los abre la cuenta dueña y quien tenga acceso dado desde el menú
+Share de cada página. `pub/` contiene las versiones publicadas (sin etiquetas de
+documento, que las agrega la plataforma al publicar); se regeneran desde `ver/`.
+
 ### Para ver en el navegador
 
 `ver/informe.html`, `ver/propuesta.html` y `ver/anexo.html` son copias

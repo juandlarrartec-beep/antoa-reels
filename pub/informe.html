@@ -1,0 +1,1053 @@
+<title>Informe de salud digital — Peter U Cook</title>
+<style>
+  @page{
+    size:A4;
+    margin:17mm 15mm 18mm 15mm;
+  }
+  :root{
+    --paper:#FFFFFF;
+    --panel:#F2F4F5;
+    --panel-2:#E8ECEE;
+    --accent:#0E7C8C;
+    --accent-soft:#E2F0F2;
+    --ink:#14191C;
+    --ink-2:#48545A;
+    --ink-3:#77858C;
+    --rule:#D6DCDF;
+    --rule-2:#B9C3C7;
+    --good:#0CA30C;
+    --warn:#FAB219;
+    --crit:#D03B3B;
+    --none:#8D9A9F;
+    --serif:"Bitstream Charter","Charter","DejaVu Serif",Georgia,serif;
+    --sans:"Liberation Sans","DejaVu Sans",Arial,sans-serif;
+    --mono:"Liberation Mono","DejaVu Sans Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:9.25pt;
+    line-height:1.45;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  p{margin:0 0 6pt}
+  h1,h2,h3,h4{font-family:var(--sans);margin:0;line-height:1.16;font-weight:700;color:var(--ink)}
+  strong,b{font-weight:700}
+  a{color:var(--accent);text-decoration:none;word-break:break-word}
+
+  /* El contenido fluye: solo la portada y el índice fuerzan salto.
+     Los títulos nunca quedan huérfanos al pie de página. */
+  .break{}
+  .pgend{break-after:page}
+  .avoid{break-inside:avoid}
+
+  /* ---------- cover ---------- */
+  .cover{height:243mm;display:flex;flex-direction:column;position:relative;break-after:page}
+  .cover .rule-top{height:3.2mm;background:var(--accent);width:44mm;margin-bottom:14mm}
+  .cover .kicker{font-family:var(--mono);font-size:8pt;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:9mm}
+  .cover h1{font-family:var(--serif);font-size:32pt;line-height:1.05;letter-spacing:-.01em;font-weight:700;max-width:150mm}
+  .cover h1 em{font-style:italic;color:var(--accent)}
+  .cover .sub{font-size:12pt;color:var(--ink-2);margin-top:8mm;max-width:130mm;line-height:1.45}
+  .cover .facts{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule-2)}
+  .cover .fact{padding:6mm 5mm 0 0;border-right:1px solid var(--rule)}
+  .cover .fact:last-child{border-right:0}
+  .cover .fact .n{font-family:var(--sans);font-size:19pt;font-weight:700;color:var(--accent);line-height:1}
+  .cover .fact .l{font-size:8pt;color:var(--ink-2);margin-top:2.5mm;line-height:1.35}
+  .cover .meta{margin-top:10mm;padding-top:5mm;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;font-family:var(--mono);font-size:7.6pt;
+    letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- índice ---------- */
+  .toc{margin-top:2mm}
+  .toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+  .toc li{counter-increment:t;display:flex;align-items:baseline;gap:3mm;
+    padding:2.4mm 0;border-bottom:.6pt solid var(--rule);font-size:9.4pt}
+  .toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);
+    font-size:8pt;color:var(--accent);font-weight:700;flex:none;width:8mm}
+  .toc .tt{font-family:var(--sans);font-weight:700;font-size:9.2pt;flex:none}
+  .toc .td{color:var(--ink-3);font-size:8.4pt;flex:1;
+    border-bottom:.5pt dotted var(--rule-2);transform:translateY(-.8mm);margin:0 2mm}
+  .toc .tp{font-family:var(--mono);font-size:8.4pt;color:var(--ink-2);flex:none}
+
+  /* ---------- section chrome ---------- */
+  .sec{margin-bottom:8mm}
+  .sec-n{font-family:var(--mono);font-size:7.6pt;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:2.5mm;break-after:avoid}
+  h2{font-size:15pt;letter-spacing:-.005em;padding-bottom:2.2mm;border-bottom:1.6pt solid var(--ink);
+    margin-bottom:4mm;break-after:avoid;break-inside:avoid}
+  h3{font-size:10.4pt;margin:5mm 0 2.5mm;break-after:avoid;break-inside:avoid}
+  h4{font-size:9.2pt;margin:4mm 0 2mm;color:var(--ink-2);break-after:avoid}
+  .std{font-size:9.9pt;color:var(--ink-2);margin-bottom:4mm;max-width:158mm;line-height:1.48;break-inside:avoid}
+
+  /* ---------- tables ---------- */
+  table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:2.5mm 0 4mm}
+  th{font-family:var(--sans);font-size:7.2pt;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-3);text-align:left;font-weight:700;
+    padding:2.2mm 2.2mm;border-bottom:1pt solid var(--rule-2);vertical-align:bottom}
+  td{padding:2.2mm 2.2mm;border-bottom:.6pt solid var(--rule);vertical-align:top;line-height:1.42}
+  tr{break-inside:avoid}
+  thead{break-after:avoid}
+  table{break-inside:auto}
+  td.c{text-align:center}
+  td.r{text-align:right;font-family:var(--mono);font-size:8.2pt;white-space:nowrap}
+  td.dim{font-family:var(--sans);font-weight:700;font-size:8.4pt}
+  tbody tr:nth-child(even) td{background:#FAFBFB}
+  .tot td{border-top:1.2pt solid var(--ink);border-bottom:0;font-family:var(--sans);font-weight:700;background:var(--accent-soft) !important}
+
+  /* status pill */
+  .pill{display:inline-block;white-space:nowrap;font-family:var(--sans);font-size:7.2pt;
+    letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink);
+    padding:1mm 2mm;border-radius:1.4mm;border:.6pt solid var(--rule-2);background:#fff}
+  .pill::before{content:"";display:inline-block;width:2.1mm;height:2.1mm;border-radius:.5mm;
+    margin-right:1.6mm;vertical-align:-.15mm}
+  .pill.ok::before{background:var(--good)}
+  .pill.mid::before{background:var(--warn)}
+  .pill.no::before{background:var(--crit)}
+  .pill.q::before{background:var(--none)}
+  .pill.q{border-style:dashed;color:var(--ink-2)}
+
+  /* ---------- callout ---------- */
+  .call{break-inside:avoid;background:var(--panel);border-left:2.2pt solid var(--accent);
+    padding:3.4mm 4.5mm;margin:3.5mm 0 4mm}
+  .call.warn{border-left-color:var(--warn)}
+  .call.crit{border-left-color:var(--crit)}
+  .call .t{font-family:var(--sans);font-size:7.6pt;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700;margin-bottom:2mm}
+  .call p:last-child{margin-bottom:0}
+
+  /* ---------- key figures ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin:3.5mm 0 4mm;break-inside:avoid}
+  .kpi{border:.7pt solid var(--rule-2);border-top:2.2pt solid var(--accent);padding:3.5mm 3.5mm 4mm}
+  .kpi .n{font-family:var(--sans);font-size:16pt;font-weight:700;color:var(--ink);line-height:1}
+  .kpi .n small{font-size:9pt;color:var(--ink-2)}
+  .kpi .l{font-size:7.8pt;color:var(--ink-2);margin-top:2.2mm;line-height:1.35}
+  .kpi .s{font-family:var(--mono);font-size:6.6pt;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:2mm}
+
+  /* ---------- bar chart ---------- */
+  .chart{break-inside:avoid;border:.7pt solid var(--rule-2);padding:4.5mm 5mm 5mm;margin:4mm 0 5mm}
+  .chart .ct{font-family:var(--sans);font-size:9pt;font-weight:700}
+  .chart .cs{font-family:var(--mono);font-size:7pt;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-top:1mm}
+  .bars{margin-top:4mm}
+  .bar{display:grid;grid-template-columns:30mm 1fr 10mm;gap:3mm;align-items:center;padding:1.1mm 0}
+  .bar .cat{font-size:8.4pt;color:var(--ink-2)}
+  .bar .tk{height:4.2mm;background:var(--panel-2)}
+  .bar .fl{height:100%;background:#9DAAB0}
+  .bar .vl{font-family:var(--mono);font-size:8pt;text-align:right;color:var(--ink-2)}
+  .bar.hi .cat{color:var(--ink);font-weight:700;font-family:var(--sans);font-size:8.2pt}
+  .bar.hi .fl{background:var(--accent)}
+  .bar.hi .vl{color:var(--ink);font-weight:700}
+
+  /* ---------- score ---------- */
+  .score{display:grid;grid-template-columns:62mm 1fr;gap:7mm;align-items:center;
+    border:.7pt solid var(--rule-2);padding:5mm;margin:4mm 0 5mm;break-inside:avoid}
+  .score .legend p{font-size:8.6pt;margin-bottom:3mm}
+  .score .legend p:last-child{margin-bottom:0}
+  .sw{display:inline-block;width:3mm;height:3mm;margin-right:2mm;vertical-align:-.3mm;border:.5pt solid var(--rule-2)}
+
+  /* ---------- service card ---------- */
+  .svc{break-inside:avoid;border:.7pt solid var(--rule-2);padding:3.4mm 4mm;margin-bottom:2.8mm}
+  .svc-h{display:flex;align-items:baseline;gap:3mm;border-bottom:.6pt solid var(--rule);padding-bottom:2.2mm;margin-bottom:3mm}
+  .svc-h .no{font-family:var(--mono);font-size:8pt;color:var(--accent);font-weight:700}
+  .svc-h h3{margin:0;font-size:10pt;flex:1}
+  .svc-h .bk{font-family:var(--sans);font-size:6.8pt;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:#fff;background:var(--accent);padding:.9mm 2mm;border-radius:1mm;white-space:nowrap}
+  .svc-h .bk.b1{background:#3A6B78}
+  .svc-h .bk.b2{background:#5A7F88}
+  .svc-h .bk.b3{background:#78959B}
+  .svc > p{font-size:8.7pt;margin-bottom:2.5mm}
+  .svc dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2.4mm 5mm}
+  .svc dt{font-family:var(--sans);font-size:6.9pt;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700;margin-bottom:.8mm}
+  .svc dd{margin:0;font-size:8.1pt;color:var(--ink-2);line-height:1.38}
+  .svc dd b{color:var(--ink)}
+
+  /* ---------- timeline ---------- */
+  .ph{break-inside:avoid;display:grid;grid-template-columns:26mm 1fr;gap:5mm;
+    padding:3.2mm 0;border-top:.6pt solid var(--rule)}
+  .ph:first-of-type{border-top:1pt solid var(--rule-2)}
+  .ph .w{font-family:var(--mono);font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .ph h3{margin:0 0 2mm;font-size:9.6pt}
+  .ph ul{margin:0;padding-left:4.5mm;font-size:8.6pt;color:var(--ink-2)}
+  .ph li{margin:1.2mm 0;line-height:1.42}
+  .ph li b{color:var(--ink)}
+
+  ul.tight{margin:0 0 4mm;padding-left:5mm}
+  ul.tight li{margin:1.3mm 0;line-height:1.42}
+
+  /* ---------- radar svg ---------- */
+  .radar-wrap{display:grid;grid-template-columns:76mm 1fr;gap:7mm;align-items:center;break-inside:avoid;margin:4mm 0 5mm}
+  .radar-wrap svg{width:100%;height:auto}
+  .rlist{font-size:8.4pt}
+  .rlist div{display:flex;justify-content:space-between;gap:4mm;padding:1.5mm 0;border-bottom:.6pt solid var(--rule)}
+  .rlist div:last-child{border-bottom:0}
+  .rlist .nm{color:var(--ink)}
+
+  /* ---------- quote ---------- */
+  .quote{break-inside:avoid;background:var(--panel);padding:5mm 6mm;margin:4mm 0}
+  .quote .t{font-family:var(--mono);font-size:7.2pt;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3mm}
+  .quote p{font-size:9.4pt;line-height:1.58}
+  .quote p:last-child{margin-bottom:0}
+
+  .srcs{font-size:8pt;color:var(--ink-2);line-height:1.6}
+  .srcs li{margin:1.5mm 0}
+  .fine{font-size:8pt;color:var(--ink-3);line-height:1.55}
+
+  /* ---------- vista en pantalla (no afecta la impresión ni el PDF) ---------- */
+  @media screen{
+    body{
+      background:#E7EAEC;
+      padding:24px 16px 56px;
+      font-size:10.4pt;
+    }
+    body > section{
+      background:var(--paper);
+      max-width:210mm;
+      margin:0 auto 18px;
+      padding:20mm 18mm;
+      box-shadow:0 1px 2px rgba(20,25,28,.06),0 10px 30px rgba(20,25,28,.10);
+      border-radius:2px;
+    }
+    body > section.cover{height:auto;min-height:220mm;padding-top:26mm}
+    @media (max-width:700px){
+      body{padding:12px 10px 32px}
+      body > section{padding:16px 16px 22px;border-radius:0}
+      .cover .facts{grid-template-columns:repeat(2,1fr);gap:10px 0}
+      .cover .fact{padding:10px 10px 0 0}
+      .cover .fact:nth-child(2){border-right:0}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+      .score,.radar-wrap,.svc dl{grid-template-columns:1fr;gap:14px}
+      .ph{grid-template-columns:1fr;gap:6px}
+      .bar{grid-template-columns:24mm 1fr 10mm}
+      table{font-size:9pt}
+      td,th{padding:7px 6px}
+    }
+    /* tablas anchas nunca desbordan la página */
+    section{overflow-x:auto}
+  }
+
+</style>
+
+<!-- ============================= PORTADA ============================= -->
+<section class="cover">
+  <div class="rule-top"></div>
+  <p class="kicker">Informe de prospección · Confidencial</p>
+  <h1>Peter U Cook</h1>
+  <p class="sub">Estado de salud del negocio, auditoría de presencia digital y catálogo de servicios a proponer. Cocina de autor a puerta cerrada, Ciudad de Buenos Aires.</p>
+
+  <div class="facts">
+    <div class="fact"><div class="n">13.000</div><div class="l">seguidores en Instagram, su único canal de venta</div></div>
+    <div class="fact"><div class="n">22<small>/100</small></div><div class="l">índice de madurez digital verificado</div></div>
+    <div class="fact"><div class="n">0</div><div class="l">activos digitales de su propiedad</div></div>
+    <div class="fact"><div class="n">17</div><div class="l">servicios concretos identificados</div></div>
+  </div>
+
+  <div class="meta">
+    <span>Relevamiento · 22 de septiembre de 2026</span>
+    <span>Documento interno de trabajo</span>
+  </div>
+</section>
+
+<!-- ============================= ÍNDICE ============================= -->
+<section class="sec break pgend">
+  <p class="sec-n">Índice</p>
+  <h2>Contenido</h2>
+  <div class="toc">
+    <ol>
+      <li><span class="tt">Resumen ejecutivo</span><span class="td"></span><span class="tp">3</span></li>
+      <li><span class="tt">Quién es — ficha del cliente</span><span class="td"></span><span class="tp">4</span></li>
+      <li><span class="tt">Salud general del negocio</span><span class="td"></span><span class="tp">5</span></li>
+      <li><span class="tt">Salud digital — auditoría por dimensión</span><span class="td"></span><span class="tp">6</span></li>
+      <li><span class="tt">Mapa de presencia por canal</span><span class="td"></span><span class="tp">7</span></li>
+      <li><span class="tt">Canales de venta al turista</span><span class="td"></span><span class="tp">8</span></li>
+      <li><span class="tt">Mercado y demanda</span><span class="td"></span><span class="tp">9</span></li>
+      <li><span class="tt">Diagnóstico: las cinco fugas</span><span class="td"></span><span class="tp">10</span></li>
+      <li><span class="tt">Catálogo de servicios a ofrecer</span><span class="td"></span><span class="tp">11</span></li>
+      <li><span class="tt">Cómo empaquetarlo</span><span class="td"></span><span class="tp">18</span></li>
+      <li><span class="tt">Plan de ejecución</span><span class="td"></span><span class="tp">19</span></li>
+      <li><span class="tt">Indicadores de control</span><span class="td"></span><span class="tp">20</span></li>
+      <li><span class="tt">Riesgos y objeciones previstas</span><span class="td"></span><span class="tp">21</span></li>
+      <li><span class="tt">Qué falta verificar y qué preguntar</span><span class="td"></span><span class="tp">22</span></li>
+      <li><span class="tt">Guion de apertura</span><span class="td"></span><span class="tp">23</span></li>
+      <li><span class="tt">Metodología, límites y fuentes</span><span class="td"></span><span class="tp">24</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================= 1. RESUMEN ============================= -->
+<section class="sec break">
+  <p class="sec-n">01</p>
+  <h2>Resumen ejecutivo</h2>
+
+  <p class="std">Peter U Cook es un negocio gastronómico sano con un problema puramente comercial: el producto está validado y la demanda existe, pero no hay infraestructura para capturarla ni para medirla.</p>
+
+  <h3>Qué es</h3>
+  <p>Cocina de autor a puerta cerrada en un rooftop de la Ciudad de Buenos Aires, con vista a la ciudad y al Río de la Plata. Mesas de 2 a 8 personas, menú por pasos con maridaje y música en vivo con tango. Tres líneas de ingreso: cenas, eventos privados y catering. Comunicación y venta íntegramente por Instagram (@peterucook, 13.000 seguidores) y teléfono.</p>
+
+  <h3>Qué está bien</h3>
+  <ul class="tight">
+    <li><b>El producto está validado.</b> Distinción Travelers' Choice de TripAdvisor, dentro del 10% mejor valorado de la plataforma, con reseñas que destacan la comida, la vista y el servicio.</li>
+    <li><b>La comunidad es real y orgánica.</b> 13.000 seguidores construidos sin inversión publicitaria detectable.</li>
+    <li><b>El modelo es rentable por diseño.</b> Inventario mínimo, ticket alto y costos fijos bajos: cada reserva adicional tiene margen alto.</li>
+  </ul>
+
+  <h3>Qué está mal</h3>
+  <ul class="tight">
+    <li><b>No tiene un solo activo digital propio.</b> Ni web, ni dominio, ni base de datos de clientes. Todo su negocio vive en cuentas de terceros.</li>
+    <li><b>No existe en el momento de decisión.</b> Cuando el turista busca en Google, no aparece. Lo único que rankea es una ficha de TripAdvisor que no controla.</li>
+    <li><b>No puede medir, entonces no puede pautar.</b> Sin web no hay analítica, ni píxel, ni eventos de conversión. Google Ads hoy es directamente inviable y Meta Ads sería a ciegas.</li>
+    <li><b>La reserva depende de una persona despierta.</b> Sin agenda online ni automatización, cada consulta fuera de horario es una mesa que se pierde.</li>
+    <li><b>Habla un solo idioma para un público de tres.</b> Sus principales mercados emisores hablan portugués e inglés.</li>
+  </ul>
+
+  <h3>Cuánto vale el problema</h3>
+  <p>La Ciudad de Buenos Aires recibió 1,61 millones de turistas internacionales entre enero y julio de 2026, un 19% más que el año anterior, y la gastronomía concentra el 29% del gasto de ese turista — la primera categoría, por encima del alojamiento. Es exactamente su cliente, llegando en cifras récord, sin forma de encontrarlo.</p>
+
+  <h3>Qué proponemos</h3>
+  <p>Diecisiete servicios agrupados en cuatro bloques, con un orden obligatorio: primero los cimientos que hacen medible el negocio (web con reserva, agenda, automatizaciones, ficha de Google y analítica), después la captura de demanda existente (posicionamiento y Google Ads), después la generación de demanda nueva (Meta Ads y contenido) y por último retención y canal B2B. Plan de arranque de 90 días.</p>
+
+  <div class="call">
+    <div class="t">La frase para la reunión</div>
+    <p>No hay que arreglarle el producto. Hay que darle la infraestructura para venderlo, y un tablero para demostrar que funciona.</p>
+  </div>
+</section>
+
+<!-- ============================= 2. FICHA ============================= -->
+<section class="sec break">
+  <p class="sec-n">02</p>
+  <h2>Quién es — ficha del cliente</h2>
+
+  <table>
+    <tbody>
+      <tr><td class="dim" style="width:42mm">Nombre comercial</td><td>Peter U Cook</td></tr>
+      <tr><td class="dim">Cuenta principal</td><td>@peterucook — mismo identificador en Instagram, Facebook y Threads</td></tr>
+      <tr><td class="dim">Rubro</td><td>Gastronomía de experiencia · cocina de autor · restaurante a puerta cerrada</td></tr>
+      <tr><td class="dim">Ubicación</td><td>Ciudad Autónoma de Buenos Aires — rooftop con vista a la ciudad y al Río de la Plata. Dirección exacta no publicada.</td></tr>
+      <tr><td class="dim">Propuesta</td><td>Cena de autor con menú por pasos, maridaje y música en vivo con tango y repertorio argentino</td></tr>
+      <tr><td class="dim">Formato de servicio</td><td>Reservas de 2 a 8 personas. Experiencia íntima, privada y personalizada.</td></tr>
+      <tr><td class="dim">Líneas de negocio</td><td>1· Cenas &nbsp;&nbsp; 2· Eventos privados &nbsp;&nbsp; 3· Catering</td></tr>
+      <tr><td class="dim">Comunidad</td><td>13.000 seguidores · 411 publicaciones · sigue a 6.284 cuentas</td></tr>
+      <tr><td class="dim">Contacto público</td><td>+54 9 11 4492-3866 — número en la biografía, sin enlace de reserva</td></tr>
+      <tr><td class="dim">Reputación</td><td>TripAdvisor con distinción Travelers' Choice (10% mejor valorado de la plataforma)</td></tr>
+      <tr><td class="dim">Idioma</td><td>Comunicación 100% en español</td></tr>
+      <tr><td class="dim">Web propia</td><td>No existe. Ningún dominio evidente resuelve y no aparece sitio propio en buscadores.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">Lectura del perfil</div>
+    <p>Seguir a <b>6.284 cuentas</b> para 13.000 seguidores es la huella de un crecimiento manual, cuenta por cuenta. No aparece ninguna señal de inversión publicitaria: ni creatividades, ni página de destino, ni enlace medible en la biografía. <b>Es un negocio que nunca pautó.</b> Eso es una oportunidad y a la vez una advertencia: nunca vio un tablero de resultados, así que hay que enseñárselo antes de pedirle presupuesto.</p>
+  </div>
+
+  <h3>Lo que el modelo de negocio implica</h3>
+  <table>
+    <thead><tr><th style="width:44mm">Característica</th><th>Consecuencia comercial</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Inventario mínimo (2 a 8 cubiertos)</td><td>No necesita volumen masivo de tráfico: necesita pocas reservas, pero cualificadas. La pauta puede ser muy segmentada y aun así rentable.</td></tr>
+      <tr><td class="dim">Ticket alto por comensal</td><td>Tolera un costo de adquisición alto. Una reserva de mesa completa justifica varios miles de pesos de inversión publicitaria.</td></tr>
+      <tr><td class="dim">Costos fijos bajos</td><td>Cada mesa adicional es casi todo margen. El retorno de la inversión publicitaria se ve rápido.</td></tr>
+      <tr><td class="dim">Producto altamente visual</td><td>Fuego, emplatado, vista al atardecer y tango en vivo: material nativo para video. El costo de producción creativa es bajo.</td></tr>
+      <tr><td class="dim">Cliente mayoritariamente turista</td><td>Compra una sola vez, decide con poca información y en poco tiempo. Manda la visibilidad en el momento de búsqueda, no la fidelización.</td></tr>
+      <tr><td class="dim">Capacidad limitada por noche</td><td>Riesgo bajo de sobredemanda: si se llena, se sube el precio o se agregan turnos. El techo no es un problema hoy.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================= 3. SALUD GENERAL ============================= -->
+<section class="sec break">
+  <p class="sec-n">03</p>
+  <h2>Salud general del negocio</h2>
+  <p class="std">Antes de mirar lo digital: cómo está el negocio en su conjunto. Diez frentes, evaluados con la evidencia pública disponible.</p>
+
+  <table>
+    <thead><tr><th style="width:38mm">Frente</th><th style="width:26mm">Estado</th><th>Lectura</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Producto</td><td><span class="pill ok">Sólido</span></td><td>Distinción Travelers' Choice y reseñas consistentes sobre comida, vista y servicio. No hay nada que arreglar acá.</td></tr>
+      <tr><td class="dim">Reputación</td><td><span class="pill ok">Sólido</span></td><td>Valoración alta y sostenida. Es su principal activo comercial — aunque vive en una plataforma ajena.</td></tr>
+      <tr><td class="dim">Diferenciación</td><td><span class="pill ok">Sólido</span></td><td>Puerta cerrada + rooftop con vista al río + tango en vivo es una combinación difícil de copiar en Buenos Aires.</td></tr>
+      <tr><td class="dim">Demanda de mercado</td><td><span class="pill ok">Favorable</span></td><td>Turismo receptivo en máximos de 25 años y gastronomía como primera categoría de gasto.</td></tr>
+      <tr><td class="dim">Marca</td><td><span class="pill mid">Parcial</span></td><td>Reconocible en Instagram, invisible fuera de ahí. No hay identidad verbal ni visual consistente más allá del feed.</td></tr>
+      <tr><td class="dim">Diversificación de ingresos</td><td><span class="pill mid">Parcial</span></td><td>Tiene tres líneas declaradas (cenas, eventos, catering) pero solo comunica la primera. Eventos y catering son el ticket más alto y no tienen ni una pieza propia.</td></tr>
+      <tr><td class="dim">Operación de reservas</td><td><span class="pill no">Frágil</span></td><td>Manual, por teléfono y mensaje directo. Sin agenda, sin seña, sin confirmación automática, sin registro.</td></tr>
+      <tr><td class="dim">Dependencia de canal</td><td><span class="pill no">Riesgo alto</span></td><td>Un único canal, propiedad de un tercero. Un bloqueo de cuenta o una caída de alcance corta la facturación.</td></tr>
+      <tr><td class="dim">Capacidad de medir</td><td><span class="pill no">Nula</span></td><td>No sabe de dónde viene cada reserva. Cualquier decisión comercial es intuición.</td></tr>
+      <tr><td class="dim">Escalabilidad</td><td><span class="pill mid">Limitada hoy</span></td><td>El techo no es la cocina: es que no puede llenar de forma predecible. Con demanda estable, se escala por precio y por turnos.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call warn">
+    <div class="t">El riesgo que hay que nombrar en la reunión</div>
+    <p>Todo el negocio depende de una cuenta de Instagram que no le pertenece. Si mañana la cuenta se restringe, se hackea o el alcance orgánico cae, <b>no tiene ningún otro modo de que un cliente lo encuentre o lo contacte</b>. No hay web, no hay base de correos, no hay teléfonos guardados de quienes ya cenaron. Esto solo se arregla creando activos propios.</p>
+  </div>
+</section>
+
+<!-- ============================= 4. SALUD DIGITAL ============================= -->
+<section class="sec break">
+  <p class="sec-n">04</p>
+  <h2>Salud digital — auditoría por dimensión</h2>
+  <p class="std">Diez dimensiones, diez puntos cada una. Ocho pude verificarlas con fuentes públicas; dos quedaron pendientes por bloqueo de red del entorno de relevamiento y se marcan como tales en lugar de asumirse.</p>
+
+  <table>
+    <thead><tr><th style="width:36mm">Dimensión</th><th style="width:24mm">Estado</th><th>Evidencia encontrada</th><th style="width:13mm;text-align:right">Pts.</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Presencia orgánica en redes</td><td><span class="pill ok">Presente</span></td><td>Instagram con 13.000 seguidores y 411 publicaciones. También Facebook y Threads con el mismo identificador.</td><td class="r">7 / 10</td></tr>
+      <tr><td class="dim">Reputación y reseñas</td><td><span class="pill ok">Presente</span></td><td>Ficha en TripAdvisor con Travelers' Choice. Activo de mucho valor, pero es de la plataforma: no controla ni el posicionamiento ni el contenido.</td><td class="r">7 / 10</td></tr>
+      <tr><td class="dim">Contenido en video</td><td><span class="pill mid">Parcial</span></td><td>Publica video en Instagram y Threads. No tiene cuenta propia en TikTok ni en YouTube. Existe contenido espontáneo de terceros sobre el lugar que nadie capitaliza.</td><td class="r">5 / 10</td></tr>
+      <tr><td class="dim">Sitio web propio</td><td><span class="pill no">Ausente</span></td><td>Ningún dominio evidente resuelve y no aparece sitio propio en resultados de búsqueda. No posee ningún activo digital.</td><td class="r">0 / 10</td></tr>
+      <tr><td class="dim">Reserva y conversión</td><td><span class="pill no">Ausente</span></td><td>Solo teléfono y mensaje directo. Sin agenda online, sin cobro de seña, sin confirmación automática, sin cobertura fuera de horario.</td><td class="r">1 / 10</td></tr>
+      <tr><td class="dim">Posicionamiento en Google</td><td><span class="pill no">Ausente</span></td><td>Lo único que aparece es la ficha de TripAdvisor. En las búsquedas donde se decide la reserva, el negocio no está.</td><td class="r">2 / 10</td></tr>
+      <tr><td class="dim">Google Business Profile</td><td><span class="pill q">A verificar</span></td><td>No pude confirmar la existencia de la ficha desde el entorno de relevamiento. Primer dato a chequear.</td><td class="r">? / 10</td></tr>
+      <tr><td class="dim">Google Ads</td><td><span class="pill no">Ausente</span></td><td>Sin sitio web no hay página de destino ni evento de conversión que optimizar. Hoy no es una decisión: es una imposibilidad técnica.</td><td class="r">0 / 10</td></tr>
+      <tr><td class="dim">Meta Ads</td><td><span class="pill q">A verificar</span></td><td>No encontré rastro de anuncios activos ni indicios de inversión publicitaria. Se confirma en la Biblioteca de Anuncios.</td><td class="r">? / 10</td></tr>
+      <tr><td class="dim">Medición y base de datos</td><td><span class="pill no">Ausente</span></td><td>Sin web no hay analítica, ni píxel, ni público de remarketing, ni registro de comensales. Todo cliente que pasó se perdió.</td><td class="r">0 / 10</td></tr>
+      <tr class="tot"><td colspan="3">Total verificado sobre las ocho dimensiones confirmadas</td><td class="r">22 / 80</td></tr>
+    </tbody>
+  </table>
+
+  <div class="score">
+    <div>
+      <svg viewBox="0 0 260 152" role="img" aria-label="Índice de madurez digital: 22 sobre 100 confirmado, hasta 42 en el mejor caso.">
+        <path d="M 26 132 A 104 104 0 0 1 234 132" fill="none" stroke="#E2E7E9" stroke-width="19" stroke-linecap="butt"/>
+        <path d="M 26 132 A 104 104 0 0 1 234 132" fill="none" stroke="#9ECED6" stroke-width="19" stroke-linecap="butt"
+              stroke-dasharray="137.2 326.7"/>
+        <path d="M 26 132 A 104 104 0 0 1 234 132" fill="none" stroke="#0E7C8C" stroke-width="19" stroke-linecap="butt"
+              stroke-dasharray="71.9 326.7"/>
+        <text x="130" y="112" text-anchor="middle" font-family="Liberation Sans, sans-serif" font-size="40" font-weight="700" fill="#14191C">22</text>
+        <text x="130" y="130" text-anchor="middle" font-family="Liberation Mono, monospace" font-size="11" letter-spacing="1.6" fill="#77858C">DE 100</text>
+        <text x="26"  y="147" text-anchor="middle" font-family="Liberation Mono, monospace" font-size="9" fill="#77858C">0</text>
+        <text x="130" y="20"  text-anchor="middle" font-family="Liberation Mono, monospace" font-size="9" fill="#77858C">50</text>
+        <text x="234" y="147" text-anchor="middle" font-family="Liberation Mono, monospace" font-size="9" fill="#77858C">100</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <p><span class="sw" style="background:#0E7C8C"></span><b>22 puntos confirmados</b> sobre los 80 que pude verificar. Es el piso real del negocio hoy.</p>
+      <p><span class="sw" style="background:#9ECED6"></span><b>Hasta 42 en el mejor de los casos</b>, si la ficha de Google y la actividad en Meta Ads resultaran estar perfectas. Aun así, queda por debajo de la mitad.</p>
+      <p><span class="sw" style="background:#E2E7E9"></span><b>Entre 58 y 78 puntos libres.</b> Ese es el tamaño real de la propuesta.</p>
+    </div>
+  </div>
+
+  <div class="call warn">
+    <div class="t">Sobre el método</div>
+    <p>El índice es una <b>evaluación propia</b> con criterio explícito, no una métrica de plataforma. Se construye con diez dimensiones de diez puntos. Las dos pendientes se dejan sin puntuar en lugar de estimarse, y el total se expresa sobre la base efectivamente verificada.</p>
+  </div>
+</section>
+
+<!-- ============================= 5. PRESENCIA POR CANAL ============================= -->
+<section class="sec break">
+  <p class="sec-n">05</p>
+  <h2>Mapa de presencia por canal</h2>
+  <p class="std">La columna que más importa no es «¿existe?» sino «¿es suyo?». Un canal que no controla es un canal que puede perder de un día para el otro.</p>
+
+  <div class="radar-wrap">
+    <svg viewBox="0 0 220 220" role="img" aria-label="Radar de presencia: dos canales activos, uno parcial, tres ausentes y dos a verificar.">
+      <circle cx="110" cy="110" r="96" fill="none" stroke="#E2E7E9" stroke-width="1"/>
+      <circle cx="110" cy="110" r="72" fill="none" stroke="#E2E7E9" stroke-width="1"/>
+      <circle cx="110" cy="110" r="48" fill="none" stroke="#E2E7E9" stroke-width="1"/>
+      <circle cx="110" cy="110" r="24" fill="none" stroke="#E2E7E9" stroke-width="1"/>
+      <line x1="14" y1="110" x2="206" y2="110" stroke="#E2E7E9" stroke-width="1"/>
+      <line x1="110" y1="14" x2="110" y2="206" stroke="#E2E7E9" stroke-width="1"/>
+      <!-- blips: r = 62 -->
+      <circle cx="110" cy="48"  r="5.2" fill="#0CA30C"/>
+      <circle cx="153.8" cy="66.2" r="5.2" fill="#FFFFFF" stroke="#8D9A9F" stroke-width="1.6" stroke-dasharray="2.4 2.2"/>
+      <circle cx="172" cy="110" r="5.2" fill="#0CA30C"/>
+      <circle cx="153.8" cy="153.8" r="5.2" fill="#FFFFFF" stroke="#8D9A9F" stroke-width="1.6" stroke-dasharray="2.4 2.2"/>
+      <circle cx="110" cy="172" r="5.2" fill="#FFFFFF" stroke="#D03B3B" stroke-width="1.8"/>
+      <circle cx="66.2" cy="153.8" r="5.2" fill="#FFFFFF" stroke="#D03B3B" stroke-width="1.8"/>
+      <circle cx="48" cy="110" r="5.2" fill="#FFFFFF" stroke="#D03B3B" stroke-width="1.8"/>
+      <circle cx="66.2" cy="66.2" r="5.2" fill="#FAB219"/>
+      <text x="110" y="37" text-anchor="middle" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#48545A">Instagram</text>
+      <text x="163" y="63" text-anchor="start" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#77858C">Meta Ads</text>
+      <text x="181" y="113" text-anchor="start" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#48545A">Reseñas</text>
+      <text x="163" y="157" text-anchor="start" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#77858C">Maps</text>
+      <text x="110" y="186" text-anchor="middle" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#48545A">Medición</text>
+      <text x="57" y="157" text-anchor="end" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#48545A">Reservas</text>
+      <text x="39" y="113" text-anchor="end" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#48545A">Web</text>
+      <text x="57" y="63" text-anchor="end" font-family="Liberation Sans, sans-serif" font-size="8.4" fill="#48545A">Video</text>
+    </svg>
+    <div class="rlist">
+      <div><span class="nm">Instagram</span><span class="pill ok">Activo</span></div>
+      <div><span class="nm">Reseñas / TripAdvisor</span><span class="pill ok">Activo</span></div>
+      <div><span class="nm">Video</span><span class="pill mid">Parcial</span></div>
+      <div><span class="nm">Sitio web</span><span class="pill no">Ausente</span></div>
+      <div><span class="nm">Reservas online</span><span class="pill no">Ausente</span></div>
+      <div><span class="nm">Medición</span><span class="pill no">Ausente</span></div>
+      <div><span class="nm">Google Maps</span><span class="pill q">A verificar</span></div>
+      <div><span class="nm">Meta Ads</span><span class="pill q">A verificar</span></div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:38mm">Canal</th><th style="width:22mm">¿Existe?</th><th style="width:22mm">¿Es suyo?</th><th>Observación</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Instagram</td><td><span class="pill ok">Sí</span></td><td>No</td><td>Su vidriera, su catálogo, su central de reservas y su base de clientes, todo en uno.</td></tr>
+      <tr><td class="dim">Facebook</td><td><span class="pill ok">Sí</span></td><td>No</td><td>Página con el mismo identificador. Probablemente espejo de Instagram, con poca gestión propia.</td></tr>
+      <tr><td class="dim">Threads</td><td><span class="pill ok">Sí</span></td><td>No</td><td>Activo, con publicaciones recientes sobre la experiencia.</td></tr>
+      <tr><td class="dim">TripAdvisor</td><td><span class="pill ok">Sí</span></td><td>No</td><td>Su mejor activo de reputación — y el único que hoy le trae tráfico de búsqueda.</td></tr>
+      <tr><td class="dim">TikTok</td><td><span class="pill no">No</span></td><td>—</td><td>Sin cuenta propia. Sí hay videos de terceros hablando del lugar.</td></tr>
+      <tr><td class="dim">YouTube</td><td><span class="pill no">No</span></td><td>—</td><td>Sin canal. Shorts es distribución gratuita que hoy no usa.</td></tr>
+      <tr><td class="dim">Sitio web</td><td><span class="pill no">No</span></td><td>—</td><td>Ningún dominio evidente resuelve. Es el hueco central de todo el diagnóstico.</td></tr>
+      <tr><td class="dim">Google Business Profile</td><td><span class="pill q">A verificar</span></td><td>—</td><td>Si no existe, la ficha está libre para reclamar. Si existe sin reclamar, alguien más puede editarla.</td></tr>
+      <tr><td class="dim">Google Ads</td><td><span class="pill no">No</span></td><td>—</td><td>Imposible de operar bien sin sitio de destino.</td></tr>
+      <tr><td class="dim">Meta Ads</td><td><span class="pill q">A verificar</span></td><td>—</td><td>Sin indicios. Se confirma en la Biblioteca de Anuncios en un minuto.</td></tr>
+      <tr><td class="dim">WhatsApp Business</td><td><span class="pill q">A verificar</span></td><td>Sí</td><td>Tiene número publicado. Falta saber si usa la versión Business con catálogo y respuestas automáticas.</td></tr>
+      <tr><td class="dim">Correo / base de datos</td><td><span class="pill no">No</span></td><td>—</td><td>Sin registro de quienes ya cenaron. Cada cliente se pierde después de pagar.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================= 6. CANALES DE VENTA ============================= -->
+<section class="sec break">
+  <p class="sec-n">06</p>
+  <h2>Canales de venta al turista</h2>
+  <p class="std">Busqué su nombre en las ocho plataformas por las que un extranjero contrata una experiencia gastronómica en Buenos Aires. No aparece en ninguna.</p>
+
+  <table>
+    <thead><tr><th style="width:38mm">Plataforma</th><th style="width:22mm">Presencia</th><th>Qué significa que no esté</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Viator</td><td><span class="pill no">No</span></td><td>La mayor plataforma de experiencias del mundo, parte de TripAdvisor — donde ya tiene reputación construida.</td></tr>
+      <tr><td class="dim">GetYourGuide</td><td><span class="pill no">No</span></td><td>Principal canal de experiencias para el turista europeo y norteamericano.</td></tr>
+      <tr><td class="dim">Civitatis</td><td><span class="pill no">No</span></td><td>El canal de referencia para el turista hispanohablante y para agencias de habla española.</td></tr>
+      <tr><td class="dim">Airbnb Experiencias</td><td><span class="pill no">No</span></td><td>Alcanza al huésped que ya está en la ciudad y busca qué hacer esa misma noche.</td></tr>
+      <tr><td class="dim">TheFork</td><td><span class="pill no">No</span></td><td>Reserva gastronómica con demanda propia y calendario integrado.</td></tr>
+      <tr><td class="dim">Meitre</td><td><span class="pill no">No</span></td><td>Estándar de reservas de la alta gastronomía argentina.</td></tr>
+      <tr><td class="dim">Woki</td><td><span class="pill no">No</span></td><td>Plataforma local de reservas con buena penetración en Buenos Aires.</td></tr>
+      <tr><td class="dim">Cookly / Eatwith</td><td><span class="pill no">No</span></td><td>Especializadas en cenas privadas y experiencias en casa: su categoría exacta.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Benchmark: qué tienen los que sí venden</h3>
+  <table>
+    <thead><tr><th style="width:44mm">Referencia</th><th style="width:24mm">Web propia</th><th style="width:24mm">Reserva online</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">The Argentine Experience</td><td><span class="pill ok">Sí</span></td><td><span class="pill ok">Sí</span></td><td>Cena-experiencia para turistas, con sitio propio en inglés, reserva directa y distribución en plataformas de experiencias. Compite por el mismo cliente.</td></tr>
+      <tr><td class="dim">Treintasillas</td><td><span class="pill ok">Sí</span></td><td><span class="pill mid">Parcial</span></td><td>Puerta cerrada de referencia en Buenos Aires desde 2007. Cobertura de prensa y guías sostenida en el tiempo.</td></tr>
+      <tr><td class="dim">Anafe</td><td><span class="pill ok">Sí</span></td><td><span class="pill mid">Parcial</span></td><td>Puerta cerrada en Colegiales con presencia editorial fuerte y reserva gestionada.</td></tr>
+      <tr><td class="dim">Cocina Sunae</td><td><span class="pill ok">Sí</span></td><td><span class="pill mid">Parcial</span></td><td>Caso clásico de puerta cerrada con marca propia y agenda pública.</td></tr>
+      <tr><td class="dim">Peter U Cook</td><td><span class="pill no">No</span></td><td><span class="pill no">No</span></td><td>Producto comparable o mejor valorado, sin ninguna de las dos piezas.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">El argumento</div>
+    <p>No lo superan cocinando. Lo superan estando donde el turista decide. <b>La diferencia entre él y ellos no es el producto: es la infraestructura.</b></p>
+  </div>
+</section>
+
+<!-- ============================= 7. MERCADO ============================= -->
+<section class="sec break">
+  <p class="sec-n">07</p>
+  <h2>Mercado y demanda</h2>
+  <p class="std">El contexto juega a favor con una fuerza poco habitual: su cliente está llegando en cifras récord y gasta, sobre todo, en comer.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">1,61 <small>M</small></div><div class="l">turistas internacionales en la Ciudad de Buenos Aires, enero a julio de 2026</div><div class="s">Ente de Turismo CABA</div></div>
+    <div class="kpi"><div class="n">+19%</div><div class="l">de crecimiento interanual en llegadas internacionales a la Ciudad</div><div class="s">Ente de Turismo CABA</div></div>
+    <div class="kpi"><div class="n">29%</div><div class="l">del gasto del turista internacional se destina a gastronomía</div><div class="s">INDEC · ETI</div></div>
+    <div class="kpi"><div class="n">1.434.001</div><div class="l">visitantes de países no limítrofes en el primer semestre: mejor marca en 25 años</div><div class="s">INDEC · ETI</div></div>
+  </div>
+
+  <div class="chart">
+    <div class="ct">Destino del gasto del turista internacional</div>
+    <div class="cs">Participación sobre el gasto total · 2026</div>
+    <div class="bars">
+      <div class="bar hi"><div class="cat">Gastronomía</div><div class="tk"><div class="fl" style="width:100%"></div></div><div class="vl">29%</div></div>
+      <div class="bar"><div class="cat">Alojamiento</div><div class="tk"><div class="fl" style="width:89.7%"></div></div><div class="vl">26%</div></div>
+      <div class="bar"><div class="cat">Compras</div><div class="tk"><div class="fl" style="width:48.3%"></div></div><div class="vl">14%</div></div>
+      <div class="bar"><div class="cat">Paquetes turísticos</div><div class="tk"><div class="fl" style="width:37.9%"></div></div><div class="vl">11%</div></div>
+      <div class="bar"><div class="cat">Transporte</div><div class="tk"><div class="fl" style="width:34.5%"></div></div><div class="vl">10%</div></div>
+    </div>
+  </div>
+
+  <h3>De dónde viene ese turista</h3>
+  <table>
+    <thead><tr><th style="width:34mm">Mercado emisor</th><th style="width:26mm">Participación</th><th style="width:26mm">Idioma</th><th>Implicancia</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Brasil</td><td>22% — 357 mil</td><td>Portugués</td><td>Su primer mercado y no tiene una sola pieza en portugués.</td></tr>
+      <tr><td class="dim">Estados Unidos</td><td>14% — 219 mil</td><td>Inglés</td><td>El de mayor poder adquisitivo y el que más valora la experiencia con reserva anticipada.</td></tr>
+      <tr><td class="dim">Uruguay</td><td>11% — 171 mil</td><td>Español</td><td>Único mercado principal cubierto por su comunicación actual.</td></tr>
+      <tr><td class="dim">China</td><td>+62% interanual</td><td>Chino / inglés</td><td>El de mayor crecimiento. Llega casi siempre por plataformas y agencias, no por Instagram.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call crit">
+    <div class="t">La conclusión incómoda</div>
+    <p>Dos de cada tres turistas de sus principales mercados <b>no hablan español</b>, y toda su comunicación — biografía, publicaciones, atención y reservas — está exclusivamente en español. Hoy no existe ninguna vía por la que un brasileño o un estadounidense pueda descubrirlo, entenderlo y reservar sin fricción.</p>
+  </div>
+</section>
+
+<!-- ============================= 8. FUGAS ============================= -->
+<section class="sec break">
+  <p class="sec-n">08</p>
+  <h2>Diagnóstico: las cinco fugas</h2>
+  <p class="std">Ordenadas por urgencia. Cada servicio del catálogo que sigue está mapeado a la fuga que cierra.</p>
+
+  <table>
+    <thead><tr><th style="width:12mm">Fuga</th><th style="width:46mm">Qué pasa</th><th>Consecuencia y por qué importa</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">F1</td><td class="dim">No existe en el momento de decisión</td><td>El turista abre Google y busca «closed door restaurant Buenos Aires», «private dinner Buenos Aires» o «cena con vista Buenos Aires». No hay nada suyo en esos resultados: solo una ficha de TripAdvisor que no controla y que puede bajar de posición sin aviso. <b>Toda esa demanda, ya calificada y lista para reservar, se la lleva otro.</b></td></tr>
+      <tr><td class="dim">F2</td><td class="dim">Todo el negocio en un canal prestado</td><td>Instagram concentra vidriera, catálogo, reservas y base de clientes. Un bloqueo, un hackeo o una caída de alcance corta la facturación entera. <b>No hay plan alternativo ni activo propio que lo sostenga.</b></td></tr>
+      <tr><td class="dim">F3</td><td class="dim">Sin medición no puede pautar</td><td>No hay sitio, analítica, píxel ni eventos de conversión. Cualquier peso invertido hoy sería a ciegas: no se sabría qué anuncio trajo qué reserva. <b>Por eso Google Ads directamente no es viable todavía</b>, y Meta Ads sería apostar sin tablero.</td></tr>
+      <tr><td class="dim">F4</td><td class="dim">La reserva depende de una persona despierta</td><td>Se reserva por teléfono o mensaje directo. El turista estadounidense consulta con cinco horas de diferencia horaria y el brasileño compara tres opciones en la misma tarde. <b>Cada respuesta demorada es una mesa vacía</b>, y sin seña cada confirmación puede caerse el mismo día.</td></tr>
+      <tr><td class="dim">F5</td><td class="dim">Un solo idioma para un público de tres</td><td>Portugués, inglés y español son los idiomas de su demanda real. Hoy todo está en español: biografía, publicaciones, atención y reservas. <b>Está compitiendo por un tercio de su mercado.</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">Lo que no es un problema</div>
+    <p>Ninguna de las cinco fugas es de producto. El producto ya está validado por distinción de plataforma, por 13.000 seguidores orgánicos y por reseñas que hablan bien de la comida, la vista y el servicio. <b>Solo falta la infraestructura comercial.</b> Ese es el encuadre con el que hay que entrar: no venimos a corregirlo, venimos a construir lo que le falta.</p>
+  </div>
+</section>
+
+<!-- ============================= 9. SERVICIOS ============================= -->
+<section class="sec break">
+  <p class="sec-n">09</p>
+  <h2>Catálogo de servicios a ofrecer</h2>
+  <p class="std">Diecisiete servicios en cuatro bloques. El orden es obligatorio: el bloque 0 hace medible el negocio y sin él los demás no se pueden cobrar por resultado. Cada ficha indica qué entrega, por qué aplica a este cliente en particular, con qué se mide y de qué depende.</p>
+
+  <table>
+    <thead><tr><th style="width:24mm">Bloque</th><th style="width:38mm">Objetivo</th><th style="width:16mm">Servicios</th><th>Regla</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">0 · Cimientos</td><td>Hacer que el negocio exista y sea medible</td><td class="c">5</td><td>Innegociable. Va primero, siempre.</td></tr>
+      <tr><td class="dim">1 · Captura</td><td>Aparecer donde ya lo están buscando</td><td class="c">4</td><td>Requiere el bloque 0 funcionando.</td></tr>
+      <tr><td class="dim">2 · Generación</td><td>Crear demanda donde todavía no existe</td><td class="c">4</td><td>Requiere píxel y públicos cargados.</td></tr>
+      <tr><td class="dim">3 · Retención y marca</td><td>Bajar el costo de todo lo anterior</td><td class="c">4</td><td>Puede arrancar en paralelo al bloque 1.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Bloque 0 — Cimientos</h3>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">01</span><h3>Página web con reserva integrada</h3><span class="bk">Bloque 0</span></div>
+    <p>Un sitio propio que venda la experiencia y cierre la reserva sin intervención humana: relato, fotos, menú, precio, disponibilidad real y confirmación automática. En español, inglés y portugués.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Diseño y desarrollo, textos en tres idiomas, galería, sección de eventos y catering, formularios, política de cancelación, velocidad y versión móvil optimizadas.</dd>
+      <dt>Por qué para Peter</dt><dd>Es el hueco central del diagnóstico. <b>Sin esto no hay Google Ads, ni medición, ni remarketing, ni posicionamiento.</b> Desbloquea diez de los diecisiete servicios.</dd>
+      <dt>Mide</dt><dd>Visitas, tasa de conversión a reserva, reservas por idioma, valor por sesión.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1, F2, F4 y F5. Depende de fotos y menú actualizados del cliente.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">02</span><h3>Sistema de agendamiento y calendario</h3><span class="bk">Bloque 0</span></div>
+    <p>Motor de reservas con calendario real: turnos por noche, cupos por mesa, bloqueo de fechas, temporada alta, cobro de seña y confirmación automática por correo y WhatsApp.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Alta y configuración del calendario, reglas de disponibilidad y aforo (2 a 8 personas), pasarela de cobro de seña, recordatorios automáticos, panel de gestión y capacitación de uso.</dd>
+      <dt>Por qué para Peter</dt><dd>Con 2 a 8 cubiertos, <b>una ausencia sin aviso arruina la noche entera</b>. La seña anticipada y el recordatorio automático son la defensa directa contra eso, y liberan al chef de administrar mensajes.</dd>
+      <dt>Mide</dt><dd>Ocupación por noche, tasa de ausencias, reservas fuera de horario comercial, anticipación media de reserva.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F4. Depende del servicio 01 y de definir la política de señas.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">03</span><h3>Automatizaciones de atención y seguimiento</h3><span class="bk">Bloque 0</span></div>
+    <p>Circuito automático de punta a punta: respuesta inmediata a la consulta, calificación, envío del menú y del precio, enlace de reserva, recordatorio previo, indicaciones de llegada el mismo día y pedido de reseña después de la cena.</p>
+    <dl>
+      <dt>Entregables</dt><dd>WhatsApp Business con catálogo y respuestas automáticas, flujos por idioma, derivación a persona cuando corresponde, integración entre formulario, calendario y ficha de cliente, alertas internas.</dd>
+      <dt>Por qué para Peter</dt><dd>Hoy cada consulta la contesta él. <b>El turista de Estados Unidos escribe con cinco horas de diferencia y el de Brasil compara tres opciones en la misma tarde</b>: el que responde primero se queda con la reserva. Además, el pedido automático de reseña alimenta su mejor activo.</dd>
+      <dt>Mide</dt><dd>Tiempo de primera respuesta, consultas atendidas fuera de horario, tasa de consulta a reserva, reseñas nuevas por mes.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F4 y F5. Depende de los servicios 01 y 02.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">04</span><h3>Google Business Profile y presencia en Maps</h3><span class="bk">Bloque 0</span></div>
+    <p>Alta o reclamo de la ficha de empresa, con categoría correcta, fotos, horarios, atributos, preguntas frecuentes, publicaciones periódicas y gestión de reseñas.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Verificación de la ficha, carga completa, calendario de publicaciones, protocolo de respuesta a reseñas, seguimiento de búsquedas que activan la ficha.</dd>
+      <dt>Por qué para Peter</dt><dd>Es la puerta de entrada a Maps y a la búsqueda local, y <b>es gratis</b>. Si la ficha no existe está libre para crearla; si existe sin reclamar, cualquiera puede editarla. <i>Antes de ejecutar hay que definir con él si quiere dirección pública</i> — ver la sección de riesgos.</dd>
+      <dt>Mide</dt><dd>Impresiones de la ficha, clics a llamada y a sitio, solicitudes de indicaciones, volumen y nota media de reseñas.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1. Depende de la decisión sobre dirección pública.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">05</span><h3>Medición, analítica y tablero</h3><span class="bk">Bloque 0</span></div>
+    <p>La instalación que convierte la inversión publicitaria en algo auditable: analítica del sitio, píxel de Meta con conversiones del servidor, etiqueta de Google y eventos de conversión sobre cada acción que vale plata.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Analítica configurada, píxel y API de conversiones, etiqueta de Google, eventos de reserva iniciada, reserva confirmada, seña cobrada y clic a WhatsApp, más un tablero mensual en una sola página.</dd>
+      <dt>Por qué para Peter</dt><dd>Nunca vio de dónde viene una reserva. <b>Este servicio es el que hace demostrable todo lo demás</b> — y es el que justifica que nos siga pagando el mes siguiente.</dd>
+      <dt>Mide</dt><dd>Costo por reserva, retorno de la inversión publicitaria, atribución por canal e idioma.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F3. Depende del servicio 01.</dd>
+    </dl>
+  </div>
+
+  <h3 class="break">Bloque 1 — Captura de demanda</h3>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">06</span><h3>Campañas de Google Ads — Búsqueda</h3><span class="bk b1">Bloque 1</span></div>
+    <p>Anuncios sobre búsquedas de intención alta en los tres idiomas, más defensa de marca para no perder a quien ya lo busca por nombre y termina haciendo clic en un competidor.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Estructura de cuenta, investigación de palabras clave en español, inglés y portugués, textos y extensiones por idioma, palabras negativas, seguimiento de conversiones, optimización y reporte mensual.</dd>
+      <dt>Por qué para Peter</dt><dd>Es demanda que <b>ya existe y hoy se pierde entera</b>: «closed door restaurant Buenos Aires», «private dinner Buenos Aires», «restaurante puerta cerrada», «cena con vista Buenos Aires», «chef privado Buenos Aires». Con inventario chico, alcanza con capturar una fracción.</dd>
+      <dt>Mide</dt><dd>Costo por reserva, cuota de impresiones de marca, conversiones por idioma y por término.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1 y F5. Depende de los servicios 01 y 05. <b>No se puede lanzar antes.</b></dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">07</span><h3>Google Ads — Performance Max, Demand Gen y YouTube</h3><span class="bk b1">Bloque 1</span></div>
+    <p>Alcance en YouTube, Discover, Gmail y Maps con audiencias en mercado de viajes e interés declarado en Buenos Aires, para llegar al viajero mientras planifica.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Recursos creativos por formato, señales de audiencia, segmentación por país emisor, exclusiones, optimización continua.</dd>
+      <dt>Por qué para Peter</dt><dd>El viaje se planifica con semanas de anticipación. <b>Aparecer durante la planificación cuesta menos que competir en la búsqueda final</b>, y su material en video rinde especialmente bien en estos formatos.</dd>
+      <dt>Mide</dt><dd>Costo por reserva asistida, alcance por mercado emisor, visitas nuevas al sitio.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1. Depende de los servicios 01, 05 y de tener video producido.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">08</span><h3>Posicionamiento orgánico (SEO)</h3><span class="bk b1">Bloque 1</span></div>
+    <p>Trabajo para que su sitio propio ocupe las búsquedas que hoy solo captura TripAdvisor, y optimización paralela de la ficha de TripAdvisor mientras el sitio madura.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Arquitectura y contenidos por idioma, datos estructurados de restaurante y menú, optimización técnica y de velocidad, notas de contenido sobre la experiencia y el barrio, trabajo de enlaces con guías y medios gastronómicos, optimización de la ficha de TripAdvisor.</dd>
+      <dt>Por qué para Peter</dt><dd>El posicionamiento orgánico es el único canal que <b>baja el costo de adquisición con el tiempo en lugar de subirlo</b>. Y en su categoría las guías editoriales pesan mucho: las notas sobre puertas cerradas de Buenos Aires son un canal real de descubrimiento.</dd>
+      <dt>Mide</dt><dd>Posiciones por término e idioma, tráfico orgánico, reservas de origen orgánico, menciones en guías.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1 y F2. Depende del servicio 01. Resultados a partir del tercer mes.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">09</span><h3>Alta y gestión en plataformas de experiencias</h3><span class="bk b1">Bloque 1</span></div>
+    <p>Publicación, optimización y gestión de la experiencia en las plataformas donde el turista ya está comprando: Viator, GetYourGuide, Civitatis y Airbnb Experiencias.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Alta y verificación, fichas y fotos por plataforma, precios y política de cancelación, sincronización con el calendario, gestión de reseñas y disponibilidad.</dd>
+      <dt>Por qué para Peter</dt><dd>Son canales con <b>demanda propia y costo por adquisición cero hasta que hay venta</b>. Además su reputación en TripAdvisor le da ventaja directa en Viator, que pertenece al mismo grupo. Hoy no está en ninguna.</dd>
+      <dt>Mide</dt><dd>Reservas por plataforma, comisión efectiva, nota media, aporte al total de ocupación.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1, F2 y F5. Depende del servicio 02 para no duplicar reservas.</dd>
+    </dl>
+  </div>
+
+  <h3 class="break">Bloque 2 — Generación de demanda</h3>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">10</span><h3>Publicidad en Meta Ads — prospección</h3><span class="bk b2">Bloque 2</span></div>
+    <p>Campañas de video a público frío en Instagram y Facebook, segmentadas por intención de viaje, por país emisor y por personas que ya están físicamente en la Ciudad.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Estructura de campañas, públicos por mercado e idioma, creatividades en video verticales, pruebas de gancho y de oferta, optimización semanal, reporte mensual.</dd>
+      <dt>Por qué para Peter</dt><dd>Su producto es <b>nativamente visual</b>: fuego, emplatado, vista al atardecer y tango en vivo se venden solos en video. Además permite alcanzar al turista ya en destino, que decide dónde cenar con 24 a 48 horas de anticipación.</dd>
+      <dt>Mide</dt><dd>Costo por reserva, costo por consulta iniciada, retención de video, frecuencia por público.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1 y F5. Depende de los servicios 01, 05 y de material en video.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">11</span><h3>Meta Ads — remarketing</h3><span class="bk b2">Bloque 2</span></div>
+    <p>Recuperación de quien mostró interés y no reservó: visitantes del sitio, gente que inició una reserva y la abandonó, quien vio buena parte de un video o interactuó con el perfil.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Públicos personalizados por comportamiento y antigüedad, secuencias de mensajes por etapa, límites de frecuencia, creatividades específicas de recuperación.</dd>
+      <dt>Por qué para Peter</dt><dd>Es sistemáticamente el tramo más barato de toda la inversión. <b>Hoy ese público se pierde entero</b> porque no hay píxel que lo guarde: cada visitante que duda desaparece para siempre.</dd>
+      <dt>Mide</dt><dd>Costo por reserva recuperada, tasa de recuperación de reservas abandonadas.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F3. Depende de los servicios 01 y 05, más entre dos y cuatro semanas de acumulación de público.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">12</span><h3>Meta Ads — captación para eventos y catering</h3><span class="bk b2">Bloque 2</span></div>
+    <p>Campañas de generación de consultas para su línea de mayor ticket: cumpleaños, aniversarios, pedidas de mano, agasajos de empresa, cenas corporativas y catering a domicilio.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Página de destino específica de eventos, formulario calificador, campañas de captación de consultas, circuito automático de seguimiento comercial, plantillas de presupuesto.</dd>
+      <dt>Por qué para Peter</dt><dd>Declara tres líneas de negocio y <b>solo comunica una</b>. Eventos y catering tienen el ticket más alto, público local en lugar de turista — lo que compensa la estacionalidad del turismo — y hoy no tienen ni una pieza propia.</dd>
+      <dt>Mide</dt><dd>Costo por consulta calificada, tasa de cierre, ticket medio de evento, ingresos de la línea.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1 y F4. Depende de los servicios 01, 03 y 05.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">13</span><h3>Producción creativa y pruebas de anuncios</h3><span class="bk b2">Bloque 2</span></div>
+    <p>Producción y rotación sistemática de creatividades publicitarias, con lectura semanal de qué gancho, qué plato y qué idioma convierten mejor.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Tanda mensual de piezas en video y estáticas, variantes por idioma y por mercado, matriz de pruebas, informe de qué funcionó y por qué.</dd>
+      <dt>Por qué para Peter</dt><dd>En campañas con inversión acotada, <b>la creatividad es la principal palanca de rendimiento</b>. Y su costo de producción es casi nulo: el material se genera solo cada noche de servicio.</dd>
+      <dt>Mide</dt><dd>Costo por mil impresiones, retención de video, tasa de clic, costo por reserva por pieza.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F3. Depende de acceso al servicio para grabar.</dd>
+    </dl>
+  </div>
+
+  <h3 class="break">Bloque 3 — Contenido, retención y canal B2B</h3>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">14</span><h3>Sistema de reels y contenido orgánico</h3><span class="bk b3">Bloque 3</span></div>
+    <p>Producción con formatos fijos y calendario estable, en lugar de publicar cuando se acuerda: el fuego, el emplatado, la vista al atardecer, la reacción del comensal, el músico, el detrás de escena.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Definición de cinco a siete formatos repetibles, guion y pauta de grabación, calendario mensual, edición, textos y etiquetas por idioma, informe de rendimiento.</dd>
+      <dt>Por qué para Peter</dt><dd>El mismo material alimenta el orgánico y la pauta, así que <b>baja el costo de las campañas mientras hace crecer la cuenta</b>. Y sostiene el canal que hoy le da de comer mientras se construyen los demás.</dd>
+      <dt>Mide</dt><dd>Alcance de no seguidores, guardados y compartidos, visitas al perfil, clics al enlace, seguidores nuevos.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F2. Puede arrancar de inmediato, en paralelo a los cimientos.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">15</span><h3>Apertura de TikTok y YouTube</h3><span class="bk b3">Bloque 3</span></div>
+    <p>Alta y gestión de dos canales hoy vacíos, publicando el mismo material que ya se produce para Instagram, con textos y etiquetas adaptados por idioma.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Creación y optimización de perfiles, adaptación de formatos, calendario de publicación, seguimiento de rendimiento por plataforma.</dd>
+      <dt>Por qué para Peter</dt><dd>Es <b>distribución gratuita con costo marginal cero</b>: el contenido ya existe. TikTok además es donde el turista joven busca qué hacer en la ciudad, y ya hay videos de terceros sobre el lugar que demuestran que el formato funciona.</dd>
+      <dt>Mide</dt><dd>Reproducciones, seguidores, clics al enlace, reservas atribuidas.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F2 y F5. Depende del servicio 14.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">16</span><h3>Base de comensales, correo y posventa</h3><span class="bk b3">Bloque 3</span></div>
+    <p>Registro de quién vino, cuándo, con quién y con qué motivo, y uso de esa base para fechas especiales, temporada alta, menús nuevos y venta de eventos privados a quien ya cenó.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Ficha de cliente integrada a la reserva, consentimiento de contacto, segmentación por origen e idioma, campañas por correo y WhatsApp, automatización de aniversarios y recompra.</dd>
+      <dt>Por qué para Peter</dt><dd>Es el activo que <b>nunca le van a poder quitar</b>, y el que más barato le sale activar. Cada cliente que ya cenó es el mejor candidato para un evento privado o para una recomendación.</dd>
+      <dt>Mide</dt><dd>Tamaño de la base, tasa de apertura y clic, reservas de recompra, ingresos por campaña.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F2 y F3. Depende de los servicios 02 y 03.</dd>
+    </dl>
+  </div>
+
+  <div class="svc">
+    <div class="svc-h"><span class="no">17</span><h3>Alianzas y canal B2B</h3><span class="bk b3">Bloque 3</span></div>
+    <p>Construcción de un canal de recomendación con hoteles boutique, anfitriones de alojamiento temporario, conserjes, agencias receptivas y guías de la ciudad.</p>
+    <dl>
+      <dt>Entregables</dt><dd>Listado y priorización de socios, material de presentación en tres idiomas, esquema de comisión o beneficio, circuito de reserva preferencial, seguimiento de derivaciones.</dd>
+      <dt>Por qué para Peter</dt><dd><b>Llena mesas sin costo por clic.</b> El conserje de un hotel y el anfitrión de un departamento son quienes responden la pregunta «¿dónde cenamos esta noche?» — exactamente el momento en el que hoy no aparece.</dd>
+      <dt>Mide</dt><dd>Socios activos, reservas derivadas por socio, costo efectivo de la derivación.</dd>
+      <dt>Cierra / depende de</dt><dd>Cierra F1 y F2. Depende de los servicios 01 y 02 para poder derivar sin fricción.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================= 10. PAQUETES ============================= -->
+<section class="sec break">
+  <p class="sec-n">10</p>
+  <h2>Cómo empaquetarlo</h2>
+  <p class="std">Tres formas de presentarlo según el apetito y el presupuesto del cliente. Las tres respetan el orden: nada de pauta antes de que haya medición.</p>
+
+  <table>
+    <thead><tr><th style="width:30mm">Propuesta</th><th style="width:30mm">Incluye</th><th style="width:22mm">Duración</th><th>Cuándo ofrecerla</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Arranque mínimo</td><td>Servicios 01, 02, 04, 05</td><td>3 a 4 semanas</td><td>Cliente escéptico o con presupuesto limitado. Deja el negocio medible y ya mejora la conversión sin pautar un peso. Es la puerta de entrada más fácil de vender.</td></tr>
+      <tr><td class="dim">Arranque completo</td><td>Servicios 01 a 05 + 14</td><td>4 a 6 semanas</td><td>Cliente convencido. Cimientos completos con automatizaciones y contenido en marcha desde el primer día.</td></tr>
+      <tr><td class="dim">Gestión mensual</td><td>Servicios 06 a 13 según etapa + 14 a 17</td><td>Mínimo 3 meses</td><td>Después del arranque. Se contrata por bloques y se escala según lo que muestre el tablero.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call">
+    <div class="t">Recomendación comercial</div>
+    <p>Entrar por el <b>arranque mínimo</b>. Es el que menos resistencia genera, el que da resultados visibles sin inversión publicitaria y el que instala el tablero. Una vez que el cliente ve de dónde viene cada reserva, la conversación sobre presupuesto de pauta deja de ser una discusión de precio y pasa a ser una de rendimiento.</p>
+  </div>
+
+  <h3>Cómo justificar la inversión</h3>
+  <p>Con inventario de 2 a 8 cubiertos y ticket alto, el punto de equilibrio se alcanza con pocas reservas. La cuenta a hacer con él, con sus números reales, es esta:</p>
+
+  <table>
+    <thead><tr><th style="width:52mm">Variable</th><th style="width:26mm">Valor</th><th>Cómo se obtiene</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Ticket promedio por comensal</td><td>a completar</td><td>Dato del cliente.</td></tr>
+      <tr><td class="dim">Comensales por reserva</td><td>a completar</td><td>Promedio real. El formato admite de 2 a 8.</td></tr>
+      <tr><td class="dim">Valor promedio de una reserva</td><td>= ticket × comensales</td><td>Cálculo.</td></tr>
+      <tr><td class="dim">Margen de contribución</td><td>a completar</td><td>Descontando insumos y músico. Con costos fijos bajos, suele ser alto.</td></tr>
+      <tr><td class="dim">Inversión mensual total</td><td>honorarios + pauta</td><td>Nuestra propuesta.</td></tr>
+      <tr class="tot"><td colspan="2">Reservas necesarias para cubrir la inversión</td><td>inversión ÷ (valor de reserva × margen)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="call warn">
+    <div class="t">Importante</div>
+    <p>No conozco sus precios reales y <b>no hay que inventarlos en la propuesta</b>. Llevar esta tabla vacía a la reunión y completarla con él enfrente es más persuasivo que cualquier número estimado: el cálculo lo hace el cliente, con sus propios datos, y llega solo a la conclusión.</p>
+  </div>
+</section>
+
+<!-- ============================= 11. ROADMAP ============================= -->
+<section class="sec break">
+  <p class="sec-n">11</p>
+  <h2>Plan de ejecución</h2>
+  <p class="std">Noventa días para pasar de invisible a medible, más la proyección de los tres meses siguientes.</p>
+
+  <div class="ph"><div class="w">Días 1 – 15</div><div>
+    <h3>Cimientos</h3>
+    <ul>
+      <li><b>Sitio web con reserva integrada</b> en español, inglés y portugués, con seña para reducir ausencias</li>
+      <li><b>Calendario y motor de reservas</b> configurado con aforo y turnos reales</li>
+      <li><b>Ficha de Google Business Profile</b> reclamada, completa y con fotos</li>
+      <li><b>Analítica, píxel y eventos de conversión</b> instalados y verificados</li>
+      <li><b>WhatsApp Business</b> con catálogo, respuestas automáticas y derivación</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Días 16 – 45</div><div>
+    <h3>Captura de demanda</h3>
+    <ul>
+      <li><b>Google Ads Búsqueda</b> con defensa de marca y términos genéricos de intención alta en tres idiomas</li>
+      <li><b>Posicionamiento orgánico</b>: estructura, datos estructurados y primeros contenidos</li>
+      <li><b>Alta en plataformas de experiencias</b> sincronizadas con el calendario</li>
+      <li>Primera lectura del tablero: de dónde viene cada reserva</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Días 46 – 75</div><div>
+    <h3>Generación de demanda</h3>
+    <ul>
+      <li><b>Meta Ads a público frío</b> con video, por intención de viaje y por ubicación</li>
+      <li><b>Remarketing</b> sobre los públicos que ya se acumularon</li>
+      <li><b>Sistema de reels</b> en régimen, alimentando orgánico y pauta</li>
+      <li><b>TikTok y YouTube</b> abiertos con el material existente</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Días 76 – 90</div><div>
+    <h3>Escala y canal B2B</h3>
+    <ul>
+      <li><b>Campañas de eventos y catering</b>, la línea de mayor ticket</li>
+      <li><b>Alianzas</b> con hoteles, anfitriones, conserjes y receptivos</li>
+      <li><b>Base de comensales</b> activada para temporada alta</li>
+      <li>Informe trimestral y definición de la inversión del período siguiente</li>
+    </ul></div></div>
+
+  <div class="ph"><div class="w">Meses 4 – 6</div><div>
+    <h3>Consolidación</h3>
+    <ul>
+      <li>Posicionamiento orgánico empieza a rendir y baja el costo medio de adquisición</li>
+      <li>Escalado de la inversión en los canales que el tablero demostró rentables</li>
+      <li>Optimización de precio y de turnos según ocupación real</li>
+      <li>Expansión de la línea corporativa y de catering</li>
+    </ul></div></div>
+</section>
+
+<!-- ============================= 12. KPIs ============================= -->
+<section class="sec break">
+  <p class="sec-n">12</p>
+  <h2>Indicadores de control</h2>
+  <p class="std">Lo que se reporta cada mes. Pocos indicadores, siempre los mismos, siempre comparados contra el mes anterior.</p>
+
+  <table>
+    <thead><tr><th style="width:44mm">Indicador</th><th style="width:26mm">Etapa</th><th>Por qué se mira</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Reservas confirmadas</td><td>Desde el día 15</td><td>El único número que le importa al cliente. Todo lo demás lo explica.</td></tr>
+      <tr><td class="dim">Costo por reserva</td><td>Desde el día 30</td><td>Define si se escala o se corrige. Se compara contra el valor de la reserva.</td></tr>
+      <tr><td class="dim">Ocupación por noche</td><td>Desde el día 15</td><td>Mide si el problema es demanda o distribución de la demanda en la semana.</td></tr>
+      <tr><td class="dim">Tasa de ausencias</td><td>Desde el día 15</td><td>Valida directamente el sistema de señas y recordatorios.</td></tr>
+      <tr><td class="dim">Tiempo de primera respuesta</td><td>Desde el día 15</td><td>Mide el efecto de las automatizaciones sobre la conversión.</td></tr>
+      <tr><td class="dim">Reservas por idioma</td><td>Desde el día 30</td><td>Demuestra el retorno de haber traducido y de haber segmentado por mercado.</td></tr>
+      <tr><td class="dim">Reservas por canal</td><td>Desde el día 30</td><td>Dónde poner más plata el mes siguiente.</td></tr>
+      <tr><td class="dim">Tráfico orgánico y posiciones</td><td>Desde el día 60</td><td>El indicador que anticipa la caída del costo de adquisición.</td></tr>
+      <tr><td class="dim">Reseñas nuevas y nota media</td><td>Desde el día 30</td><td>Protege su activo principal y alimenta el posicionamiento local.</td></tr>
+      <tr><td class="dim">Consultas de eventos y catering</td><td>Desde el día 60</td><td>La línea de mayor ticket, hoy en cero.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================= 13. RIESGOS ============================= -->
+<section class="sec break">
+  <p class="sec-n">13</p>
+  <h2>Riesgos y objeciones previstas</h2>
+
+  <table>
+    <thead><tr><th style="width:52mm">Lo que va a decir</th><th>Cómo responderlo</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">«Somos puerta cerrada, no queremos tanta exposición.»</td><td>La exclusividad está en el acceso, no en la invisibilidad. Ya está listado en TripAdvisor con distinción y tiene 13.000 seguidores: <b>la decisión de ser público ya la tomó</b>. Lo que proponemos es controlar esa exposición en lugar de dejarla en manos de terceros, y elegir a quién llega.</td></tr>
+      <tr><td class="dim">«No quiero publicar la dirección.»</td><td>Perfectamente compatible. Se trabaja con modelo de reserva primero y dirección al confirmar, que además es el estándar del formato. En ese caso la ficha de Google se configura sin dirección visible o directamente no se crea, y se compensa con posicionamiento del sitio propio y plataformas. <b>Hay que definirlo con él antes de ejecutar el servicio 04.</b></td></tr>
+      <tr><td class="dim">«Ya me lleno, no necesito publicidad.»</td><td>Entonces el problema no es llenar: es <b>elegir con quién llenar y a qué precio</b>. Con demanda predecible se sube el ticket, se agregan turnos y se desarrolla la línea de eventos, que tiene el margen más alto y hoy está en cero. Además llenarse hoy no protege de una caída de alcance mañana.</td></tr>
+      <tr><td class="dim">«Instagram me alcanza.»</td><td>Le alcanzó hasta acá, y no le pertenece. Ese es el riesgo concreto: si mañana la cuenta se restringe, <b>no tiene ningún otro modo de que un cliente lo encuentre</b>. Y mientras tanto, el turista que busca en Google se lo está llevando la competencia.</td></tr>
+      <tr><td class="dim">«Es caro.»</td><td>Se hace la cuenta con sus números en la reunión: cuántas reservas por mes cubren la inversión. Con su ticket y su margen, suelen ser muy pocas. Y se puede arrancar por el paquete mínimo, sin pauta, para que vea el tablero antes de invertir en medios.</td></tr>
+      <tr><td class="dim">«Ya tuve una agencia y no funcionó.»</td><td>Casi siempre es el mismo error: pautaron sin medición. Sin sitio ni eventos de conversión, nadie puede demostrar qué trajo qué. <b>Acá el primer entregable es el tablero</b>, no el anuncio.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Riesgos del proyecto</h3>
+  <table>
+    <thead><tr><th style="width:44mm">Riesgo</th><th style="width:20mm">Nivel</th><th>Mitigación</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Situación de habilitación comercial</td><td><span class="pill mid">Medio</span></td><td>Muchas puertas cerradas operan sin habilitación gastronómica y por eso evitan dirección pública. Hay que preguntarlo en la primera reunión: condiciona la ficha de Google, el alta en plataformas y la facturación.</td></tr>
+      <tr><td class="dim">Dependencia de una sola persona</td><td><span class="pill mid">Medio</span></td><td>El chef es el producto. Si crece la demanda, hay que planificar turnos y equipo antes de escalar la inversión publicitaria.</td></tr>
+      <tr><td class="dim">Estacionalidad del turismo</td><td><span class="pill mid">Medio</span></td><td>Se compensa con la línea de eventos y catering, de público local, y con ajuste del presupuesto por temporada.</td></tr>
+      <tr><td class="dim">Expectativa de resultado inmediato</td><td><span class="pill no">Alto</span></td><td>Nunca pautó: hay que fijar expectativas por escrito. Los cimientos rinden en semanas, la pauta en uno o dos meses, el posicionamiento orgánico desde el tercero.</td></tr>
+      <tr><td class="dim">Capacidad de carga operativa</td><td><span class="pill ok">Bajo</span></td><td>Las automatizaciones reducen su carga de trabajo en lugar de aumentarla. Es un argumento de venta, no un riesgo.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================= 14. VERIFICAR ============================= -->
+<section class="sec break">
+  <p class="sec-n">14</p>
+  <h2>Qué falta verificar y qué preguntar</h2>
+
+  <h3>Cuatro chequeos de tres minutos</h3>
+  <table>
+    <thead><tr><th style="width:44mm">Qué confirmar</th><th>Dónde</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">¿Corre Meta Ads?</td><td>Biblioteca de Anuncios de Meta, país Argentina, buscar «Peter U Cook».<br><span class="fine">facebook.com/ads/library</span></td></tr>
+      <tr><td class="dim">¿Corre Google Ads?</td><td>Centro de Transparencia de Anuncios de Google, región Argentina, buscar el anunciante.<br><span class="fine">adstransparency.google.com</span></td></tr>
+      <tr><td class="dim">¿Tiene ficha en Maps?</td><td>Buscar «Peter U Cook Buenos Aires» en Google Maps. Si no aparece, la ficha está libre para reclamar.</td></tr>
+      <tr><td class="dim">¿Qué hay en la biografía?</td><td>Instagram @peterucook: ver si hay enlace, botón de reserva y si la cuenta es de tipo profesional.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Preguntas para la reunión de descubrimiento</h3>
+  <ul class="tight">
+    <li><b>¿Cuántas noches por semana abre y cuántas mesas por noche?</b> Define el techo de ocupación y el tamaño real de la oportunidad.</li>
+    <li><b>¿Cuál es el ticket promedio por persona y cuántas personas por reserva?</b> Sin esto no se puede calcular el punto de equilibrio.</li>
+    <li><b>¿Qué porcentaje de ocupación tiene hoy?</b> Distingue un problema de demanda de uno de distribución.</li>
+    <li><b>¿Cuántas consultas recibe por semana y cuántas terminan en reserva?</b> Cuantifica la fuga F4.</li>
+    <li><b>¿Cuántos clientes son extranjeros y de qué países?</b> Valida la prioridad de idiomas.</li>
+    <li><b>¿Cobra seña? ¿Cuántas ausencias tiene por mes?</b> Justifica el sistema de agendamiento.</li>
+    <li><b>¿Cuántos eventos privados y catering hizo este año?</b> Dimensiona la línea de mayor margen.</li>
+    <li><b>¿Está habilitado como local gastronómico? ¿Puede publicar dirección?</b> Condiciona Google Maps y las plataformas.</li>
+    <li><b>¿Tiene alguna forma de contactar a quienes ya cenaron?</b> Confirma la ausencia de base de datos.</li>
+    <li><b>¿Invirtió alguna vez en publicidad? ¿Cómo le fue?</b> Anticipa objeciones y fija expectativas.</li>
+  </ul>
+</section>
+
+<!-- ============================= 15. APERTURA ============================= -->
+<section class="sec break">
+  <p class="sec-n">15</p>
+  <h2>Guion de apertura</h2>
+  <p class="std">Sin hablar de servicios ni de precio. Un solo dato concreto que muestre que hay dinero quedando afuera.</p>
+
+  <div class="quote">
+    <div class="t">Mensaje sugerido · Instagram o WhatsApp</div>
+    <p>Hola Peter. Vi la propuesta y las reseñas — la experiencia está impecable. Te escribo por otra cosa.</p>
+    <p>Me puse a buscar en Google «closed door restaurant Buenos Aires» y «cena con vista Buenos Aires», que es lo que teclea un turista antes de elegir dónde comer. No aparecés. Lo único que hay tuyo es la ficha de TripAdvisor, que no es tuya y la controla la plataforma.</p>
+    <p>Este año la Ciudad recibió 1,6 millones de turistas internacionales, 19% más que el año pasado, y el 29% de lo que gastan se va en gastronomía. Es tu cliente exacto, buscándote, sin encontrarte.</p>
+    <p>Armé una radiografía de tu presencia digital: qué tenés, qué falta y qué se puede hacer primero. ¿Te la paso y lo charlamos 15 minutos?</p>
+  </div>
+
+  <h3>Cómo seguir si responde</h3>
+  <ul class="tight">
+    <li><b>No mandar el catálogo completo.</b> Mandar la radiografía, que es diagnóstico, no venta.</li>
+    <li><b>En la reunión, hacer la cuenta con sus números.</b> La tabla del punto de equilibrio, vacía, completada con él enfrente.</li>
+    <li><b>Cerrar por el arranque mínimo.</b> Web, calendario, ficha de Google y medición. Sin pauta. Es la puerta de entrada de menor resistencia.</li>
+    <li><b>Prometer el tablero, no el resultado.</b> El primer entregable que va a ver es saber de dónde viene cada reserva. Eso es lo que nunca tuvo.</li>
+  </ul>
+</section>
+
+<!-- ============================= 16. METODOLOGÍA ============================= -->
+<section class="sec break">
+  <p class="sec-n">16</p>
+  <h2>Metodología, límites y fuentes</h2>
+
+  <h3>Cómo se hizo</h3>
+  <p>Relevamiento del 22 de septiembre de 2026 a partir de fuentes públicas: perfiles sociales, fichas de reseñas, resultados de buscadores, consulta de resolución de dominios y estadísticas oficiales de turismo. No se contactó al prospecto ni se accedió a ningún dato privado.</p>
+
+  <h3>Límites del relevamiento</h3>
+  <div class="call warn">
+    <div class="t">Leer antes de usar este informe en una reunión</div>
+    <p>El entorno desde el que se hizo el relevamiento tiene <b>bloqueado el acceso directo</b> a Instagram, TripAdvisor, Google Maps, la Biblioteca de Anuncios de Meta y el Centro de Transparencia de Google. Por eso:</p>
+    <p>· Las dimensiones <b>Google Business Profile</b> y <b>Meta Ads</b> se marcaron como «a verificar» en lugar de darse por ausentes, y quedaron fuera del puntaje.</p>
+    <p>· Los datos de Instagram (13.000 seguidores, 411 publicaciones, 6.284 seguidos) y la distinción de TripAdvisor provienen de <b>resultados de búsqueda indexados</b>, no de las plataformas en vivo. Conviene reconfirmarlos antes de citarlos frente al cliente.</p>
+    <p>· La ausencia de sitio web se apoya en dos evidencias convergentes: ningún dominio evidente resuelve y ningún buscador devuelve sitio propio. Es la conclusión más firme del informe, pero sigue siendo una inferencia.</p>
+    <p>· El índice de madurez digital es una <b>evaluación propia</b> con criterio explícito, no una métrica de plataforma.</p>
+  </div>
+
+  <h3>Fuentes</h3>
+  <ul class="srcs">
+    <li>Instagram — instagram.com/peterucook</li>
+    <li>Facebook — facebook.com/peterucook</li>
+    <li>Threads — threads.com/@peterucook</li>
+    <li>TripAdvisor — ficha de Peter U Cook, Buenos Aires (Capital Federal District)</li>
+    <li>INDEC — Estadísticas de turismo internacional, 2026</li>
+    <li>Ente de Turismo de la Ciudad de Buenos Aires — llegadas internacionales enero a julio de 2026</li>
+    <li>Infobae — crecimiento del turismo receptivo, septiembre de 2026</li>
+    <li>El Economista — valor estratégico del turismo receptivo y estructura del gasto</li>
+    <li>Guía Michelin Argentina — restaurantes escondidos de Buenos Aires</li>
+    <li>Mr &amp; Mrs Smith y El Planeta Urbano — guías de restaurantes a puertas cerradas</li>
+    <li>The Argentine Experience — theargentineexperience.com</li>
+  </ul>
+
+  <p class="fine" style="margin-top:6mm;padding-top:4mm;border-top:.6pt solid var(--rule)">
+    Documento interno de trabajo. No fue elaborado ni revisado junto al prospecto y no constituye una propuesta comercial cerrada: los servicios, plazos y paquetes descriptos son una base de trabajo a ajustar según el catálogo, la capacidad operativa y la política de precios de la agencia.
+  </p>
+</section>
