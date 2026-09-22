@@ -3,48 +3,72 @@
 Presentación de estrategia de contenido para Antoá: 5 modelos de reels reales,
 referencias analizadas y plan de acción. Página estática (GitHub Pages).
 
-## Dossier Peter U Cook
+---
 
-`peter-u-cook.html` — radiografía digital del prospecto Peter U Cook (@peterucook):
-presencia por canal, mercado turístico de Buenos Aires y servicios a proponer.
-Página estática, `noindex`, de uso interno.
-
-## Prospecto Peter U Cook
+# Prospecto Peter U Cook
 
 Relevamiento y material comercial para el prospecto Peter U Cook (@peterucook),
 cocina de autor a puerta cerrada, CABA.
 
-| Archivo | Qué es | Para quién |
-|---|---|---|
-| `peter-u-cook.html` | Radiografía web con motion graphics | Interno |
-| `Informe-Peter-U-Cook.pdf` | Informe de salud digital, 24 págs. | Interno |
-| `Propuesta-Peter-U-Cook.pdf` | Propuesta de trabajo, 10 págs. | **Se le envía a él** |
-| `Anexo-Ejecucion-Peter-U-Cook.pdf` | Keywords, campañas, flujos y checklists, 11 págs. | Interno |
+## Para compartir
 
-### Links para abrir en el navegador
+La carpeta `peter-u-cook/` es el sitio publicable: cinco páginas autocontenidas,
+sin dependencias externas. Se abren con doble clic, se mandan por mail o las
+sirve GitHub Pages.
+
+Para que queden con URL pública: **Settings → Pages → Source**, y elegir rama.
+
+- Si se apunta Pages a `claude/prospect-digital-analysis-vty1mh` con carpeta
+  `/ (root)`, publica sin tocar `master`.
+- Si Pages ya sirve desde `master`, hay que mergear la rama primero.
+
+En cualquiera de los dos casos las direcciones quedan:
+
+| Documento | Ruta |
+|---|---|
+| Índice | `/antoa-reels/peter-u-cook/` |
+| Radiografía (con radar) | `/antoa-reels/peter-u-cook/radiografia.html` |
+| Propuesta — **para el cliente** | `/antoa-reels/peter-u-cook/propuesta.html` |
+| Informe de salud digital | `/antoa-reels/peter-u-cook/informe.html` |
+| Anexo de ejecución | `/antoa-reels/peter-u-cook/anexo.html` |
+
+`robots.txt` bloquea a los buscadores y cada página lleva `noindex`, así que no
+se indexan — pero quien tenga el link entra. El Informe y el Anexo son internos:
+tienen el enfoque comercial y el manejo de objeciones.
+
+## Links privados (claude.ai)
+
+Las mismas páginas, visibles solo para la cuenta dueña y para quien reciba
+acceso desde el menú *Share* de cada una:
 
 | Documento | Link |
 |---|---|
-| Radiografía con motion graphics | https://claude.ai/artifact/9WwuDdrDETx7AqpSgmDTKH |
-| Propuesta (para el cliente) | https://claude.ai/artifact/MiKuGVaM1aoDNd4xFDUHU1 |
-| Informe de salud digital | https://claude.ai/artifact/JXcxARqAVkZavtv4zLfd4M |
-| Anexo de ejecución | https://claude.ai/artifact/KR1Vxh738DEQYdGLov74aR |
+| Radiografía | https://claude.ai/artifact/9WwuDdrDETx7AqpSgmDTKH |
+| Propuesta | https://claude.ai/artifact/MiKuGVaM1aoDNd4xFDUHU1 |
+| Informe | https://claude.ai/artifact/JXcxARqAVkZavtv4zLfd4M |
+| Anexo | https://claude.ai/artifact/KR1Vxh738DEQYdGLov74aR |
 
-Son privados: los abre la cuenta dueña y quien tenga acceso dado desde el menú
-Share de cada página. `pub/` contiene las versiones publicadas (sin etiquetas de
-documento, que las agrega la plataforma al publicar); se regeneran desde `ver/`.
+## Estructura
 
-### Para ver en el navegador
+| Ruta | Qué es |
+|---|---|
+| `hub-peter-u-cook.html` | Fuente del índice |
+| `peter-u-cook.html` | Fuente de la radiografía con motion graphics |
+| `propuesta-peter-u-cook.html` | Fuente de la propuesta |
+| `informe-peter-u-cook.html` | Fuente del informe |
+| `anexo-ejecucion-peter-u-cook.html` | Fuente del anexo |
+| `print.css` | Estilos compartidos de los tres documentos imprimibles |
+| `build.py` | Genera `peter-u-cook/` y `pub/` desde las fuentes |
+| `peter-u-cook/` | **Generado.** Sitio publicable, autocontenido |
+| `pub/` | **Generado.** Mismas páginas para publicar como artifact |
+| `*.pdf` | Versiones imprimibles |
 
-`ver/informe.html`, `ver/propuesta.html` y `ver/anexo.html` son copias
-autocontenidas (CSS embebido, sin dependencias) de los tres documentos, con
-estilos de pantalla. Se abren con doble clic y se pueden mandar por mail.
-Se regeneran desde los `*.html` de la raíz; no editarlas a mano.
+Editar siempre las fuentes de la raíz y correr `python3 build.py`; lo que hay en
+`peter-u-cook/` y en `pub/` se sobrescribe.
 
-Los PDF se generan desde los `*.html` homónimos con Chromium en modo impresión;
-`print.css` es la hoja de estilos compartida. El índice del informe se numera en
-dos pasadas (render, se leen las páginas reales, se reemplazan los tokens y se
-vuelve a renderizar).
+## Cómo se generan los PDF
 
-La propuesta tiene campos en blanco a completar antes de enviarla: nombre de la
-agencia, precios de los paquetes y datos de contacto.
+Desde las fuentes con Chromium en modo impresión, márgenes A4 y pie con número
+de página. El índice del informe se numera en dos pasadas: se renderiza, se leen
+las páginas reales de cada sección, se reemplazan los tokens y se vuelve a
+renderizar.

@@ -1,0 +1,106 @@
+<title>Peter U Cook — Material</title>
+<style>
+  :root{
+    --plane:#0B1014; --surface:#121A20; --surface-2:#18242C;
+    --line:rgba(159,203,222,.14); --line-strong:rgba(159,203,222,.28);
+    --ink:#F1F6F8; --ink-2:#9FB6C2; --ink-3:#6C8694;
+    --accent:#3FBFD6; --warn:#FAB219;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--plane);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(90% 55% at 82% -8%,rgba(63,191,214,.12) 0%,rgba(63,191,214,0) 60%);
+    background-repeat:no-repeat;
+    min-height:100vh;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{padding:66px 0 34px}
+  @media(max-width:640px){header{padding:44px 0 26px}}
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 16px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);flex:none}
+  h1{margin:0;font-size:clamp(30px,5.6vw,46px);line-height:1.04;letter-spacing:-.02em;font-weight:800}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lead{margin:18px 0 0;color:var(--ink-2);font-size:17px;max-width:56ch}
+
+  .grid{display:grid;gap:14px;padding-bottom:26px}
+  .card{
+    display:block;text-decoration:none;color:inherit;
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:22px 22px;transition:border-color .18s ease,transform .18s ease,background .18s ease;
+  }
+  .card:hover,.card:focus-visible{border-color:var(--accent);transform:translateY(-2px);background:var(--surface-2)}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:9px}
+  .top h2{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em;flex:1;min-width:0}
+  .tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+    padding:4px 9px;border-radius:999px;border:1px solid var(--line-strong);
+    color:var(--ink-3);white-space:nowrap;
+  }
+  .tag.cli{color:#9FE3EF;border-color:rgba(63,191,214,.45);background:rgba(63,191,214,.10)}
+  .tag.int{color:#F0D08C;border-color:rgba(250,178,25,.36);background:rgba(250,178,25,.08)}
+  .card p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.5}
+  .meta{
+    margin-top:14px;padding-top:12px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:flex;justify-content:space-between;gap:14px;
+  }
+  .meta .go{color:var(--accent)}
+
+  footer{
+    border-top:1px solid var(--line);margin-top:14px;padding:26px 0 56px;
+    color:var(--ink-3);font-size:13px;line-height:1.6;
+  }
+  footer b{color:var(--ink-2);font-weight:600}
+  @media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Material de prospección · 22.09.2026</p>
+    <h1>Peter U Cook<br><em>cuatro documentos.</em></h1>
+    <p class="lead">Relevamiento de presencia digital, propuesta comercial y material de ejecución para el prospecto @peterucook — cocina de autor a puerta cerrada, Buenos Aires.</p>
+  </header>
+
+  <main class="grid">
+
+    <a class="card" href="radiografia.html">
+      <div class="top"><h2>Radiografía digital</h2><span class="tag int">Uso interno</span></div>
+      <p>El diagnóstico visual: radar de presencia por canal, índice de madurez digital, datos de mercado y las cinco fugas. La versión rápida de leer.</p>
+      <div class="meta"><span>Página web · 9 secciones</span><span class="go">Abrir →</span></div>
+    </a>
+
+    <a class="card" href="propuesta.html">
+      <div class="top"><h2>Propuesta de trabajo</h2><span class="tag cli">Para el cliente</span></div>
+      <p>La versión que se le envía a él: diagnóstico en tono constructivo, oportunidad de mercado, los cuatro bloques de servicio, paquetes, plan de 90 días y preguntas frecuentes.</p>
+      <div class="meta"><span>10 páginas · imprimible</span><span class="go">Abrir →</span></div>
+    </a>
+
+    <a class="card" href="informe.html">
+      <div class="top"><h2>Informe de salud digital</h2><span class="tag int">Uso interno</span></div>
+      <p>El relevamiento completo: salud general del negocio, auditoría de diez dimensiones, benchmark competitivo, catálogo de 17 servicios, riesgos y objeciones previstas.</p>
+      <div class="meta"><span>24 páginas · imprimible</span><span class="go">Abrir →</span></div>
+    </a>
+
+    <a class="card" href="anexo.html">
+      <div class="top"><h2>Anexo de ejecución</h2><span class="tag int">Uso interno</span></div>
+      <p>Cómo se hace: arquitectura de la web, cuatro flujos de automatización, estructura de campañas con palabras clave en tres idiomas, ángulos creativos y listas de arranque.</p>
+      <div class="meta"><span>11 páginas · imprimible</span><span class="go">Abrir →</span></div>
+    </a>
+
+  </main>
+
+  <footer>
+    <p>Los documentos marcados <b>uso interno</b> contienen el enfoque comercial y el manejo de objeciones: no están escritos para que los lea el prospecto. Los tres documentos imprimibles se descargan en PDF desde el menú de impresión del navegador.</p>
+    <p style="margin-top:12px">Relevamiento hecho con fuentes públicas. Dos puntos quedaron marcados «a verificar» porque el entorno de relevamiento tenía bloqueado el acceso directo a Google Maps y a la Biblioteca de Anuncios de Meta.</p>
+  </footer>
+
+</div>

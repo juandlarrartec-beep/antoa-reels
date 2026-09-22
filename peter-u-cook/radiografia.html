@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Radiografia digital del prospecto Peter U Cook: presencia por canal, mercado y servicios a proponer.">
+<title>Dossier Peter U Cook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --plane:#0B1014;
+    --surface:#121A20;
+    --surface-2:#18242C;
+    --surface-3:#1E2D37;
+    --line:rgba(159,203,222,.14);
+    --line-strong:rgba(159,203,222,.26);
+    --ink:#F1F6F8;
+    --ink-2:#9FB6C2;
+    --ink-3:#6C8694;
+    --accent:#3FBFD6;
+    --accent-dim:rgba(63,191,214,.16);
+    --good:#0CA30C;
+    --warn:#FAB219;
+    --serious:#EC835A;
+    --crit:#D03B3B;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1080px;
+    --r:14px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--plane);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+  section{padding-block:68px}
+  @media(max-width:700px){section{padding-block:46px}}
+
+  h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.02em;font-weight:700}
+  h1{font-size:clamp(32px,6.4vw,58px);line-height:1.02;font-weight:800}
+  h2{font-size:clamp(25px,4vw,38px);line-height:1.08;font-weight:700}
+  h3{font-size:19px;line-height:1.25}
+  p{margin:0}
+  a{color:var(--accent)}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent);font-weight:500;
+    display:flex;align-items:center;gap:10px;margin:0 0 16px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);flex:none}
+  .lead{font-size:clamp(16px,2.1vw,18.5px);color:var(--ink-2);max-width:62ch}
+  .sec-head{display:flex;flex-direction:column;gap:16px;max-width:66ch}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+    background:rgba(11,16,20,.86);backdrop-filter:saturate(1.5) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{
+    max-width:var(--maxw);margin:0 auto;padding:11px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+  }
+  .mark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+  .mark .dotlive{
+    width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;
+    box-shadow:0 0 0 0 rgba(63,191,214,.55);animation:ping 2.6s ease-out infinite;
+  }
+  @keyframes ping{
+    0%{box-shadow:0 0 0 0 rgba(63,191,214,.5)}
+    70%{box-shadow:0 0 0 9px rgba(63,191,214,0)}
+    100%{box-shadow:0 0 0 0 rgba(63,191,214,0)}
+  }
+  .topbar .meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3);text-align:right}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-block:64px 58px;
+    background:
+      radial-gradient(90% 70% at 88% 4%,rgba(63,191,214,.13) 0%,rgba(63,191,214,0) 62%),
+      radial-gradient(70% 60% at 2% 96%,rgba(236,131,90,.10) 0%,rgba(236,131,90,0) 60%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:center}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:38px}}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero .lead{margin-top:20px}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;
+    padding:7px 13px;font-size:13px;color:var(--ink-2);
+  }
+  .chip b{color:var(--ink);font-weight:600}
+  .chip .sq{width:7px;height:7px;border-radius:2px;flex:none}
+
+  /* ---------- radar ---------- */
+  .radar-box{display:flex;flex-direction:column;gap:16px;align-items:center}
+  .radar-shell{
+    position:relative;width:100%;max-width:392px;aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,rgba(63,191,214,.06),rgba(11,16,20,0) 70%);
+  }
+  .radar-shell canvas{width:100%;height:100%;display:block}
+  .radar-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-3);text-align:center}
+
+  /* ---------- panels ---------- */
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:820px){.grid-2{grid-template-columns:1fr}}
+
+  /* ---------- ficha ---------- */
+  .ficha{margin-top:34px;overflow:hidden}
+  .ficha dl{margin:0;display:grid;grid-template-columns:repeat(2,1fr)}
+  @media(max-width:700px){.ficha dl{grid-template-columns:1fr}}
+  .fr{padding:16px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
+  .fr:nth-child(-n+2){border-top:0}
+  @media(max-width:700px){.fr:nth-child(2){border-top:1px solid var(--line)}}
+  .fr dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .fr dd{margin:0;font-size:15.5px;color:var(--ink);line-height:1.45}
+  .fr dd span{color:var(--ink-2)}
+  .fr dd a{text-decoration:none;border-bottom:1px solid rgba(63,191,214,.4)}
+
+  .note{
+    display:flex;gap:14px;align-items:flex-start;margin-top:22px;
+    padding:18px 20px;border-radius:var(--r);
+    background:var(--surface-2);border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+  }
+  .note .ni{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);flex:none;padding-top:3px}
+  .note p{font-size:15px;color:var(--ink-2);line-height:1.55}
+  .note p b{color:var(--ink);font-weight:600}
+  .note.warn{border-left-color:var(--warn)}
+  .note.warn .ni{color:var(--warn)}
+
+  /* ---------- audit table ---------- */
+  .audit{margin-top:36px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+  .arow{
+    display:grid;grid-template-columns:minmax(0,1.05fr) 132px minmax(0,1.5fr) 74px;
+    gap:16px;align-items:center;
+    padding:15px 20px;border-top:1px solid var(--line);
+  }
+  .arow.head{
+    border-top:0;background:var(--surface-2);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--ink-3);
+  }
+  .arow .dim{font-weight:600;font-size:15px;color:var(--ink)}
+  .arow .why{font-size:14px;color:var(--ink-2);line-height:1.45;min-width:0}
+  .arow .pts{font-family:var(--mono);font-size:15px;text-align:right;
+    font-variant-numeric:tabular-nums;color:var(--ink-2)}
+  .arow .pts b{color:var(--ink);font-weight:600}
+  .arow[data-state="ausente"] .pts b{color:var(--crit)}
+  @media(max-width:820px){
+    .arow{grid-template-columns:1fr auto;gap:8px 14px;padding:16px 18px}
+    .arow.head{display:none}
+    .arow .dim{grid-column:1}
+    .arow .st{grid-column:2;grid-row:1;justify-self:end}
+    .arow .why{grid-column:1/-1}
+    .arow .pts{grid-column:1/-1;text-align:left}
+    .arow .pts::before{content:"Puntaje · ";color:var(--ink-3);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  }
+  .st{
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:5px 10px;border-radius:999px;border:1px solid var(--line-strong);
+    background:var(--surface-2);color:var(--ink-2);font-weight:500;
+  }
+  .st .g{width:8px;height:8px;border-radius:2px;flex:none}
+  .st.ok{color:#8FE08F}       .st.ok .g{background:var(--good)}
+  .st.mid{color:#FBD887}      .st.mid .g{background:var(--warn)}
+  .st.no{color:#F09696}       .st.no .g{background:var(--crit)}
+  .st.q{color:var(--ink-3);border-style:dashed}  .st.q .g{background:var(--ink-3)}
+
+  /* ---------- gauge ---------- */
+  .score{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:center;
+    margin-top:26px;padding:26px 24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+  @media(max-width:760px){.score{grid-template-columns:1fr;gap:20px}}
+  .gauge{position:relative;width:100%;max-width:260px;margin-inline:auto}
+  .gauge svg{width:100%;height:auto;display:block;overflow:visible}
+  .gauge .val{
+    position:absolute;left:0;right:0;bottom:6px;text-align:center;
+  }
+  .gauge .val .n{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+  .gauge .val .n span{font-size:20px;color:var(--ink-3);font-weight:600}
+  .gauge .val .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+  .score-legend{display:flex;flex-direction:column;gap:13px}
+  .lg{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--ink-2);line-height:1.45}
+  .lg .sw{width:14px;height:14px;border-radius:4px;flex:none;margin-top:4px;border:1px solid var(--line-strong)}
+  .lg b{color:var(--ink);font-weight:600}
+
+  /* ---------- stat tiles ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+  @media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .tile{padding:22px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+    display:flex;flex-direction:column;gap:9px}
+  .tile .n{font-size:clamp(30px,4.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--accent)}
+  .tile .n small{font-size:.5em;font-weight:600;letter-spacing:0;color:var(--ink-2)}
+  .tile .l{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+  .tile .src{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:auto;padding-top:6px}
+
+  /* ---------- bar chart ---------- */
+  .chart{margin-top:32px;padding:26px 24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+  .chart h3{font-size:16.5px;margin-bottom:4px}
+  .chart .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .bars{margin-top:24px;display:flex;flex-direction:column;gap:3px}
+  .bar{display:grid;grid-template-columns:118px 1fr 46px;gap:14px;align-items:center;
+    padding:7px 0;position:relative}
+  @media(max-width:560px){.bar{grid-template-columns:96px 1fr 42px;gap:10px}}
+  .bar .cat{font-size:14px;color:var(--ink-2)}
+  .bar .track{height:22px;background:rgba(159,203,222,.07);border-radius:4px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:0 4px 4px 0;background:#2F4551;
+    transform-origin:left center;animation:grow .9s cubic-bezier(.22,.7,.3,1) backwards}
+  .bar[data-hi="1"] .cat{color:var(--ink);font-weight:600}
+  .bar[data-hi="1"] .fill{background:var(--accent)}
+  .bar .v{font-family:var(--mono);font-size:14px;text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+  .bar[data-hi="1"] .v{color:var(--ink);font-weight:600}
+  .bar:hover .track{background:rgba(159,203,222,.12)}
+  .bar:hover::after{
+    content:attr(data-tip);position:absolute;left:132px;bottom:100%;z-index:5;
+    background:var(--surface-3);border:1px solid var(--line-strong);color:var(--ink);
+    font-size:12.5px;padding:6px 10px;border-radius:8px;white-space:nowrap;pointer-events:none;
+  }
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+  /* ---------- leaks ---------- */
+  .leaks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px}
+  @media(max-width:760px){.leaks{grid-template-columns:1fr}}
+  .leak{padding:22px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+    display:flex;gap:16px;align-items:flex-start}
+  .leak .num{font-family:var(--mono);font-size:12px;color:var(--crit);flex:none;padding-top:4px;letter-spacing:.06em}
+  .leak h3{font-size:16.5px;margin-bottom:7px}
+  .leak p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+  /* ---------- servicios ---------- */
+  .svc-block{margin-top:34px}
+  .blk-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    padding-bottom:13px;border-bottom:1px solid var(--line-strong);margin-bottom:20px}
+  .blk-head .tagn{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--plane);background:var(--accent);padding:4px 10px;border-radius:6px;font-weight:600}
+  .blk-head h3{font-size:20px}
+  .blk-head .hint{font-size:13.5px;color:var(--ink-3);margin-left:auto}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:820px){.svc-grid{grid-template-columns:1fr}}
+  .svc{padding:20px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+    display:flex;flex-direction:column;gap:11px;transition:border-color .2s ease,transform .2s ease}
+  .svc:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+  .svc h4{font-size:16px;font-weight:700;line-height:1.3}
+  .svc p{font-size:14px;color:var(--ink-2);line-height:1.5}
+  .svc .fix{font-size:13px;color:var(--ink-3);line-height:1.45}
+  .svc .fix b{color:var(--accent);font-weight:500;font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+  .impact{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:6px}
+  .impact .segs{display:flex;gap:3px}
+  .impact .sg{width:16px;height:5px;border-radius:2px;background:rgba(159,203,222,.16)}
+  .impact .sg.on{background:var(--accent)}
+  .impact .lb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- timeline ---------- */
+  .tl{margin-top:34px;display:flex;flex-direction:column}
+  .ph{display:grid;grid-template-columns:132px 1fr;gap:26px;padding:24px 0;border-top:1px solid var(--line)}
+  .ph:first-child{border-top:0;padding-top:4px}
+  @media(max-width:640px){.ph{grid-template-columns:1fr;gap:10px}}
+  .ph .when{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .ph h3{font-size:18px;margin-bottom:9px}
+  .ph ul{margin:0;padding-left:17px;color:var(--ink-2);font-size:14.5px;line-height:1.55}
+  .ph li{margin:5px 0}
+  .ph li b{color:var(--ink);font-weight:600}
+
+  /* ---------- verify ---------- */
+  .verify{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .vlist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px}
+  @media(max-width:760px){.vlist{grid-template-columns:1fr}}
+  .vcard{display:flex;gap:14px;padding:17px 18px;border:1px solid var(--line);border-radius:12px;
+    background:var(--surface-2);text-decoration:none;color:inherit;transition:border-color .2s ease}
+  .vcard:hover{border-color:var(--accent)}
+  .vcard .k{font-family:var(--mono);font-size:11px;color:var(--accent);flex:none;padding-top:3px}
+  .vcard strong{display:block;font-size:14.5px;font-weight:600;margin-bottom:3px}
+  .vcard span{font-size:13px;color:var(--ink-3);line-height:1.4;word-break:break-word}
+
+  /* ---------- pitch ---------- */
+  .pitch{padding:28px 26px;border-radius:var(--r);background:var(--surface-2);
+    border:1px solid var(--line-strong);margin-top:30px}
+  .pitch .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:16px}
+  .pitch blockquote{margin:0;font-size:16px;line-height:1.65;color:var(--ink);max-width:64ch}
+  .pitch blockquote p + p{margin-top:14px}
+
+  /* ---------- footer ---------- */
+  footer{padding-block:44px 64px;border-top:1px solid var(--line)}
+  footer h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:500;margin-bottom:14px}
+  .srcs{display:flex;flex-wrap:wrap;gap:8px}
+  .srcs a{font-size:12.5px;color:var(--ink-2);text-decoration:none;
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px;transition:border-color .2s ease}
+  .srcs a:hover{border-color:var(--accent);color:var(--accent)}
+  .disclaim{margin-top:26px;font-size:13px;color:var(--ink-3);line-height:1.6;max-width:72ch}
+
+  /* reveal — resting state is fully visible */
+  .rv{transform:translateY(14px);opacity:.999;transition:transform .6s cubic-bezier(.22,.7,.3,1)}
+  .rv.in{transform:none}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{transform:none;transition:none}
+    .bar .fill{animation:none}
+    .mark .dotlive{animation:none}
+    .svc{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="row">
+    <div class="mark"><span class="dotlive" aria-hidden="true"></span> Dossier · Peter U Cook</div>
+    <div class="meta">Relevamiento · 22 sep 2026</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Prospecto · CABA · Gastronomía de experiencia</p>
+      <h1>13.000 seguidores.<br><em>Cero activos propios.</em></h1>
+      <p class="lead">Peter U Cook vende cenas de autor a puerta cerrada, con vista al Río de la Plata, a un público que llega a Buenos Aires en cifras récord. Todo el negocio pasa por un único canal prestado: Instagram. No tiene web, no tiene reserva online y no tiene forma de medir nada — y sin medición no puede pautar.</p>
+      <div class="hero-chips">
+        <span class="chip"><span class="sq" style="background:var(--good)" aria-hidden="true"></span> Instagram <b>13K</b></span>
+        <span class="chip"><span class="sq" style="background:var(--good)" aria-hidden="true"></span> TripAdvisor <b>Travelers' Choice</b></span>
+        <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Web propia <b>no existe</b></span>
+        <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Medición <b>nula</b></span>
+      </div>
+    </div>
+    <div class="radar-box">
+      <div class="radar-shell">
+        <canvas id="radar" width="392" height="392" role="img"
+          aria-label="Radar de presencia digital: de ocho canales relevados, dos están activos (Instagram y reseñas), uno es parcial (video), tres están ausentes (web, reservas online, medición) y dos quedan a verificar (Maps y Meta Ads)."></canvas>
+      </div>
+      <p class="radar-cap">Barrido de presencia · 8 canales relevados</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FICHA ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">01 — Quién es</p>
+      <h2>Ticket alto, inventario mínimo, demanda internacional.</h2>
+      <p class="lead">Mesas de 2 a 8 personas. Menú por pasos con maridaje y música en vivo. Es exactamente el perfil de negocio donde cada reserva vale mucho y donde la pauta medible se paga sola.</p>
+    </div>
+
+    <div class="ficha panel">
+      <dl>
+        <div class="fr"><dt>Cuenta</dt><dd><a href="https://www.instagram.com/peterucook/" target="_blank" rel="noopener">@peterucook</a> <span>— mismo handle en Instagram, Facebook y Threads</span></dd></div>
+        <div class="fr"><dt>Comunidad</dt><dd>13.000 seguidores · 411 publicaciones · sigue a 6.284</dd></div>
+        <div class="fr"><dt>Propuesta</dt><dd>Cocina de autor a puerta cerrada <span>— rooftop con vista a la ciudad y al Río de la Plata</span></dd></div>
+        <div class="fr"><dt>Formato</dt><dd>Reservas de 2 a 8 personas · menú por pasos · maridaje · tango en vivo</dd></div>
+        <div class="fr"><dt>Líneas de negocio</dt><dd>Cenas · eventos privados · catering</dd></div>
+        <div class="fr"><dt>Contacto público</dt><dd>+54 9 11 4492-3866 <span>— teléfono en la bio, sin link de reserva</span></dd></div>
+        <div class="fr"><dt>Reputación</dt><dd>TripAdvisor con Travelers' Choice <span>— top 10% de la plataforma</span></dd></div>
+        <div class="fr"><dt>Idioma</dt><dd>Comunicación 100% en español</dd></div>
+      </dl>
+    </div>
+
+    <div class="note">
+      <span class="ni">Señal</span>
+      <p>Sigue a <b>6.284 cuentas</b> para 13.000 seguidores. Es la huella de una cuenta que creció a pulmón, siguiendo gente una por una. <b>No aparece ninguna señal de inversión publicitaria</b> en ningún canal: ni creativos, ni landing, ni link medible en bio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUDITORÍA ============ -->
+<section style="background:linear-gradient(180deg,rgba(63,191,214,.045),rgba(63,191,214,0) 220px);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">02 — Radiografía por canal</p>
+      <h2>Diez dimensiones. Ocho verificadas, dos pendientes.</h2>
+      <p class="lead">Cada fila es un frente del negocio digital. Lo que está en verde ya funciona y hay que protegerlo; lo que está en rojo es el margen de crecimiento que hoy nadie está tocando.</p>
+    </div>
+
+    <div class="audit">
+      <div class="arow head"><div>Dimensión</div><div>Estado</div><div>Qué encontré</div><div style="text-align:right">Puntaje</div></div>
+
+      <div class="arow" data-state="ok">
+        <div class="dim">Presencia orgánica en redes</div>
+        <div class="st ok"><span class="g" aria-hidden="true"></span>Presente</div>
+        <div class="why">Instagram con 13K, más Facebook y Threads con el mismo handle.</div>
+        <div class="pts"><b>7</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="ok">
+        <div class="dim">Reputación y reseñas</div>
+        <div class="st ok"><span class="g" aria-hidden="true"></span>Presente</div>
+        <div class="why">Ficha en TripAdvisor con Travelers' Choice. Activo valioso — pero es de la plataforma, no suyo.</div>
+        <div class="pts"><b>7</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="mid">
+        <div class="dim">Contenido en video</div>
+        <div class="st mid"><span class="g" aria-hidden="true"></span>Parcial</div>
+        <div class="why">Publica video en Instagram, pero no tiene cuenta propia en TikTok ni en YouTube. Hay contenido espontáneo de terceros que nadie capitaliza.</div>
+        <div class="pts"><b>5</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="ausente">
+        <div class="dim">Sitio web propio</div>
+        <div class="st no"><span class="g" aria-hidden="true"></span>Ausente</div>
+        <div class="why">Ningún dominio obvio resuelve y no aparece web propia en ningún buscador. No hay activo digital de su propiedad.</div>
+        <div class="pts"><b>0</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="ausente">
+        <div class="dim">Reserva y conversión</div>
+        <div class="st no"><span class="g" aria-hidden="true"></span>Ausente</div>
+        <div class="why">Solo teléfono y mensaje directo. Sin agenda online, sin seña, sin confirmación automática, sin cobertura fuera de horario.</div>
+        <div class="pts"><b>1</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="ausente">
+        <div class="dim">Visibilidad en Google (SEO)</div>
+        <div class="st no"><span class="g" aria-hidden="true"></span>Ausente</div>
+        <div class="why">Lo único que rankea es la ficha de TripAdvisor. En el momento en que el turista busca, el negocio no está.</div>
+        <div class="pts"><b>2</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="q">
+        <div class="dim">Google Business Profile / Maps</div>
+        <div class="st q"><span class="g" aria-hidden="true"></span>A verificar</div>
+        <div class="why">No pude confirmar la ficha desde este entorno. Es el primer dato a chequear en la llamada.</div>
+        <div class="pts">?/10</div>
+      </div>
+
+      <div class="arow" data-state="ausente">
+        <div class="dim">Google Ads</div>
+        <div class="st no"><span class="g" aria-hidden="true"></span>Ausente</div>
+        <div class="why">Sin web no hay destino ni conversión que optimizar. Hoy Google Ads no es viable — es una consecuencia, no una decisión.</div>
+        <div class="pts"><b>0</b>/10</div>
+      </div>
+
+      <div class="arow" data-state="q">
+        <div class="dim">Meta Ads</div>
+        <div class="st q"><span class="g" aria-hidden="true"></span>A verificar</div>
+        <div class="why">No encontré rastro de anuncios activos. Se confirma en un minuto en la Biblioteca de Anuncios.</div>
+        <div class="pts">?/10</div>
+      </div>
+
+      <div class="arow" data-state="ausente">
+        <div class="dim">Medición y base de datos</div>
+        <div class="st no"><span class="g" aria-hidden="true"></span>Ausente</div>
+        <div class="why">Sin web no hay GA4, ni píxel, ni público de remarketing, ni base de comensales. Cada cliente que pasó se perdió.</div>
+        <div class="pts"><b>0</b>/10</div>
+      </div>
+    </div>
+
+    <div class="score">
+      <div class="gauge">
+        <svg viewBox="0 0 260 150" aria-hidden="true">
+          <path d="M 25 133 A 105 105 0 0 1 235 133" fill="none" stroke="rgba(159,203,222,.10)" stroke-width="18" stroke-linecap="round"/>
+          <path id="gBand" d="M 25 133 A 105 105 0 0 1 235 133" fill="none" stroke="rgba(63,191,214,.24)" stroke-width="18" stroke-linecap="round"/>
+          <path id="gVal"  d="M 25 133 A 105 105 0 0 1 235 133" fill="none" stroke="#3FBFD6" stroke-width="18" stroke-linecap="round"/>
+          <text x="25"  y="149" fill="#6C8694" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">0</text>
+          <text x="130" y="18"  fill="#6C8694" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">50</text>
+          <text x="235" y="149" fill="#6C8694" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">100</text>
+        </svg>
+        <div class="val">
+          <div class="n" data-count="22">22<span>/100</span></div>
+          <div class="k">Madurez digital</div>
+        </div>
+      </div>
+      <div class="score-legend">
+        <div class="lg"><span class="sw" style="background:#3FBFD6" aria-hidden="true"></span><span><b>22 puntos confirmados</b> sobre los 80 que pude verificar. Es el piso real del negocio hoy.</span></div>
+        <div class="lg"><span class="sw" style="background:rgba(63,191,214,.24)" aria-hidden="true"></span><span><b>Hasta 42 en el mejor caso</b>, si Maps y Meta Ads resultaran estar perfectos. Incluso así, queda por debajo de la mitad.</span></div>
+        <div class="lg"><span class="sw" style="background:rgba(159,203,222,.10)" aria-hidden="true"></span><span><b>Entre 58 y 78 puntos libres.</b> Ese es el tamaño de la propuesta.</span></div>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="ni">Método</span>
+      <p>El índice es una <b>evaluación propia</b>, no una métrica de plataforma: 10 dimensiones de 10 puntos cada una. Las dos pendientes se marcan como tales en vez de asumirse — <b>y se chequean en tres minutos</b> con los links del final.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CANALES DE VENTA ============ -->
+<section style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">03 — Canales de venta al turista</p>
+      <h2>No está en ninguna plataforma donde el turista reserva.</h2>
+      <p class="lead">Busqué su nombre en los ocho canales por los que un extranjero contrata una experiencia gastronómica en Buenos Aires. No aparece en ninguno.</p>
+    </div>
+    <div class="hero-chips" style="margin-top:28px">
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Viator</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> GetYourGuide</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Civitatis</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Airbnb Experiencias</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> TheFork</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Meitre</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Woki</span>
+      <span class="chip"><span class="sq" style="background:var(--crit)" aria-hidden="true"></span> Cookly / Eatwith</span>
+    </div>
+    <div class="note">
+      <span class="ni">Contraste</span>
+      <p>Un competidor de su misma categoría, <b>The Argentine Experience</b>, tiene web propia, reserva online, versión en inglés y presencia en las OTAs. No cocina mejor: <b>está donde el turista decide</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MERCADO ============ -->
+<section style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">04 — El mercado que se está perdiendo</p>
+      <h2>Su cliente llega a Buenos Aires en cifras récord.</h2>
+      <p class="lead">Y gasta, sobre todo, en comer. La gastronomía es la primera categoría de gasto del turista internacional — por encima del alojamiento.</p>
+    </div>
+
+    <div class="stats">
+      <div class="tile">
+        <div class="n" data-count="1.61" data-dec="2">1,61<small> M</small></div>
+        <div class="l">turistas internacionales en la Ciudad de Buenos Aires, enero–julio 2026</div>
+        <div class="src">Ente de Turismo CABA</div>
+      </div>
+      <div class="tile">
+        <div class="n" data-count="19" data-prefix="+" data-suffix="%">+19%</div>
+        <div class="l">de crecimiento interanual en llegadas internacionales a la Ciudad</div>
+        <div class="src">Ente de Turismo CABA</div>
+      </div>
+      <div class="tile">
+        <div class="n" data-count="29" data-suffix="%">29%</div>
+        <div class="l">del gasto del turista internacional va a gastronomía — la categoría número uno</div>
+        <div class="src">INDEC · ETI</div>
+      </div>
+      <div class="tile">
+        <div class="n" data-count="1434001">1.434.001</div>
+        <div class="l">visitantes de países no limítrofes en el primer semestre — mejor marca en 25 años</div>
+        <div class="src">INDEC · ETI</div>
+      </div>
+    </div>
+
+    <div class="chart">
+      <h3>Destino del gasto del turista internacional</h3>
+      <p class="sub">Participación sobre el gasto total · 2026</p>
+      <div class="bars">
+        <div class="bar" data-hi="1" data-tip="Gastronomía — 29% del gasto total">
+          <div class="cat">Gastronomía</div>
+          <div class="track"><div class="fill" style="width:29%;animation-delay:.05s"></div></div>
+          <div class="v">29%</div>
+        </div>
+        <div class="bar" data-tip="Alojamiento — 26% del gasto total">
+          <div class="cat">Alojamiento</div>
+          <div class="track"><div class="fill" style="width:26%;animation-delay:.12s"></div></div>
+          <div class="v">26%</div>
+        </div>
+        <div class="bar" data-tip="Compras — 14% del gasto total">
+          <div class="cat">Compras</div>
+          <div class="track"><div class="fill" style="width:14%;animation-delay:.19s"></div></div>
+          <div class="v">14%</div>
+        </div>
+        <div class="bar" data-tip="Paquetes turísticos — 11% del gasto total">
+          <div class="cat">Paquetes</div>
+          <div class="track"><div class="fill" style="width:11%;animation-delay:.26s"></div></div>
+          <div class="v">11%</div>
+        </div>
+        <div class="bar" data-tip="Transporte — 10% del gasto total">
+          <div class="cat">Transporte</div>
+          <div class="track"><div class="fill" style="width:10%;animation-delay:.33s"></div></div>
+          <div class="v">10%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="ni">Idioma</span>
+      <p>Los tres mercados emisores principales son <b>Brasil (22%)</b>, <b>Estados Unidos (14%)</b> y <b>Uruguay (11%)</b>, y China creció <b>62%</b> interanual. Su comunicación es íntegramente en español: <b>el primer mercado habla portugués y el segundo, inglés</b>. Hoy no hay una sola pieza pensada para ellos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUGAS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">05 — Diagnóstico</p>
+      <h2>Cinco fugas, en orden de urgencia.</h2>
+    </div>
+    <div class="leaks">
+      <div class="leak"><span class="num">F1</span><div><h3>No existe en el momento de decisión</h3><p>El turista abre Google y busca "closed door restaurant Buenos Aires" o "cena con vista Buenos Aires". Ahí no hay nada suyo: solo una ficha de TripAdvisor que no controla y que puede caer de posición mañana.</p></div></div>
+      <div class="leak"><span class="num">F2</span><div><h3>Todo el negocio en un canal prestado</h3><p>Instagram es su vidriera, su catálogo, su central de reservas y su base de clientes. Si la cuenta se bloquea o el alcance cae, la facturación cae con ella. No hay plan B ni activo propio.</p></div></div>
+      <div class="leak"><span class="num">F3</span><div><h3>Sin medición no puede pautar</h3><p>No hay web, ni GA4, ni píxel, ni eventos de conversión. Cualquier peso invertido hoy sería a ciegas: no se sabría qué anuncio trajo qué reserva. Por eso Google Ads directamente no es viable todavía.</p></div></div>
+      <div class="leak"><span class="num">F4</span><div><h3>La reserva depende de una persona despierta</h3><p>Se reserva por teléfono o mensaje directo. El turista de Estados Unidos consulta con cinco horas de diferencia y el de Brasil compara tres opciones en la misma tarde. Cada respuesta demorada es una mesa vacía.</p></div></div>
+      <div class="leak"><span class="num">F5</span><div><h3>Un solo idioma para un público de tres</h3><p>Portugués, inglés y español son los idiomas de su demanda real. Hoy todo está en español, incluida la bio, los reels y la atención.</p></div></div>
+      <div class="leak" style="border-color:var(--line-strong);background:var(--surface-2)"><span class="num" style="color:var(--accent)">→</span><div><h3>Lo bueno</h3><p>Nada de esto es un problema de producto. El producto ya está validado: Travelers' Choice, 13.000 seguidores orgánicos y reseñas que hablan de la comida, la vista y el servicio. <b>Solo falta la infraestructura para venderlo.</b></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section style="background:linear-gradient(180deg,rgba(63,191,214,.06),rgba(63,191,214,0) 320px);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">06 — Servicios a ofrecer</p>
+      <h2>Qué le podemos vender, en el orden en que hay que venderlo.</h2>
+      <p class="lead">Cuatro bloques. El bloque 0 no es opcional: sin cimientos, la pauta no se puede medir y el resto no se puede cobrar por resultado. Cada servicio dice qué fuga cierra.</p>
+    </div>
+
+    <div class="svc-block">
+      <div class="blk-head">
+        <span class="tagn">Bloque 0</span>
+        <h3>Cimientos</h3>
+        <span class="hint">Sin esto, nada de lo demás se puede medir</span>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <h4>Sitio web con reserva online</h4>
+          <p>Una página que venda la experiencia y cierre la reserva sola: fotos, menú, precio, disponibilidad y seña. En español, inglés y portugués.</p>
+          <p class="fix"><b>Cierra</b> F1 · F2 · F4 · F5</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>Dominio propio e identidad digital</h4>
+          <p>Dominio, correo profesional y presencia consistente en los tres perfiles. Deja de depender de un handle prestado.</p>
+          <p class="fix"><b>Cierra</b> F2</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>Ficha de Google Business Profile</h4>
+          <p>Alta o reclamo de la ficha, categoría correcta, fotos, horarios, publicaciones y gestión de reseñas. Es la puerta de Maps y de la búsqueda local.</p>
+          <p class="fix"><b>Cierra</b> F1</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>Medición: GA4, píxel y eventos</h4>
+          <p>Analítica, píxel de Meta, etiqueta de Google y eventos de conversión sobre reserva y clic a WhatsApp. Es lo que convierte la pauta en algo auditable.</p>
+          <p class="fix"><b>Cierra</b> F3</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>WhatsApp Business automatizado</h4>
+          <p>Respuestas automáticas, menú de opciones, derivación y recordatorio de reserva. Responde a las tres de la mañana al turista de otro huso horario.</p>
+          <p class="fix"><b>Cierra</b> F4 · F5</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <div class="blk-head">
+        <span class="tagn">Bloque 1</span>
+        <h3>Captura de demanda · Google</h3>
+        <span class="hint">Gente que ya está buscando lo que él vende</span>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <h4>Google Ads · Búsqueda</h4>
+          <p>Campañas sobre intención alta en tres idiomas: cena a puerta cerrada, private dinner, rooftop con vista, chef privado. Más defensa de marca para no perder a quien ya lo busca por nombre.</p>
+          <p class="fix"><b>Cierra</b> F1 · F5</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>Performance Max y Demand Gen</h4>
+          <p>Alcance en YouTube, Discover y Maps con audiencias en mercado de viajes y con interés en Buenos Aires, apuntando a quien está planificando el viaje.</p>
+          <p class="fix"><b>Cierra</b> F1</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>SEO local y contenido</h4>
+          <p>Posicionar la web propia en las búsquedas que hoy solo captura TripAdvisor, y optimizar la ficha de TripAdvisor mientras tanto.</p>
+          <p class="fix"><b>Cierra</b> F1 · F2</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>Alta en plataformas de experiencias</h4>
+          <p>Publicación y gestión en Viator, GetYourGuide, Civitatis y Airbnb Experiencias. Son canales con demanda propia donde hoy directamente no existe.</p>
+          <p class="fix"><b>Cierra</b> F1 · F2 · F5</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <div class="blk-head">
+        <span class="tagn">Bloque 2</span>
+        <h3>Generación de demanda · Meta</h3>
+        <span class="hint">Crear el deseo antes de que exista la búsqueda</span>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <h4>Meta Ads · público frío</h4>
+          <p>Campañas de video segmentadas por intención de viaje y por ubicación, incluidas personas que ya están en la Ciudad. El producto es visual: fuego, vista y tango se venden solos en video.</p>
+          <p class="fix"><b>Cierra</b> F1 · F5</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>Remarketing</h4>
+          <p>Recuperar a quien vio la web, miró un reel o abrió el chat y no reservó. Hoy ese público se pierde entero porque no hay píxel que lo guarde.</p>
+          <p class="fix"><b>Cierra</b> F3</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>Campañas de eventos y catering</h4>
+          <p>La línea de mayor ticket del negocio, y la única que hoy no tiene ni una pieza propia. Captación de consultas para cumpleaños, agasajos de empresa y catering.</p>
+          <p class="fix"><b>Cierra</b> F1 · F4</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>Creatividades y testeo</h4>
+          <p>Producción y rotación de anuncios con lectura semanal de qué gancho, qué plato y qué idioma convierten mejor.</p>
+          <p class="fix"><b>Cierra</b> F3</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <div class="blk-head">
+        <span class="tagn">Bloque 3</span>
+        <h3>Contenido, marca y retención</h3>
+        <span class="hint">Lo que baja el costo de todo lo anterior</span>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <h4>Sistema de reels</h4>
+          <p>Producción con formatos fijos y calendario: el fuego, el emplatado, la vista al atardecer, la reacción del comensal, el tango. Mismo material que alimenta la pauta.</p>
+          <p class="fix"><b>Cierra</b> F2</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+        <div class="svc">
+          <h4>Apertura de TikTok y YouTube</h4>
+          <p>Dos canales de distribución gratuita que hoy están vacíos, con el mismo contenido que ya se produce para Instagram.</p>
+          <p class="fix"><b>Cierra</b> F2 · F5</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>Programa de creadores y contenido de comensales</h4>
+          <p>Ya hay gente grabando la experiencia por su cuenta. Sistematizarlo: invitaciones, entrega de material y derechos de uso para pautar con contenido real.</p>
+          <p class="fix"><b>Cierra</b> F1 · F2</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>Base de comensales y posventa</h4>
+          <p>Guardar quién vino, cuándo y con quién. Correo y WhatsApp para fechas especiales, temporada alta y la venta de eventos privados al que ya cenó.</p>
+          <p class="fix"><b>Cierra</b> F2 · F3</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg"></i></span><span class="lb">Impacto medio</span></div>
+        </div>
+        <div class="svc">
+          <h4>Alianzas y canal B2B</h4>
+          <p>Hoteles boutique, anfitriones de Airbnb, conserjes y operadores receptivos. Un canal de recomendación que llena mesas sin costo por clic.</p>
+          <p class="fix"><b>Cierra</b> F1 · F2</p>
+          <div class="impact"><span class="segs"><i class="sg on"></i><i class="sg on"></i><i class="sg on"></i></span><span class="lb">Impacto alto</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">07 — Plan de 90 días</p>
+      <h2>Primero medir, después pagar por tráfico.</h2>
+      <p class="lead">El orden importa: pautar antes de tener web y medición es quemar presupuesto sin poder demostrar el resultado.</p>
+    </div>
+    <div class="tl">
+      <div class="ph"><div class="when">Días 1 – 15</div><div>
+        <h3>Cimientos</h3>
+        <ul>
+          <li><b>Web con reserva online</b> en tres idiomas, con seña para reducir ausencias</li>
+          <li><b>Ficha de Google Business Profile</b> reclamada, completa y con fotos</li>
+          <li><b>GA4, píxel y eventos</b> de conversión funcionando y verificados</li>
+          <li><b>WhatsApp Business</b> con respuestas automáticas y derivación</li>
+        </ul></div></div>
+      <div class="ph"><div class="when">Días 16 – 45</div><div>
+        <h3>Captura</h3>
+        <ul>
+          <li><b>Google Ads Búsqueda</b> con defensa de marca y genéricas de alta intención</li>
+          <li><b>SEO local</b> y optimización de la ficha de TripAdvisor</li>
+          <li><b>Alta en plataformas</b> de experiencias para turistas</li>
+          <li>Primera lectura de datos: de dónde viene cada reserva</li>
+        </ul></div></div>
+      <div class="ph"><div class="when">Días 46 – 75</div><div>
+        <h3>Generación</h3>
+        <ul>
+          <li><b>Meta Ads</b> a público frío con video, por intención de viaje</li>
+          <li><b>Remarketing</b> sobre los públicos que ya empezaron a acumularse</li>
+          <li><b>Sistema de reels</b> en marcha, alimentando orgánico y pauta</li>
+          <li>Apertura de TikTok y YouTube con el material que ya se produce</li>
+        </ul></div></div>
+      <div class="ph"><div class="when">Días 76 – 90</div><div>
+        <h3>Escala y B2B</h3>
+        <ul>
+          <li><b>Campañas de eventos y catering</b>, la línea de mayor ticket</li>
+          <li><b>Alianzas</b> con hoteles, anfitriones y operadores receptivos</li>
+          <li><b>Base de comensales</b> activada para temporada alta</li>
+          <li>Informe de resultados y definición de la inversión del trimestre siguiente</li>
+        </ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VERIFICAR ============ -->
+<section class="verify">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">08 — Antes de la llamada</p>
+      <h2>Los dos datos que me faltan, y dónde están.</h2>
+      <p class="lead">Instagram, la Biblioteca de Anuncios de Meta, el Centro de Transparencia de Google y Maps están bloqueados por la política de red del entorno donde corrí este relevamiento. Se confirman a mano en tres minutos.</p>
+    </div>
+    <div class="vlist">
+      <a class="vcard" href="https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&q=Peter%20U%20Cook&search_type=keyword_unordered" target="_blank" rel="noopener">
+        <span class="k">01</span><div><strong>¿Corre Meta Ads?</strong><span>Biblioteca de Anuncios de Meta · Argentina · buscar "Peter U Cook"</span></div></a>
+      <a class="vcard" href="https://adstransparency.google.com/?region=AR" target="_blank" rel="noopener">
+        <span class="k">02</span><div><strong>¿Corre Google Ads?</strong><span>Centro de Transparencia de Anuncios · región Argentina · buscar anunciante</span></div></a>
+      <a class="vcard" href="https://www.google.com/maps/search/Peter+U+Cook+Buenos+Aires" target="_blank" rel="noopener">
+        <span class="k">03</span><div><strong>¿Tiene ficha en Maps?</strong><span>Google Maps · si no aparece, la ficha está libre para reclamar</span></div></a>
+      <a class="vcard" href="https://www.instagram.com/peterucook/" target="_blank" rel="noopener">
+        <span class="k">04</span><div><strong>¿Qué hay en la bio?</strong><span>Instagram · mirar si hay link, botón de reserva y si la cuenta es profesional</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PITCH ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">09 — Apertura</p>
+      <h2>Cómo entrarle.</h2>
+      <p class="lead">Sin hablar de servicios ni de precio. Un solo dato concreto que le muestre que hay plata quedando afuera.</p>
+    </div>
+    <div class="pitch">
+      <p class="lbl">Mensaje sugerido · Instagram o WhatsApp</p>
+      <blockquote>
+        <p>Hola Peter. Vi la propuesta y las reseñas — la experiencia está impecable. Te escribo por otra cosa.</p>
+        <p>Me puse a buscar en Google "closed door restaurant Buenos Aires" y "cena con vista Buenos Aires", que es lo que teclea un turista antes de elegir dónde comer. No aparecés. Lo único que hay tuyo es la ficha de TripAdvisor, que no es tuya y la controla la plataforma.</p>
+        <p>Este año la Ciudad recibió 1,6 millones de turistas internacionales, 19% más que el año pasado, y el 29% de lo que gastan se va en gastronomía. Es tu cliente exacto, buscándote, sin encontrarte.</p>
+        <p>Armé una radiografía de tu presencia digital: qué tenés, qué falta y qué se puede hacer primero. ¿Te la paso y lo charlamos 15 minutos?</p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h4>Fuentes</h4>
+    <div class="srcs">
+      <a href="https://www.instagram.com/peterucook/" target="_blank" rel="noopener">Instagram @peterucook</a>
+      <a href="https://www.facebook.com/peterucook/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.threads.com/@peterucook" target="_blank" rel="noopener">Threads</a>
+      <a href="https://www.tripadvisor.com.ar/Restaurant_Review-g312741-d32983965-Reviews-Peter_U_Cook-Buenos_Aires_Capital_Federal_District.html" target="_blank" rel="noopener">TripAdvisor</a>
+      <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-13-55" target="_blank" rel="noopener">INDEC · Turismo internacional</a>
+      <a href="https://www.destinocordoba.com.ar/2026/09/07/buenos-aires-recibio-161-millones-de-turistas-internacionales-y-crecio-19-en-2026/" target="_blank" rel="noopener">CABA · 1,61 M turistas (+19%)</a>
+      <a href="https://www.infobae.com/economia/2026/09/06/tras-dos-anos-en-declive-por-que-crece-la-cantidad-de-turistas-extranjeros-que-llegan-al-pais/" target="_blank" rel="noopener">Infobae · Turismo receptivo</a>
+      <a href="https://eleconomista.com.ar/economia/el-valor-estrategico-turismo-receptivo-destino-n98178" target="_blank" rel="noopener">El Economista · Gasto turístico</a>
+      <a href="https://guide.michelin.com/ar/es/articulo/travel/buenos-aires-oculta-los-restaurantes-escondidos-de-la-ciudad-portena" target="_blank" rel="noopener">Michelin · Puertas cerradas</a>
+      <a href="https://theargentineexperience.com/" target="_blank" rel="noopener">The Argentine Experience</a>
+    </div>
+    <p class="disclaim">
+      Relevamiento del 22 de septiembre de 2026, hecho desde fuentes públicas. Instagram, TripAdvisor, Google Maps, la Biblioteca de Anuncios de Meta y el Centro de Transparencia de Google estaban bloqueados por la política de red del entorno, así que esos puntos se marcaron como «a verificar» en vez de darse por ciertos. Los datos de Instagram (13.000 seguidores, 411 publicaciones, 6.284 seguidos) y de TripAdvisor provienen de resultados de búsqueda indexados y conviene reconfirmarlos en vivo. El índice de madurez digital es una evaluación propia, no una métrica de plataforma. Documento interno de trabajo.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- reveal on scroll (resting state is visible) ---------- */
+  var rv = document.querySelectorAll('.sec-head, .ficha, .audit, .score, .stats, .chart, .leaks, .svc-block, .tl, .vlist, .pitch');
+  Array.prototype.forEach.call(rv, function(el){ el.classList.add('rv'); });
+  if (reduce || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(rv, function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    Array.prototype.forEach.call(rv, function(el){ io.observe(el); });
+  }
+
+  /* ---------- count up (final value already in the HTML) ---------- */
+  function fmt(v, dec){
+    return v.toLocaleString('es-AR', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+  }
+  function countUp(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var pre = el.getAttribute('data-prefix') || '';
+    var suf = el.getAttribute('data-suffix') || '';
+    var inner = el.querySelector('small, span');
+    var tail = inner ? inner.outerHTML : '';
+    var t0 = null, dur = 1100;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.innerHTML = pre + fmt(target * e, dec) + suf + tail;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var nums = document.querySelectorAll('[data-count]');
+  if (!reduce) {
+    if ('IntersectionObserver' in window) {
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); io2.unobserve(e.target); } });
+      }, {threshold:0.4});
+      Array.prototype.forEach.call(nums, function(el){ io2.observe(el); });
+    } else {
+      Array.prototype.forEach.call(nums, countUp);
+    }
+  }
+
+  /* ---------- gauge ---------- */
+  (function(){
+    var L = Math.PI * 105;              // semicircle arc length, r = 105
+    var band = document.getElementById('gBand');
+    var val  = document.getElementById('gVal');
+    if (!band || !val) return;
+    function setArc(el, pct, delay){
+      var len = L * (pct/100);
+      el.style.strokeDasharray = len + ' ' + L;
+      if (reduce) return;
+      el.style.strokeDashoffset = len;
+      el.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.22,.7,.3,1) ' + delay + 's';
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.strokeDashoffset = '0'; }); });
+    }
+    setArc(band, 42, 0.15);
+    setArc(val, 22, 0.35);
+  })();
+
+  /* ---------- radar ---------- */
+  (function(){
+    var cv = document.getElementById('radar');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+
+    var CH = [
+      {label:'Instagram', state:'ok'},
+      {label:'Meta Ads',  state:'q'},
+      {label:'Reseñas',   state:'ok'},
+      {label:'Maps',      state:'q'},
+      {label:'Medición',  state:'no'},
+      {label:'Reservas',  state:'no'},
+      {label:'Web',       state:'no'},
+      {label:'Video',     state:'mid'}
+    ];
+    var COLOR = {ok:'#0CA30C', mid:'#FAB219', no:'#D03B3B', q:'#6C8694'};
+
+    var size = 392, half = size/2;
+    function resize(){
+      var rect = cv.getBoundingClientRect();
+      var css = Math.max(220, Math.round(rect.width || 392));
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(css * dpr);
+      cv.height = Math.round(css * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      size = css; half = css/2;
+    }
+
+    function draw(t){
+      ctx.clearRect(0, 0, size, size);
+      ctx.save();
+      ctx.translate(half, half);
+
+      var R = half * 0.88;
+
+      // rings
+      ctx.strokeStyle = 'rgba(159,203,222,.13)';
+      ctx.lineWidth = 1;
+      [0.28, 0.5, 0.72, 0.94].forEach(function(f){
+        ctx.beginPath(); ctx.arc(0, 0, R*f, 0, Math.PI*2); ctx.stroke();
+      });
+      // cross hairs
+      ctx.beginPath();
+      ctx.moveTo(-R*0.94, 0); ctx.lineTo(R*0.94, 0);
+      ctx.moveTo(0, -R*0.94); ctx.lineTo(0, R*0.94);
+      ctx.stroke();
+
+      // sweep
+      var ang = reduce ? -Math.PI/3 : (t/2600) % 1 * Math.PI * 2;
+      var g = ctx.createConicGradient ? ctx.createConicGradient(ang, 0, 0) : null;
+      if (g) {
+        g.addColorStop(0,    'rgba(63,191,214,.30)');
+        g.addColorStop(0.08, 'rgba(63,191,214,.06)');
+        g.addColorStop(0.30, 'rgba(63,191,214,0)');
+        g.addColorStop(1,    'rgba(63,191,214,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(0, 0, R*0.94, 0, Math.PI*2); ctx.fill();
+      }
+      // leading edge
+      ctx.strokeStyle = 'rgba(63,191,214,.5)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(Math.cos(ang)*R*0.94, Math.sin(ang)*R*0.94);
+      ctx.stroke();
+
+      // blips
+      var showLabels = half >= 150;
+      ctx.font = '500 ' + Math.max(9, Math.round(half*0.057)) + 'px "IBM Plex Mono", monospace';
+      ctx.textBaseline = 'middle';
+
+      CH.forEach(function(c, i){
+        var a = -Math.PI/2 + i * (Math.PI*2/CH.length);
+        var rd = R * 0.58;
+        var x = Math.cos(a)*rd, y = Math.sin(a)*rd;
+
+        // proximity to sweep -> pulse
+        var d = Math.abs(((a - ang + Math.PI*3) % (Math.PI*2)) - Math.PI);
+        var near = reduce ? 0.45 : Math.max(0, 1 - d/0.85);
+        var col = COLOR[c.state];
+
+        if (near > 0) {
+          ctx.beginPath();
+          ctx.arc(x, y, 5 + near*13, 0, Math.PI*2);
+          ctx.fillStyle = hexA(col, 0.20 * near);
+          ctx.fill();
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, 4.5, 0, Math.PI*2);
+        if (c.state === 'no' || c.state === 'q') {
+          ctx.fillStyle = 'rgba(11,16,20,1)';
+          ctx.fill();
+          ctx.strokeStyle = col; ctx.lineWidth = 1.6;
+          if (c.state === 'q') ctx.setLineDash([2.4, 2.4]);
+          ctx.stroke(); ctx.setLineDash([]);
+        } else {
+          ctx.fillStyle = col; ctx.fill();
+        }
+
+        if (!showLabels) return;
+        var lx, align;
+        if (Math.abs(Math.cos(a)) < 0.2) { align = 'center'; lx = x; }
+        else if (Math.cos(a) > 0) { align = 'left'; lx = x + 11; }
+        else { align = 'right'; lx = x - 11; }
+        var ly = (Math.abs(Math.cos(a)) < 0.2) ? y + (Math.sin(a) > 0 ? 20 : -20) : y;
+
+        ctx.textAlign = align;
+        var w = ctx.measureText(c.label).width;
+        var bx = align === 'left' ? lx - 4 : align === 'right' ? lx - w - 4 : lx - w/2 - 4;
+        ctx.fillStyle = 'rgba(11,16,20,.82)';
+        ctx.fillRect(bx, ly - 8, w + 8, 16);
+        ctx.fillStyle = (c.state === 'no') ? '#F09696' : (c.state === 'q') ? '#6C8694' : '#9FB6C2';
+        ctx.fillText(c.label, lx, ly);
+      });
+
+      ctx.restore();
+    }
+
+    function hexA(hex, a){
+      var n = parseInt(hex.slice(1), 16);
+      return 'rgba(' + ((n>>16)&255) + ',' + ((n>>8)&255) + ',' + (n&255) + ',' + a + ')';
+    }
+
+    var raf;
+    function loop(ts){ draw(ts || 0); raf = requestAnimationFrame(loop); }
+
+    resize();
+    if (reduce) { draw(0); }
+    else { loop(0); }
+
+    var rt;
+    window.addEventListener('resize', function(){
+      clearTimeout(rt);
+      rt = setTimeout(function(){ resize(); if (reduce) draw(0); }, 150);
+    });
+  })();
+})();
+</script>
+
+</body>
+</html>
