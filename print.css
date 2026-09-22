@@ -193,3 +193,36 @@
   .srcs{font-size:8pt;color:var(--ink-2);line-height:1.6}
   .srcs li{margin:1.5mm 0}
   .fine{font-size:8pt;color:var(--ink-3);line-height:1.55}
+
+  /* ---------- vista en pantalla (no afecta la impresión ni el PDF) ---------- */
+  @media screen{
+    body{
+      background:#E7EAEC;
+      padding:24px 16px 56px;
+      font-size:10.4pt;
+    }
+    body > section{
+      background:var(--paper);
+      max-width:210mm;
+      margin:0 auto 18px;
+      padding:20mm 18mm;
+      box-shadow:0 1px 2px rgba(20,25,28,.06),0 10px 30px rgba(20,25,28,.10);
+      border-radius:2px;
+    }
+    body > section.cover{height:auto;min-height:220mm;padding-top:26mm}
+    @media (max-width:700px){
+      body{padding:12px 10px 32px}
+      body > section{padding:16px 16px 22px;border-radius:0}
+      .cover .facts{grid-template-columns:repeat(2,1fr);gap:10px 0}
+      .cover .fact{padding:10px 10px 0 0}
+      .cover .fact:nth-child(2){border-right:0}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+      .score,.radar-wrap,.svc dl{grid-template-columns:1fr;gap:14px}
+      .ph{grid-template-columns:1fr;gap:6px}
+      .bar{grid-template-columns:24mm 1fr 10mm}
+      table{font-size:9pt}
+      td,th{padding:7px 6px}
+    }
+    /* tablas anchas nunca desbordan la página */
+    section{overflow-x:auto}
+  }
