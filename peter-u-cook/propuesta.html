@@ -99,6 +99,7 @@
   thead{break-after:avoid}
   table{break-inside:auto}
   td.c{text-align:center}
+  th.c{text-align:center}
   td.r{text-align:right;font-family:var(--mono);font-size:8.2pt;white-space:nowrap}
   td.dim{font-family:var(--sans);font-weight:700;font-size:8.4pt}
   tbody tr:nth-child(even) td{background:#FAFBFB}
@@ -260,6 +261,24 @@
   .need .ck{font-family:var(--mono);color:var(--accent);font-size:9pt;font-weight:700}
   .need b{font-family:var(--sans);font-size:9pt}
   .need span{display:block;font-size:8.5pt;color:var(--ink-2);margin-top:.8mm;line-height:1.42}
+
+  .pk .price .pv{font-family:var(--sans);font-size:13pt;font-weight:700;color:var(--ink);
+    border-bottom:0;min-width:0;text-align:right;letter-spacing:-.01em}
+  .pk .price .pv i{font-style:normal;font-size:8pt;font-weight:400;color:var(--ink-3);
+    display:block;margin-top:.6mm;letter-spacing:0}
+  .tier{break-inside:avoid;border:.7pt solid var(--rule-2);padding:3.4mm 4mm;margin-bottom:3mm;
+    display:grid;grid-template-columns:1fr 32mm;gap:4mm;align-items:start}
+  .tier.hi{border:1.4pt solid var(--accent);background:#FAFCFC}
+  .tier h4{margin:0 0 1.6mm;font-size:10pt;color:var(--ink);font-family:var(--sans);font-weight:700}
+  .tier p{margin:0;font-size:8.5pt;color:var(--ink-2);line-height:1.45}
+  .tier .amt{text-align:right}
+  .tier .amt b{font-family:var(--sans);font-size:14pt;font-weight:700;letter-spacing:-.02em;display:block;line-height:1}
+  .tier .amt span{font-family:var(--mono);font-size:7.4pt;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-top:1.4mm}
+  .tier .rec{font-family:var(--mono);font-size:6.8pt;letter-spacing:.12em;text-transform:uppercase;
+    color:#0A5E6B;background:var(--accent-soft);padding:.8mm 1.8mm;border-radius:1mm;
+    display:inline-block;margin-bottom:1.6mm;font-weight:700}
+  @media(max-width:560px){.tier{grid-template-columns:1fr}.tier .amt{text-align:left}}
   .fill{font-family:var(--mono);color:var(--ink-3);
     border-bottom:.8pt solid var(--rule-2);padding:0 6mm}
 </style>
@@ -439,8 +458,10 @@
 <!-- ===================== 05 ===================== -->
 <section class="sec break">
   <p class="sec-n">05</p>
-  <h2>Formas de empezar</h2>
-  <p class="std">Tres alternativas según con qué te sientas cómodo. Las tres respetan el mismo orden: nada de publicidad antes de que haya medición.</p>
+  <h2>Inversión</h2>
+  <p class="std">Dos partes separadas: un pago inicial por construir todo, y un abono mensual por gestionarlo. La inversión publicitaria va aparte y se paga directo a Google y a Meta — nosotros no la tocamos.</p>
+
+  <h3>Puesta en marcha · pago único</h3>
 
   <div class="pk hi">
     <div class="pk-h"><h3>Arranque</h3><span class="tag">Recomendado para empezar</span></div>
@@ -450,8 +471,8 @@
       <li>Ficha de Google reclamada y completa</li>
       <li>Medición instalada y tablero mensual</li>
     </ul>
-    <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm"><b>Sin inversión publicitaria.</b> Mejora la conversión de lo que ya tenés y te deja el tablero funcionando para decidir el paso siguiente con datos.</p>
-    <div class="price"><span class="lb">Plazo · 3 a 4 semanas</span><span class="pv">&nbsp;</span></div>
+    <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm"><b>Sin inversión publicitaria.</b> Mejora la conversión de lo que ya tenés y deja el tablero funcionando para decidir el paso siguiente con datos.</p>
+    <div class="price"><span class="lb">3 a 4 semanas · 50% al inicio, 50% a la entrega</span><span class="pv">USD 1.500<i>pago único</i></span></div>
   </div>
 
   <div class="pk">
@@ -463,24 +484,62 @@
       <li>Alta en plataformas de experiencias para turistas</li>
     </ul>
     <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm">Los cimientos completos, con atención automatizada y contenido produciéndose en paralelo.</p>
-    <div class="price"><span class="lb">Plazo · 4 a 6 semanas</span><span class="pv">&nbsp;</span></div>
+    <div class="price"><span class="lb">4 a 6 semanas · 50% al inicio, 50% a la entrega</span><span class="pv">USD 2.400<i>pago único</i></span></div>
   </div>
 
-  <div class="pk">
-    <div class="pk-h"><h3>Gestión mensual</h3></div>
-    <ul>
-      <li>Campañas en Google y en Meta, según la etapa</li>
-      <li>Posicionamiento orgánico y contenido</li>
-      <li>Gestión de plataformas, reseñas y base de comensales</li>
-      <li>Informe mensual y reunión de lectura de resultados</li>
-    </ul>
-    <p style="font-size:8.6pt;color:var(--ink-2);margin-bottom:3mm">Se contrata después del arranque y se escala según lo que muestre el tablero. Mínimo tres meses, porque antes no hay datos suficientes para decidir.</p>
-    <div class="price"><span class="lb">Honorarios mensuales · inversión publicitaria aparte</span><span class="pv">&nbsp;</span></div>
+  <h3>Gestión mensual</h3>
+  <p style="font-size:9pt;color:var(--ink-2);margin-bottom:3.5mm">Arranca después de la puesta en marcha. Mínimo tres meses: antes no hay datos suficientes para decidir nada. Se sube o se baja de nivel según lo que muestre el tablero.</p>
+
+  <div class="tier">
+    <div>
+      <h4>Esencial</h4>
+      <p>Google Ads en los tres idiomas, ficha de Google, medición y reporte mensual. El mínimo para capturar la demanda que ya existe.</p>
+    </div>
+    <div class="amt"><b>USD 550</b><span>por mes</span></div>
   </div>
+
+  <div class="tier hi">
+    <div>
+      <span class="rec">Recomendado</span>
+      <h4>Crecimiento</h4>
+      <p>Todo lo anterior, más publicidad en Meta con recuperación de interesados, posicionamiento orgánico y gestión de las plataformas de experiencias.</p>
+    </div>
+    <div class="amt"><b>USD 850</b><span>por mes</span></div>
+  </div>
+
+  <div class="tier">
+    <div>
+      <h4>Integral</h4>
+      <p>Todo lo anterior, más producción de contenido y reels, campañas de eventos y catering, base de comensales y desarrollo del canal de alianzas.</p>
+    </div>
+    <div class="amt"><b>USD 1.200</b><span>por mes</span></div>
+  </div>
+
+  <div class="call">
+    <div class="t">Inversión publicitaria</div>
+    <p>Se paga directo a Google y a Meta, aparte de los honorarios. Para arrancar sugerimos <b>entre USD 400 y 600 por mes</b>: alcanza para juntar datos en los tres idiomas y decidir con fundamento dónde concentrar. Se ajusta desde el segundo mes según el costo por reserva real.</p>
+  </div>
+
+  <h3>Cuántas reservas cubren la inversión</h3>
+  <p style="font-size:9pt;color:var(--ink-2);margin-bottom:3mm">La cuenta que importa. Tomando una mesa promedio de 4 personas y un margen de contribución del 70%, estas son las reservas <b>adicionales</b> por mes que hacen que la inversión se pague sola:</p>
+
+  <table>
+    <thead><tr><th style="width:34%">Nivel · honorarios + pauta</th><th class="c" style="width:22%">Ticket USD 60 por persona</th><th class="c" style="width:22%">Ticket USD 90 por persona</th><th class="c" style="width:22%">Ticket USD 120 por persona</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Esencial · USD 950</td><td class="c">6 reservas</td><td class="c">4 reservas</td><td class="c">3 reservas</td></tr>
+      <tr><td class="dim">Crecimiento · USD 1.350</td><td class="c">8 reservas</td><td class="c">6 reservas</td><td class="c">4 reservas</td></tr>
+      <tr><td class="dim">Integral · USD 1.800</td><td class="c">11 reservas</td><td class="c">8 reservas</td><td class="c">6 reservas</td></tr>
+    </tbody>
+  </table>
 
   <div class="call warn">
-    <div class="t">Sobre la inversión publicitaria</div>
-    <p>El presupuesto de medios lo definís vos y se paga directo a Google y a Meta: nosotros no lo tocamos. En la reunión hacemos juntos la cuenta con tus números — cuánto vale una reserva para vos y cuántas hacen falta por mes para que la inversión se pague sola. Con tu ticket y tu margen, suelen ser muy pocas.</p>
+    <div class="t">Sobre esta tabla</div>
+    <p>Los tickets son <b>supuestos nuestros</b>, no tus precios: no los conocemos todavía. En la primera reunión rehacemos la cuenta con tus números reales — ticket, personas por mesa y margen — y el resultado puede ser bastante mejor que esto. Lo que no cambia es el orden de magnitud: <b>hablamos de unas pocas mesas por mes</b>, no de llenar el salón.</p>
+  </div>
+
+  <div class="call">
+    <div class="t">Condiciones</div>
+    <p>Valores en dólares, sin IVA. La gestión mensual se factura por adelantado, con un mínimo de tres meses y después mes a mes. Todo lo que se construye — dominio, web, ficha de Google, cuentas publicitarias y base de comensales — queda a tu nombre y es tuyo, sigas o no con nosotros.</p>
   </div>
 </section>
 

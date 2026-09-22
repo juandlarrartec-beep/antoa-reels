@@ -91,6 +91,7 @@
   thead{break-after:avoid}
   table{break-inside:auto}
   td.c{text-align:center}
+  th.c{text-align:center}
   td.r{text-align:right;font-family:var(--mono);font-size:8.2pt;white-space:nowrap}
   td.dim{font-family:var(--sans);font-weight:700;font-size:8.4pt}
   tbody tr:nth-child(even) td{background:#FAFBFB}
