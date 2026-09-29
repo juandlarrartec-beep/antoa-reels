@@ -22,6 +22,7 @@ DOCS = [
     ("hub-peter-u-cook.html",            "index.html",       False),
     ("peter-u-cook.html",                "radiografia.html", False),
     ("presentacion-primera-etapa.html",  "primera-etapa.html", False),
+    ("presentacion-primera-etapa-v2.html", "primera-etapa-visual.html", False),
     ("propuesta-peter-u-cook.html",      "propuesta.html",   True),
     ("informe-peter-u-cook.html",        "informe.html",     True),
     ("anexo-ejecucion-peter-u-cook.html","anexo.html",       True),
