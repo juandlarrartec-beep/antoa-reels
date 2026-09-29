@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Propuesta de primera etapa para Peter U Cook">
+<title>Primera etapa Peter U Cook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  /* Diapositivas a pantalla completa con ajuste de desplazamiento.
+     Mundo nocturno único: la terraza de noche sobre la ciudad.
+     El cian conduce todo; el dorado aparece solo en el momento del precio. */
+  :root{
+    color-scheme:dark;
+    --plane:#0A0F13;
+    --surface:#111A20;
+    --surface-2:#17242C;
+    --line:rgba(159,203,222,.15);
+    --line-2:rgba(159,203,222,.30);
+    --ink:#F1F6F8;
+    --ink-2:#A2B8C4;
+    --ink-3:#6E8895;
+    --accent:#3FBFD6;
+    --accent-dim:rgba(63,191,214,.13);
+    --gold:#F2B441;
+    --gold-dim:rgba(242,180,65,.12);
+    --good:#4ED07A;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-snap-type:y proximity;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--plane);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img{max-width:100%}
+
+  .slide{
+    min-height:100vh;min-height:100svh;
+    scroll-snap-align:start;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-block:76px;padding-inline:24px;
+    position:relative;border-bottom:1px solid var(--line);
+  }
+  .slide > .in{width:100%;max-width:980px;margin-inline:auto}
+  @media(max-width:640px){.slide{padding-block:56px;padding-inline:18px}}
+
+  h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.025em;text-wrap:balance;line-height:1.03}
+  h1{font-size:clamp(34px,7.2vw,70px);font-weight:900}
+  h2{font-size:clamp(27px,5vw,46px)}
+  h3{font-size:clamp(19px,2.4vw,24px);font-weight:700;letter-spacing:-.015em}
+  p{margin:0}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--accent);font-weight:500;display:flex;align-items:center;gap:11px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--accent);flex:none}
+  .eyebrow.g{color:var(--gold)}
+  .eyebrow.g::before{background:var(--gold)}
+  .lead{font-size:clamp(16px,2vw,19.5px);color:var(--ink-2);max-width:60ch;margin-top:22px}
+  .accent{color:var(--accent)}
+  .gold{color:var(--gold)}
+
+  /* ---------- rail ---------- */
+  .rail{
+    position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:30;
+    display:flex;flex-direction:column;gap:9px;
+  }
+  @media(max-width:760px){.rail{display:none}}
+  .rail button{
+    width:9px;height:9px;padding:0;border-radius:50%;cursor:pointer;
+    border:1px solid var(--line-2);background:transparent;
+    transition:background .22s ease,transform .22s ease,border-color .22s ease;
+  }
+  .rail button[aria-current="true"]{background:var(--accent);border-color:var(--accent);transform:scale(1.45)}
+  .rail button:hover{border-color:var(--accent)}
+  .bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:40;width:0;transition:width .18s linear}
+
+  /* ---------- portada ---------- */
+  .cover h1 em{font-style:normal;color:var(--accent)}
+  .cover .meta{
+    margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:10px 30px;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  }
+  .scroll-cue{
+    position:absolute;left:50%;bottom:28px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .scroll-cue span{display:block;width:1px;height:26px;background:linear-gradient(var(--accent),transparent);
+    animation:drop 2.1s ease-in-out infinite}
+  @keyframes drop{0%,100%{opacity:.25;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- tiles ---------- */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+  @media(max-width:760px){.tiles{grid-template-columns:1fr}}
+  .tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 22px}
+  .tile .n{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--accent)}
+  .tile .n.no{color:#F08585}
+  .tile .l{margin-top:11px;font-size:14.5px;color:var(--ink-2);line-height:1.45}
+
+  /* ---------- dos servicios ---------- */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+  @media(max-width:760px){.duo{grid-template-columns:1fr}}
+  .svc{
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px 28px;
+    display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;
+  }
+  .svc::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:2px;background:var(--accent);opacity:.55}
+  .svc .num{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);font-weight:600}
+  .svc p{font-size:15px;color:var(--ink-2);line-height:1.5}
+  .svc .when{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ---------- checklist ---------- */
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin-top:36px}
+  @media(max-width:760px){.checks{grid-template-columns:1fr}}
+  .ck{display:flex;gap:13px;align-items:flex-start;font-size:15.5px;color:var(--ink-2);line-height:1.45}
+  .ck .m{
+    flex:none;width:21px;height:21px;border-radius:6px;margin-top:1px;
+    background:var(--accent-dim);border:1px solid rgba(63,191,214,.4);
+    display:grid;place-items:center;
+  }
+  .ck .m::after{
+    content:"";width:9px;height:5px;border-left:1.8px solid var(--accent);border-bottom:1.8px solid var(--accent);
+    transform:rotate(-45deg) translate(1px,-1px);transform-origin:center;
+  }
+  .ck b{color:var(--ink);font-weight:600}
+  .slide.on .ck .m{animation:pop .4s cubic-bezier(.3,1.4,.5,1) backwards}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+
+  /* ---------- beneficios ---------- */
+  .bens{display:flex;flex-direction:column;gap:0;margin-top:34px}
+  .ben{display:grid;grid-template-columns:38px 1fr;gap:18px;padding:19px 0;border-top:1px solid var(--line)}
+  .ben:first-child{border-top:0}
+  @media(max-width:600px){.ben{grid-template-columns:28px 1fr;gap:13px}}
+  .ben .i{
+    font-family:var(--mono);font-size:11px;color:var(--good);font-weight:600;padding-top:4px;letter-spacing:.06em;
+  }
+  .ben h4{font-size:17.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:5px}
+  .ben p{font-size:14.8px;color:var(--ink-2);line-height:1.5}
+
+  /* ---------- circuito ---------- */
+  .circuit{margin-top:34px;width:100%}
+  .circuit canvas{width:100%;height:auto;display:block}
+
+  /* ---------- precios ---------- */
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+  @media(max-width:760px){.price-grid{grid-template-columns:1fr}}
+  .pcard{
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px 26px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .pcard .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .pcard h3{margin:4px 0 14px}
+  .pcard .was{
+    font-family:var(--mono);font-size:14px;color:var(--ink-3);text-decoration:line-through;
+    text-decoration-color:rgba(242,180,65,.7);text-decoration-thickness:1.5px;
+  }
+  .pcard .now{font-size:clamp(30px,4.4vw,42px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--gold);margin-top:3px}
+  .pcard .per{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:7px}
+  .pcard .x{
+    display:inline-block;margin-top:14px;align-self:flex-start;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    color:var(--gold);background:var(--gold-dim);border:1px solid rgba(242,180,65,.34);
+    padding:5px 11px;border-radius:999px;
+  }
+  .total{
+    margin-top:18px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:18px;
+    padding:26px 28px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px;
+  }
+  .total .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .total .v{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.03em;color:var(--gold);line-height:1}
+  .total .v small{display:block;font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--ink-3);
+    text-decoration:line-through;margin-bottom:6px;font-family:var(--mono)}
+  .note{
+    margin-top:22px;padding:18px 22px;border-radius:14px;background:var(--surface);
+    border:1px solid var(--line);border-left:2px solid var(--accent);
+    font-size:14.5px;color:var(--ink-2);line-height:1.55;
+  }
+  .note b{color:var(--ink);font-weight:600}
+  .note.g{border-left-color:var(--gold)}
+
+  /* barras comparativas */
+  .cmp{margin-top:34px;display:flex;flex-direction:column;gap:16px}
+  .cmp .row{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center}
+  @media(max-width:600px){.cmp .row{grid-template-columns:1fr;gap:6px}}
+  .cmp .lb{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+  .cmp .track{display:flex;align-items:center;gap:13px;min-width:0}
+  .cmp .fl{height:30px;border-radius:5px;background:#283B45;transform-origin:left center}
+  .cmp .row.hi .fl{background:var(--gold)}
+  .cmp .row.hi .lb{color:var(--gold)}
+  .cmp .vl{font-family:var(--mono);font-size:14px;color:var(--ink-2);white-space:nowrap}
+  .cmp .row.hi .vl{color:var(--ink);font-weight:600}
+  .slide.on .cmp .fl{animation:grow .85s cubic-bezier(.22,.75,.3,1) backwards}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+  /* ---------- etapas ---------- */
+  .stages{display:flex;flex-direction:column;margin-top:36px}
+  .st{display:grid;grid-template-columns:96px 1fr auto;gap:22px;align-items:center;
+    padding:20px 0;border-top:1px solid var(--line)}
+  .st:first-child{border-top:0}
+  @media(max-width:700px){.st{grid-template-columns:1fr auto;gap:6px 14px}
+    .st .ord{grid-column:1}.st .badge{grid-column:2;grid-row:1}.st .txt{grid-column:1/-1}}
+  .st .ord{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .st h4{font-size:18.5px;font-weight:700;letter-spacing:-.015em;margin-bottom:4px}
+  .st p{font-size:14.5px;color:var(--ink-2);line-height:1.48}
+  .st .badge{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    padding:5px 11px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-3);white-space:nowrap}
+  .st.now{border-left:0}
+  .st.now .ord{color:var(--accent)}
+  .st.now .badge{color:var(--accent);border-color:rgba(63,191,214,.45);background:var(--accent-dim)}
+
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+  @media(max-width:760px){.cards2{grid-template-columns:1fr}}
+  .fcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+  .fcard .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:12px}
+  .fcard h3{margin-bottom:12px}
+  .fcard ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px;line-height:1.55}
+  .fcard li{margin:6px 0}
+  .fcard li b{color:var(--ink);font-weight:600}
+
+  /* ---------- cierre ---------- */
+  .close h2 em{font-style:normal;color:var(--accent)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+  .step .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--accent);margin-bottom:9px}
+  .step p{font-size:14.5px;color:var(--ink-2);line-height:1.48}
+  .step b{color:var(--ink);font-weight:600}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;scroll-snap-type:none}
+    .scroll-cue span,.slide.on .ck .m,.slide.on .cmp .fl{animation:none}
+    .bar,.rail button{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar" id="bar"></div>
+<nav class="rail" id="rail" aria-label="Diapositivas"></nav>
+
+<main>
+
+<!-- 1 ---------------------------------------------------------------- -->
+<section class="slide cover" data-t="Portada">
+  <div class="in">
+    <p class="eyebrow">Propuesta · Primera etapa</p>
+    <h1>Que te vean,<br>te escriban<br>y <em>reserven.</em></h1>
+    <p class="lead">Dos cosas concretas para empezar: dejar tu entorno de Meta armado y verificado, y salir a buscar reservas con el contenido que ya tenés publicado. Sin producir nada nuevo.</p>
+    <div class="meta">
+      <span>Peter U Cook</span>
+      <span>Cocina de autor · Buenos Aires</span>
+      <span>Septiembre 2026</span>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span></span>Deslizá</div>
+</section>
+
+<!-- 2 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Punto de partida">
+  <div class="in">
+    <p class="eyebrow">Dónde estás hoy</p>
+    <h2>El producto ya está probado.<br>Lo que falta es el motor.</h2>
+    <p class="lead">Tenés lo difícil: una propuesta que la gente valora y recomienda. Lo que no tenés todavía es la estructura para que eso se convierta en reservas de forma predecible.</p>
+    <div class="tiles">
+      <div class="tile">
+        <div class="n">13.000</div>
+        <div class="l">seguidores conseguidos sin pagar un peso de publicidad</div>
+      </div>
+      <div class="tile">
+        <div class="n">Travelers'<br>Choice</div>
+        <div class="l">distinción de TripAdvisor, dentro del 10% mejor valorado</div>
+      </div>
+      <div class="tile">
+        <div class="n no">0</div>
+        <div class="l">publicidad corriendo, entorno de Meta sin armar, reservas que dependen de que alguien conteste</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Los dos servicios">
+  <div class="in">
+    <p class="eyebrow">La primera etapa</p>
+    <h2>Dos servicios. Uno arma la base,<br>el otro sale a buscar reservas.</h2>
+    <div class="duo">
+      <div class="svc">
+        <span class="num">SERVICIO 01</span>
+        <h3>Entorno de Meta Ads</h3>
+        <p>Dejamos toda tu estructura de Meta creada, vinculada y verificada: portafolio comercial, fanpage, cuenta publicitaria, Instagram, Facebook y WhatsApp conectados, y el negocio verificado ante Meta.</p>
+        <div class="when">Una sola vez · no se repite nunca más</div>
+      </div>
+      <div class="svc">
+        <span class="num">SERVICIO 02</span>
+        <h3>Publicidad en Meta Ads</h3>
+        <p>Elegimos y editamos tu mejor material ya publicado, armamos la estrategia y las campañas, y salimos a buscar consultas que entran directo a tu WhatsApp.</p>
+        <div class="when">Trabajo mensual · con reporte de resultados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Servicio 01 · qué hacemos">
+  <div class="in">
+    <p class="eyebrow">Servicio 01 · Qué hacemos</p>
+    <h2>Te dejamos el entorno de Meta<br>sólido y a tu nombre.</h2>
+    <div class="checks">
+      <div class="ck"><span class="m"></span><span>Auditoría de <b>todo lo que ya existe</b> a tu nombre, para no duplicar nada</span></div>
+      <div class="ck"><span class="m"></span><span>Creación del <b>portafolio comercial</b>, que es el paraguas de todo lo demás</span></div>
+      <div class="ck"><span class="m"></span><span>Creación o reclamo de la <b>fanpage de Facebook</b></span></div>
+      <div class="ck"><span class="m"></span><span>Creación de la <b>cuenta publicitaria</b> con tus datos de facturación</span></div>
+      <div class="ck"><span class="m"></span><span>Vinculación de <b>Instagram, Facebook y WhatsApp</b> en una sola estructura</span></div>
+      <div class="ck"><span class="m"></span><span><b>Verificación del negocio</b> ante Meta, el trámite que casi nadie hace</span></div>
+      <div class="ck"><span class="m"></span><span>Configuración de <b>roles y permisos</b>: vos dueño, nosotros colaboradores</span></div>
+      <div class="ck"><span class="m"></span><span>Instalación del <b>píxel y los eventos</b> para medir cada consulta</span></div>
+      <div class="ck"><span class="m"></span><span>Configuración de <b>WhatsApp Business</b> como destino de los anuncios</span></div>
+      <div class="ck"><span class="m"></span><span><b>Entrega documentada</b> de todos los accesos, con instructivo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Servicio 01 · beneficios">
+  <div class="in">
+    <p class="eyebrow">Servicio 01 · Qué ganás</p>
+    <h2>Lo que esto te resuelve<br>para siempre.</h2>
+    <div class="bens">
+      <div class="ben"><span class="i">01</span><div>
+        <h4>Todo queda a tu nombre</h4>
+        <p>El portafolio, la fanpage y la cuenta publicitaria se crean con vos como dueño y nosotros como colaboradores. Si mañana dejás de trabajar con nosotros, te quedás con todo. Es tuyo, no nuestro.</p></div></div>
+      <div class="ben"><span class="i">02</span><div>
+        <h4>Dejás de estar a un bloqueo de distancia</h4>
+        <p>Un negocio sin verificar convive con rechazos de anuncios, límites de gasto y cuentas restringidas sin aviso. Verificado, eso deja de pasar. Es la diferencia entre poder pautar cuando querés y quedarte frenado en temporada alta.</p></div></div>
+      <div class="ben"><span class="i">03</span><div>
+        <h4>Cada peso se puede medir desde el día uno</h4>
+        <p>Con el píxel y los eventos instalados antes de gastar el primer peso, vas a saber cuánto costó cada consulta y cada reserva. Sin eso, invertir en publicidad es tirar plata a ciegas.</p></div></div>
+      <div class="ben"><span class="i">04</span><div>
+        <h4>Las consultas caen donde ya sabés vender</h4>
+        <p>WhatsApp queda vinculado como destino de los anuncios. La conversación arranca sola, en el canal que ya usás todos los días.</p></div></div>
+      <div class="ben"><span class="i">05</span><div>
+        <h4>Se hace una sola vez</h4>
+        <p>Es un trabajo de fundación, no un gasto recurrente. Una vez armado, queda armado: sirve para esta campaña y para todas las que vengan después.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Servicio 02 · qué hacemos">
+  <div class="in">
+    <p class="eyebrow">Servicio 02 · Qué hacemos</p>
+    <h2>Publicidad con el material<br>que ya tenés.</h2>
+    <p class="lead">No hace falta producir nada nuevo para empezar. En tu perfil ya hay fuego, emplatado, la vista al atardecer y el tango en vivo. Eso es exactamente lo que funciona en video.</p>
+    <div class="checks">
+      <div class="ck"><span class="m"></span><span><b>Selección</b> del mejor material ya publicado en tus redes</span></div>
+      <div class="ck"><span class="m"></span><span><b>Edición</b> a formato vertical, con subtítulos y los primeros tres segundos trabajados</span></div>
+      <div class="ck"><span class="m"></span><span><b>Definición de públicos</b>: turistas en la Ciudad, Brasil, Estados Unidos y público local</span></div>
+      <div class="ck"><span class="m"></span><span><b>Estrategia y estructura</b> de campañas, con presupuesto repartido por objetivo</span></div>
+      <div class="ck"><span class="m"></span><span><b>Redacción</b> de los textos de cada anuncio</span></div>
+      <div class="ck"><span class="m"></span><span><b>Publicación y optimización</b> semanal según lo que rinde</span></div>
+      <div class="ck"><span class="m"></span><span><b>Destino WhatsApp</b>: el anuncio abre la conversación, no una página</span></div>
+      <div class="ck"><span class="m"></span><span><b>Reporte mensual</b> con consultas, costo por consulta y reservas</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Servicio 02 · beneficios">
+  <div class="in">
+    <p class="eyebrow">Servicio 02 · Qué ganás</p>
+    <h2>Lo que cambia cuando<br>la publicidad arranca.</h2>
+    <div class="bens">
+      <div class="ben"><span class="i">01</span><div>
+        <h4>Arrancás sin producir nada</h4>
+        <p>Tu contenido actual alcanza para las primeras campañas. Cero costo de producción, cero sesiones de fotos, cero esperar a tener material nuevo.</p></div></div>
+      <div class="ben"><span class="i">02</span><div>
+        <h4>Le hablás al que decide esta semana</h4>
+        <p>El turista elige dónde cenar con uno o dos días de anticipación, y está mirando el teléfono mientras camina por la Ciudad. Podemos aparecer justo en ese momento, y también semanas antes, cuando todavía está planificando el viaje desde Brasil o Estados Unidos.</p></div></div>
+      <div class="ben"><span class="i">03</span><div>
+        <h4>Dejás de depender del alcance orgánico</h4>
+        <p>Hoy si Instagram decide mostrarte menos, vendés menos y no podés hacer nada. Con publicidad, el alcance lo decidís vos.</p></div></div>
+      <div class="ben"><span class="i">04</span><div>
+        <h4>Sabés cuánto te cuesta una reserva</h4>
+        <p>Cada mes vas a ver cuántas consultas entraron, cuánto costó cada una y cuántas terminaron en mesa. Con eso se decide si conviene invertir más o corregir el rumbo. Es información que hoy no tenés de ninguna manera.</p></div></div>
+      <div class="ben"><span class="i">05</span><div>
+        <h4>Llenás las noches flojas</h4>
+        <p>La publicidad se puede concentrar en los días que te cuesta llenar, en vez de repartirse parejo. Con mesas de 2 a 8 personas, unas pocas reservas por semana ya cambian el mes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ---------------------------------------------------------------- -->
+<section class="slide" data-t="El circuito">
+  <div class="in">
+    <p class="eyebrow">Cómo funciona</p>
+    <h2>De un video que ya publicaste<br>a una mesa reservada.</h2>
+    <div class="circuit">
+      <canvas id="flow" width="960" height="300" role="img"
+        aria-label="Circuito en cuatro pasos: tu contenido ya publicado se convierte en anuncio, el anuncio abre una conversación de WhatsApp, y esa conversación termina en una reserva confirmada."></canvas>
+    </div>
+    <p class="lead" style="margin-top:28px">Cuatro pasos, sin fricción en el medio. El anuncio no manda a una página donde la gente se pierde: abre el WhatsApp con el mensaje ya escrito, y la conversación arranca con vos.</p>
+  </div>
+</section>
+
+<!-- 9 ---------------------------------------------------------------- -->
+<section class="slide" data-t="Inversión">
+  <div class="in">
+    <p class="eyebrow g">La inversión</p>
+    <h2>Lo que cobramos por esto,<br>y lo que <span class="gold">vale realmente.</span></h2>
+    <div class="price-grid">
+      <div class="pcard">
+        <span class="tag">Servicio 01 · pago único</span>
+        <h3>Entorno de Meta Ads</h3>
+        <div class="was">$ 600.000</div>
+        <div class="now">$ 200.000</div>
+        <div class="per">Una sola vez</div>
+        <span class="x">3× por debajo del precio de lista</span>
+      </div>
+      <div class="pcard">
+        <span class="tag">Servicio 02 · mensual</span>
+        <h3>Publicidad en Meta Ads</h3>
+        <div class="was">$ 600.000</div>
+        <div class="now">$ 200.000</div>
+        <div class="per">Por mes</div>
+        <span class="x">3× por debajo del precio de lista</span>
+      </div>
+    </div>
+    <div class="total">
+      <span class="k">Primera etapa · entorno + primer mes de publicidad</span>
+      <span class="v"><small>$ 1.200.000</small>$ 400.000</span>
+    </div>
+    <div class="note">
+      <b>La inversión publicitaria va aparte.</b> El presupuesto que se gasta en anuncios lo definís vos y se paga directo a Meta con tu tarjeta. Nosotros no lo tocamos y no cobramos comisión sobre él.
+    </div>
+  </div>
+</section>
+
+<!-- 10 --------------------------------------------------------------- -->
+<section class="slide" data-t="Por qué este precio">
+  <div class="in">
+    <p class="eyebrow g">Por qué este precio</p>
+    <h2>No es un descuento.<br>Es un precio de arranque.</h2>
+    <p class="lead">Este trabajo, hecho con este alcance, se cobra tres veces más. Te lo ofrecemos a este valor por una razón concreta, y nos conviene decirla de frente.</p>
+    <div class="cmp">
+      <div class="row"><span class="lb">Precio de lista</span>
+        <span class="track"><span class="fl" style="width:100%;animation-delay:.05s"></span><span class="vl">$ 1.200.000</span></span></div>
+      <div class="row hi"><span class="lb">Tu precio</span>
+        <span class="track"><span class="fl" style="width:33.3%;animation-delay:.2s"></span><span class="vl">$ 400.000</span></span></div>
+    </div>
+    <div class="note g" style="margin-top:34px">
+      <b>Queremos el caso.</b> Tu propuesta es visualmente extraordinaria, tiene ticket alto y un público internacional que está creciendo. Si esto funciona como creemos, es el caso de éxito que vamos a mostrar durante los próximos dos años. Por eso entramos abajo: preferimos ganar con vos a mediano plazo antes que cobrarte lo que corresponde y que no arranquemos nunca.
+    </div>
+  </div>
+</section>
+
+<!-- 11 --------------------------------------------------------------- -->
+<section class="slide" data-t="El camino completo">
+  <div class="in">
+    <p class="eyebrow">Lo que viene después</p>
+    <h2>Esto es el primer tramo<br>de un camino más largo.</h2>
+    <p class="lead">Cada etapa se abre solo cuando la anterior está funcionando y medida. No vendemos todo junto: vendemos la próxima.</p>
+    <div class="stages">
+      <div class="st now">
+        <span class="ord">Etapa 1</span>
+        <div class="txt"><h4>Entorno de Meta y publicidad</h4>
+          <p>La estructura armada y verificada, y las primeras campañas buscando reservas por WhatsApp.</p></div>
+        <span class="badge">Esta propuesta</span>
+      </div>
+      <div class="st">
+        <span class="ord">Etapa 2</span>
+        <div class="txt"><h4>Web con reserva y seña online</h4>
+          <p>Un sitio propio donde el cliente reserva, paga la seña y la confirmación cae en tu WhatsApp. Más Google Ads para posicionarlo y promocionar la ubicación.</p></div>
+        <span class="badge">A futuro</span>
+      </div>
+      <div class="st">
+        <span class="ord">Etapa 3</span>
+        <div class="txt"><h4>Agente de inteligencia artificial</h4>
+          <p>Atiende cada consulta al instante, en su idioma, agenda la reserva, manda el link de seña y te pasa el informe del día.</p></div>
+        <span class="badge">A futuro</span>
+      </div>
+      <div class="st">
+        <span class="ord">Etapa 4</span>
+        <div class="txt"><h4>Mini CRM de clientes</h4>
+          <p>Un tablero para controlar, clasificar y atender a todos los que entren por la publicidad, y volver a venderles después.</p></div>
+        <span class="badge">A futuro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 --------------------------------------------------------------- -->
+<section class="slide" data-t="Etapas 2 y 3">
+  <div class="in">
+    <p class="eyebrow">Etapas 2 y 3 · sin precio todavía</p>
+    <h2>Cuando la primera etapa<br>esté funcionando.</h2>
+    <div class="cards2">
+      <div class="fcard">
+        <div class="tag">Etapa 2</div>
+        <h3>Web con reservas y Google Ads</h3>
+        <ul>
+          <li><b>Sitio propio</b> con la experiencia contada y el menú</li>
+          <li><b>Reserva y seña online</b>, con confirmación automática a tu WhatsApp</li>
+          <li><b>Menos ausencias</b>: el que paga seña, viene</li>
+          <li><b>Google Ads</b> para aparecer cuando te buscan</li>
+          <li><b>Tu ubicación promocionada</b> en Google y en Maps</li>
+        </ul>
+      </div>
+      <div class="fcard">
+        <div class="tag">Etapas 3 y 4</div>
+        <h3>Agente de IA y mini CRM</h3>
+        <ul>
+          <li><b>Respuesta inmediata</b> a cada consulta, a cualquier hora y en su idioma</li>
+          <li><b>Agenda sola</b> y manda el link de seña</li>
+          <li><b>Informe diario</b> de reservas y consultas</li>
+          <li><b>Mini CRM</b> para clasificar y seguir a cada cliente</li>
+          <li><b>Base propia</b> para volver a venderles eventos y fechas especiales</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      Estas etapas <b>no tienen precio en esta propuesta</b> a propósito. Se cotizan cuando la primera esté andando y tengamos datos reales de cuántas consultas entran por mes. Antes de eso, cualquier número sería inventado.
+    </div>
+  </div>
+</section>
+
+<!-- 13 --------------------------------------------------------------- -->
+<section class="slide close" data-t="Próximos pasos">
+  <div class="in">
+    <p class="eyebrow">Para arrancar</p>
+    <h2>Tres pasos y estamos<br><em>publicando.</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="k">PASO 01</div>
+        <p><b>Nos das los accesos.</b> Instagram, Facebook y el número de WhatsApp del negocio. No necesitamos tus contraseñas: se hace por permisos.</p>
+      </div>
+      <div class="step">
+        <div class="k">PASO 02</div>
+        <p><b>Armamos el entorno.</b> Entre 5 y 7 días hábiles, incluido el trámite de verificación ante Meta.</p>
+      </div>
+      <div class="step">
+        <div class="k">PASO 03</div>
+        <p><b>Salimos al aire.</b> Elegimos el material, editamos, armamos las campañas y empezás a recibir consultas por WhatsApp.</p>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:44px">El objetivo de todo esto es uno solo: que dejes de depender de que te encuentren de casualidad, y tengas una presencia fuerte en redes y en Google que trabaje para vos todos los días.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+
+  /* ---------- rail + barra de progreso ---------- */
+  var rail = document.getElementById('rail'), bar = document.getElementById('bar');
+  slides.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', (i+1) + '. ' + (s.dataset.t || ''));
+    b.addEventListener('click', function(){ s.scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); });
+    rail.appendChild(b);
+  });
+  var dots = Array.prototype.slice.call(rail.children);
+
+  function mark(i){
+    dots.forEach(function(d, k){ d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    bar.style.width = ((i + 1) / slides.length * 100) + '%';
+  }
+  mark(0);
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('on');
+        mark(slides.indexOf(e.target));
+      });
+    }, {threshold: 0.5});
+    slides.forEach(function(s){ io.observe(s); });
+  } else {
+    slides.forEach(function(s){ s.classList.add('on'); });
+  }
+
+  /* escalona los tildes de cada lista dentro de su diapositiva */
+  slides.forEach(function(s){
+    Array.prototype.forEach.call(s.querySelectorAll('.ck .m'), function(m, i){
+      m.style.animationDelay = (0.06 * i + 0.1) + 's';
+    });
+  });
+
+  /* ---------- teclado ---------- */
+  document.addEventListener('keydown', function(e){
+    var i = -1, mid = window.innerHeight / 2;
+    for (var k = 0; k < slides.length; k++) {
+      var r = slides[k].getBoundingClientRect();
+      if (r.top <= mid && r.bottom > mid) { i = k; break; }
+    }
+    if (i < 0) return;
+    var to = null;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') to = i + 1;
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') to = i - 1;
+    if (e.key === 'Home') to = 0;
+    if (e.key === 'End') to = slides.length - 1;
+    if (to === null || to < 0 || to >= slides.length) return;
+    e.preventDefault();
+    slides[to].scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  });
+
+  /* ---------- circuito ---------- */
+  (function(){
+    var cv = document.getElementById('flow');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+
+    var NODES = [
+      {t:'Tu contenido', s:'lo que ya publicaste'},
+      {t:'El anuncio',   s:'editado y segmentado'},
+      {t:'WhatsApp',     s:'la conversación arranca'},
+      {t:'La reserva',   s:'mesa confirmada'}
+    ];
+
+    var W = 960, H = 300, vertical = false, boxes = [];
+
+    function layout(){
+      var css = cv.parentNode.clientWidth || 960;
+      vertical = css < 620;
+      W = css;
+      H = vertical ? 420 : 250;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * dpr);
+      cv.height = Math.round(H * dpr);
+      cv.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      boxes = [];
+      if (vertical) {
+        var bh = 66, gap = (H - NODES.length * bh) / (NODES.length - 1);
+        for (var i = 0; i < NODES.length; i++) {
+          boxes.push({x: 6, y: i * (bh + gap), w: W - 12, h: bh});
+        }
+      } else {
+        var gapx = 22, bw = (W - gapx * (NODES.length - 1)) / NODES.length;
+        for (var j = 0; j < NODES.length; j++) {
+          boxes.push({x: j * (bw + gapx), y: (H - 96) / 2, w: bw, h: 96});
+        }
+      }
+    }
+
+    function rr(x, y, w, h, r){
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function draw(t){
+      ctx.clearRect(0, 0, W, H);
+      var cycle = 2800, p = reduce ? 0.55 : (t % cycle) / cycle;
+
+      /* conectores */
+      for (var i = 0; i < boxes.length - 1; i++) {
+        var a = boxes[i], b = boxes[i + 1], x1, y1, x2, y2;
+        if (vertical) { x1 = a.x + a.w / 2; y1 = a.y + a.h; x2 = x1; y2 = b.y; }
+        else { x1 = a.x + a.w; y1 = a.y + a.h / 2; x2 = b.x; y2 = y1; }
+        ctx.strokeStyle = 'rgba(159,203,222,.18)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+
+        /* partícula viajando por el tramo */
+        var seg = 1 / (boxes.length - 1);
+        var local = (p - i * seg) / seg;
+        if (local >= 0 && local <= 1) {
+          var px = x1 + (x2 - x1) * local, py = y1 + (y2 - y1) * local;
+          var g = ctx.createRadialGradient(px, py, 0, px, py, 16);
+          g.addColorStop(0, 'rgba(63,191,214,.55)');
+          g.addColorStop(1, 'rgba(63,191,214,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(px, py, 16, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = '#3FBFD6';
+          ctx.beginPath(); ctx.arc(px, py, 3.6, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+
+      /* cajas */
+      for (var k = 0; k < boxes.length; k++) {
+        var bx = boxes[k];
+        var segk = 1 / (boxes.length - 1);
+        var reached = reduce ? true : (p >= (k - 0.06) * segk);
+        var glow = reached ? Math.max(0, 1 - Math.abs(p - k * segk) / (segk * 0.6)) : 0;
+
+        rr(bx.x, bx.y, bx.w, bx.h, 12);
+        ctx.fillStyle = '#111A20';
+        ctx.fill();
+        ctx.strokeStyle = glow > 0.05 ? 'rgba(63,191,214,' + (0.28 + glow * 0.55) + ')' : 'rgba(159,203,222,.17)';
+        ctx.lineWidth = glow > 0.05 ? 1.6 : 1;
+        ctx.stroke();
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+        var cx = bx.x + bx.w / 2, cy = bx.y + bx.h / 2;
+        ctx.fillStyle = '#F1F6F8';
+        ctx.font = '700 ' + (vertical ? 15 : 16) + 'px Archivo, system-ui, sans-serif';
+        ctx.fillText(NODES[k].t, cx, cy + 1);
+        ctx.fillStyle = '#6E8895';
+        ctx.font = '400 ' + (vertical ? 11 : 12) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText(NODES[k].s, cx, cy + 20);
+
+        /* número de paso */
+        ctx.fillStyle = 'rgba(63,191,214,' + (0.4 + glow * 0.5) + ')';
+        ctx.font = '600 10px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('0' + (k + 1), bx.x + 13, bx.y + 20);
+      }
+    }
+
+    layout();
+    if (reduce) { draw(0); }
+    else { (function loop(ts){ draw(ts || 0); requestAnimationFrame(loop); })(0); }
+
+    var rt;
+    window.addEventListener('resize', function(){
+      clearTimeout(rt);
+      rt = setTimeout(function(){ layout(); if (reduce) draw(0); }, 150);
+    });
+  })();
+})();
+</script>
+
+</body>
+</html>
