@@ -213,6 +213,100 @@
     .short-hide{display:none}
   }
 
+  /* ---------- PC: dos columnas y todo mas grande ---------- */
+  @media(min-width:1000px) and (min-height:640px){
+    .slide{padding:78px 40px 96px}
+    .slide > .in{max-width:1260px}
+    h1{font-size:clamp(40px,5.6vw,84px)}
+    h2{font-size:clamp(30px,4vw,56px)}
+    .eyebrow{font-size:12px;margin-bottom:22px}
+    .sub{font-size:18.5px;max-width:46ch;margin-top:20px}
+    .viz{margin-top:34px}
+
+    .slide.split > .in{
+      display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+      column-gap:64px;align-items:center;
+    }
+    .slide.split .txt{min-width:0}
+    .slide.split .viz{margin-top:0;min-width:0}
+
+    .keys{margin-top:30px;gap:10px}
+    .key{font-size:12.5px;padding:10px 16px}
+
+    .duo{gap:24px;margin-top:40px}
+    .card{padding:30px 26px;gap:14px;border-radius:22px}
+    .card h3{font-size:23px}
+    .card p{font-size:16px}
+
+    .bens{gap:18px;margin-top:44px}
+    .ben{padding:26px 22px;gap:13px;border-radius:18px}
+    .ben .ic{width:36px;height:36px}
+    .ben h3{font-size:19.5px}
+    .ben p{font-size:15px;line-height:1.5}
+
+    .prices{gap:22px;margin-top:40px}
+    .pc{padding:30px 26px;border-radius:22px;display:flex;flex-direction:column}
+    .pc .now{margin-top:auto}
+    .pc .t{font-size:11.5px}
+    .pc h3{font-size:23px;margin:8px 0 18px}
+    .pc .was{font-size:16px}
+    .pc .per{font-size:11.5px;margin-top:11px}
+    .total{padding:28px 32px;margin-top:20px;border-radius:20px}
+    .total .k{font-size:11.5px}
+    .foot{font-size:15px;margin-top:20px}
+
+    .steps{gap:18px;margin-top:44px}
+    .step{padding:26px 22px;border-radius:18px;display:flex;flex-direction:column}
+    .step .k{font-size:11.5px;margin-bottom:11px}
+    .step h3{font-size:19px;margin-bottom:8px}
+    .step p{font-size:15px;line-height:1.5}
+  }
+
+  /* ---------- PC con pantalla alta: fichas mas generosas ---------- */
+  @media(min-width:1000px) and (min-height:840px){
+    .slide{padding:84px 40px 104px}
+    .ben{padding:32px 28px;gap:16px;min-height:248px}
+    .ben .ic{width:46px;height:46px;margin-bottom:4px}
+    .card{padding:36px 32px;gap:16px;min-height:296px}
+    .step{padding:32px 28px;min-height:212px}
+    .pc{padding:36px 32px;min-height:246px}
+    .bens,.steps,.prices,.duo{margin-top:48px}
+  }
+
+  /* ---------- tablet vertical ---------- */
+  @media(min-width:700px) and (max-width:999px){
+    .slide{padding:80px 40px 96px}
+    .slide > .in{max-width:760px}
+    h1{font-size:clamp(44px,7vw,68px)}
+    h2{font-size:clamp(34px,5.4vw,52px)}
+    .sub{font-size:18px}
+    .bens{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+    .ben{padding:26px 22px;min-height:200px}
+    .ben .ic{width:38px;height:38px}
+    .ben h3{font-size:19px}
+    .ben p{font-size:14.5px}
+    .duo{grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
+    .card{padding:28px 24px}
+    .prices{grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}
+    .pc{padding:28px 24px}
+    .steps{grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+    .step{padding:22px 18px}
+  }
+
+  /* ---------- pantallas muy grandes ---------- */
+  @media(min-width:1600px) and (min-height:900px){
+    .slide > .in{max-width:1460px}
+    h1{font-size:clamp(52px,5.4vw,96px)}
+    h2{font-size:clamp(38px,3.9vw,64px)}
+    .sub{font-size:20px}
+    .ben{min-height:280px;padding:36px 32px}
+    .ben h3{font-size:21px}
+    .ben p{font-size:16px}
+    .card{min-height:330px}
+    .pc{min-height:280px}
+    .step{min-height:240px}
+  }
+
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
   @media (prefers-reduced-motion:reduce){
     .slide{transition:none}
@@ -225,31 +319,35 @@
 <div class="deck" id="deck">
 
 <!-- 1 -->
-<section class="slide active" data-t="Portada">
+<section class="slide split active" data-t="Portada">
   <div class="in">
-    <p class="eyebrow">Propuesta · Primera etapa</p>
-    <h1>Más reservas.<br>Con lo que <span class="accent">ya tenés.</span></h1>
-    <div class="viz"><canvas data-viz="reservas" height="210"></canvas></div>
-    <div class="keys">
-      <span class="key on">Peter U Cook</span>
-      <span class="key">Meta Ads</span>
-      <span class="key">Septiembre 2026</span>
+    <div class="txt">
+      <p class="eyebrow">Propuesta · Primera etapa</p>
+      <h1>Más reservas.<br>Con lo que <span class="accent">ya tenés.</span></h1>
+      <div class="keys">
+        <span class="key on">Peter U Cook</span>
+        <span class="key">Meta Ads</span>
+        <span class="key">Septiembre 2026</span>
+      </div>
     </div>
+    <div class="viz"><canvas data-viz="reservas" height="210"></canvas></div>
   </div>
 </section>
 
 <!-- 2 -->
-<section class="slide" data-t="Hoy">
+<section class="slide split" data-t="Hoy">
   <div class="in">
-    <p class="eyebrow">Hoy</p>
-    <h2>Un solo canal<br>sostiene todo.</h2>
-    <div class="viz"><canvas data-viz="canales" height="230"></canvas></div>
-    <div class="keys">
-      <span class="key on">13.000 seguidores</span>
-      <span class="key on">Travelers' Choice</span>
-      <span class="key no">Sin publicidad</span>
-      <span class="key no">Sin medición</span>
+    <div class="txt">
+      <p class="eyebrow">Hoy</p>
+      <h2>Un solo canal<br>sostiene todo.</h2>
+      <div class="keys">
+        <span class="key on">13.000 seguidores</span>
+        <span class="key on">Travelers' Choice</span>
+        <span class="key no">Sin publicidad</span>
+        <span class="key no">Sin medición</span>
+      </div>
     </div>
+    <div class="viz"><canvas data-viz="canales" height="230"></canvas></div>
   </div>
 </section>
 
@@ -263,23 +361,25 @@
         <span class="num">01</span>
         <h3>El entorno</h3>
         <p>Tu estructura de Meta creada, vinculada y verificada.</p>
-        <div class="viz tight"><canvas data-viz="mini-a" height="110"></canvas></div>
+        <div class="viz tight"><canvas class="mini" data-viz="mini-a" height="110"></canvas></div>
       </div>
       <div class="card">
         <span class="num">02</span>
         <h3>La publicidad</h3>
         <p>Tus mejores videos, convertidos en anuncios que traen consultas.</p>
-        <div class="viz tight"><canvas data-viz="mini-b" height="110"></canvas></div>
+        <div class="viz tight"><canvas class="mini" data-viz="mini-b" height="110"></canvas></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 4 -->
-<section class="slide" data-t="Servicio 01">
+<section class="slide split" data-t="Servicio 01">
   <div class="in">
-    <p class="eyebrow">Servicio 01 · El entorno</p>
-    <h2>Todo conectado.<br>Todo <span class="accent">verificado.</span></h2>
+    <div class="txt">
+      <p class="eyebrow">Servicio 01 · El entorno</p>
+      <h2>Todo conectado.<br>Todo <span class="accent">verificado.</span></h2>
+    </div>
     <div class="viz"><canvas data-viz="entorno" height="330"></canvas></div>
   </div>
 </section>
@@ -392,12 +492,14 @@
 </section>
 
 <!-- 10 -->
-<section class="slide" data-t="Un tercio">
+<section class="slide split" data-t="Un tercio">
   <div class="in">
-    <p class="eyebrow g">Por qué este precio</p>
-    <h2>Un tercio del<br><span class="gold">precio de lista.</span></h2>
+    <div class="txt">
+      <p class="eyebrow g">Por qué este precio</p>
+      <h2>Un tercio del<br><span class="gold">precio de lista.</span></h2>
+      <p class="sub"><b style="color:var(--ink)">No es un descuento: es un precio de arranque.</b> Tu propuesta es fotogénica, tiene ticket alto y público internacional creciendo. Queremos el caso.</p>
+    </div>
     <div class="viz"><canvas data-viz="tercio" height="250"></canvas></div>
-    <p class="sub"><b style="color:var(--ink)">No es un descuento: es un precio de arranque.</b> Tu propuesta es fotogénica, tiene ticket alto y público internacional creciendo. Queremos el caso.</p>
   </div>
 </section>
 
@@ -561,7 +663,15 @@
     var h = parseInt(v.cv.getAttribute('height'), 10) || 220;
     if (box < 560) h = Math.round(h * (v.kind === 'entorno' || v.kind === 'pauta' || v.kind === 'ruta' ? 1.12 : 0.92));
     if (window.innerHeight < 740) h = Math.round(h * 0.76);
-    h = Math.max(96, Math.min(h, Math.round(window.innerHeight * 0.52)));
+    var wide = window.innerWidth >= 1000 && window.innerHeight >= 640;
+    if (wide && !v.cv.classList.contains('mini')) {
+      var split = !!(v.cv.closest('.slide') || {classList:{contains:function(){return false}}}).classList.contains('split');
+      var huge = window.innerWidth >= 1600 && window.innerHeight >= 900;
+      h = Math.round(split ? Math.min(huge ? 660 : 540, window.innerHeight * 0.62)
+                           : Math.min(huge ? 560 : 460, window.innerHeight * 0.46));
+      if (v.kind === 'tercio') h = Math.min(h, huge ? 420 : 360);
+    }
+    h = Math.max(96, Math.min(h, Math.round(window.innerHeight * (wide ? 0.66 : 0.52))));
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     v.w = box; v.h = h;
     v.cv.width = Math.round(box * dpr);
@@ -959,8 +1069,10 @@
       {l:'Tu precio',       v:400000,  f:1/3, col:P.gold, ink:P.ink}
     ];
     var narrow3 = w < 520;
-    var lw = narrow3 ? 0 : 128, bh3 = 44, gap3 = 34;
-    var vfont = narrow3 ? 13 : 15;
+    var lw = narrow3 ? 0 : 128;
+    var bh3 = Math.max(40, Math.min(80, h * 0.20));
+    var gap3 = Math.max(26, Math.min(64, h * 0.13));
+    var vfont = narrow3 ? 13 : (bh3 > 56 ? 17 : 15);
     var top3 = (h - (bh3 * 2 + gap3)) / 2;
     var grow = Math.min(1, ease(t / 900));
     rows.forEach(function(r, i){
