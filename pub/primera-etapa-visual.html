@@ -136,6 +136,35 @@
   .step h3{font-size:16px;margin-bottom:5px}
   .step p{font-size:13.5px;color:var(--ink-2);line-height:1.42}
 
+  /* ---------- fotos de su Instagram ---------- */
+  .shot{margin:0;position:relative;overflow:hidden;border-radius:16px;
+    border:1px solid var(--line);background:var(--surface);min-width:0}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover}
+  .shot .cap{
+    position:absolute;left:10px;bottom:10px;z-index:2;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-2);background:rgba(10,15,19,.72);backdrop-filter:blur(4px);
+    padding:5px 9px;border-radius:999px;
+  }
+  .shot::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(10,15,19,0) 55%,rgba(10,15,19,.55) 100%)}
+  /* mientras no haya foto, un marcador con intencion en vez de un icono roto */
+  .shot .ph{position:absolute;inset:0;display:grid;place-content:center;gap:8px;
+    text-align:center;padding:18px;border-radius:16px;
+    border:1px dashed var(--line-2);background:var(--surface)}
+  .shot .ph i{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent)}
+  .shot .ph span{font-size:12.5px;color:var(--ink-3);line-height:1.4;max-width:24ch}
+  .shot.ok .ph{display:none}
+  .shot.ok{border-color:var(--line-2)}
+  /* mientras no haya foto el hueco se cierra entero, para poder compartir el link */
+  .shot:not(.ok){display:none}
+
+  @media(max-width:999px){.slide[data-t="Inversión"] .shot{display:none}}
+  /* alto atado a la pantalla, no a la proporcion: el recorte lo hace object-fit */
+  .shot.tall{height:min(50vh,440px);max-width:100%}
+  .shot.wide{height:min(17vh,150px);max-width:100%;margin-top:20px}
+  @media(max-width:640px){.shot.wide{height:min(15vh,110px);margin-top:16px}}
   /* controles */
   .hud{
     position:fixed;left:0;right:0;bottom:0;z-index:30;
@@ -247,6 +276,10 @@
     }
     .slide.split .txt{min-width:0}
     .slide.split .viz{margin-top:0;min-width:0}
+    /* en Inversión manda el texto: la foto va como franja vertical angosta */
+    .slide[data-t="Inversión"].split > .in{grid-template-columns:minmax(0,1.42fr) minmax(0,.58fr);column-gap:44px}
+    .slide.split.no-shot > .in{display:block}
+    .slide[data-t="Inversión"] .shot.tall{height:min(46vh,400px)}
 
     .keys{margin-top:30px;gap:10px}
     .key{font-size:12.5px;padding:10px 16px}
@@ -330,10 +363,11 @@
 
   @media(min-width:1000px) and (max-height:780px){
     .slide{padding:56px 40px 78px}
-    .prices{margin-top:28px}
-    .total{padding:18px 24px;margin-top:14px}
-    .goal{margin-top:14px;padding:12px 16px;font-size:14px}
-    .foot{margin-top:14px}
+    .prices{margin-top:22px}
+    .total{padding:16px 22px;margin-top:11px}
+    .goal{margin-top:10px;padding:11px 15px;font-size:13.5px}
+    .foot{margin-top:11px}
+    .slide[data-t="Inversión"] .shot.tall{height:min(40vh,290px)}
   }
 
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
@@ -492,30 +526,37 @@
 </section>
 
 <!-- 9 -->
-<section class="slide" data-t="Inversión">
+<section class="slide split" data-t="Inversión">
   <div class="in">
-    <p class="eyebrow g">La inversión</p>
-    <h2>Primera etapa.</h2>
-    <div class="prices">
-      <div class="pc">
-        <span class="t">01 · Pago único</span>
-        <h3>Configuración y armado completo del universo Meta</h3>
-        <div class="now" data-num="200000">$ 200.000</div>
-        <div class="per">Una sola vez</div>
+    <div class="txt">      <p class="eyebrow g">La inversión</p>
+      <h2>Primera etapa.</h2>
+      <div class="prices">
+        <div class="pc">
+          <span class="t">01 · Pago único</span>
+          <h3>Configuración y armado completo del universo Meta</h3>
+          <div class="now" data-num="200000">$ 200.000</div>
+          <div class="per">Una sola vez</div>
+        </div>
+        <div class="pc">
+          <span class="t">02 · Mensual</span>
+          <h3>Gestión y optimización de campañas publicitarias</h3>
+          <div class="now" data-num="200000">$ 200.000</div>
+          <div class="per">Por mes</div>
+        </div>
       </div>
-      <div class="pc">
-        <span class="t">02 · Mensual</span>
-        <h3>Gestión y optimización de campañas publicitarias</h3>
-        <div class="now" data-num="200000">$ 200.000</div>
-        <div class="per">Por mes</div>
+      <div class="total">
+        <span class="k">Entorno + primer mes</span>
+        <span class="v" data-num="400000">$ 400.000</span>
       </div>
+      <p class="foot"><b>Es un precio de arranque</b> y <b>la pauta va aparte</b>: la definís vos y se paga directo a Meta.</p>
+      <p class="goal"><b>Objetivo:</b> validar el canal y generar las primeras reservas para la experiencia de mesa para 4 personas.</p>
+  
     </div>
-    <div class="total">
-      <span class="k">Entorno + primer mes</span>
-      <span class="v" data-num="400000">$ 400.000</span>
-    </div>
-    <p class="foot"><b>Es un precio de arranque</b> y <b>la pauta va aparte</b>: la definís vos y se paga directo a Meta.</p>
-    <p class="goal"><b>Objetivo:</b> validar el canal y generar las primeras reservas para la experiencia de mesa para 4 personas.</p>
+    <figure class="shot tall">
+      <img src="img/experiencia.jpg" alt="Una noche en Peter U Cook">
+      <figcaption class="cap">@peterucook</figcaption>
+      <span class="ph"><i>Foto pendiente</i><span>Poné acá una foto de su Instagram: la mesa servida o la vista</span></span>
+    </figure>
   </div>
 </section>
 
@@ -539,10 +580,11 @@
       <div class="step"><div class="k">PASO 02</div><h3>Entorno</h3><p>5 a 7 días hábiles, verificación incluida.</p></div>
       <div class="step"><div class="k">PASO 03</div><h3>Al aire</h3><p>Campañas publicadas y consultas entrando por WhatsApp.</p></div>
     </div>
-    <div class="keys short-hide" style="margin-top:26px">
-      <span class="key on">Presencia fuerte en redes</span>
-      <span class="key on">Reservas medibles</span>
-    </div>
+    <figure class="shot wide short-hide">
+      <img src="img/vista.jpg" alt="La terraza de Peter U Cook">
+      <figcaption class="cap">@peterucook</figcaption>
+      <span class="ph"><i>Foto pendiente</i><span>Una panorámica de la terraza o la vista al atardecer</span></span>
+    </figure>
   </div>
 </section>
 
@@ -644,6 +686,24 @@
     go(e.deltaY > 0 ? cur + 1 : cur - 1);
   }, {passive:true});
 
+  /* fotos: marcar las que cargaron */
+  Array.prototype.forEach.call(document.querySelectorAll('.shot'), function(f){
+    var sl = f.closest('.slide'); if (sl) sl.classList.add('no-shot');
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.shot img'), function(im){
+    function ok(){
+      var f = im.closest('.shot'); if (!f) return;
+      f.classList.add('ok');
+      var sl = f.closest('.slide'); if (sl) sl.classList.remove('no-shot');
+    }
+    if (im.complete && im.naturalWidth > 0) ok();
+    im.addEventListener('load', ok);
+  });
+
+  /* foto de perfil para el encabezado del chat */
+  var AVATAR = null;
+  (function(){ var im = new Image(); im.onload = function(){ if (im.naturalWidth) AVATAR = im; }; im.src = 'img/avatar.jpg'; })();
+
   /* ================= motor de gráficos ================= */
   var P = {plane:'#0A0F13', surf:'#111A20', line:'rgba(159,203,222,.17)',
            ink:'#F1F6F8', ink2:'#A2B8C4', ink3:'#6E8895',
@@ -731,11 +791,24 @@
     c.beginPath(); c.moveTo(px, py + headH); c.lineTo(px + pw, py + headH); c.stroke();
 
     var pulse = (Math.sin(t / 560) + 1) / 2;
-    c.fillStyle = hexa('#4ED07A', .25 + pulse * .55);
-    c.beginPath(); c.arc(px + 16, py + headH / 2, 4.5, 0, 7); c.fill();
+    var ax = px + 16, ay = py + headH / 2, ar = headH * 0.32, tx = px + 28;
+    if (AVATAR) {
+      c.save();
+      c.beginPath(); c.arc(ax, ay, ar, 0, 7); c.clip();
+      c.drawImage(AVATAR, ax - ar, ay - ar, ar * 2, ar * 2);
+      c.restore();
+      c.strokeStyle = hexa('#3FBFD6', .45); c.lineWidth = 1;
+      c.beginPath(); c.arc(ax, ay, ar, 0, 7); c.stroke();
+      c.fillStyle = hexa('#4ED07A', .45 + pulse * .55);
+      c.beginPath(); c.arc(ax + ar * 0.78, ay + ar * 0.78, 3, 0, 7); c.fill();
+      tx = ax + ar + 9;
+    } else {
+      c.fillStyle = hexa('#4ED07A', .25 + pulse * .55);
+      c.beginPath(); c.arc(ax, ay, 4.5, 0, 7); c.fill();
+    }
     c.textAlign = 'left'; c.textBaseline = 'middle';
     c.fillStyle = P.ink; c.font = '700 ' + (narrow ? 12 : 13) + 'px ' + F;
-    c.fillText('Reservas', px + 28, py + headH / 2);
+    c.fillText('Reservas', tx, py + headH / 2);
     c.textAlign = 'right';
     c.fillStyle = P.ink3; c.font = '500 ' + (narrow ? 9 : 10) + 'px ' + M;
     c.fillText('WHATSAPP', px + pw - 14, py + headH / 2);

@@ -62,4 +62,12 @@ for src_name, out_name, inlines_css in DOCS:
 
     print(f"  {out_name:<18} {len(html)//1024:>3} KB")
 
+# las fotos viajan junto al sitio
+src_img = ROOT / "img"
+if src_img.is_dir():
+    dst = site / "img"
+    shutil.copytree(src_img, dst, dirs_exist_ok=True)
+    fotos = [f.name for f in dst.iterdir() if f.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}]
+    print(f"\n  img/: {len(fotos)} foto(s)" + (" — " + ", ".join(fotos) if fotos else " (ninguna todavia)"))
+
 print(f"\nListo. {len(DOCS)} paginas en peter-u-cook/ y en pub/")

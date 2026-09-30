@@ -1,0 +1,15 @@
+Fotos de @peterucook para la presentación.
+
+Poné los archivos con estos nombres exactos y corré: python3 build.py
+
+  experiencia.jpg   vertical (4:5) — la mesa servida, un plato, o la vista.
+                    Va en la diapositiva de Inversión, columna derecha.
+
+  vista.jpg         apaisada (21:9) — panorámica de la terraza o el atardecer.
+                    Va al cierre, debajo de los tres pasos.
+
+  avatar.jpg        cuadrada — su foto de perfil.
+                    Va en el encabezado del chat de la portada.
+
+Mientras falten, cada espacio muestra un marcador con borde punteado
+en vez de un ícono de imagen rota. No hace falta que estén las tres.
