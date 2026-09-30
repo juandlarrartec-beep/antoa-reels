@@ -483,14 +483,12 @@
       <div class="pc">
         <span class="t">01 · Pago único</span>
         <h3>El entorno</h3>
-        <div class="was">$ 600.000</div>
         <div class="now" data-num="200000">$ 200.000</div>
         <div class="per">Una sola vez</div>
       </div>
       <div class="pc">
         <span class="t">02 · Mensual</span>
         <h3>La publicidad</h3>
-        <div class="was">$ 600.000</div>
         <div class="now" data-num="200000">$ 200.000</div>
         <div class="per">Por mes</div>
       </div>
@@ -499,19 +497,7 @@
       <span class="k">Entorno + primer mes</span>
       <span class="v" data-num="400000">$ 400.000</span>
     </div>
-    <p class="foot"><b>La pauta va aparte.</b> El presupuesto de anuncios lo definís vos y se paga directo a Meta.</p>
-  </div>
-</section>
-
-<!-- 10 -->
-<section class="slide split" data-t="Un tercio">
-  <div class="in">
-    <div class="txt">
-      <p class="eyebrow g">Por qué este precio</p>
-      <h2>Un tercio del<br><span class="gold">precio de lista.</span></h2>
-      <p class="sub"><b style="color:var(--ink)">No es un descuento: es un precio de arranque.</b> Tu propuesta es fotogénica, tiene ticket alto y público internacional creciendo. Queremos el caso.</p>
-    </div>
-    <div class="viz"><canvas data-viz="tercio" height="250"></canvas></div>
+    <p class="foot"><b>Es un precio de arranque:</b> entramos así porque queremos el caso. <b>La pauta va aparte</b>, la definís vos y se paga directo a Meta.</p>
   </div>
 </section>
 
@@ -681,7 +667,6 @@
       var huge = window.innerWidth >= 1600 && window.innerHeight >= 900;
       h = Math.round(split ? Math.min(huge ? 660 : 540, window.innerHeight * 0.62)
                            : Math.min(huge ? 560 : 460, window.innerHeight * 0.46));
-      if (v.kind === 'tercio') h = Math.min(h, huge ? 420 : 360);
     }
     h = Math.max(96, Math.min(h, Math.round(window.innerHeight * (wide ? 0.66 : 0.52))));
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1072,54 +1057,6 @@
       c.font = '600 10px ' + M;
       c.fillText('0' + (k2 + 1), bx.x + 12, bx.y + 18);
     });
-  };
-
-  /* --- un tercio: barras --- */
-  DRAW.tercio = function(c, w, h, t){
-    var rows = [
-      {l:'Precio de lista', v:1200000, f:1, col:'#283B45', ink:P.ink3},
-      {l:'Tu precio',       v:400000,  f:1/3, col:P.gold, ink:P.ink}
-    ];
-    var narrow3 = w < 520;
-    var lw = narrow3 ? 0 : 128;
-    var bh3 = Math.max(40, Math.min(80, h * 0.20));
-    var gap3 = Math.max(26, Math.min(64, h * 0.13));
-    var vfont = narrow3 ? 13 : (bh3 > 56 ? 17 : 15);
-    var top3 = (h - (bh3 * 2 + gap3)) / 2;
-    var grow = Math.min(1, ease(t / 900));
-    rows.forEach(function(r, i){
-      var y = top3 + i * (bh3 + gap3);
-      if (lw) {
-        c.textAlign = 'right'; c.textBaseline = 'middle';
-        c.font = '500 11px ' + M; c.fillStyle = r.ink === P.ink ? P.gold : P.ink3;
-        c.fillText(r.l.toUpperCase(), lw - 16, y + bh3 / 2);
-      } else {
-        c.textAlign = 'left'; c.textBaseline = 'alphabetic';
-        c.font = '500 11px ' + M; c.fillStyle = r.ink === P.ink ? P.gold : P.ink3;
-        c.fillText(r.l.toUpperCase(), 6, y - 8);
-      }
-      c.font = '700 ' + vfont + 'px ' + M;
-      var X0 = lw || 6;
-      var maxw = w - X0 - (c.measureText('$ 1.200.000').width + 22);
-      rr(c, X0, y, Math.max(3, maxw * r.f * grow), bh3, 6);
-      c.fillStyle = r.col; c.fill();
-      c.textAlign = 'left'; c.textBaseline = 'middle';
-      c.font = (r.ink === P.ink ? '700 ' : '400 ') + vfont + 'px ' + M;
-      c.fillStyle = r.ink;
-      c.fillText('$ ' + (r.v / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.000',
-                 X0 + maxw * r.f * grow + 12, y + bh3 / 2);
-    });
-    /* sello 3x */
-    var a2 = Math.min(1, Math.max(0, (t - 900) / 500));
-    c.globalAlpha = a2;
-    c.textAlign = 'center'; c.textBaseline = 'middle';
-    var by = top3 + bh3 * 2 + gap3 + 6;
-    rr(c, w / 2 - 46, by - 15, 92, 30, 15);
-    c.fillStyle = hexa('#F2B441', .13); c.fill();
-    c.strokeStyle = hexa('#F2B441', .45); c.lineWidth = 1.3; c.stroke();
-    c.fillStyle = P.gold; c.font = '700 13px ' + M;
-    c.fillText('3× MENOS', w / 2, by);
-    c.globalAlpha = 1;
   };
 
   /* --- ruta de etapas --- */

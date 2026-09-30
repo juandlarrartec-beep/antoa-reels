@@ -179,19 +179,7 @@
   .note b{color:var(--ink);font-weight:600}
   .note.g{border-left-color:var(--gold)}
 
-  /* barras comparativas */
-  .cmp{margin-top:34px;display:flex;flex-direction:column;gap:16px}
-  .cmp .row{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center}
-  @media(max-width:600px){.cmp .row{grid-template-columns:1fr;gap:6px}}
-  .cmp .lb{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
-  .cmp .track{display:flex;align-items:center;gap:13px;min-width:0}
-  .cmp .fl{height:30px;border-radius:5px;background:#283B45;transform-origin:left center}
-  .cmp .row.hi .fl{background:var(--gold)}
-  .cmp .row.hi .lb{color:var(--gold)}
-  .cmp .vl{font-family:var(--mono);font-size:14px;color:var(--ink-2);white-space:nowrap}
-  .cmp .row.hi .vl{color:var(--ink);font-weight:600}
-  .slide.on .cmp .fl{animation:grow .85s cubic-bezier(.22,.75,.3,1) backwards}
-  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
   /* ---------- etapas ---------- */
   .stages{display:flex;flex-direction:column;margin-top:36px}
@@ -231,7 +219,7 @@
   :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;scroll-snap-type:none}
-    .scroll-cue span,.slide.on .ck .m,.slide.on .cmp .fl{animation:none}
+    .scroll-cue span,.slide.on .ck .m{animation:none}
     .bar,.rail button{transition:none}
   }
 </style>
@@ -385,7 +373,7 @@
         <p>Cada mes vas a ver cuántas consultas entraron, cuánto costó cada una y cuántas terminaron en mesa. Con eso se decide si conviene invertir más o corregir el rumbo. Es información que hoy no tenés de ninguna manera.</p></div></div>
       <div class="ben"><span class="i">05</span><div>
         <h4>Llenás las noches flojas</h4>
-        <p>La publicidad se puede concentrar en los días que te cuesta llenar, en vez de repartirse parejo. Con mesas de 2 a 8 personas, unas pocas reservas por semana ya cambian el mes.</p></div></div>
+        <p>La publicidad se puede concentrar en los días que te cuesta llenar, en vez de repartirse parejo. Con mesas de 2 a 4 personas, unas pocas reservas por semana ya cambian el mes.</p></div></div>
     </div>
   </div>
 </section>
@@ -407,49 +395,30 @@
 <section class="slide" data-t="Inversión">
   <div class="in">
     <p class="eyebrow g">La inversión</p>
-    <h2>Lo que cobramos por esto,<br>y lo que <span class="gold">vale realmente.</span></h2>
+    <h2>Primera etapa.</h2>
     <div class="price-grid">
       <div class="pcard">
         <span class="tag">Servicio 01 · pago único</span>
         <h3>Entorno de Meta Ads</h3>
-        <div class="was">$ 600.000</div>
         <div class="now">$ 200.000</div>
         <div class="per">Una sola vez</div>
-        <span class="x">3× por debajo del precio de lista</span>
       </div>
       <div class="pcard">
         <span class="tag">Servicio 02 · mensual</span>
         <h3>Publicidad en Meta Ads</h3>
-        <div class="was">$ 600.000</div>
         <div class="now">$ 200.000</div>
         <div class="per">Por mes</div>
-        <span class="x">3× por debajo del precio de lista</span>
       </div>
     </div>
     <div class="total">
       <span class="k">Primera etapa · entorno + primer mes de publicidad</span>
-      <span class="v"><small>$ 1.200.000</small>$ 400.000</span>
+      <span class="v">$ 400.000</span>
+    </div>
+    <div class="note g">
+      <b>Es un precio de arranque.</b> Entramos con este valor porque queremos el caso. Tu propuesta es visualmente extraordinaria, tiene ticket alto y un público internacional que está creciendo: si funciona como creemos, es el caso de éxito que vamos a mostrar durante los próximos dos años.
     </div>
     <div class="note">
       <b>La inversión publicitaria va aparte.</b> El presupuesto que se gasta en anuncios lo definís vos y se paga directo a Meta con tu tarjeta. Nosotros no lo tocamos y no cobramos comisión sobre él.
-    </div>
-  </div>
-</section>
-
-<!-- 10 --------------------------------------------------------------- -->
-<section class="slide" data-t="Por qué este precio">
-  <div class="in">
-    <p class="eyebrow g">Por qué este precio</p>
-    <h2>No es un descuento.<br>Es un precio de arranque.</h2>
-    <p class="lead">Este trabajo, hecho con este alcance, se cobra tres veces más. Te lo ofrecemos a este valor por una razón concreta, y nos conviene decirla de frente.</p>
-    <div class="cmp">
-      <div class="row"><span class="lb">Precio de lista</span>
-        <span class="track"><span class="fl" style="width:100%;animation-delay:.05s"></span><span class="vl">$ 1.200.000</span></span></div>
-      <div class="row hi"><span class="lb">Tu precio</span>
-        <span class="track"><span class="fl" style="width:33.3%;animation-delay:.2s"></span><span class="vl">$ 400.000</span></span></div>
-    </div>
-    <div class="note g" style="margin-top:34px">
-      <b>Queremos el caso.</b> Tu propuesta es visualmente extraordinaria, tiene ticket alto y un público internacional que está creciendo. Si esto funciona como creemos, es el caso de éxito que vamos a mostrar durante los próximos dos años. Por eso entramos abajo: preferimos ganar con vos a mediano plazo antes que cobrarte lo que corresponde y que no arranquemos nunca.
     </div>
   </div>
 </section>
