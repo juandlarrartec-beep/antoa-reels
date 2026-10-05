@@ -59,12 +59,12 @@ section>h2{font-size:1.6rem;margin-bottom:6px}
 .gwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surf);box-shadow:var(--shadow)}
 .gantt{min-width:720px;padding:14px 16px 12px}
 .g-head,.g-row{display:grid;grid-template-columns:230px 1fr;gap:12px;align-items:center}
-.g-weeks{display:grid;grid-template-columns:repeat(8,1fr);font:500 11px/1.2 var(--fm);color:var(--mut)}
+.g-weeks{display:grid;grid-template-columns:repeat(var(--ns,8),1fr);font:500 11px/1.2 var(--fm);color:var(--mut)}
 .g-weeks span{padding-left:6px;border-left:1px solid var(--line)}
 .g-phase{font:600 12px/1 var(--fm);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:16px 0 6px}
 .g-row{min-height:30px}
 .g-lab{font-size:13px;line-height:1.25;min-width:0}
-.g-track{position:relative;height:18px;background:repeating-linear-gradient(90deg,transparent 0 calc(12.5% - 1px),var(--line) calc(12.5% - 1px) 12.5%);border-radius:3px}
+.g-track{position:relative;height:18px;background:repeating-linear-gradient(90deg,transparent 0 calc(100% / var(--ns,8) - 1px),var(--line) calc(100% / var(--ns,8) - 1px) calc(100% / var(--ns,8)));border-radius:3px}
 .g-track::after{content:"";position:absolute;top:-6px;bottom:-6px;left:calc(var(--hoy,-10)*1%);width:2px;background:var(--crit);display:var(--hoyshow,none)}
 .bar{position:absolute;top:2px;height:14px;border-radius:5px;--c:var(--acc);border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 22%,transparent)}
 .bar.cl{--c:var(--ember)}
@@ -127,6 +127,7 @@ button.ghost{background:transparent}
 .vault .kv{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
 .vault code{font-family:var(--fm);word-break:break-all}
 .vault button{padding:6px 10px;min-height:30px;font-size:12.5px}
+.deadline{display:inline-flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;border:1px solid var(--ember);color:var(--ember);border-radius:12px;padding:8px 14px;font-weight:600;margin:0 0 18px}
 .notice{background:var(--surf);border:1px dashed var(--ember);border-radius:12px;padding:12px 14px;color:var(--mut);margin-bottom:14px;font-size:14px}
 
 /* bitacora */
@@ -205,6 +206,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <h2>Lo que necesitamos de vos</h2>
     <p class="lead" data-pubonly>Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas a mano: las marcas quedan solo en tu navegador y no nos llegan. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.</p>
     <p class="lead" data-apponly>Completá cada bloque y apretá <b>Guardar</b>. Vas a ver el cartel verde «Guardado y verificado» cuando el dato ya esté a salvo. Podés volver y cambiar lo que quieras.</p>
+    <p class="deadline">Fecha límite para tenerlo todo con nosotros <span class="mono" id="limitePedidos"></span></p>
     <div class="notice" id="noSession" data-apponly hidden>Para cargar datos abrí esta página con tu cuenta de Claude. Si ya la abriste así y ves este aviso, avisanos por WhatsApp.</div>
     <div class="tiles" id="pTiles"></div>
     <div class="pgrid" id="pedidosGrid"></div>
@@ -224,7 +226,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <div class="log" id="bitList"><div class="empty">Todavía no hay entradas.</div></div>
   </section>
 
-  <footer>Días hábiles de lunes a viernes, sin contar feriados nacionales 2026 (12/10, 23/11, 7/12, 8/12, 25/12). La inversión publicitaria se paga directo a Meta y la define Peter.</footer>
+  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria se paga directo a Meta y la define Peter.</footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -238,8 +240,8 @@ var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){r
 
 /* ---------- plan ---------- */
 var INICIO_DEFAULT='2026-10-06';
-var FER=['2026-10-12','2026-11-23','2026-12-07','2026-12-08','2026-12-25'];
-var TOTAL_DIAS=40;
+var FER=['2026-11-23','2026-12-07','2026-12-08','2026-12-25'];
+var TOTAL_DIAS=30;
 var FASES=[
  {id:'F0',n:'Arranque y accesos',e:'Etapa 1 · Configuración del universo Meta'},
  {id:'F1',n:'Auditoría y base',e:'Etapa 1 · Configuración del universo Meta'},
@@ -250,22 +252,22 @@ var FASES=[
 var TAREAS=[
  {id:'t01',f:'F0',t:'Reunión de arranque y alcance',d:'Repasamos la propuesta aprobada, fechas y quién hace qué.',r:'ag',a:1,b:1},
  {id:'t02',f:'F0',t:'Entrega de accesos y materiales',d:'Completás la sección «Lo que necesitamos de vos».',r:'cl',a:1,b:3},
- {id:'t03',f:'F1',t:'Auditoría de lo existente',d:'Revisamos Instagram, Facebook, números, anuncios y pixeles que ya existan.',r:'ag',a:2,b:4},
- {id:'t04',f:'F1',t:'Portafolio comercial y permisos',d:'Armamos el portafolio comercial de Meta y ordenamos roles y accesos.',r:'ag',a:3,b:5},
- {id:'t05',f:'F1',t:'Fanpage lista para vender',d:'Datos, categoría, horarios, botón de WhatsApp y perfil coherente con Instagram.',r:'ag',a:4,b:6},
- {id:'t06',f:'F2',t:'Cuenta publicitaria y medio de pago',d:'Creamos la cuenta; Peter carga el medio de pago directamente en Meta.',r:'cl',a:5,b:7},
- {id:'t07',f:'F2',t:'Vinculación de Instagram, Facebook y WhatsApp',d:'Todo conectado para que los mensajes entren al mismo lugar.',r:'ag',a:6,b:8},
- {id:'t08',f:'F2',t:'Píxel y evento «mensaje de reserva»',d:'Dejamos medido qué anuncio trae mensajes y reservas.',r:'ag',a:7,b:9},
- {id:'t09',f:'F2',t:'Verificación del negocio ante Meta',d:'Se presenta la documentación; el tiempo de respuesta lo define Meta.',r:'cl',a:6,b:15},
- {id:'t10',f:'F2',t:'Entrega documentada de la configuración',d:'Te dejamos por escrito cómo quedó todo y quién tiene qué acceso.',r:'ag',a:10,b:11},
- {id:'t11',f:'F3',t:'Selección de los mejores videos',d:'Elegimos entre lo ya publicado lo que mejor transmite la experiencia.',r:'ag',a:4,b:6},
- {id:'t12',f:'F3',t:'Edición vertical y subtítulos',d:'Versiones listas para anuncio, en formato vertical y con texto.',r:'ag',a:6,b:9},
- {id:'t13',f:'F3',t:'Públicos y estructura de campañas',d:'Turistas en la Ciudad, Brasil, EE.UU. y público local.',r:'ag',a:8,b:10},
- {id:'t14',f:'F3',t:'Textos de anuncios y bienvenida en WhatsApp',d:'Redacción en español, inglés y portugués si corresponde.',r:'ag',a:9,b:11},
- {id:'t15',f:'F4',t:'Revisión final y aprobación',d:'Mirás los anuncios y las campañas y das el visto bueno.',r:'cl',a:12,b:13},
- {id:'t16',f:'F4',t:'Lanzamiento de campañas',d:'Se publican y se empiezan a recibir mensajes por WhatsApp.',r:'ag',a:16,b:16},
- {id:'t17',f:'F4',t:'Optimización semanal',d:'Cada semana ajustamos públicos, anuncios y presupuesto según resultados.',r:'ag',a:17,b:35},
- {id:'t18',f:'F4',t:'Primer reporte mensual',d:'Mensajes, reservas, costo por mensaje y próximos pasos.',r:'ag',a:36,b:37}
+ {id:'t03',f:'F1',t:'Auditoría de lo existente',d:'Revisamos Instagram, Facebook, números, anuncios y pixeles que ya existan.',r:'ag',a:2,b:3},
+ {id:'t04',f:'F1',t:'Portafolio comercial y permisos',d:'Armamos el portafolio comercial de Meta y ordenamos roles y accesos.',r:'ag',a:3,b:4},
+ {id:'t05',f:'F1',t:'Fanpage lista para vender',d:'Datos, categoría, horarios, botón de WhatsApp y perfil coherente con Instagram.',r:'ag',a:3,b:4},
+ {id:'t06',f:'F2',t:'Cuenta publicitaria y medio de pago',d:'Creamos la cuenta; Peter carga el medio de pago directamente en Meta.',r:'cl',a:4,b:5},
+ {id:'t07',f:'F2',t:'Vinculación de Instagram, Facebook y WhatsApp',d:'Todo conectado para que los mensajes entren al mismo lugar.',r:'ag',a:4,b:5},
+ {id:'t08',f:'F2',t:'Píxel y evento «mensaje de reserva»',d:'Dejamos medido qué anuncio trae mensajes y reservas.',r:'ag',a:5,b:5},
+ {id:'t09',f:'F2',t:'Envío de la verificación del negocio a Meta',d:'Presentamos la documentación antes de cerrar la configuración. La respuesta depende de Meta y puede llegar después.',r:'cl',a:3,b:5},
+ {id:'t10',f:'F2',t:'Entrega documentada de la configuración',d:'Te dejamos por escrito cómo quedó todo y quién tiene qué acceso.',r:'ag',a:5,b:5},
+ {id:'t11',f:'F3',t:'Selección de los mejores videos',d:'Elegimos entre lo ya publicado lo que mejor transmite la experiencia.',r:'ag',a:2,b:3},
+ {id:'t12',f:'F3',t:'Edición vertical y subtítulos',d:'Versiones listas para anuncio, en formato vertical y con texto.',r:'ag',a:3,b:5},
+ {id:'t13',f:'F3',t:'Públicos y estructura de campañas',d:'Turistas en la Ciudad, Brasil, EE.UU. y público local.',r:'ag',a:4,b:5},
+ {id:'t14',f:'F3',t:'Textos de anuncios y bienvenida en WhatsApp',d:'Redacción en español, inglés y portugués si corresponde.',r:'ag',a:5,b:6},
+ {id:'t15',f:'F4',t:'Revisión final y aprobación',d:'Mirás los anuncios y las campañas y das el visto bueno.',r:'cl',a:6,b:6},
+ {id:'t16',f:'F4',t:'Lanzamiento de campañas',d:'Se publican y se empiezan a recibir mensajes por WhatsApp.',r:'ag',a:7,b:7},
+ {id:'t17',f:'F4',t:'Optimización semanal',d:'Cada semana ajustamos públicos, anuncios y presupuesto según resultados.',r:'ag',a:8,b:26},
+ {id:'t18',f:'F4',t:'Primer reporte mensual',d:'Mensajes, reservas, costo por mensaje y próximos pasos.',r:'ag',a:27,b:28}
 ];
 var ESTADOS=[['pendiente','Pendiente'],['curso','En curso'],['espera','Esperando a Peter'],['listo','Listo']];
 var ELAB={pendiente:'Pendiente',curso:'En curso',espera:'Esperando a Peter',listo:'Listo'};
@@ -348,7 +350,7 @@ function renderTiles(){
   $('#tiles').innerHTML=
    '<div class="tile"><div class="k">Inicio</div><div class="v mono">'+esc(fLong.format(wd(1)))+'</div><div class="s">Día 1 de trabajo</div></div>'+
    '<div class="tile"><div class="k">Configuración lista</div><div class="v mono">'+esc(fLong.format(wd(t10.b)))+'</div><div class="s">Entrega documentada</div></div>'+
-   '<div class="tile"><div class="k">Lanzamiento de campañas</div><div class="v mono">'+esc(fLong.format(wd(t16.b)))+'</div><div class="s">Depende de la verificación en Meta</div></div>'+
+   '<div class="tile"><div class="k">Lanzamiento de campañas</div><div class="v mono">'+esc(fLong.format(wd(t16.b)))+'</div><div class="s">Primeras campañas al aire</div></div>'+
    (PUBLICO?
     '<div class="tile"><div class="k">Dependen de vos</div><div class="v">'+TAREAS.filter(function(t){return t.r==='cl'}).length+' tareas</div><div class="s">Son las barras naranjas del cronograma</div></div>':
     '<div class="tile"><div class="k">Avance</div><div class="v">'+done+' de '+TAREAS.length+' tareas</div><div class="bar-prog" aria-hidden="true"><i style="width:'+pct+'%"></i></div>'+
@@ -358,7 +360,8 @@ function renderTiles(){
 /* ---------- gantt ---------- */
 function renderGantt(){
   var h='<div class="g-head"><span></span><div class="g-weeks">';
-  for(var w=0;w<8;w++)h+='<span>Sem '+(w+1)+'<br>'+esc(fShort.format(wd(w*5+1)))+'</span>';
+  var NS=Math.ceil(TOTAL_DIAS/5);
+  for(var w=0;w<NS;w++)h+='<span>Sem '+(w+1)+'<br>'+esc(fShort.format(wd(w*5+1)))+'</span>';
   h+='</div></div>';
   FASES.forEach(function(f){
     h+='<div class="g-phase">'+esc(f.n)+'</div>';
@@ -367,7 +370,7 @@ function renderGantt(){
       h+='<div class="g-row"><span class="g-lab">'+esc(t.t)+'</span><div class="g-track"><i class="bar '+t.r+' e-'+estadoDe(t.id)+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(PUBLICO?fechaTarea(t):fechaTarea(t)+' · '+ELAB[estadoDe(t.id)])+'"></i></div></div>';
     });
   });
-  var g=$('#gantt');g.innerHTML=h;
+  var g=$('#gantt');g.innerHTML=h;g.style.setProperty('--ns',NS);
   var hi=hoyIdx();
   if(hi>0&&hi<=TOTAL_DIAS){g.style.setProperty('--hoy',((hi-.5)/TOTAL_DIAS*100).toFixed(2));g.style.setProperty('--hoyshow','block')}else{g.style.setProperty('--hoyshow','none')}
 }
@@ -612,7 +615,8 @@ async function saveInicio(){
   b.disabled=false;
 }
 
-function refresh(){renderTiles();renderGantt();applyTareas();if(!PUBLICO){applyPedidos();renderBit()}}
+function setLimite(){var t=TAREAS.filter(function(x){return x.id==='t02'})[0];$('#limitePedidos').textContent=fLong.format(wd(t.b))}
+function refresh(){renderTiles();renderGantt();applyTareas();setLimite();if(!PUBLICO){applyPedidos();renderBit()}}
 
 /* ---------- arranque ---------- */
 buildTareas();if(PUBLICO)buildChecklist();else buildPedidos();refresh();
