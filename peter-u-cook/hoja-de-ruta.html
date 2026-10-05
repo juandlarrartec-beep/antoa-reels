@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Concepto: un tablero de obra para una cocina de rooftop. Tinta azul-río, plata, y una brasa naranja que solo marca lo que depende de Peter. */
+/* Concepto: un tablero de obra para una cocina de rooftop. Tinta azul-río, plata, y una brasa naranja que solo marca lo que depende de Pedro. */
 :root{
   --bg:#EFF3F2; --surf:#FFFFFF; --surf2:#E6ECEB; --ink:#10222B; --mut:#4F6670; --line:#CBD6D6;
   --acc:#0F6B73; --acc-ink:#FFFFFF; --ember:#C8561F; --good:#0A8A0A; --warn:#B87A00; --crit:#C23030;
@@ -205,7 +205,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <div class="gwrap"><div class="gantt" id="gantt"></div></div>
     <div class="legend">
       <span><i class="ag"></i>Lo hacemos nosotros</span>
-      <span><i class="cl"></i>Depende de Peter</span>
+      <span><i class="cl"></i>Depende de Pedro</span>
       <span><i class="hoy"></i>Hoy</span>
     </div>
     <div id="fases"></div>
@@ -235,7 +235,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <div class="log" id="bitList"><div class="empty">Todavía no hay entradas.</div></div>
   </section>
 
-  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria se paga directo a Meta y la define Peter.</footer>
+  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria se paga directo a Meta y la define Pedro.</footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -264,7 +264,7 @@ var TAREAS=[
  {id:'t03',f:'F1',t:'Auditoría de lo existente',d:'Revisamos Instagram, Facebook, números, anuncios y pixeles que ya existan.',r:'ag',a:2,b:3},
  {id:'t04',f:'F1',t:'Portafolio comercial y permisos',d:'Armamos el portafolio comercial de Meta y ordenamos roles y accesos.',r:'ag',a:3,b:4},
  {id:'t05',f:'F1',t:'Fanpage lista para vender',d:'Datos, categoría, horarios, botón de WhatsApp y perfil coherente con Instagram.',r:'ag',a:3,b:4},
- {id:'t06',f:'F2',t:'Cuenta publicitaria y medio de pago',d:'Creamos la cuenta; Peter carga el medio de pago directamente en Meta.',r:'cl',a:4,b:5},
+ {id:'t06',f:'F2',t:'Cuenta publicitaria y medio de pago',d:'Creamos la cuenta; Pedro carga el medio de pago directamente en Meta.',r:'cl',a:4,b:5},
  {id:'t07',f:'F2',t:'Vinculación de Instagram, Facebook y WhatsApp',d:'Todo conectado para que los mensajes entren al mismo lugar.',r:'ag',a:4,b:5},
  {id:'t08',f:'F2',t:'Píxel y evento «mensaje de reserva»',d:'Dejamos medido qué anuncio trae mensajes y reservas.',r:'ag',a:5,b:5},
  {id:'t09',f:'F2',t:'Envío de la verificación del negocio a Meta',d:'Presentamos la documentación antes de cerrar la configuración. La respuesta depende de Meta y puede llegar después.',r:'cl',a:3,b:5},
@@ -278,8 +278,8 @@ var TAREAS=[
  {id:'t17',f:'F4',t:'Optimización semanal',d:'Cada semana ajustamos públicos, anuncios y presupuesto según resultados.',r:'ag',a:8,b:26},
  {id:'t18',f:'F4',t:'Primer reporte mensual',d:'Mensajes, reservas, costo por mensaje y próximos pasos.',r:'ag',a:27,b:28}
 ];
-var ESTADOS=[['pendiente','Pendiente'],['curso','En curso'],['espera','Esperando a Peter'],['listo','Listo']];
-var ELAB={pendiente:'Pendiente',curso:'En curso',espera:'Esperando a Peter',listo:'Listo'};
+var ESTADOS=[['pendiente','Pendiente'],['curso','En curso'],['espera','Esperando a Pedro'],['listo','Listo']];
+var ELAB={pendiente:'Pendiente',curso:'En curso',espera:'Esperando a Pedro',listo:'Listo'};
 
 var PED=[
  {k:'whatsapp',t:'Número nuevo para WhatsApp Business',p:'Un chip dedicado a las reservas. Tiene que ser un número que no esté activo en WhatsApp común.',
@@ -393,7 +393,7 @@ function buildTareas(){
     ts.forEach(function(t){
       h+='<article class="t" id="tk-'+t.id+'" data-id="'+t.id+'">'+
        '<div><span class="chip" data-chip data-apponly></span><span data-late data-apponly></span><h4>'+esc(t.t)+'</h4><p class="d">'+esc(t.d)+'</p></div>'+
-       '<dl class="t-meta"><div><dt>Responsable</dt><dd class="'+(t.r==='cl'?'resp-cl':'')+'">'+(t.r==='cl'?'Peter':'Agencia')+'</dd></div>'+
+       '<dl class="t-meta"><div><dt>Responsable</dt><dd class="'+(t.r==='cl'?'resp-cl':'')+'">'+(t.r==='cl'?'Pedro':'Agencia')+'</dd></div>'+
        '<div><dt>Fecha límite</dt><dd class="mono" data-fecha></dd></div></dl>'+
        '<div class="t-log" data-apponly><div><div class="eyebrow" style="margin-bottom:6px">Qué se hizo</div><p class="nota" data-nota></p></div>'+
        '<div class="own" hidden><div class="row"><div style="flex:1 1 170px"><label for="es-'+t.id+'">Estado</label><select id="es-'+t.id+'">'+
@@ -655,7 +655,7 @@ if(PUBLICO){setWho('Versión pública')}else{lockInputs(true);setWho('Solo lectu
   isOwner=!!(user&&user.isOwner&&user.isOwner());
   if(user&&user.can&&user.can('data.write')===false)canWrite=false;
   lockInputs(!canWrite);
-  setWho(isOwner?'Vista agencia':'Vista Peter');
+  setWho(isOwner?'Vista agencia':'Vista Pedro');
   Array.prototype.forEach.call(document.querySelectorAll('.own'),function(o){o.hidden=!isOwner});
   $('#cfg').hidden=!isOwner;$('#bitForm').hidden=!isOwner;
   Array.prototype.forEach.call(document.querySelectorAll('[data-uphint]'),function(h){if(!assets)h.textContent='Con tu acceso actual no se pueden subir archivos acá. Pegá un link en «Material para las campañas» o avisanos.'});
