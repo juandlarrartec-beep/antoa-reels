@@ -12,7 +12,7 @@ cocina de autor a puerta cerrada, CABA.
 
 ## Para compartir
 
-La carpeta `peter-u-cook/` es el sitio publicable: cinco páginas autocontenidas,
+La carpeta `peter-u-cook/` es el sitio publicable: ocho páginas autocontenidas,
 sin dependencias externas. Se abren con doble clic, se mandan por mail o las
 sirve GitHub Pages.
 
@@ -27,6 +27,9 @@ En cualquiera de los dos casos las direcciones quedan:
 | Documento | Ruta |
 |---|---|
 | Índice | `/antoa-reels/peter-u-cook/` |
+| Primera etapa · versión visual | `/antoa-reels/peter-u-cook/primera-etapa-visual.html` |
+| Primera etapa · versión texto | `/antoa-reels/peter-u-cook/primera-etapa.html` |
+| Hoja de ruta — **para el cliente** (solo lectura) | `/antoa-reels/peter-u-cook/hoja-de-ruta.html` |
 | Radiografía (con radar) | `/antoa-reels/peter-u-cook/radiografia.html` |
 | Propuesta — **para el cliente** | `/antoa-reels/peter-u-cook/propuesta.html` |
 | Informe de salud digital | `/antoa-reels/peter-u-cook/informe.html` |
@@ -47,6 +50,11 @@ acceso desde el menú *Share* de cada una:
 | Propuesta | https://claude.ai/artifact/MiKuGVaM1aoDNd4xFDUHU1 |
 | Informe | https://claude.ai/artifact/JXcxARqAVkZavtv4zLfd4M |
 | Anexo | https://claude.ai/artifact/KR1Vxh738DEQYdGLov74aR |
+| Hoja de ruta **completa** (con carga de datos y bitácora) | https://claude.ai/artifact/1WF2TL56txRpY1acZQadfn |
+
+La hoja de ruta guarda datos en la base de la plataforma, que solo existe en el link de claude.ai
+(quien la use necesita cuenta e invitación como Editor). La copia de GitHub Pages es de solo
+lectura: cronograma, fechas y lista de lo que se pide; las tildes quedan en el navegador de quien las marca.
 
 ## Estructura
 
@@ -57,6 +65,7 @@ acceso desde el menú *Share* de cada una:
 | `propuesta-peter-u-cook.html` | Fuente de la propuesta |
 | `informe-peter-u-cook.html` | Fuente del informe |
 | `anexo-ejecucion-peter-u-cook.html` | Fuente del anexo |
+| `hoja-de-ruta/hoja-de-ruta.html` | Fuente de la hoja de ruta (una sola fuente: app en claude.ai, solo lectura en Pages) |
 | `print.css` | Estilos compartidos de los tres documentos imprimibles |
 | `build.py` | Genera `peter-u-cook/` y `pub/` desde las fuentes |
 | `peter-u-cook/` | **Generado.** Sitio publicable, autocontenido |
