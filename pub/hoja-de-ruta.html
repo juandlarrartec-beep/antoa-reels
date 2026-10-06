@@ -235,7 +235,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
 
   <section id="pedidos">
     <h2>Lo que necesitamos de vos</h2>
-    <p class="lead" data-pubonly>Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas a mano: las marcas quedan solo en tu navegador y no nos llegan. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.</p>
+    <p class="lead" data-pubonly>Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas a mano y mirá cómo avanza la barra de arriba. Las marcas quedan solo en tu navegador y no nos llegan. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.</p>
     <p class="lead" data-apponly>Completá cada bloque y apretá <b>Guardar</b>. Vas a ver el cartel verde «Guardado y verificado» cuando el dato ya esté a salvo. Podés volver y cambiar lo que quieras.</p>
     <p class="deadline">Fecha límite para tenerlo todo con nosotros <span class="mono" id="limitePedidos"></span></p>
     <div class="notice" id="noSession" data-apponly hidden>Para cargar datos abrí esta página con tu cuenta de Claude. Si ya la abriste así y ves este aviso, avisanos por WhatsApp.</div>
@@ -345,7 +345,7 @@ var PED=[
   conf:{k:'Presupuesto confirmado',v:'$100.000 a $150.000 por mes',n:'Pesos argentinos. Pedro ya lo aceptó.'},
   f:[{id:'ok',l:'¿Vas a cargar vos el medio de pago en Meta?',ty:'sel',req:1,o:['Sí, lo cargo yo cuando la cuenta esté lista','Prefiero verlo en la reunión']}],
   s:'No nos pases datos de tarjetas por acá ni por mensaje. El medio de pago lo cargás vos, directo en Meta.'},
- {k:'extra',t:'Algo más que debamos saber',p:'Cuentas anteriores de publicidad, cosas que ya probaste, fechas especiales, restricciones.',
+ {k:'extra',opt:1,t:'Algo más que debamos saber',p:'Cuentas anteriores de publicidad, cosas que ya probaste, fechas especiales, restricciones.',
   f:[{id:'texto',l:'Contanos',pl:'Lo que se te ocurra y no esté en la lista',ty:'area'}]}
 ];
 
@@ -398,18 +398,34 @@ function contar(el,desde,hasta){
   }
   avRaf=requestAnimationFrame(paso);
 }
+function entregas(){
+  var req=PED.filter(function(p){return !p.opt});
+  var n=req.filter(function(p){
+    if(PUBLICO){var cb=document.getElementById('ok-'+p.k);return !!(cb&&cb.checked)}
+    return estadoPedido(p)==='completo';
+  }).length;
+  return {n:n,total:req.length};
+}
 function renderAvance(){
+  /* La tarea t02 (entrega de accesos y materiales) es la suma de las siete entregas de Pedro:
+     cada entrega mueve la barra y, si t02 se marca lista, cuentan las siete. Así nada se cuenta dos veces
+     y el 100 % se alcanza cuando todas las tareas están listas. */
   var total=TAREAS.length,
-      hechas=TAREAS.filter(function(t){return estadoDe(t.id)==='listo'}).length,
-      pct=Math.round(hechas/total*100),
-      prox=TAREAS.filter(function(t){return estadoDe(t.id)!=='listo'}).sort(function(x,y){return x.b-y.b||x.a-y.a})[0],
+      ent=entregas(),
+      t02lista=estadoDe('t02')==='listo',
+      entN=t02lista?ent.total:ent.n,
+      sinT02=TAREAS.filter(function(t){return t.id!=='t02'}),
+      hechas=sinT02.filter(function(t){return estadoDe(t.id)==='listo'}).length,
+      pct=Math.round((hechas+entN)/(sinT02.length+ent.total)*100),
+      t02hecha=t02lista||ent.n===ent.total,
+      prox=TAREAS.filter(function(t){return t.id==='t02'?!t02hecha:estadoDe(t.id)!=='listo'}).sort(function(x,y){return x.b-y.b||x.a-y.a})[0],
       bar=$('#avBar');
   bar.setAttribute('aria-valuenow',pct);
-  bar.setAttribute('aria-valuetext',pct+' por ciento, '+hechas+' de '+total+' tareas listas');
+  bar.setAttribute('aria-valuetext',pct+' por ciento: '+(hechas+(t02hecha?1:0))+' de '+total+' tareas listas y '+entN+' de '+ent.total+' entregas tuyas');
   bar.classList.toggle('full',pct===100);
-  $('#avCount').textContent=hechas+' de '+total+' tareas listas';
-  $('#avFoot').textContent=(prox?'Próxima fecha: '+prox.t+' · '+fShort.format(wd(prox.b)):'Proyecto completo')+
-    (PUBLICO&&BASE&&BASE.actualizado?' · Actualizado el '+fShort.format(parse(BASE.actualizado)):'');
+  $('#avCount').textContent=(hechas+(t02hecha?1:0))+' de '+total+' tareas listas · '+entN+' de '+ent.total+' entregas tuyas';
+  $('#avFoot').textContent=(prox?'Próxima fecha: '+prox.t+' · '+fShort.format(wd(prox.b)):'Todas las tareas están listas')+
+    (PUBLICO&&BASE&&BASE.actualizado?' · Tareas actualizadas el '+fShort.format(parse(BASE.actualizado)):'');
   var desde=avPrimera?0:avPrev;avPrimera=false;avPrev=pct;
   requestAnimationFrame(function(){requestAnimationFrame(function(){$('#avFill').style.width=pct+'%'})});
   contar($('#avNum'),desde,pct);
@@ -539,12 +555,12 @@ function estadoPedido(p){
   return 'vacio';
 }
 function applyPedidos(){
-  var comp=0;
+  var comp=0,tot=PED.filter(function(p){return !p.opt}).length;
   PED.forEach(function(p){
     var el=$('#p-'+p.k);if(!el)return;
     var d=S.pedidos[p.k]||{},v=d.valores||{},c=d.cargados||{},st=estadoPedido(p);
-    if(st==='completo')comp++;
-    var b=$('[data-badge]',el);b.className='badge '+st;b.textContent=st==='completo'?'Completo':st==='parcial'?'Falta algo':'Sin cargar';
+    if(st==='completo'&&!p.opt)comp++;
+    var b=$('[data-badge]',el);b.className='badge '+st;b.textContent=st==='completo'?'Completo':st==='parcial'?'Falta algo':(p.opt?'Opcional':'Sin cargar');
     if(!el.dataset.dirty){
       p.f.forEach(function(f){var i=$('[data-f="'+f.id+'"]',el);if(i&&f.ty!=='pw')i.value=v[f.id]||''});
       if(d.at)setMsg($('[data-msg]',el),'ok','✓ Guardado y verificado · '+atFmt(d.at));
@@ -556,7 +572,8 @@ function applyPedidos(){
     if(fl){var ar=d.archivos||[];fl.innerHTML=ar.length?ar.map(function(a){return '<div>📎 <a href="/_blob/'+esc(a.id)+'" target="_blank" rel="noopener">'+esc(a.nombre)+'</a> <span class="hint">'+esc(atFmt(a.at))+'</span></div>'}).join(''):'<div class="hint">Todavía no se subió nada.</div>'}
     renderVault(p,el);
   });
-  $('#pTiles').innerHTML='<div class="tile"><div class="k">Bloques completos</div><div class="v">'+comp+' de '+PED.length+'</div><div class="bar-prog" aria-hidden="true"><i style="width:'+Math.round(comp/PED.length*100)+'%"></i></div></div>';
+  $('#pTiles').innerHTML='<div class="tile"><div class="k">Bloques completos</div><div class="v">'+comp+' de '+tot+'</div><div class="bar-prog" aria-hidden="true"><i style="width:'+Math.round(comp/tot*100)+'%"></i></div></div>';
+  renderAvance();
 }
 function renderVault(p,el){
   var box=$('[data-vault]',el);if(!box)return;
@@ -623,12 +640,12 @@ function buildChecklist(){
     });
     if(p.up)items.push('<li><span>'+esc(p.uh)+'</span></li>');
     var nota=p.sp!==undefined?p.sp:p.s;
-    h+='<article class="p" id="p-'+p.k+'" data-k="'+p.k+'"><div class="p-head"><div><h3>'+esc(p.t)+'</h3><p class="why">'+esc(p.p)+'</p></div><span class="badge" data-badge>Pendiente</span></div>'+
+    h+='<article class="p" id="p-'+p.k+'" data-k="'+p.k+'"><div class="p-head"><div><h3>'+esc(p.t)+'</h3><p class="why">'+esc(p.p)+'</p></div><span class="badge" data-badge>'+(p.opt?'Opcional':'Pendiente')+'</span></div>'+
       (p.conf?confHtml(p.conf):'')+
       '<ul class="chk">'+items.join('')+'</ul>'+
       (p.h?'<div class="hint">'+esc(p.h)+'</div>':'')+
       (nota?'<div class="secure">'+esc(nota)+'</div>':'')+
-      '<div class="okrow"><input type="checkbox" id="ok-'+p.k+'"><label for="ok-'+p.k+'">Ya tengo esto listo</label></div></article>';
+      (p.opt?'':'<div class="okrow"><input type="checkbox" id="ok-'+p.k+'"><label for="ok-'+p.k+'">Ya tengo esto listo</label></div>')+'</article>';
   });
   $('#pedidosGrid').innerHTML=h;
   Array.prototype.forEach.call(document.querySelectorAll('.okrow input'),function(cb){
@@ -639,13 +656,14 @@ function buildChecklist(){
   syncChecklist();
 }
 function syncChecklist(){
-  var n=0;
+  var n=0,tot=PED.filter(function(p){return !p.opt}).length;
   PED.forEach(function(p){
     var cb=$('#ok-'+p.k),b=$('#p-'+p.k+' [data-badge]');if(!cb||!b)return;
     if(cb.checked)n++;
     b.className='badge'+(cb.checked?' completo':'');b.textContent=cb.checked?'Listo':'Pendiente';
   });
-  $('#pTiles').innerHTML='<div class="tile"><div class="k">Listos</div><div class="v">'+n+' de '+PED.length+'</div><div class="bar-prog" aria-hidden="true"><i style="width:'+Math.round(n/PED.length*100)+'%"></i></div><div class="s">Las marcas quedan solo en este navegador.</div></div>';
+  $('#pTiles').innerHTML='<div class="tile"><div class="k">Entregas listas</div><div class="v">'+n+' de '+tot+'</div><div class="bar-prog" aria-hidden="true"><i style="width:'+Math.round(n/tot*100)+'%"></i></div><div class="s">Las marcas quedan solo en este navegador.</div></div>';
+  renderAvance();
 }
 
 /* ---------- bitácora ---------- */
