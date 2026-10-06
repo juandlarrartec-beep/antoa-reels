@@ -16,7 +16,7 @@ base de datos de la plataforma para guardar. En GitHub Pages esa base no existe,
 asi que alli se publica envuelta y con la bandera window.__PUBLICO: solo lectura,
 sin formularios y sin bitacora.
 """
-import re, shutil
+import json, re, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -39,11 +39,31 @@ FRAGMENTS = [
     ("hoja-de-ruta/hoja-de-ruta.html",   "hoja-de-ruta.html"),
 ]
 
+# Estado de las tareas que ve el cliente en la copia publica (sin base de datos).
+# Se edita a mano o se le pide a Claude; en la version de claude.ai el avance es en vivo.
+AVANCE = ROOT / "hoja-de-ruta" / "avance.json"
+ESTADOS = {"pendiente", "curso", "espera", "listo"}
+
+
+def leer_avance(fuente: str):
+    if not AVANCE.exists():
+        return None
+    datos = json.loads(AVANCE.read_text(encoding="utf-8"))
+    ids = set(re.findall(r"\{id:'(t\d+)',f:", fuente))
+    tareas = datos.get("tareas", {})
+    assert set(tareas) == ids, f"avance.json: tareas distintas a las del cronograma ({sorted(set(tareas) ^ ids)})"
+    malos = {k: v for k, v in tareas.items() if v not in ESTADOS}
+    assert not malos, f"avance.json: estados invalidos {malos} (validos: {sorted(ESTADOS)})"
+    assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", datos.get("actualizado", "")), "avance.json: falta 'actualizado' (AAAA-MM-DD)"
+    return datos
+
+
 NOINDEX = '<meta name="robots" content="noindex, nofollow">'
 VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1">'
 
 def envolver(fragmento: str) -> str:
     """Convierte un fragmento de artifact en una pagina completa, en modo publico."""
+    avance = leer_avance(fragmento)
     corte = fragmento.index('<div class="wrap">')
     cabeza, cuerpo = fragmento[:corte].strip(), fragmento[corte:].strip()
     return (
@@ -51,7 +71,9 @@ def envolver(fragmento: str) -> str:
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
         + NOINDEX + "\n"
         "<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n"
-        "<script>window.__PUBLICO = true;</script>\n"
+        "<script>window.__PUBLICO = true;"
+        + (f" window.__AVANCE = {json.dumps(avance, ensure_ascii=False)};" if avance else "")
+        + "</script>\n"
         + cabeza + "\n</head>\n<body>\n" + cuerpo + "\n</body>\n</html>\n"
     )
 

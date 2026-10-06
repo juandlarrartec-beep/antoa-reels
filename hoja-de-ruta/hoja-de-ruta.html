@@ -46,6 +46,27 @@ section>h2{font-size:1.6rem;margin-bottom:6px}
 
 .goal{background:var(--ink);color:var(--bg);border-radius:14px;padding:18px 20px;margin-bottom:16px;font-weight:500}
 .goal b{font-family:var(--fd);font-weight:700}
+.avance{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 36px;align-items:center;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:22px 28px;margin-bottom:16px;box-shadow:var(--shadow)}
+.av-num{display:flex;align-items:baseline;font-family:var(--fd);font-weight:700;line-height:.85;letter-spacing:-.04em;color:var(--ink)}
+.av-num .n{font-size:clamp(4.2rem,13vw,8rem);font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+.av-num .pc{font-size:clamp(1.7rem,4.5vw,3rem);color:var(--acc);margin-left:4px;letter-spacing:0}
+.av-top{display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.av-top h3{font-size:1.15rem}
+.av-top span{color:var(--mut);font-size:14px}
+.av-bar{position:relative;height:22px;border-radius:99px;background:var(--surf2);overflow:hidden}
+.av-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:inherit;background:var(--acc);transition:width 1.2s cubic-bezier(.22,.7,.3,1),background-color .4s}
+.av-bar.full i{background:var(--good)}
+.av-bar b{position:absolute;top:0;bottom:0;width:2px;background:var(--surf)}
+.av-scale{position:relative;height:14px;margin-top:7px;font:500 11px/1 var(--fm);color:var(--mut)}
+.av-scale span{position:absolute;top:0;transform:translateX(-50%)}
+.av-scale span:first-child{transform:none}
+.av-scale span:last-child{transform:translateX(-100%)}
+.av-foot{color:var(--mut);font-size:13.5px;margin-top:8px}
+.conf{display:flex;gap:14px;align-items:center;border:1px solid var(--good);background:color-mix(in srgb,var(--good) 9%,transparent);border-radius:12px;padding:12px 16px}
+.conf-ic{flex:none;width:30px;height:30px;border-radius:50%;background:var(--good);color:var(--bg);display:grid;place-items:center;font-weight:700}
+.conf-k{font:600 11px/1 var(--fm);letter-spacing:.08em;text-transform:uppercase;color:var(--good)}
+.conf-v{font:700 1.4rem/1.15 var(--fd);margin-top:6px}
+.conf-n{color:var(--mut);font-size:13px;margin-top:3px}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:8px}
 .tile{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
 .tile .k{font:500 11px/1 var(--fm);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
@@ -155,6 +176,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
 .okrow label{margin:0;font-weight:600}
 
 @media (max-width:640px){
+  .avance{grid-template-columns:1fr;padding:18px}
   .t{grid-template-columns:1fr}
   .entry{grid-template-columns:1fr}
   .g-head,.g-row{grid-template-columns:150px 1fr}
@@ -181,6 +203,15 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
 
   <section id="resumen">
     <div class="goal"><b>Objetivo de la etapa:</b> validar el canal y generar las primeras reservas para la experiencia de mesa para 4 personas.</div>
+    <div class="avance" id="avance">
+      <div class="av-num" aria-hidden="true"><span class="n" id="avNum">0</span><span class="pc">%</span></div>
+      <div class="av-body">
+        <div class="av-top"><h3>Avance del proyecto</h3><span id="avCount">0 de 18 tareas listas</span></div>
+        <div class="av-bar" id="avBar" role="progressbar" aria-label="Avance del proyecto" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="avFill"></i><b style="left:25%"></b><b style="left:50%"></b><b style="left:75%"></b></div>
+        <div class="av-scale" aria-hidden="true"><span style="left:0">0</span><span style="left:25%">25</span><span style="left:50%">50</span><span style="left:75%">75</span><span style="left:100%">100%</span></div>
+        <p class="av-foot" id="avFoot"></p>
+      </div>
+    </div>
     <div class="tiles" id="tiles"></div>
     <div class="cfg" id="cfg" hidden>
       <label for="inicio" style="margin:0">Fecha de inicio</label>
@@ -226,7 +257,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <div class="log" id="bitList"><div class="empty">Todavía no hay entradas.</div></div>
   </section>
 
-  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria se paga directo a Meta y la define Pedro.</footer>
+  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria, de $100.000 a $150.000 por mes, está confirmada por Pedro y se paga directo a Meta.</footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -310,9 +341,9 @@ var PED=[
      {id:'mesa',l:'Tamaño de la mesa',ty:'sel',o:['Hasta 4 personas','Otro (lo contás abajo)']},
      {id:'sena',l:'Cómo funciona la seña',ty:'area',ph:'Monto, cómo se paga y qué pasa si se cancela'},
      {id:'idiomas',l:'Idiomas en los que atendés',ty:'text',ph:'Español, inglés, portugués…'}]},
- {k:'pauta',t:'Inversión publicitaria',p:'El dinero de los anuncios se paga directo a Meta. Vos definís cuánto.',
-  f:[{id:'presupuesto',l:'Cuánto querés invertir por mes en anuncios',ty:'text',req:1,ph:'Monto y moneda'},
-     {id:'ok',l:'¿Vas a cargar vos el medio de pago en Meta?',ty:'sel',req:1,o:['Sí, lo cargo yo cuando la cuenta esté lista','Prefiero verlo en la reunión']}],
+ {k:'pauta',t:'Inversión publicitaria',p:'El dinero de los anuncios se paga directo a Meta.',
+  conf:{k:'Presupuesto confirmado',v:'$100.000 a $150.000 por mes',n:'Pesos argentinos. Pedro ya lo aceptó.'},
+  f:[{id:'ok',l:'¿Vas a cargar vos el medio de pago en Meta?',ty:'sel',req:1,o:['Sí, lo cargo yo cuando la cuenta esté lista','Prefiero verlo en la reunión']}],
   s:'No nos pases datos de tarjetas por acá ni por mensaje. El medio de pago lo cargás vos, directo en Meta.'},
  {k:'extra',t:'Algo más que debamos saber',p:'Cuentas anteriores de publicidad, cosas que ya probaste, fechas especiales, restricciones.',
   f:[{id:'texto',l:'Contanos',pl:'Lo que se te ocurra y no esté en la lista',ty:'area'}]}
@@ -321,6 +352,7 @@ var PED=[
 /* ---------- estado ---------- */
 var db=null,user=null,assets=null,isOwner=false,canWrite=true;
 var S={inicio:INICIO_DEFAULT,tareas:{},pedidos:{},cred:{},bit:[]};
+var BASE=(window.__AVANCE&&window.__AVANCE.tareas)?window.__AVANCE:null;
 
 /* ---------- fechas ---------- */
 function parse(s){var p=s.split('-').map(Number);return new Date(p[0],p[1]-1,p[2],12)}
@@ -333,7 +365,7 @@ var fHora=new Intl.DateTimeFormat('es-AR',{day:'numeric',month:'short',hour:'2-d
 function fechaTarea(t){var a=wd(t.a),b=wd(t.b);return t.a===t.b?fLong.format(a):fShort.format(a)+' → '+fLong.format(b)}
 function hoyIdx(){var h=new Date();h.setHours(12,0,0,0);var d=parse(S.inicio);while(!habil(d))d.setDate(d.getDate()+1);if(h<d)return 0;var i=0;while(d<=h){i++;do{d.setDate(d.getDate()+1)}while(!habil(d))}return i}
 function atFmt(s){try{return fHora.format(new Date(s))}catch(e){return ''}}
-function estadoDe(id){return (S.tareas[id]&&S.tareas[id].estado)||'pendiente'}
+function estadoDe(id){return (S.tareas[id]&&S.tareas[id].estado)||(BASE&&BASE.tareas[id])||'pendiente'}
 
 /* ---------- ui helpers ---------- */
 var toastT;
@@ -343,18 +375,47 @@ function errTxt(e){var c=e&&e.code;if(c==='quota_exceeded')return 'Se llenó el 
 
 /* ---------- resumen ---------- */
 function renderTiles(){
-  var done=TAREAS.filter(function(t){return estadoDe(t.id)==='listo'}).length;
-  var pct=Math.round(done/TAREAS.length*100);
   var t10=TAREAS.filter(function(t){return t.id==='t10'})[0],t16=TAREAS.filter(function(t){return t.id==='t16'})[0];
-  var prox=TAREAS.filter(function(t){return estadoDe(t.id)!=='listo'}).sort(function(x,y){return x.b-y.b})[0];
   $('#tiles').innerHTML=
    '<div class="tile"><div class="k">Inicio</div><div class="v mono">'+esc(fLong.format(wd(1)))+'</div><div class="s">Día 1 de trabajo</div></div>'+
    '<div class="tile"><div class="k">Configuración lista</div><div class="v mono">'+esc(fLong.format(wd(t10.b)))+'</div><div class="s">Entrega documentada</div></div>'+
    '<div class="tile"><div class="k">Lanzamiento de campañas</div><div class="v mono">'+esc(fLong.format(wd(t16.b)))+'</div><div class="s">Primeras campañas al aire</div></div>'+
-   (PUBLICO?
-    '<div class="tile"><div class="k">Dependen de vos</div><div class="v">'+TAREAS.filter(function(t){return t.r==='cl'}).length+' tareas</div><div class="s">Son las barras naranjas del cronograma</div></div>':
-    '<div class="tile"><div class="k">Avance</div><div class="v">'+done+' de '+TAREAS.length+' tareas</div><div class="bar-prog" aria-hidden="true"><i style="width:'+pct+'%"></i></div>'+
-    '<div class="s">'+(prox?'Próxima fecha: '+esc(prox.t)+' · '+esc(fShort.format(wd(prox.b))):'Todo listo')+'</div></div>');
+   '<div class="tile"><div class="k">Dependen de vos</div><div class="v">'+TAREAS.filter(function(t){return t.r==='cl'}).length+' tareas</div><div class="s">Son las barras naranjas del cronograma</div></div>';
+}
+
+/* ---------- avance ---------- */
+var avPrev=0,avPrimera=true,avRaf=0;
+function contar(el,desde,hasta){
+  cancelAnimationFrame(avRaf);
+  var quieto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(quieto||desde===hasta){el.textContent=hasta;return}
+  var t0=null,dur=1200;
+  function paso(t){
+    if(t0===null)t0=t;
+    var k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);
+    el.textContent=k<1?Math.round(desde+(hasta-desde)*e):hasta;
+    if(k<1)avRaf=requestAnimationFrame(paso);
+  }
+  avRaf=requestAnimationFrame(paso);
+}
+function renderAvance(){
+  var total=TAREAS.length,
+      hechas=TAREAS.filter(function(t){return estadoDe(t.id)==='listo'}).length,
+      pct=Math.round(hechas/total*100),
+      prox=TAREAS.filter(function(t){return estadoDe(t.id)!=='listo'}).sort(function(x,y){return x.b-y.b||x.a-y.a})[0],
+      bar=$('#avBar');
+  bar.setAttribute('aria-valuenow',pct);
+  bar.setAttribute('aria-valuetext',pct+' por ciento, '+hechas+' de '+total+' tareas listas');
+  bar.classList.toggle('full',pct===100);
+  $('#avCount').textContent=hechas+' de '+total+' tareas listas';
+  $('#avFoot').textContent=(prox?'Próxima fecha: '+prox.t+' · '+fShort.format(wd(prox.b)):'Proyecto completo')+
+    (PUBLICO&&BASE&&BASE.actualizado?' · Actualizado el '+fShort.format(parse(BASE.actualizado)):'');
+  var desde=avPrimera?0:avPrev;avPrimera=false;avPrev=pct;
+  requestAnimationFrame(function(){requestAnimationFrame(function(){$('#avFill').style.width=pct+'%'})});
+  contar($('#avNum'),desde,pct);
+}
+function confHtml(c){
+  return '<div class="conf"><span class="conf-ic" aria-hidden="true">✓</span><div><div class="conf-k">'+esc(c.k)+'</div><div class="conf-v">'+esc(c.v)+'</div><div class="conf-n">'+esc(c.n)+'</div></div></div>';
 }
 
 /* ---------- gantt ---------- */
@@ -383,7 +444,7 @@ function buildTareas(){
     h+='<div class="fase"><h3>'+esc(f.n)+' <small>'+esc(f.e)+'</small></h3><div class="tasks">';
     ts.forEach(function(t){
       h+='<article class="t" id="tk-'+t.id+'" data-id="'+t.id+'">'+
-       '<div><span class="chip" data-chip data-apponly></span><span data-late data-apponly></span><h4>'+esc(t.t)+'</h4><p class="d">'+esc(t.d)+'</p></div>'+
+       '<div><span class="chip" data-chip></span><span data-late data-apponly></span><h4>'+esc(t.t)+'</h4><p class="d">'+esc(t.d)+'</p></div>'+
        '<dl class="t-meta"><div><dt>Responsable</dt><dd class="'+(t.r==='cl'?'resp-cl':'')+'">'+(t.r==='cl'?'Pedro':'Agencia')+'</dd></div>'+
        '<div><dt>Fecha límite</dt><dd class="mono" data-fecha></dd></div></dl>'+
        '<div class="t-log" data-apponly><div><div class="eyebrow" style="margin-bottom:6px">Qué se hizo</div><p class="nota" data-nota></p></div>'+
@@ -407,7 +468,7 @@ function applyTareas(){
   var hi=hoyIdx();
   TAREAS.forEach(function(t){
     var el=$('#tk-'+t.id);if(!el)return;
-    var d=S.tareas[t.id]||{},e=d.estado||'pendiente';
+    var d=S.tareas[t.id]||{},e=estadoDe(t.id);
     var chip=$('[data-chip]',el);chip.className='chip e-'+e;chip.textContent=ELAB[e];
     var late=e!=='listo'&&hi>t.b;
     $('[data-late]',el).innerHTML=late?'<span class="chip late">Atrasada</span>':'';
@@ -436,6 +497,7 @@ function buildPedidos(){
   var h='';
   PED.forEach(function(p){
     h+='<article class="p" id="p-'+p.k+'" data-k="'+p.k+'"><div class="p-head"><div><h3>'+esc(p.t)+'</h3><p class="why">'+esc(p.p)+'</p></div><span class="badge" data-badge>Sin cargar</span></div>';
+    if(p.conf)h+=confHtml(p.conf);
     if(p.s)h+='<div class="secure">'+esc(p.s)+'</div>';
     h+='<div class="fields">';
     p.f.forEach(function(f){
@@ -470,7 +532,7 @@ function estadoPedido(p){
   var d=S.pedidos[p.k]||{},v=d.valores||{},c=d.cargados||{};
   var req=p.f.filter(function(f){return f.req});
   var ok=req.filter(function(f){return f.ty==='pw'?c[f.id]:(v[f.id]||'').toString().trim()}).length;
-  var any=p.f.some(function(f){return f.ty==='pw'?c[f.id]:(v[f.id]||'').toString().trim()})||((d.archivos||[]).length>0);
+  var any=!!p.conf||p.f.some(function(f){return f.ty==='pw'?c[f.id]:(v[f.id]||'').toString().trim()})||((d.archivos||[]).length>0);
   if(req.length&&ok===req.length)return 'completo';
   if(any)return 'parcial';
   if(!req.length&&!any)return 'vacio';
@@ -562,6 +624,7 @@ function buildChecklist(){
     if(p.up)items.push('<li><span>'+esc(p.uh)+'</span></li>');
     var nota=p.sp!==undefined?p.sp:p.s;
     h+='<article class="p" id="p-'+p.k+'" data-k="'+p.k+'"><div class="p-head"><div><h3>'+esc(p.t)+'</h3><p class="why">'+esc(p.p)+'</p></div><span class="badge" data-badge>Pendiente</span></div>'+
+      (p.conf?confHtml(p.conf):'')+
       '<ul class="chk">'+items.join('')+'</ul>'+
       (p.h?'<div class="hint">'+esc(p.h)+'</div>':'')+
       (nota?'<div class="secure">'+esc(nota)+'</div>':'')+
@@ -616,7 +679,7 @@ async function saveInicio(){
 }
 
 function setLimite(){var t=TAREAS.filter(function(x){return x.id==='t02'})[0];$('#limitePedidos').textContent=fLong.format(wd(t.b))}
-function refresh(){renderTiles();renderGantt();applyTareas();setLimite();if(!PUBLICO){applyPedidos();renderBit()}}
+function refresh(){renderTiles();renderAvance();renderGantt();applyTareas();setLimite();if(!PUBLICO){applyPedidos();renderBit()}}
 
 /* ---------- arranque ---------- */
 buildTareas();if(PUBLICO)buildChecklist();else buildPedidos();refresh();

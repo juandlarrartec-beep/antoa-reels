@@ -66,6 +66,7 @@ lectura: cronograma, fechas y lista de lo que se pide; las tildes quedan en el n
 | `informe-peter-u-cook.html` | Fuente del informe |
 | `anexo-ejecucion-peter-u-cook.html` | Fuente del anexo |
 | `hoja-de-ruta/hoja-de-ruta.html` | Fuente de la hoja de ruta (una sola fuente: app en claude.ai, solo lectura en Pages) |
+| `hoja-de-ruta/avance.json` | Estado de las 18 tareas que ve el cliente en la copia pública y que alimenta la barra de avance. En claude.ai el avance es en vivo. Se edita y se corre `python3 build.py` |
 | `print.css` | Estilos compartidos de los tres documentos imprimibles |
 | `build.py` | Genera `peter-u-cook/` y `pub/` desde las fuentes |
 | `peter-u-cook/` | **Generado.** Sitio publicable, autocontenido |
