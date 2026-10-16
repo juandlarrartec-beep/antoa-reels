@@ -174,6 +174,122 @@ button.ghost{background:transparent}
 .deadline{display:inline-flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;border:1px solid var(--ember);color:var(--ember);border-radius:12px;padding:8px 14px;font-weight:600;margin:0 0 18px}
 .notice{background:var(--surf);border:1px dashed var(--ember);border-radius:12px;padding:12px 14px;color:var(--mut);margin-bottom:14px;font-size:14px}
 
+
+/* mapa de estado (ecosistema) */
+.eco{margin-top:16px;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:22px 24px 26px;box-shadow:var(--shadow)}
+.eco-head{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.eco-head h3{font-size:1.15rem}
+.eco-leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--mut)}
+.eco-leg span{--c:var(--mut)}
+.eco-leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--c)}
+.eco-map{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,250px) minmax(0,1fr);gap:0 clamp(36px,7vw,100px);align-items:center}
+.eco-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.eco-svg path{fill:none;stroke:var(--line);stroke-width:1.6}
+.eco-svg path.s-listo{stroke:var(--good);opacity:.6}
+.eco-svg path.s-curso{stroke:var(--warn);stroke-dasharray:5 5;opacity:.9}
+.eco-svg path.s-espera{stroke:var(--ember);stroke-dasharray:3 5}
+.eco-col{position:relative;z-index:1;display:grid;gap:9px;min-width:0}
+.eco-col>h4{font:600 11.5px/1 var(--fm);letter-spacing:.08em;text-transform:uppercase;color:var(--acc);border-top:4px solid var(--acc);padding-top:9px;margin-bottom:2px}
+.eco-card{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:1px 11px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 11px;min-width:0}
+.eco-card.s-listo{border-color:color-mix(in srgb,var(--good) 55%,var(--line))}
+.eco-card.s-curso{border-color:color-mix(in srgb,var(--warn) 60%,var(--line))}
+.eco-ic{grid-row:1/3;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;background:var(--acc)}
+.eco-ic svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.eco-ic.m{background:#0866FF} .eco-ic.fb{background:#1877F2} .eco-ic.wa{background:#1FA855} .eco-ic.ad{background:#1B74E4} .eco-ic.ix{background:#8A5CF6}
+.eco-ic.ig{background:linear-gradient(135deg,#F9A13B,#E1306C 55%,#7B3FD0)}
+.eco-ic.ek{background:var(--ember)} .eco-ic.dk{background:#475569}
+.eco-t{font:700 .93rem/1.2 var(--fd);min-width:0}
+.eco-d{grid-column:2;font-size:12.5px;color:var(--mut);line-height:1.3;min-width:0}
+.eco-chip{grid-row:1/3;grid-column:3;justify-self:end;font:600 11px/1 var(--fb);padding:5px 9px;border-radius:99px;white-space:nowrap;background:color-mix(in srgb,var(--mut) 14%,transparent);color:var(--mut)}
+.s-listo .eco-chip{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.s-curso .eco-chip{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.s-espera .eco-chip{background:color-mix(in srgb,var(--ember) 16%,transparent);color:var(--ember)}
+.eco-mini{grid-column:2/4;height:4px;border-radius:99px;background:var(--surf2);overflow:hidden;margin-top:6px}
+.eco-mini i{display:block;height:100%;background:var(--warn);transition:width .6s}
+.eco-c{position:relative;z-index:1;text-align:center;border:2px solid var(--acc);border-radius:18px;background:var(--surf);padding:20px 16px;box-shadow:var(--shadow)}
+.eco-c .k{font:600 10.5px/1 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.eco-c .nm{font:700 1.6rem/1.05 var(--fd);margin-top:10px}
+.eco-c .hd{color:var(--mut);font-size:13px;margin-top:4px}
+.eco-c .ct{font:700 2rem/1 var(--fd);margin-top:14px;font-variant-numeric:tabular-nums}
+.eco-c .ct small{font:500 13px/1.2 var(--fb);color:var(--mut)}
+@media (max-width:860px){
+  .eco{padding:18px 16px 20px}
+  .eco-map{grid-template-columns:1fr;gap:18px}
+  .eco-svg{display:none}
+  .eco-c{order:-1}
+}
+
+/* pestaña: contenido seleccionado */
+#contenido{display:none}
+html.vcont #contenido{display:block}
+html.vcont section:not(#contenido){display:none}
+.cs-h{font:600 12px/1 var(--fm);letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:34px 0 12px}
+.pub-hero{background:var(--ink);color:var(--bg);border-radius:16px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px 32px;align-items:center}
+.pub-hero h3{font-size:1.5rem;line-height:1.15}
+.pub-hero p{opacity:.85;margin-top:8px;font-size:14.5px}
+.pub-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pub-facts div{border-left:2px solid var(--acc);padding-left:10px}
+.pub-facts b{display:block;font:700 1.5rem/1 var(--fd)}
+.pub-facts span{font-size:12px;opacity:.75}
+.seg-bar{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:14px 0 6px;gap:2px}
+.seg-bar i{display:grid;place-items:center;font:700 12.5px/1 var(--fm);color:#fff;font-style:normal;min-width:0}
+.seg-leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12.5px;color:var(--mut)}
+.seg-leg span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--c)}
+.segs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:12px;margin-top:16px}
+.seg{background:var(--surf);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:14px;padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
+.seg-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.seg h4{font-size:1.02rem}
+.seg .pc{font:700 1.3rem/1 var(--fd);color:var(--c)}
+.seg .mo{font:500 12px/1.2 var(--fm);color:var(--mut)}
+.seg dl{margin:0;display:grid;gap:7px}
+.seg dt{font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.seg dd{margin:3px 0 0;font-size:13.5px;line-height:1.35}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.tags span{font-size:12px;padding:3px 8px;border-radius:99px;background:var(--surf2);color:var(--ink)}
+.cfgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px;margin-top:14px}
+.cfgs>div{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.cfgs .k{font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.cfgs .v{font-size:13.5px;margin-top:6px;line-height:1.35}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr);align-items:stretch;gap:6px;margin-top:6px}
+.flow>div{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.flow>div b{display:block;font:700 1rem/1.2 var(--fd)}
+.flow>div span{font-size:13px;color:var(--mut);display:block;margin-top:4px}
+.flow>i{align-self:center;text-align:center;color:var(--acc);font-style:normal;font-weight:700;font-size:20px}
+.cr{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:20px 28px;background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+.cr-media{position:relative;border-radius:12px;overflow:hidden;background:var(--surf2);min-height:420px;aspect-ratio:4/5;align-self:start}
+.cr-media .ph{position:absolute;inset:0;display:grid;place-content:center;gap:8px;text-align:center;padding:18px;color:var(--mut);font-size:13px;background:linear-gradient(160deg,var(--surf2),var(--bg))}
+.cr-media .ph b{font:700 1.05rem/1.2 var(--fd);color:var(--ink)}
+.cr-media img,.cr-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;background:transparent}
+.cr-link{display:inline-block;margin-top:8px;font-size:13px;font-weight:600}
+.cr-tag{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.cr-tag .n{font:600 11.5px/1 var(--fm);letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+.cr-tag .ang{font:600 11.5px/1 var(--fb);padding:5px 9px;border-radius:99px;border:1px solid var(--ember);color:var(--ember)}
+.cr h3{font-size:1.35rem;margin-top:8px;line-height:1.15}
+.cr-body{display:grid;gap:14px;align-content:start;min-width:0}
+.cr-copy{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px}
+.cr-copy .k,.cr-sub .k{font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.cr-copy .hook{font:700 1.08rem/1.3 var(--fd)}
+.cr-copy p{font-size:14.5px;line-height:1.5}
+.cta{display:inline-block;width:fit-content;background:var(--acc);color:var(--acc-ink);font-weight:700;font-size:14px;padding:10px 18px;border-radius:9px}
+.cr details{font-size:13.5px}
+.cr summary{cursor:pointer;color:var(--acc);font-weight:600}
+.cr details p{margin-top:6px;color:var(--mut)}
+.obj{display:grid;gap:8px}
+.obj div{border-left:3px solid var(--ember);padding:2px 0 2px 12px;font-size:13.5px;line-height:1.4}
+.obj b{display:block}
+.obj span{color:var(--mut)}
+.cr-cfg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 14px;border-top:1px dashed var(--line);padding-top:12px}
+.cr-cfg .w{grid-column:1/-1}
+.cr-cfg .k{font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.cr-cfg .v{font-size:13px;margin-top:4px;line-height:1.3}
+@media (max-width:860px){
+  .pub-hero{grid-template-columns:1fr}
+  .cr{grid-template-columns:1fr}
+  .cr-media{min-height:0;max-width:420px}
+  .flow{grid-template-columns:1fr}
+  .flow>i{transform:rotate(90deg)}
+}
+
 /* bitacora */
 .log{display:grid;gap:10px;margin-top:16px}
 .entry{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 16px;padding:12px 0;border-top:1px solid var(--line)}
@@ -223,6 +339,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <a href="#cronograma">Cronograma</a>
     <a href="#pedidos">Lo que necesitamos de vos</a>
     <a href="#bitacora" data-apponly>Bitácora</a>
+    <a href="#contenido" id="tabCont">Contenido seleccionado</a>
   </nav>
 
   <section id="resumen">
@@ -236,7 +353,12 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
         <p class="av-foot" id="avFoot"></p>
       </div>
     </div>
-    <div class="tiles" id="tiles"></div>
+    <div class="eco" id="eco" aria-label="Estado de la estructura">
+      <div class="eco-head"><h3>Cómo va todo lo que armamos</h3>
+        <div class="eco-leg"><span style="--c:var(--good)"><i></i>Listo</span><span style="--c:var(--warn)"><i></i>En proceso</span><span><i></i>Pendiente</span></div></div>
+      <div class="eco-map" id="ecoMap"></div>
+    </div>
+    <div class="tiles" id="tiles" style="margin-top:16px"></div>
     <div class="cfg" id="cfg" hidden>
       <label for="inicio" style="margin:0">Fecha de inicio</label>
       <input id="inicio" type="date" style="width:auto">
@@ -279,6 +401,207 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
       </div>
     </div>
     <div class="log" id="bitList"><div class="empty">Todavía no hay entradas.</div></div>
+  </section>
+
+  <section id="contenido">
+    <h2>Contenido seleccionado</h2>
+    <p class="lead">A quién le vamos a hablar, con qué contenido y cómo queda armado dentro de Meta. Los videos ya están publicados en @peterucook: los republicamos como anuncios con un texto pensado para que escriban por WhatsApp y reserven.</p>
+
+    <div class="cs-h">1 · Público objetivo</div>
+    <div class="pub-hero">
+      <div>
+        <h3>Viajeros y comensales de 28 a 60 años que buscan una cena para recordar</h3>
+        <p>Parejas, grupos de amigos y familias con poder adquisitivo medio-alto, que descubren y deciden desde el celular, y prefieren escribir por WhatsApp antes que llamar. Les interesan los viajes, la buena mesa, el vino y la música en vivo.</p>
+      </div>
+      <div class="pub-facts">
+        <div><b>29%</b><span>del gasto del turista internacional va a gastronomía</span></div>
+        <div><b>22%</b><span>de los turistas llegan de Brasil, el mercado número uno</span></div>
+        <div><b>14%</b><span>llegan de EE.UU., los que más reservan con anticipación</span></div>
+      </div>
+    </div>
+
+    <div class="cs-h">Cuatro públicos y cómo repartimos la inversión</div>
+    <div class="seg-bar" role="img" aria-label="Reparto inicial: turistas en la Ciudad 40 por ciento, Brasil 25, Estados Unidos 15, público local 20">
+      <i style="flex:40;background:#0F6B73">40%</i><i style="flex:25;background:#C8561F">25%</i><i style="flex:15;background:#5B4BC4">15%</i><i style="flex:20;background:#B87A00">20%</i>
+    </div>
+    <div class="seg-leg"><span style="--c:#0F6B73">Turistas en la Ciudad</span><span style="--c:#C8561F">Brasil</span><span style="--c:#5B4BC4">EE.UU.</span><span style="--c:#B87A00">Público local</span></div>
+    <p class="hint" style="margin-top:8px">Reparto inicial sobre los $100.000 a $150.000 por mes. Cada semana lo movemos hacia el público que más mensajes trae al menor costo.</p>
+
+    <div class="segs">
+      <article class="seg" style="--c:#0F6B73">
+        <div class="seg-top"><h4>Turistas en la Ciudad</h4><span class="pc">40%</span></div>
+        <div class="mo">$40.000 a $60.000 por mes</div>
+        <dl>
+          <div><dt>Dónde</dt><dd>Ciudad de Buenos Aires · personas que están de viaje en esa ubicación</dd></div>
+          <div><dt>Edad e idioma</dt><dd>28 a 60 · inglés y portugués</dd></div>
+          <div><dt>Intereses</dt><dd><div class="tags"><span>Viajes</span><span>Gastronomía</span><span>Vino</span><span>Tango</span><span>Experiencias</span></div></dd></div>
+          <div><dt>Comportamiento</dt><dd>Viajeros internacionales y viajeros frecuentes</dd></div>
+        </dl>
+      </article>
+      <article class="seg" style="--c:#C8561F">
+        <div class="seg-top"><h4>Brasil</h4><span class="pc">25%</span></div>
+        <div class="mo">$25.000 a $37.500 por mes</div>
+        <dl>
+          <div><dt>Dónde</dt><dd>Brasil · San Pablo, Río de Janeiro, Porto Alegre, Curitiba y Belo Horizonte</dd></div>
+          <div><dt>Edad e idioma</dt><dd>28 a 60 · portugués</dd></div>
+          <div><dt>Intereses</dt><dd><div class="tags"><span>Viajes a Argentina</span><span>Buenos Aires</span><span>Gastronomía</span><span>Vino argentino</span></div></dd></div>
+          <div><dt>Comportamiento</dt><dd>Viajeros frecuentes y a quienes les interesa viajar al exterior</dd></div>
+        </dl>
+      </article>
+      <article class="seg" style="--c:#5B4BC4">
+        <div class="seg-top"><h4>Estados Unidos</h4><span class="pc">15%</span></div>
+        <div class="mo">$15.000 a $22.500 por mes</div>
+        <dl>
+          <div><dt>Dónde</dt><dd>EE.UU. · Nueva York, Miami, Los Ángeles y Chicago</dd></div>
+          <div><dt>Edad e idioma</dt><dd>30 a 65 · inglés</dd></div>
+          <div><dt>Intereses</dt><dd><div class="tags"><span>Viajes a Sudamérica</span><span>Malbec</span><span>Alta cocina</span><span>Experiencias</span></div></dd></div>
+          <div><dt>Comportamiento</dt><dd>Viajeros internacionales con reserva anticipada</dd></div>
+        </dl>
+      </article>
+      <article class="seg" style="--c:#B87A00">
+        <div class="seg-top"><h4>Público local</h4><span class="pc">20%</span></div>
+        <div class="mo">$20.000 a $30.000 por mes</div>
+        <dl>
+          <div><dt>Dónde</dt><dd>Ciudad de Buenos Aires y GBA · radio de 25 km</dd></div>
+          <div><dt>Edad e idioma</dt><dd>28 a 55 · español</dd></div>
+          <div><dt>Intereses</dt><dd><div class="tags"><span>Restaurantes</span><span>Gastronomía</span><span>Vino</span><span>Celebraciones</span><span>Eventos</span></div></dd></div>
+          <div><dt>Comportamiento</dt><dd>Aniversarios y cumpleaños próximos · seguidores de cuentas gastronómicas</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="cs-h">Lo que se repite en todas las campañas</div>
+    <div class="cfgs">
+      <div><div class="k">Objetivo</div><div class="v">Interacción → Mensajes por WhatsApp</div></div>
+      <div><div class="k">Optimización</div><div class="v">Conversaciones iniciadas. Evento medido: mensaje de reserva</div></div>
+      <div><div class="k">Dónde se ve</div><div class="v">Reels, Historias y Feed de Instagram, más Facebook</div></div>
+      <div><div class="k">Género</div><div class="v">Todos</div></div>
+      <div><div class="k">Presupuesto</div><div class="v">$100.000 a $150.000 por mes, entre $3.300 y $5.000 por día</div></div>
+      <div><div class="k">Se excluye</div><div class="v">El equipo del negocio y quienes ya reservaron en los últimos 30 días</div></div>
+      <div><div class="k">Segunda vuelta</div><div class="v">Quienes vieron el video o escribieron y no reservaron, durante 30 días</div></div>
+      <div><div class="k">Idiomas del anuncio</div><div class="v">Español, inglés y portugués según el público</div></div>
+    </div>
+
+    <div class="cs-h">Cómo queda armado dentro de Meta</div>
+    <div class="flow">
+      <div><b>1 campaña</b><span>Objetivo: mensajes por WhatsApp</span></div><i>→</i>
+      <div><b>4 conjuntos de anuncios</b><span>Uno por público: turistas, Brasil, EE.UU. y local</span></div><i>→</i>
+      <div><b>4 anuncios</b><span>Los contenidos de abajo, cada uno con su texto y su botón</span></div>
+    </div>
+
+    <div class="cs-h">2 · Contenidos que vamos a republicar</div>
+
+    <article class="cr">
+      <div class="cr-media" data-ig="DOCWGDBjTx4" data-n="1"><div class="ph"><b>Contenido 1</b>Publicación de Instagram<a class="cr-link" href="https://www.instagram.com/p/DOCWGDBjTx4/" target="_blank" rel="noopener">Ver en Instagram</a></div></div>
+      <div class="cr-body">
+        <div><div class="cr-tag"><span class="n">Contenido 1</span><span class="ang">La experiencia completa</span></div>
+        <h3>Cena de autor con vista al río</h3>
+        <a class="cr-link" href="https://www.instagram.com/p/DOCWGDBjTx4/" target="_blank" rel="noopener">Ver la publicación en Instagram</a></div>
+        <div class="cr-copy">
+          <span class="k">Texto del anuncio</span>
+          <div class="hook">Tu mejor noche en Buenos Aires no está en ninguna guía.</div>
+          <p>Cocina de autor a puerta cerrada, en un rooftop con la ciudad y el río a tus pies. Menú por pasos con maridaje, música en vivo y una mesa pensada para vos y tu gente. Mesas de 2 a 4 personas y cupos limitados cada noche. Escribinos por WhatsApp y te contamos qué fechas quedan.</p>
+          <span class="cta">Enviar mensaje</span>
+          <details><summary>Versión en inglés y portugués</summary>
+            <p><b>EN ·</b> A closed-door chef's dinner on a Buenos Aires rooftop, overlooking the city and the Río de la Plata. Tasting menu with wine pairing and live music. Tables of 2 to 4. Message us on WhatsApp to check availability.</p>
+            <p><b>PT ·</b> Um jantar autoral de portas fechadas em um rooftop de Buenos Aires, com vista para a cidade e o Río de la Plata. Menu degustação com harmonização e música ao vivo. Mesas de 2 a 4 pessoas. Chame no WhatsApp e veja a disponibilidade.</p></details>
+        </div>
+        <div class="obj"><span class="k" style="font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)">Objeciones y cómo las respondemos</span>
+          <div><b>«Debe ser carísimo»</b><span>En el primer mensaje enviamos el menú de la noche y el valor por persona, con lo que incluye: pasos, maridaje y música.</span></div>
+          <div><b>«¿Voy a conseguir lugar?»</b><span>Confirmamos fecha disponible en el día y decimos cuántas mesas quedan.</span></div>
+          <div><b>«No hablo español»</b><span>Atendemos en español, inglés y portugués.</span></div></div>
+        <div class="cr-cfg">
+          <div><div class="k">Público</div><div class="v">Turistas en la Ciudad y Brasil</div></div>
+          <div><div class="k">Titular</div><div class="v">Cena de autor con vista al río</div></div>
+          <div><div class="k">Botón</div><div class="v">Enviar mensaje · WhatsApp</div></div>
+          <div class="w"><div class="k">Bienvenida</div><div class="v">«¡Hola! Gracias por escribir a Peter U Cook. ¿Para qué fecha y cuántas personas, de 2 a 4? Respondemos en español, English y português.»</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="cr">
+      <div class="cr-media" data-ig="DYVb4O1JVli" data-n="2"><div class="ph"><b>Contenido 2</b>Publicación de Instagram<a class="cr-link" href="https://www.instagram.com/p/DYVb4O1JVli/" target="_blank" rel="noopener">Ver en Instagram</a></div></div>
+      <div class="cr-body">
+        <div><div class="cr-tag"><span class="n">Contenido 2</span><span class="ang">Maridaje y música en vivo</span></div>
+        <h3>Cena con maridaje y tango en vivo</h3>
+        <a class="cr-link" href="https://www.instagram.com/p/DYVb4O1JVli/" target="_blank" rel="noopener">Ver la publicación en Instagram</a></div>
+        <div class="cr-copy">
+          <span class="k">Texto del anuncio</span>
+          <div class="hook">Cena, maridaje y tango en vivo. Todo en la misma mesa.</div>
+          <p>Un menú por pasos pensado para acompañarse con maridaje, mientras suena tango en vivo sobre la ciudad. Es la noche que vas a contar cuando vuelvas a casa. Reservás por WhatsApp y armamos tu mesa para 2, 3 o 4 personas.</p>
+          <span class="cta">Enviar mensaje</span>
+          <details><summary>Versión en inglés y portugués</summary>
+            <p><b>EN ·</b> A tasting menu with pairings, played to live tango above the city. The night you'll tell everyone about back home. Message us on WhatsApp and we'll set up a table for 2 to 4.</p>
+            <p><b>PT ·</b> Um menu degustação com harmonização, ao som de tango ao vivo sobre a cidade. A noite que você vai contar quando voltar para casa. Chame no WhatsApp e montamos sua mesa para 2 a 4 pessoas.</p></details>
+        </div>
+        <div class="obj"><span class="k" style="font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)">Objeciones y cómo las respondemos</span>
+          <div><b>«¿Qué incluye exactamente?»</b><span>Respondemos con el detalle: menú por pasos, maridaje y música en vivo.</span></div>
+          <div><b>«Es un show para turistas»</b><span>Mostramos que es una cena de autor a puerta cerrada, con reseñas reales y la distinción Travelers' Choice.</span></div>
+          <div><b>«¿Cómo llego?»</b><span>Al confirmar la reserva enviamos la ubicación y las indicaciones de llegada.</span></div></div>
+        <div class="cr-cfg">
+          <div><div class="k">Público</div><div class="v">EE.UU. y Brasil</div></div>
+          <div><div class="k">Titular</div><div class="v">Cena con maridaje y tango en vivo</div></div>
+          <div><div class="k">Botón</div><div class="v">Enviar mensaje · WhatsApp</div></div>
+          <div class="w"><div class="k">Bienvenida</div><div class="v">«Hi! Thanks for writing to Peter U Cook. What date and how many guests (2 to 4)? Olá! Também atendemos em português.»</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="cr">
+      <div class="cr-media" data-ig="DRf1jfkkUp8" data-n="3"><div class="ph"><b>Contenido 3</b>Publicación de Instagram<a class="cr-link" href="https://www.instagram.com/p/DRf1jfkkUp8/" target="_blank" rel="noopener">Ver en Instagram</a></div></div>
+      <div class="cr-body">
+        <div><div class="cr-tag"><span class="n">Contenido 3</span><span class="ang">Una mesa para los tuyos</span></div>
+        <h3>Una mesa para 4, una noche distinta</h3>
+        <a class="cr-link" href="https://www.instagram.com/p/DRf1jfkkUp8/" target="_blank" rel="noopener">Ver la publicación en Instagram</a></div>
+        <div class="cr-copy">
+          <span class="k">Texto del anuncio</span>
+          <div class="hook">¿Dónde llevás a los tuyos cuando querés algo que no se olvide?</div>
+          <p>Una mesa para vos y hasta tres personas más: cena a puerta cerrada con vista al río, menú por pasos y música en vivo. Distinguidos como Travelers' Choice en TripAdvisor. Para cumpleaños, aniversarios o simplemente una noche distinta. Escribinos y te reservamos.</p>
+          <span class="cta">Enviar mensaje</span>
+          <details><summary>Versión en inglés y portugués</summary>
+            <p><b>EN ·</b> A table for you and up to three more: closed-door dinner overlooking the river, tasting menu and live music. A TripAdvisor Travelers' Choice winner. Message us to book.</p>
+            <p><b>PT ·</b> Uma mesa para você e até mais três pessoas: jantar de portas fechadas com vista para o rio, menu degustação e música ao vivo. Distinguido como Travelers' Choice no TripAdvisor. Chame para reservar.</p></details>
+        </div>
+        <div class="obj"><span class="k" style="font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)">Objeciones y cómo las respondemos</span>
+          <div><b>«Somos más de 4»</b><span>Las mesas son de 2 a 4 personas. Para grupos más grandes ofrecemos eventos privados.</span></div>
+          <div><b>«¿Vale la pena?»</b><span>Prueba social en el texto: Travelers' Choice, top 10 % de TripAdvisor, y reseñas sobre la comida, la vista y la atención.</span></div>
+          <div><b>«Lo pienso y después reservo»</b><span>Cupos limitados por noche: la respuesta de bienvenida ofrece las próximas fechas disponibles.</span></div></div>
+        <div class="cr-cfg">
+          <div><div class="k">Público</div><div class="v">Público local y turistas en la Ciudad</div></div>
+          <div><div class="k">Titular</div><div class="v">Una mesa para 4, una noche distinta</div></div>
+          <div><div class="k">Botón</div><div class="v">Enviar mensaje · WhatsApp</div></div>
+          <div class="w"><div class="k">Bienvenida</div><div class="v">«¡Hola! Gracias por escribir a Peter U Cook. ¿Qué fecha tenés en mente y cuántos son (2 a 4)? Te pasamos las próximas fechas disponibles.»</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="cr">
+      <div class="cr-media" data-ig="DLnneYuys1K" data-n="4"><div class="ph"><b>Contenido 4</b>Publicación de Instagram<a class="cr-link" href="https://www.instagram.com/p/DLnneYuys1K/" target="_blank" rel="noopener">Ver en Instagram</a></div></div>
+      <div class="cr-body">
+        <div><div class="cr-tag"><span class="n">Contenido 4</span><span class="ang">Servicio de catering</span></div>
+        <h3>Catering de autor para tu evento</h3>
+        <a class="cr-link" href="https://www.instagram.com/p/DLnneYuys1K/" target="_blank" rel="noopener">Ver la publicación en Instagram</a></div>
+        <div class="cr-copy">
+          <span class="k">Texto del anuncio</span>
+          <div class="hook">Llevá la experiencia Peter U Cook a tu evento.</div>
+          <p>Cocina de autor para tus celebraciones y reuniones, en el lugar que elijas. Contanos cuántos son, para cuándo y qué ocasión es, y te armamos una propuesta a medida. Escribinos por WhatsApp.</p>
+          <span class="cta">Enviar mensaje</span>
+          <details><summary>Versión en inglés y portugués</summary>
+            <p><b>EN ·</b> Chef-driven catering for your celebrations and gatherings, wherever you choose. Tell us how many guests, when and what the occasion is, and we'll prepare a custom proposal. Message us on WhatsApp.</p>
+            <p><b>PT ·</b> Catering autoral para suas celebrações e reuniões, onde você preferir. Conte quantas pessoas, quando e qual é a ocasião, e preparamos uma proposta sob medida. Chame no WhatsApp.</p></details>
+        </div>
+        <div class="obj"><span class="k" style="font:500 10.5px/1 var(--fm);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)">Objeciones y cómo las respondemos</span>
+          <div><b>«¿Cuánto cuesta?»</b><span>Con tres datos (cuántos son, fecha y ocasión) enviamos un presupuesto a medida.</span></div>
+          <div><b>«¿Llegan a mi fecha?»</b><span>Preguntamos la fecha en el primer mensaje y confirmamos disponibilidad en el día.</span></div>
+          <div><b>«¿Será igual que en el restaurante?»</b><span>Mostramos el mismo estilo de cocina de autor del video, adaptado al evento.</span></div></div>
+        <div class="cr-cfg">
+          <div><div class="k">Público</div><div class="v">Local: eventos, empresas y celebraciones</div></div>
+          <div><div class="k">Titular</div><div class="v">Catering de autor para tu evento</div></div>
+          <div><div class="k">Botón</div><div class="v">Enviar mensaje · WhatsApp</div></div>
+          <div class="w"><div class="k">Bienvenida</div><div class="v">«¡Hola! Gracias por escribir a Peter U Cook catering. ¿Qué tipo de evento es, para cuántas personas y para qué fecha?»</div></div>
+        </div>
+      </div>
+    </article>
   </section>
 
   <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria, de $100.000 a $150.000 por mes, está confirmada por Pedro y se paga directo a Meta.
@@ -792,7 +1115,132 @@ async function saveInicio(){
 }
 
 function setLimite(){var t=TAREAS.filter(function(x){return x.id==='t02'})[0];$('#limitePedidos').textContent=fLong.format(wd(t.b))}
-function refresh(){renderTiles();renderAvance();renderGantt();applyTareas();setLimite();if(!PUBLICO){applyPedidos();renderBit()}}
+
+/* ---------- mapa de estado ---------- */
+var IC={
+ search:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/>',
+ brief:'<rect x="4" y="8" width="16" height="11" rx="2"/><path d="M9 8V6h6v2"/>',
+ page:'<rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+ fb:'<path d="M14 8h2V5h-2.5A3.5 3.5 0 0 0 10 8.5V11H8v3h2v6h3v-6h2.2l.5-3H13V8.7c0-.4.3-.7 1-.7z"/>',
+ ig:'<rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6"/>',
+ wa:'<path d="M5 19l1.2-3.6A7.5 7.5 0 1 1 9 18z"/><path d="M9.5 9.5c.3 2 2 3.7 4 4l1-1-1.6-1-.8.6c-.6-.3-1.1-.8-1.4-1.4l.6-.8-1-1.6z"/>',
+ chart:'<path d="M5 19V11M12 19V5M19 19v-7"/>',
+ card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/>',
+ pixel:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="2 3"/>',
+ shield:'<path d="M12 4l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V7z"/><path d="M9 12l2 2 4-4"/>',
+ doc:'<path d="M7 4h7l4 4v12H7z"/><path d="M14 4v4h4M9 13h6M9 16h4"/>',
+ video:'<rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-2v8l-4-2"/>',
+ cut:'<circle cx="7" cy="7" r="2.5"/><circle cx="7" cy="17" r="2.5"/><path d="M9 8.5L20 17M9 15.5L20 7"/>',
+ target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/>',
+ text:'<path d="M5 6h14M12 6v13M9 19h6"/>',
+ eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ rocket:'<path d="M5 19c0-3 1-4 3-5l-2-2 6-6c3-3 6-3 8-3 0 2 0 5-3 8l-6 6-2-2c-1 2-2 3-4 4z"/><circle cx="15" cy="9" r="1.2"/>',
+ loop:'<path d="M20 12a8 8 0 0 1-14 5M4 12a8 8 0 0 1 14-5"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+ report:'<path d="M5 20V4M5 20h14"/><path d="M9 15l3-4 3 2 4-6"/>'
+};
+var ECO=[
+ {h:'Estructura en Meta',it:[
+  {ids:['t03'],i:'search',c:'dk',t:'Auditoría de lo existente',d:'Revisamos cuentas, números, anuncios y píxeles',o:'Todo lo existente, revisado'},
+  {ids:['t04'],i:'brief',c:'m',t:'Portafolio comercial',d:'La raíz de Facebook e Instagram',o:'Creado, con roles y accesos ordenados'},
+  {ids:['t05'],i:'page',c:'fb',t:'Fanpage de Facebook',d:'Datos, horarios y botón de WhatsApp',o:'Fanpage creada y lista para vender'},
+  {ids:['t20'],i:'fb',c:'fb',t:'Facebook vinculado',d:'Fanpage conectada al portafolio',o:'Fanpage vinculada al portafolio'},
+  {ids:['t07'],i:'ig',c:'ig',t:'Instagram vinculado',d:'@peterucook conectado al portafolio',o:'Instagram vinculado al portafolio'},
+  {ids:['t21'],i:'wa',c:'wa',t:'WhatsApp Business',d:'Para que los mensajes entren al mismo lugar',o:'Conectado y recibiendo mensajes',p:'Conexión en proceso'},
+  {ids:['t06'],i:'chart',c:'ad',t:'Cuenta publicitaria',d:'Donde se crean y miden los anuncios',o:'Creada, desbloqueada y gestionada'},
+  {ids:['t19'],i:'card',c:'ek',t:'Medio de pago',d:'Lo carga Pedro directo en Meta',o:'Cargado directo en Meta'},
+  {ids:['t08'],i:'pixel',c:'ix',t:'Píxel de Meta',d:'Mide mensajes y reservas',o:'Píxel creado y midiendo'},
+  {ids:['t09'],i:'shield',c:'m',t:'Verificación del negocio',d:'Documentación enviada a Meta',o:'Documentación presentada a Meta'},
+  {ids:['t10'],i:'doc',c:'dk',t:'Entrega documentada',d:'Cómo quedó todo y quién tiene qué acceso',o:'Configuración entregada por escrito'}]},
+ {h:'Contenido y campañas',it:[
+  {ids:['t11'],i:'video',c:'ig',t:'Selección de videos',d:'Lo ya publicado que mejor transmite la experiencia',o:'Videos elegidos'},
+  {ids:['t12'],i:'cut',c:'ix',t:'Edición vertical y subtítulos',d:'Versiones listas para anuncio',o:'Versiones listas para anuncio'},
+  {ids:['t13'],i:'target',c:'ad',t:'Públicos y estructura',d:'Turistas, Brasil, EE.UU. y público local',o:'Públicos y campañas armados'},
+  {ids:['t14'],i:'text',c:'dk',t:'Textos y bienvenida',d:'Español, inglés y portugués',o:'Textos y mensaje de bienvenida listos'},
+  {ids:['t15'],i:'eye',c:'ek',t:'Revisión final',d:'Pedro da el visto bueno',o:'Aprobado por Pedro'},
+  {ids:['t16'],i:'rocket',c:'wa',t:'Lanzamiento de campañas',d:'Las campañas salen al aire',o:'Campañas al aire'},
+  {ids:['t17'],i:'loop',c:'m',t:'Optimización semanal',d:'Ajustamos públicos, anuncios y presupuesto',o:'En marcha cada semana'},
+  {ids:['t18'],i:'report',c:'dk',t:'Primer reporte mensual',d:'Mensajes, reservas y costo por mensaje',o:'Reporte entregado'}]}
+];
+function ecoEstado(it){
+  var n=it.ids.length,l=0,c=0,e=0;
+  it.ids.forEach(function(id){var s=estadoDe(id);if(s==='listo')l++;else if(s==='curso')c++;else if(s==='espera')e++});
+  var pct=Math.round((l+c*0.5)/n*100);
+  if(l===n)return {k:'listo',pct:100,txt:'Listo',d:it.o};
+  if(l+c>0)return {k:'curso',pct:pct,txt:'En proceso · '+pct+' %',d:it.p||it.d};
+  if(e>0)return {k:'espera',pct:0,txt:'En espera',d:it.d};
+  return {k:'pend',pct:0,txt:'Pendiente',d:it.d};
+}
+var ecoSig='';
+function renderEco(){
+  var map=$('#ecoMap');if(!map)return;
+  var tot=0,hechos=0,cols=[];
+  ECO.forEach(function(col){
+    var h='<div class="eco-col"><h4>'+esc(col.h)+'</h4>';
+    col.it.forEach(function(it){
+      var st=ecoEstado(it);tot++;if(st.k==='listo')hechos++;
+      h+='<div class="eco-card s-'+st.k+'" data-k="'+st.k+'"><span class="eco-ic '+it.c+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+IC[it.i]+'</svg></span>'+
+         '<span class="eco-t">'+esc(it.t)+'</span><span class="eco-chip">'+esc(st.txt)+'</span>'+
+         '<span class="eco-d">'+esc(st.d)+'</span>'+
+         (st.k==='curso'?'<span class="eco-mini"><i style="width:'+st.pct+'%"></i></span>':'')+'</div>';
+    });
+    cols.push(h+'</div>');
+  });
+  map.innerHTML=cols[0]+
+   '<div class="eco-c"><div class="k">El punto de encuentro</div><div class="nm">Peter U Cook</div><div class="hd">@peterucook · WhatsApp → reservas</div>'+
+   '<div class="ct">'+hechos+'<small> de '+tot+' procesos listos</small></div></div>'+cols[1]+
+   '<svg class="eco-svg" id="ecoSvg" aria-hidden="true"></svg>';
+  dibujarEco();
+}
+function dibujarEco(){
+  var map=$('#ecoMap'),svg=$('#ecoSvg'),c=map&&map.querySelector('.eco-c');
+  if(!svg||!c)return;
+  var mr=map.getBoundingClientRect(),cr=c.getBoundingClientRect();
+  if(!mr.width||getComputedStyle(svg).display==='none'){svg.innerHTML='';return}
+  var cards=map.querySelectorAll('.eco-card'),h='',cols=map.querySelectorAll('.eco-col'),
+      lefts=cols[0].querySelectorAll('.eco-card').length,rights=cols[1].querySelectorAll('.eco-card').length;
+  Array.prototype.forEach.call(cards,function(el,i){
+    var left=i<lefts,r=el.getBoundingClientRect(),n=left?lefts:rights,j=left?i:i-lefts;
+    var x1=(left?r.right:r.left)-mr.left,y1=r.top+r.height/2-mr.top;
+    var x2=(left?cr.left:cr.right)-mr.left,y2=cr.top+cr.height*(0.18+0.64*(j+0.5)/n)-mr.top,mx=(x1+x2)/2;
+    h+='<path class="s-'+el.getAttribute('data-k')+'" d="M'+x1.toFixed(1)+' '+y1.toFixed(1)+' C'+mx.toFixed(1)+' '+y1.toFixed(1)+' '+mx.toFixed(1)+' '+y2.toFixed(1)+' '+x2.toFixed(1)+' '+y2.toFixed(1)+'"/>';
+  });
+  svg.setAttribute('viewBox','0 0 '+mr.width+' '+mr.height);
+  svg.innerHTML=h;
+}
+try{window.addEventListener('resize',dibujarEco);if(window.ResizeObserver)new ResizeObserver(function(){dibujarEco()}).observe($('#ecoMap'))}catch(e){}
+
+/* ---------- pestaña de contenido seleccionado ---------- */
+function setVista(v){
+  document.documentElement.classList.toggle('vcont',v==='contenido');
+  Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',v==='contenido'?a.id==='tabCont':a.getAttribute('href')==='#resumen')});
+  if(v==='contenido')cargarCreativos();
+  setTimeout(dibujarEco,30);
+}
+var creativosOk=false;
+function cargarCreativos(){
+  if(creativosOk)return;creativosOk=true;
+  Array.prototype.forEach.call(document.querySelectorAll('.cr-media[data-ig]'),function(m){
+    var id=m.getAttribute('data-ig'),n=m.getAttribute('data-n'),ph=m.querySelector('.ph');
+    var im=new Image();
+    im.onload=function(){im.alt='Imagen principal del contenido';m.appendChild(im);if(ph)ph.hidden=true};
+    im.onerror=function(){
+      var f=document.createElement('iframe');
+      f.src='https://www.instagram.com/p/'+id+'/embed';f.loading='lazy';f.title='Publicación de Instagram';f.setAttribute('scrolling','no');f.setAttribute('allowtransparency','true');
+      m.appendChild(f);
+    };
+    im.src='img/contenido-'+n+'.jpg';
+  });
+}
+Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){
+  a.addEventListener('click',function(ev){
+    var h=a.getAttribute('href');
+    if(h==='#contenido'){ev.preventDefault();setVista('contenido');window.scrollTo(0,0)}
+    else if(document.documentElement.classList.contains('vcont')){ev.preventDefault();setVista('');var t=$(h);if(t)setTimeout(function(){t.scrollIntoView()},0)}
+  });
+});
+if(location.hash==='#contenido')setVista('contenido');
+
+function refresh(){renderTiles();renderEco();renderAvance();renderGantt();applyTareas();setLimite();if(!PUBLICO){applyPedidos();renderBit()}}
 
 /* ---------- arranque ---------- */
 buildTareas();if(PUBLICO)buildChecklist();else buildPedidos();refresh();
@@ -802,7 +1250,7 @@ $('#inicio').value=S.inicio;
 
 var secs=['resumen','cronograma','pedidos','bitacora'];
 try{
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-30% 0px -60% 0px'});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!document.documentElement.classList.contains('vcont')){Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-30% 0px -60% 0px'});
   secs.forEach(function(id){io.observe($('#'+id))});
 }catch(e){}
 
