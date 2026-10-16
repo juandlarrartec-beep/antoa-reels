@@ -62,6 +62,10 @@ section>h2{font-size:1.6rem;margin-bottom:6px}
 .av-scale span:first-child{transform:none}
 .av-scale span:last-child{transform:translateX(-100%)}
 .av-foot{color:var(--mut);font-size:13.5px;margin-top:8px}
+.adm{grid-column:1/-1;display:none;gap:12px;align-items:center;border-top:1px dashed var(--line);padding-top:10px}
+html.admin .adm{display:flex}
+.admchk{display:flex;gap:10px;align-items:center;margin:0;font-weight:600}
+.admchk input{width:22px;height:22px;min-height:0;padding:0;accent-color:var(--acc)}
 .conf{display:flex;gap:14px;align-items:center;border:1px solid var(--good);background:color-mix(in srgb,var(--good) 9%,transparent);border-radius:12px;padding:12px 16px}
 .conf-ic{flex:none;width:30px;height:30px;border-radius:50%;background:var(--good);color:var(--bg);display:grid;place-items:center;font-weight:700}
 .conf-k{font:600 11px/1 var(--fm);letter-spacing:.08em;text-transform:uppercase;color:var(--good)}
@@ -235,7 +239,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
 
   <section id="pedidos">
     <h2>Lo que necesitamos de vos</h2>
-    <p class="lead" data-pubonly>Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas a mano y mirá cómo avanza la barra de arriba. Las marcas quedan solo en tu navegador y no nos llegan. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.</p>
+    <p class="lead" id="leadPub" data-pubonly>Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas a mano y mirá cómo avanza la barra de arriba. Las marcas quedan solo en tu navegador y no nos llegan. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.</p>
     <p class="lead" data-apponly>Completá cada bloque y apretá <b>Guardar</b>. Vas a ver el cartel verde «Guardado y verificado» cuando el dato ya esté a salvo. Podés volver y cambiar lo que quieras.</p>
     <p class="deadline">Fecha límite para tenerlo todo con nosotros <span class="mono" id="limitePedidos"></span></p>
     <div class="notice" id="noSession" data-apponly hidden>Para cargar datos abrí esta página con tu cuenta de Claude. Si ya la abriste así y ves este aviso, avisanos por WhatsApp.</div>
@@ -265,6 +269,8 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
 (function(){
 "use strict";
 var PUBLICO=window.__PUBLICO===true;
+var API=(PUBLICO&&window.__API&&window.__API.url)||null;
+var SRV={tareas:{},entregas:{},actualizado:''},sinConexion=false,ADMIN=null;
 if(PUBLICO)document.documentElement.classList.add("publico");
 var $=function(s,r){return (r||document).querySelector(s)};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
@@ -365,7 +371,7 @@ var fHora=new Intl.DateTimeFormat('es-AR',{day:'numeric',month:'short',hour:'2-d
 function fechaTarea(t){var a=wd(t.a),b=wd(t.b);return t.a===t.b?fLong.format(a):fShort.format(a)+' → '+fLong.format(b)}
 function hoyIdx(){var h=new Date();h.setHours(12,0,0,0);var d=parse(S.inicio);while(!habil(d))d.setDate(d.getDate()+1);if(h<d)return 0;var i=0;while(d<=h){i++;do{d.setDate(d.getDate()+1)}while(!habil(d))}return i}
 function atFmt(s){try{return fHora.format(new Date(s))}catch(e){return ''}}
-function estadoDe(id){return (S.tareas[id]&&S.tareas[id].estado)||(BASE&&BASE.tareas[id])||'pendiente'}
+function estadoDe(id){return (S.tareas[id]&&S.tareas[id].estado)||SRV.tareas[id]||(BASE&&BASE.tareas[id])||'pendiente'}
 
 /* ---------- ui helpers ---------- */
 var toastT;
@@ -401,6 +407,7 @@ function contar(el,desde,hasta){
 function entregas(){
   var req=PED.filter(function(p){return !p.opt});
   var n=req.filter(function(p){
+    if(API)return !!SRV.entregas[p.k];
     if(PUBLICO){var cb=document.getElementById('ok-'+p.k);return !!(cb&&cb.checked)}
     return estadoPedido(p)==='completo';
   }).length;
@@ -425,7 +432,8 @@ function renderAvance(){
   bar.classList.toggle('full',pct===100);
   $('#avCount').textContent=(hechas+(t02hecha?1:0))+' de '+total+' tareas listas · '+entN+' de '+ent.total+' entregas tuyas';
   $('#avFoot').textContent=(prox?'Próxima fecha: '+prox.t+' · '+fShort.format(wd(prox.b)):'Todas las tareas están listas')+
-    (PUBLICO&&BASE&&BASE.actualizado?' · Tareas actualizadas el '+fShort.format(parse(BASE.actualizado)):'');
+    (API?(SRV.actualizado?' · Actualizado el '+atFmt(SRV.actualizado):''):(PUBLICO&&BASE&&BASE.actualizado?' · Tareas actualizadas el '+fShort.format(parse(BASE.actualizado)):''))+
+    (sinConexion?' · Sin conexión: se muestra el último dato':'');
   var desde=avPrimera?0:avPrev;avPrimera=false;avPrev=pct;
   requestAnimationFrame(function(){requestAnimationFrame(function(){$('#avFill').style.width=pct+'%'})});
   contar($('#avNum'),desde,pct);
@@ -467,7 +475,8 @@ function buildTareas(){
        '<div class="own" hidden><div class="row"><div style="flex:1 1 170px"><label for="es-'+t.id+'">Estado</label><select id="es-'+t.id+'">'+
          ESTADOS.map(function(e){return '<option value="'+e[0]+'">'+e[1]+'</option>'}).join('')+'</select></div></div>'+
        '<div><label for="nt-'+t.id+'">Qué se hizo</label><textarea id="nt-'+t.id+'" placeholder="Describí lo que se hizo, con el detalle que quieras."></textarea></div>'+
-       '<div class="row"><button class="pri" data-save>Guardar</button><span class="msg" data-msg role="status"></span></div></div></div></article>';
+       '<div class="row"><button class="pri" data-save>Guardar</button><span class="msg" data-msg role="status"></span></div></div></div>'+
+       '<div class="adm"><label class="admchk"><input type="checkbox" data-adm> Marcar como lista</label><span class="msg" data-admmsg role="status"></span></div></article>';
     });
     h+='</div></div>';
   });
@@ -478,6 +487,7 @@ function buildTareas(){
     $('select',el).addEventListener('change',mark);
     $('textarea',el).addEventListener('input',mark);
     $('[data-save]',el).addEventListener('click',function(){saveTarea(id,el)});
+    var ad=$('[data-adm]',el);ad.addEventListener('change',function(){marcarTarea(id,ad)});
   });
 }
 function applyTareas(){
@@ -489,6 +499,7 @@ function applyTareas(){
     var late=e!=='listo'&&hi>t.b;
     $('[data-late]',el).innerHTML=late?'<span class="chip late">Atrasada</span>':'';
     $('[data-fecha]',el).textContent=fechaTarea(t);
+    if(!el.dataset.busy)$('[data-adm]',el).checked=(e==='listo');
     $('[data-nota]',el).textContent=d.nota||'';
     if(!el.dataset.dirty){$('select',el).value=e;$('textarea',el).value=d.nota||'';
       var m=$('[data-msg]',el);if(d.at&&isOwner)setMsg(m,'ok','✓ Último guardado: '+atFmt(d.at));}
@@ -650,8 +661,11 @@ function buildChecklist(){
   $('#pedidosGrid').innerHTML=h;
   Array.prototype.forEach.call(document.querySelectorAll('.okrow input'),function(cb){
     var k=cb.id.slice(3);
-    cb.checked=lsGet('hdr-ok-'+k)==='1';
-    cb.addEventListener('change',function(){lsSet('hdr-ok-'+k,cb.checked?'1':'0');syncChecklist()});
+    cb.checked=API?!!SRV.entregas[k]:lsGet('hdr-ok-'+k)==='1';
+    cb.addEventListener('change',function(){
+      if(API){marcarEntrega(k,cb);return}
+      lsSet('hdr-ok-'+k,cb.checked?'1':'0');syncChecklist();
+    });
   });
   syncChecklist();
 }
@@ -659,11 +673,50 @@ function syncChecklist(){
   var n=0,tot=PED.filter(function(p){return !p.opt}).length;
   PED.forEach(function(p){
     var cb=$('#ok-'+p.k),b=$('#p-'+p.k+' [data-badge]');if(!cb||!b)return;
+    if(API&&!cb.dataset.busy)cb.checked=!!SRV.entregas[p.k];
     if(cb.checked)n++;
     b.className='badge'+(cb.checked?' completo':'');b.textContent=cb.checked?'Listo':'Pendiente';
   });
-  $('#pTiles').innerHTML='<div class="tile"><div class="k">Entregas listas</div><div class="v">'+n+' de '+tot+'</div><div class="bar-prog" aria-hidden="true"><i style="width:'+Math.round(n/tot*100)+'%"></i></div><div class="s">Las marcas quedan solo en este navegador.</div></div>';
+  $('#pTiles').innerHTML='<div class="tile"><div class="k">Entregas listas</div><div class="v">'+n+' de '+tot+'</div><div class="bar-prog" aria-hidden="true"><i style="width:'+Math.round(n/tot*100)+'%"></i></div><div class="s">'+(API?'Se guardan y las ve todo el mundo.':'Las marcas quedan solo en este navegador.')+'</div></div>';
   renderAvance();
+}
+
+/* ---------- servicio compartido (versión pública) ---------- */
+function llamar(params){
+  var qs=Object.keys(params).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(params[k])}).join('&');
+  return fetch(API+'?'+qs+'&_='+Date.now(),{cache:'no-store'}).then(function(r){
+    if(!r.ok)throw new Error('http '+r.status);
+    return r.json();
+  });
+}
+function aplicarServicio(r){
+  if(r&&r.estado){SRV=r.estado;SRV.tareas=SRV.tareas||{};SRV.entregas=SRV.entregas||{}}
+  if(r&&r.owner&&!document.documentElement.classList.contains('admin')){document.documentElement.classList.add('admin');setWho('Vista agencia')}
+  sinConexion=false;
+  refresh();syncChecklist();
+}
+function cargarServicio(){
+  var p={op:'get'};if(ADMIN)p.token=ADMIN;
+  return llamar(p).then(aplicarServicio).catch(function(){sinConexion=true;renderAvance()});
+}
+function marcarEntrega(k,cb){
+  var v=cb.checked;cb.dataset.busy='1';SRV.entregas[k]=v;syncChecklist();
+  llamar({op:'entrega',k:k,v:v?'1':'0'}).then(function(r){
+    if(!r||!r.ok)throw new Error('rechazado');
+    delete cb.dataset.busy;aplicarServicio(r);
+  }).catch(function(){
+    delete cb.dataset.busy;cb.checked=!v;SRV.entregas[k]=!v;syncChecklist();toast('No se pudo guardar. Probá de nuevo.');
+  });
+}
+function marcarTarea(id,cb){
+  var el=$('#tk-'+id),m=$('[data-admmsg]',el),v=cb.checked;
+  el.dataset.busy='1';setMsg(m,'','Guardando…');
+  llamar({op:'tarea',id:id,estado:v?'listo':'pendiente',token:ADMIN||''}).then(function(r){
+    if(!r||!r.ok)throw new Error('rechazado');
+    delete el.dataset.busy;aplicarServicio(r);setMsg(m,'ok','✓ Guardado, lo ve todo el mundo');
+  }).catch(function(){
+    delete el.dataset.busy;cb.checked=!v;setMsg(m,'err','No se pudo guardar. Revisá tu enlace de agencia.');
+  });
 }
 
 /* ---------- bitácora ---------- */
@@ -717,6 +770,16 @@ function lockInputs(lock){
   $('#noSession').hidden=!lock;
 }
 if(PUBLICO){setWho('Versión pública')}else{lockInputs(true);setWho('Solo lectura')}
+if(API){
+  try{
+    var mh=location.hash.match(/admin=([^&]+)/);
+    if(mh){lsSet('hdr-admin',decodeURIComponent(mh[1]));history.replaceState(null,'',location.pathname+location.search)}
+  }catch(e){}
+  ADMIN=lsGet('hdr-admin');
+  $('#leadPub').textContent='Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas listo y mirá cómo avanza la barra de arriba: las marcas se guardan y las vemos todos. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.';
+  cargarServicio();
+  setInterval(function(){if(!document.hidden)cargarServicio()},15000);
+}
 
 (async function(){
   if(PUBLICO||!(window.claude&&window.claude.use))return;

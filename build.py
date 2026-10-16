@@ -44,6 +44,10 @@ FRAGMENTS = [
 AVANCE = ROOT / "hoja-de-ruta" / "avance.json"
 ESTADOS = {"pendiente", "curso", "espera", "listo"}
 
+# Servicio compartido (workflow de n8n) que guarda el avance para todos. Solo lleva la direccion publica:
+# la clave de la agencia vive unicamente en n8n y en el enlace privado de quien administra.
+SERVICIO = ROOT / "hoja-de-ruta" / "servicio.json"
+
 
 def leer_avance(fuente: str):
     if not AVANCE.exists():
@@ -73,6 +77,7 @@ def envolver(fragmento: str) -> str:
         "<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n"
         "<script>window.__PUBLICO = true;"
         + (f" window.__AVANCE = {json.dumps(avance, ensure_ascii=False)};" if avance else "")
+        + (f" window.__API = {SERVICIO.read_text(encoding='utf-8').strip()};" if SERVICIO.exists() else "")
         + "</script>\n"
         + cabeza + "\n</head>\n<body>\n" + cuerpo + "\n</body>\n</html>\n"
     )
