@@ -220,9 +220,9 @@ button.ghost{background:transparent}
 }
 
 /* pestaña: contenido seleccionado */
-#contenido{display:none}
-html.vcont #contenido{display:block}
-html.vcont section:not(#contenido){display:none}
+#publico,#anuncios{display:none}
+html.v-publico #publico,html.v-anuncios #anuncios{display:block}
+html.v-publico section:not(#publico),html.v-anuncios section:not(#anuncios){display:none}
 .cs-h{font:600 12px/1 var(--fm);letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:34px 0 12px}
 .pub-hero{background:var(--ink);color:var(--bg);border-radius:16px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px 32px;align-items:center}
 .pub-hero h3{font-size:1.5rem;line-height:1.15}
@@ -339,7 +339,8 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <a href="#cronograma">Cronograma</a>
     <a href="#pedidos">Lo que necesitamos de vos</a>
     <a href="#bitacora" data-apponly>Bitácora</a>
-    <a href="#contenido" id="tabCont">Contenido seleccionado</a>
+    <a href="#publico" id="tabPub">Público objetivo</a>
+    <a href="#anuncios" id="tabAnu">Anuncios seleccionados</a>
   </nav>
 
   <section id="resumen">
@@ -403,11 +404,9 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <div class="log" id="bitList"><div class="empty">Todavía no hay entradas.</div></div>
   </section>
 
-  <section id="contenido">
-    <h2>Contenido seleccionado</h2>
-    <p class="lead">A quién le vamos a hablar, con qué contenido y cómo queda armado dentro de Meta. Los videos ya están publicados en @peterucook: los republicamos como anuncios con un texto pensado para que escriban por WhatsApp y reserven.</p>
-
-    <div class="cs-h">1 · Público objetivo</div>
+  <section id="publico">
+    <h2>Público objetivo</h2>
+    <p class="lead">A quién le vamos a mostrar los anuncios: la gente de Buenos Aires y los extranjeros que viajan a Argentina, sobre todo cuando están cerca del local.</p>
     <div class="pub-hero">
       <div>
         <h3>La gente de Buenos Aires y los turistas que la visitan, cuando están cerca del local</h3>
@@ -468,6 +467,17 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
         </dl>
       </article>
     </div>
+  </section>
+
+  <section id="anuncios">
+    <h2>Anuncios seleccionados</h2>
+    <p class="lead">Los videos ya están publicados en @peterucook. Los republicamos como anuncios, con un texto pensado para que escriban por WhatsApp y reserven, y con la configuración que llevan dentro de Meta.</p>
+    <div class="cs-h">Cómo queda armado dentro de Meta</div>
+    <div class="flow">
+      <div><b>1 campaña</b><span>Objetivo: mensajes por WhatsApp</span></div><i>→</i>
+      <div><b>4 conjuntos de anuncios</b><span>Uno por público: extranjeros, zona del local, Buenos Aires y los que ya los conocen</span></div><i>→</i>
+      <div><b>4 anuncios</b><span>Los contenidos de abajo, cada uno con su texto y su botón</span></div>
+    </div>
 
     <div class="cs-h">Lo que se repite en todas las campañas</div>
     <div class="cfgs">
@@ -481,14 +491,7 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
       <div><div class="k">Idiomas del anuncio</div><div class="v">Español, inglés y portugués según el público</div></div>
     </div>
 
-    <div class="cs-h">Cómo queda armado dentro de Meta</div>
-    <div class="flow">
-      <div><b>1 campaña</b><span>Objetivo: mensajes por WhatsApp</span></div><i>→</i>
-      <div><b>4 conjuntos de anuncios</b><span>Uno por público: extranjeros, zona del local, Buenos Aires y los que ya los conocen</span></div><i>→</i>
-      <div><b>4 anuncios</b><span>Los contenidos de abajo, cada uno con su texto y su botón</span></div>
-    </div>
-
-    <div class="cs-h">2 · Contenidos que vamos a republicar</div>
+    <div class="cs-h">Los contenidos que vamos a republicar</div>
 
     <article class="cr">
       <div class="cr-media" data-ig="DOCWGDBjTx4" data-n="1"><div class="ph"><b>Contenido 1</b>Publicación de Instagram<a class="cr-link" href="https://www.instagram.com/p/DOCWGDBjTx4/" target="_blank" rel="noopener">Ver en Instagram</a></div></div>
@@ -1210,9 +1213,11 @@ try{window.addEventListener('resize',dibujarEco);if(window.ResizeObserver)new Re
 
 /* ---------- pestaña de contenido seleccionado ---------- */
 function setVista(v){
-  document.documentElement.classList.toggle('vcont',v==='contenido');
-  Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',v==='contenido'?a.id==='tabCont':a.getAttribute('href')==='#resumen')});
-  if(v==='contenido')cargarCreativos();
+  var cl=document.documentElement.classList;
+  cl.remove('v-publico');cl.remove('v-anuncios');
+  if(v)cl.add('v-'+v);
+  Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',v?a.getAttribute('href')==='#'+v:a.getAttribute('href')==='#resumen')});
+  if(v==='anuncios')cargarCreativos();
   setTimeout(dibujarEco,30);
 }
 var creativosOk=false;
@@ -1230,14 +1235,16 @@ function cargarCreativos(){
     im.src='img/contenido-'+n+'.jpg';
   });
 }
+function enVista(){return /\bv-(publico|anuncios)\b/.test(document.documentElement.className)}
 Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){
   a.addEventListener('click',function(ev){
     var h=a.getAttribute('href');
-    if(h==='#contenido'){ev.preventDefault();setVista('contenido');window.scrollTo(0,0)}
-    else if(document.documentElement.classList.contains('vcont')){ev.preventDefault();setVista('');var t=$(h);if(t)setTimeout(function(){t.scrollIntoView()},0)}
+    if(h==='#publico'||h==='#anuncios'){ev.preventDefault();setVista(h.slice(1));window.scrollTo(0,0)}
+    else if(enVista()){ev.preventDefault();setVista('');var t=$(h);if(t)setTimeout(function(){t.scrollIntoView()},0)}
   });
 });
-if(location.hash==='#contenido')setVista('contenido');
+if(location.hash==='#publico'||location.hash==='#anuncios')setVista(location.hash.slice(1));
+else if(location.hash==='#contenido')setVista('anuncios');
 
 function refresh(){renderTiles();renderEco();renderAvance();renderGantt();applyTareas();setLimite();if(!PUBLICO){applyPedidos();renderBit()}}
 
@@ -1249,7 +1256,7 @@ $('#inicio').value=S.inicio;
 
 var secs=['resumen','cronograma','pedidos','bitacora'];
 try{
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!document.documentElement.classList.contains('vcont')){Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-30% 0px -60% 0px'});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!enVista()){Array.prototype.forEach.call(document.querySelectorAll('nav.tabs a'),function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-30% 0px -60% 0px'});
   secs.forEach(function(id){io.observe($('#'+id))});
 }catch(e){}
 
