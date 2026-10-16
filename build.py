@@ -47,6 +47,7 @@ ESTADOS = {"pendiente", "curso", "espera", "listo"}
 # Servicio compartido (workflow de n8n) que guarda el avance para todos. Solo lleva la direccion publica:
 # la clave de la agencia vive unicamente en n8n y en el enlace privado de quien administra.
 SERVICIO = ROOT / "hoja-de-ruta" / "servicio.json"
+VERCEL = ROOT / "vercel-app"
 
 
 def leer_avance(fuente: str):
@@ -64,6 +65,17 @@ def leer_avance(fuente: str):
 
 NOINDEX = '<meta name="robots" content="noindex, nofollow">'
 VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1">'
+
+def redireccion(destino: str) -> str:
+    """Pagina minima que lleva al link definitivo (los links viejos siguen funcionando)."""
+    return (
+        '<!DOCTYPE html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + NOINDEX + "\n"
+        f'<meta http-equiv="refresh" content="0; url={destino}">\n<link rel="canonical" href="{destino}">\n'
+        "<title>Hoja de ruta Peter U Cook</title>\n</head>\n<body style=\"font:16px system-ui;padding:24px\">\n"
+        f'<p>La hoja de ruta se mudó: <a href="{destino}">abrirla acá</a>.</p>\n</body>\n</html>\n'
+    )
+
 
 def envolver(fragmento: str) -> str:
     """Convierte un fragmento de artifact en una pagina completa, en modo publico."""
@@ -118,7 +130,11 @@ for src_name, out_name in FRAGMENTS:
     page = envolver(frag)
     for bad in ("<!DOCTYPE", "<html", "<body>"):
         assert bad not in frag, f"{src_name}: ya trae {bad}"
-    (site / out_name).write_text(page, encoding="utf-8")
+    # la pagina real se sirve desde Vercel (misma direccion que el servicio que guarda el avance)
+    VERCEL.mkdir(exist_ok=True)
+    (VERCEL / "index.html").write_text(page, encoding="utf-8")
+    publica = json.loads(SERVICIO.read_text(encoding="utf-8")).get("publica") if SERVICIO.exists() else None
+    (site / out_name).write_text(redireccion(publica) if publica else page, encoding="utf-8")
     (pub / out_name).write_text(frag, encoding="utf-8")
     print(f"  {out_name:<18} {len(page)//1024:>3} KB  (modo publico)")
 

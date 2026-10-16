@@ -1,0 +1,8 @@
+{
+  "name": "hoja-de-ruta-pedro",
+  "private": true,
+  "description": "Hoja de ruta de Pedro U Cook: pagina y servicio que guarda el avance compartido",
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  }
+}
