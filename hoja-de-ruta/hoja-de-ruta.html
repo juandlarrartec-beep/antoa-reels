@@ -62,6 +62,14 @@ section>h2{font-size:1.6rem;margin-bottom:6px}
 .av-scale span:first-child{transform:none}
 .av-scale span:last-child{transform:translateX(-100%)}
 .av-foot{color:var(--mut);font-size:13.5px;margin-top:8px}
+.agency{margin-top:12px;font-size:12.5px}
+.agency .lnk{background:none;border:0;padding:0;min-height:0;color:var(--mut);text-decoration:underline;font:inherit;cursor:pointer}
+.agency #agForm{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:8px}
+.agency #agForm[hidden]{display:none}
+.agency input{width:200px;min-height:36px;padding:6px 10px}
+.agency button.pri{min-height:36px;padding:8px 14px}
+.sr{position:absolute;left:-9999px}
+html.admin .agency{display:none}
 .adm{grid-column:1/-1;display:none;gap:12px;align-items:center;border-top:1px dashed var(--line);padding-top:10px}
 html.admin .adm{display:flex}
 .admchk{display:flex;gap:10px;align-items:center;margin:0;font-weight:600}
@@ -261,7 +269,17 @@ footer{margin-top:48px;color:var(--mut);font-size:12.5px;border-top:1px solid va
     <div class="log" id="bitList"><div class="empty">Todavía no hay entradas.</div></div>
   </section>
 
-  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria, de $100.000 a $150.000 por mes, está confirmada por Pedro y se paga directo a Meta.</footer>
+  <footer>Días hábiles de lunes a viernes. El lunes 12/10, que es feriado nacional, se trabaja para llegar a la fecha de entrega. No se cuentan los feriados del 23/11, 7/12, 8/12 y 25/12. La inversión publicitaria, de $100.000 a $150.000 por mes, está confirmada por Pedro y se paga directo a Meta.
+    <div class="agency" data-pubonly>
+      <button type="button" class="lnk" id="agAbrir">Acceso de agencia</button>
+      <span id="agForm" hidden>
+        <label for="claveAg" class="sr">Clave de agencia</label>
+        <input id="claveAg" type="password" autocomplete="off" placeholder="Clave de agencia">
+        <button type="button" class="pri" id="agEntrar">Entrar</button>
+        <span class="msg" id="agMsg" role="status"></span>
+      </span>
+    </div>
+  </footer>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -695,6 +713,15 @@ function aplicarServicio(r){
   sinConexion=false;
   refresh();syncChecklist();
 }
+function entrarAgencia(){
+  var k=$('#claveAg').value.trim(),m=$('#agMsg');
+  if(!k){setMsg(m,'err','Escribí la clave.');return}
+  setMsg(m,'','Verificando…');
+  llamar({op:'get',token:k}).then(function(r){
+    if(r&&r.owner){ADMIN=k;lsSet('hdr-admin',k);$('#claveAg').value='';setMsg(m,'','');aplicarServicio(r)}
+    else setMsg(m,'err','Clave incorrecta.');
+  }).catch(function(){setMsg(m,'err','No se pudo verificar. Probá de nuevo.')});
+}
 function cargarServicio(){
   var p={op:'get'};if(ADMIN)p.token=ADMIN;
   return llamar(p).then(aplicarServicio).catch(function(){sinConexion=true;renderAvance()});
@@ -771,11 +798,18 @@ function lockInputs(lock){
 }
 if(PUBLICO){setWho('Versión pública')}else{lockInputs(true);setWho('Solo lectura')}
 if(API){
-  try{
-    var mh=location.hash.match(/admin=([^&]+)/);
-    if(mh){lsSet('hdr-admin',decodeURIComponent(mh[1]));history.replaceState(null,'',location.pathname+location.search)}
-  }catch(e){}
-  ADMIN=lsGet('hdr-admin');
+  function leerHash(){
+    try{
+      var mh=location.hash.match(/admin=([^&]+)/);
+      if(mh){ADMIN=decodeURIComponent(mh[1]);lsSet('hdr-admin',ADMIN);history.replaceState(null,'',location.pathname+location.search);return true}
+    }catch(e){}
+    return false;
+  }
+  ADMIN=lsGet('hdr-admin');leerHash();
+  window.addEventListener('hashchange',function(){if(leerHash())cargarServicio()});
+  $('#agAbrir').addEventListener('click',function(){$('#agForm').hidden=false;$('#claveAg').focus()});
+  $('#agEntrar').addEventListener('click',entrarAgencia);
+  $('#claveAg').addEventListener('keydown',function(e){if(e.key==='Enter')entrarAgencia()});
   $('#leadPub').textContent='Esto es lo que necesitamos para arrancar. Tildá lo que ya tengas listo y mirá cómo avanza la barra de arriba: las marcas se guardan y las vemos todos. Cuando esté todo, mandanoslo por el mismo canal por el que te pasamos este link.';
   cargarServicio();
   setInterval(function(){if(!document.hidden)cargarServicio()},15000);
