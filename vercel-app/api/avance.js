@@ -1,7 +1,7 @@
 /* Guarda y devuelve el avance compartido de la hoja de ruta (solo estados, sin datos personales).
    Cada cambio se escribe como un archivo nuevo en Vercel Blob (hdr/estado-<marca de tiempo>.json);
    se lee el mas reciente y se borran los viejos. Al no reescribir nunca un archivo, la CDN no sirve datos viejos. */
-const TAREAS = Array.from({ length: 18 }, (_, i) => 't' + String(i + 1).padStart(2, '0'));
+const TAREAS = Array.from({ length: 21 }, (_, i) => 't' + String(i + 1).padStart(2, '0'));
 const ESTADOS = ['pendiente', 'curso', 'espera', 'listo'];
 const ENTREGAS = ['whatsapp', 'instagram', 'facebook', 'negocio', 'contenido', 'operativa', 'pauta'];
 const CONSERVAR = 10;
