@@ -29,7 +29,7 @@ En cualquiera de los dos casos las direcciones quedan:
 | Índice | `/antoa-reels/peter-u-cook/` |
 | Primera etapa · versión visual | `/antoa-reels/peter-u-cook/primera-etapa-visual.html` |
 | Primera etapa · versión texto | `/antoa-reels/peter-u-cook/primera-etapa.html` |
-| Hoja de ruta — **para el cliente** (solo lectura) | `/antoa-reels/peter-u-cook/hoja-de-ruta.html` |
+| Hoja de ruta — **para el cliente** | https://hoja-de-ruta-pedro.vercel.app/ (la ruta vieja de GitHub Pages redirige ahí) |
 | Radiografía (con radar) | `/antoa-reels/peter-u-cook/radiografia.html` |
 | Propuesta — **para el cliente** | `/antoa-reels/peter-u-cook/propuesta.html` |
 | Informe de salud digital | `/antoa-reels/peter-u-cook/informe.html` |
@@ -66,7 +66,8 @@ lectura: cronograma, fechas y lista de lo que se pide; las tildes quedan en el n
 | `informe-peter-u-cook.html` | Fuente del informe |
 | `anexo-ejecucion-peter-u-cook.html` | Fuente del anexo |
 | `hoja-de-ruta/hoja-de-ruta.html` | Fuente de la hoja de ruta (una sola fuente: app en claude.ai, solo lectura en Pages) |
-| `hoja-de-ruta/servicio.json` | Dirección pública del servicio que guarda el avance compartido (workflow «Hoja de ruta Pedro - avance compartido» en n8n; guarda solo estados). La clave de la agencia NO está en el repositorio: vive en n8n y en el enlace privado de administración |
+| `hoja-de-ruta/servicio.json` | Dirección del servicio de avance (`/api/avance`, mismo dominio que la página) y link público definitivo. La página se sirve desde Vercel (proyecto `hoja-de-ruta-pedro`, carpeta `vercel-app/`) y guarda solo estados en Vercel Blob. La clave de agencia es la variable `ADMIN_TOKEN` del proyecto en Vercel: no está en el repositorio |
+| `vercel-app/` | **Generado** (`index.html`) más `api/avance.js` y `package.json`. Es lo que despliega Vercel. La copia de GitHub Pages (`peter-u-cook/hoja-de-ruta.html`) solo redirige a ese link |
 | `hoja-de-ruta/avance.json` | Estado de las 18 tareas que ve el cliente en la copia pública y que alimenta la barra de avance. En claude.ai el avance es en vivo. Se edita y se corre `python3 build.py`. La barra suma las 17 tareas restantes más las 7 entregas de Pedro; la tarea t02 equivale a esas siete (si figura lista, cuentan todas) |
 | `print.css` | Estilos compartidos de los tres documentos imprimibles |
 | `build.py` | Genera `peter-u-cook/` y `pub/` desde las fuentes |

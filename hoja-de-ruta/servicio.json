@@ -1,3 +1,4 @@
 {
-  "url": "/api/avance"
+  "url": "/api/avance",
+  "publica": "https://hoja-de-ruta-pedro.vercel.app/"
 }
